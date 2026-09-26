@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>학교 연장통 — 학교 업무를 바꾼 웹사이트</title>
+<meta name="description" content="학교 연장통 — 초등학교 교감이 바이브 코딩으로 만들어 학교에서 실제로 쓰는 웹 도구 30개 모음. 휴가·복무 확인부터 반편성, 시간표, 연수, 생활지도까지 링크 하나로 바로 씁니다.">
+<meta name="keywords" content="학교 연장통, 바이브 코딩, 학교 업무, 교사 업무 도구, 초등학교, 교감, 반편성, 휴가, 연수, 생활지도">
+<meta name="author" content="최창훈">
+<meta property="og:title" content="학교 연장통 — 학교 업무를 바꾼 웹사이트">
+<meta property="og:description" content="학교 일에는 매년 같은 질문이 돌아옵니다. 그 질문마다 만들어 둔 웹 도구 모음.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://edu-hub-alpha-ten.vercel.app/">
+<meta property="og:site_name" content="학교 연장통">
+<link rel="canonical" href="https://edu-hub-alpha-ten.vercel.app/">
+<meta name="naver-site-verification" content="f6380eaccf6527eea2cd11e1634b074d0720d6df" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.css">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:32px; --s7:48px; --s8:64px;
+  --ink:#16202e;
+  --ink-soft:#3f4c58;
+  --muted:#6d7873;
+  --paper:#f6f7f5;
+  --line:#e0e4de;
+  --line-strong:#c8cec6;
+  --warn:#8a5a1f;
+  --c1:#33685a;  --c1l:#e3ece9;  --c1t:#eef4f1;
+  --c2:#2f5d87;  --c2l:#e2e9f0;  --c2t:#edf3f8;
+  --c3:#6d4f86;  --c3l:#eae5ef;  --c3t:#f3eff7;
+  --c4:#9c4a45;  --c4l:#f2e5e4;  --c4t:#f9f0ef;
+  /* 아주 옅은 종이 결 */
+  --grain:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  --serif:"Gowun Batang","Nanum Myeongjo","Batang",serif;
+  --sans:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,system-ui,"Malgun Gothic",sans-serif;
+  --maxw:1200px;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{margin:0;background-color:var(--paper);background-image:var(--grain);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+/* 한글이 낱말 한가운데서 갈라지지 않도록 — 띄어쓰기에서만 줄을 바꿉니다 */
+body,h1,h2,h3,p,li,button,a{word-break:keep-all;overflow-wrap:break-word;}
+.modal .box .u{word-break:break-all;}
+a{color:inherit;}
+:focus-visible{outline:2.5px solid var(--ink);outline-offset:2px;}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--s5);}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+
+/* 진행 선 */
+#progress{position:fixed;top:0;left:0;height:2px;width:0;background:var(--k,var(--ink));z-index:60;transition:width .1s linear,background-color .35s;}
+
+/* 상단 바 */
+.topbar{position:sticky;top:0;z-index:40;background:rgba(246,247,245,.93);backdrop-filter:saturate(160%) blur(8px);border-bottom:1px solid var(--line);}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;height:56px;gap:var(--s3);}
+.brand{font-family:var(--serif);font-weight:700;font-size:17px;letter-spacing:-.01em;white-space:nowrap;background:none;border:0;padding:0;color:var(--ink);cursor:pointer;display:flex;align-items:baseline;gap:var(--s3);}
+.brand span{font-family:var(--sans);font-size:12.5px;font-weight:400;color:var(--muted);letter-spacing:0;}
+@media(max-width:680px){.brand span{display:none;}}
+.topnav{display:flex;gap:var(--s1);}
+.topnav button{font-family:var(--sans);font-size:13.5px;color:var(--ink-soft);cursor:pointer;padding:var(--s2) var(--s3);border:1px solid transparent;border-radius:2px;background:none;min-height:38px;}
+.topnav button:hover{border-color:var(--line-strong);background:#fff;}
+
+/* 히어로 */
+.hero{padding:var(--s6) 0 var(--s5);}
+.herogrid{display:grid;gap:var(--s5);}
+@media(min-width:900px){.herogrid{grid-template-columns:minmax(0,1fr) 420px;gap:var(--s7);align-items:start;}}
+.hero h1{font-family:var(--serif);font-weight:700;font-size:clamp(30px,4.6vw,50px);line-height:1.3;letter-spacing:-.035em;margin:0 0 var(--s3);max-width:10.5em;}
+.hero p.lede{margin:0 0 var(--s5);color:var(--muted);font-size:14.5px;}
+
+.searchrow{position:relative;max-width:520px;}
+.searchrow input{width:100%;font-family:var(--sans);font-size:16px;color:var(--ink);padding:var(--s4) var(--s7) var(--s4) var(--s4);background:#fff;border:1.5px solid var(--line-strong);border-radius:3px;}
+.searchrow input::placeholder{color:#9aa39d;}
+.searchrow input:focus{border-color:var(--ink);outline:none;box-shadow:0 0 0 3px rgba(22,32,46,.09);}
+.clearbtn{position:absolute;right:var(--s2);top:50%;transform:translateY(-50%);width:34px;height:34px;border:0;background:none;color:var(--muted);font-size:20px;line-height:1;cursor:pointer;border-radius:50%;display:none;}
+.clearbtn:hover{background:var(--paper);color:var(--ink);}
+.clearbtn.on{display:block;}
+
+.chips{display:flex;flex-wrap:wrap;gap:var(--s2);margin-top:var(--s4);}
+.chip{font-family:var(--sans);font-size:13.5px;cursor:pointer;min-height:38px;padding:var(--s2) var(--s3);background:#fff;color:var(--ink-soft);border:1px solid var(--line-strong);border-radius:2px;display:inline-flex;align-items:center;gap:var(--s2);}
+.chip .dot{width:8px;height:8px;border-radius:50%;background:var(--k,var(--muted));flex:none;}
+.chip .n{color:var(--muted);font-size:12.5px;font-variant-numeric:tabular-nums;}
+.chip:hover{border-color:var(--ink-soft);}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff;}
+.chip[aria-pressed="true"] .n{color:rgba(255,255,255,.62);}
+
+/* 서른 칸 지도 */
+.maptoggle{
+  display:none;width:100%;font-family:var(--sans);font-size:13.5px;color:var(--ink-soft);
+  background:#fff;border:1px solid var(--line-strong);border-radius:2px;
+  min-height:44px;padding:var(--s2) var(--s4);cursor:pointer;
+  align-items:center;justify-content:space-between;gap:var(--s2);margin-top:var(--s4);
+}
+.maptoggle .mark{font-size:11px;color:var(--muted);}
+.map{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--s2);}
+@media(min-width:900px){.map{grid-template-columns:repeat(6,1fr);}}
+.cell{
+  min-height:46px;border:0;cursor:pointer;border-radius:2px;padding:var(--s1);
+  background:var(--kl);color:var(--k);
+  font-family:var(--sans);font-size:11.5px;font-weight:600;line-height:1.3;letter-spacing:-.02em;
+  display:flex;align-items:center;justify-content:center;text-align:center;word-break:keep-all;
+  transition:background-color .12s,color .12s,transform .12s;
+}
+.cell:hover,.cell:focus-visible{background:var(--k);color:#fff;transform:translateY(-2px);}
+.cell.dim{opacity:.3;}
+.maplabel{margin:var(--s3) 0 0;font-size:13px;color:var(--muted);line-height:1.6;min-height:1.6em;}
+.maplabel b{color:var(--ink);font-weight:600;}
+@media(max-width:899px){
+  .maptoggle{display:flex;}
+  .mapbox{display:none;margin-top:var(--s3);}
+  .mapbox.open{display:block;}
+  .maplabel{display:none;}
+  .cell{min-height:58px;}
+}
+
+/* 결과 요약 */
+.resultbar{display:flex;align-items:center;gap:var(--s3);flex-wrap:wrap;border-top:1px solid var(--line);margin-top:var(--s6);padding-top:var(--s4);font-size:13.5px;color:var(--muted);}
+.resultbar[hidden]{display:none;}
+.resultbar strong{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums;}
+.resultbar button{font-family:var(--sans);font-size:13px;color:var(--ink-soft);background:#fff;border:1px solid var(--line-strong);border-radius:2px;padding:var(--s2) var(--s3);min-height:34px;cursor:pointer;}
+.resultbar button:hover{border-color:var(--ink);color:var(--ink);}
+
+/* 부 섹션 */
+.part{padding:var(--s8) 0 var(--s7);background-color:var(--tint);background-image:var(--grain);}
+.part:first-child{padding-top:var(--s6);}
+.partrule{height:4px;width:40px;background:var(--k);margin-bottom:var(--s3);}
+.parthead{display:flex;align-items:baseline;gap:var(--s3);flex-wrap:wrap;}
+.parthead h2{font-family:var(--serif);font-weight:700;font-size:clamp(22px,2.6vw,28px);margin:0;letter-spacing:-.01em;}
+.parthead .count{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;}
+.partdesc{margin:var(--s2) 0 var(--s6);color:var(--muted);font-size:14px;max-width:46em;}
+
+.grid{display:grid;border-top:1px solid var(--line);}
+@media(min-width:700px){.grid{grid-template-columns:1fr 1fr;column-gap:var(--s6);}}
+@media(min-width:1180px){.grid{grid-template-columns:1fr 1fr 1fr;}}
+
+.item{position:relative;border-bottom:1px solid var(--line);padding:var(--s5) var(--s3) var(--s4) var(--s4);display:flex;flex-direction:column;gap:var(--s2);cursor:pointer;background:transparent;transition:background-color .12s;}
+.item::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--k);transition:width .12s;}
+.item:hover,.item.flash{background:#fff;}
+.item:hover::before,.item.flash::before{width:7px;}
+.item h3{margin:0;font-size:16.5px;line-height:1.45;font-weight:600;letter-spacing:-.01em;}
+.item h3 a{text-decoration:none;}
+.item:hover h3 a{color:var(--k);}
+.item p.desc{margin:0;font-size:14px;line-height:1.7;color:var(--ink-soft);}
+.item .who{margin:0;font-size:12.5px;color:var(--muted);display:flex;gap:var(--s4);flex-wrap:wrap;}
+.item .who .store{color:var(--warn);}
+.item .prep{margin:0;font-size:12.5px;color:var(--muted);}
+.item .prep b{color:var(--ink-soft);font-weight:600;}
+.item .chapline{margin:0;font-size:12.5px;color:var(--muted);}
+.item .chapline b{color:var(--k);font-weight:600;font-variant-numeric:tabular-nums;}
+.acts{display:flex;gap:var(--s4);margin-top:auto;padding-top:var(--s3);}
+.acts button{font-family:var(--sans);font-size:12.5px;cursor:pointer;color:var(--muted);background:none;border:0;padding:var(--s2) 0;min-height:34px;text-decoration:underline;text-decoration-color:var(--line-strong);text-underline-offset:4px;}
+.acts button:hover{color:var(--ink);text-decoration-color:currentColor;}
+
+.empty{padding:var(--s7) 0 0;}
+.empty .msg{text-align:center;color:var(--muted);padding-bottom:var(--s6);}
+.empty .msg strong{display:block;font-family:var(--serif);font-size:21px;color:var(--ink);margin-bottom:var(--s2);font-weight:700;}
+.empty .msg button{margin-top:var(--s4);font-family:var(--sans);font-size:14px;padding:var(--s3) var(--s5);border:1px solid var(--ink);background:#fff;cursor:pointer;border-radius:2px;}
+.empty h3.near{font-size:14px;font-weight:600;margin:0 0 var(--s3);color:var(--ink-soft);}
+
+/* 아래쪽 */
+.below{background-color:#fff;background-image:var(--grain);border-top:1px solid var(--line);}
+.book{padding:var(--s8) 0 var(--s7);}
+.book h2{font-family:var(--serif);font-weight:700;font-size:clamp(22px,2.6vw,28px);margin:0 0 var(--s4);}
+.book p{margin:0 0 var(--s4);color:var(--ink-soft);font-size:15px;line-height:1.9;max-width:40em;}
+.tocmini{list-style:none;padding:0;margin:var(--s5) 0 0;border-top:1px solid var(--line);max-width:40em;}
+.tocmini li{display:flex;gap:var(--s3);align-items:baseline;padding:var(--s3) 0;border-bottom:1px solid var(--line);font-size:14.5px;}
+.tocmini .k{width:8px;height:8px;border-radius:50%;background:var(--k);flex:none;transform:translateY(-1px);}
+.tocmini .num{margin-left:auto;color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums;}
+.pending{display:inline-block;margin-top:var(--s5);font-size:13px;color:var(--muted);border:1px dashed var(--line-strong);padding:var(--s3) var(--s4);border-radius:2px;}
+
+.notes{border-top:1px solid var(--line);padding:var(--s7) 0 var(--s5);}
+.notes h2{font-family:var(--serif);font-size:22px;font-weight:700;margin:0 0 var(--s5);}
+.notelist{display:grid;gap:var(--s5);}
+@media(min-width:760px){.notelist{grid-template-columns:1fr 1fr 1fr;gap:var(--s6);}}
+.notelist h3{font-size:14.5px;margin:0 0 var(--s2);font-weight:600;}
+.notelist p{margin:0;font-size:13.5px;color:var(--muted);line-height:1.8;}
+footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s8);color:var(--muted);font-size:13px;}
+footer .fr{display:flex;justify-content:space-between;gap:var(--s4);flex-wrap:wrap;align-items:center;}
+footer .linkbtn{font-family:inherit;font-size:13px;background:none;border:0;color:var(--muted);cursor:pointer;text-decoration:underline;text-underline-offset:3px;padding:var(--s2) 0;}
+footer .linkbtn:hover{color:var(--ink);}
+
+/* 창 */
+.modal{position:fixed;inset:0;z-index:80;display:none;align-items:center;justify-content:center;padding:var(--s5);}
+.modal.on{display:flex;}
+.modal .bg{position:absolute;inset:0;background:rgba(22,32,46,.45);}
+.modal .box{position:relative;background:#fff;border:1px solid var(--line-strong);padding:var(--s6) var(--s5) var(--s5);max-width:420px;width:100%;text-align:center;}
+.modal .box h3{font-size:16px;margin:0 0 var(--s1);line-height:1.5;font-weight:600;}
+.modal .box .u{font-size:12px;color:var(--muted);word-break:break-all;margin:0 0 var(--s4);}
+.modal .box .why{font-size:13.5px;color:var(--ink-soft);line-height:1.8;margin:0 0 var(--s4);}
+#qrbox{display:flex;justify-content:center;margin-bottom:var(--s4);}
+#qrbox img,#qrbox canvas{width:100% !important;height:auto !important;max-width:300px;image-rendering:pixelated;}
+.modal .box .row{display:flex;gap:var(--s2);}
+.modal .box .row button,.modal .box .row a{flex:1;font-family:var(--sans);font-size:13px;min-height:44px;border:1px solid var(--line-strong);background:#fff;cursor:pointer;border-radius:2px;display:flex;align-items:center;justify-content:center;text-decoration:none;color:var(--ink);}
+.modal .box .row button.primary,.modal .box .row a.primary{background:var(--ink);border-color:var(--ink);color:#fff;}
+.reportline{margin:var(--s4) 0 0;padding-top:var(--s3);border-top:1px solid var(--line);font-size:12.5px;color:var(--muted);line-height:1.7;}
+
+#toast{position:fixed;left:50%;bottom:var(--s5);transform:translateX(-50%) translateY(14px);background:var(--ink);color:#fff;font-size:13.5px;padding:var(--s3) var(--s4);border-radius:3px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:90;}
+#toast.on{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* 오픈소스 라이선스 */
+#licbtn{position:fixed;right:var(--s4);bottom:var(--s4);z-index:70;font-family:var(--sans);font-size:12.5px;color:var(--ink-soft);background:rgba(255,255,255,.94);border:1px solid var(--line-strong);border-radius:999px;padding:var(--s2) var(--s3);min-height:36px;cursor:pointer;box-shadow:0 2px 8px rgba(22,32,46,.08);}
+#licbtn:hover{color:var(--ink);border-color:var(--ink-soft);}
+#licbtn:focus-visible,#lic .x:focus-visible{outline:2px solid var(--ink);outline-offset:2px;}
+footer{padding-bottom:calc(var(--s8) + 24px);}
+#lic{position:fixed;inset:0;z-index:85;display:none;align-items:center;justify-content:center;padding:var(--s4);}
+#lic.on{display:flex;}
+#lic .bg{position:absolute;inset:0;background:rgba(22,32,46,.45);}
+#lic .panel{position:relative;background:#fff;border:1px solid var(--line-strong);width:100%;max-width:640px;max-height:min(86vh,760px);display:flex;flex-direction:column;}
+#lic .head{display:flex;align-items:center;justify-content:space-between;gap:var(--s3);padding:var(--s4) var(--s5);border-bottom:1px solid var(--line);}
+#lic .head h2{font-family:var(--serif);font-size:19px;margin:0;font-weight:700;}
+#lic .x{font-family:var(--sans);font-size:13px;min-height:38px;padding:0 var(--s4);border:1px solid var(--line-strong);background:#fff;cursor:pointer;border-radius:2px;color:var(--ink);}
+#lic .body{overflow-y:auto;padding:var(--s4) var(--s5) var(--s5);font-size:13.5px;line-height:1.8;color:var(--ink-soft);-webkit-overflow-scrolling:touch;}
+#lic h3{font-size:14.5px;color:var(--ink);margin:var(--s5) 0 var(--s2);font-weight:600;}
+#lic h3:first-child{margin-top:var(--s2);}
+#lic p{margin:0 0 var(--s2);}
+#lic ul{margin:0 0 var(--s2);padding-left:1.2em;}
+#lic li{margin-bottom:var(--s1);}
+#lic table{width:100%;border-collapse:collapse;font-size:13px;margin:var(--s2) 0;}
+#lic th,#lic td{border:1px solid var(--line);padding:var(--s2);text-align:left;vertical-align:top;}
+#lic th{background:var(--paper);font-weight:600;color:var(--ink);white-space:nowrap;}
+#lic details{border:1px solid var(--line);margin:var(--s2) 0;}
+#lic summary{cursor:pointer;padding:var(--s3);font-weight:600;color:var(--ink);font-size:13.5px;}
+#lic pre{margin:0;padding:var(--s3);border-top:1px solid var(--line);background:var(--paper);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11.5px;line-height:1.6;white-space:pre-wrap;word-break:break-word;color:var(--ink-soft);}
+#lic .small{font-size:12.5px;color:var(--muted);}
+@media (max-width:560px){#lic{padding:0;} #lic .panel{max-height:100%;height:100%;border:0;} #lic .head,#lic .body{padding-left:var(--s4);padding-right:var(--s4);} #lic td,#lic th{font-size:12px;}}
+@media print{#licbtn,#lic{display:none !important;}}
+
+@media (prefers-reduced-motion: reduce){*{transition:none !important;animation:none !important;}}
+@media print{
+  .topbar,.searchrow,.chips,.maptoggle,.mapbox,.acts,.modal,#toast,.notes,.pending,.resultbar{display:none !important;}
+  body{background:none;} .below,.part{background:none !important;}
+  #progress{display:none !important;}
+  .item{break-inside:avoid;cursor:auto;}
+  .grid{grid-template-columns:1fr 1fr;}
+  .item::after{content:attr(data-url);font-size:10px;color:#666;word-break:break-all;}
+}
+
+/* 검색로봇·비자바스크립트용 기본 목록 */
+.seolist{padding:var(--s6) 0;}
+.seolist .seonote{font-size:13px;color:var(--muted);margin:0 0 var(--s5);}
+.seolist h2{font-family:var(--serif);font-size:20px;margin:var(--s6) 0 var(--s3);}
+.seolist ul{margin:0;padding-left:1.1em;}
+.seolist li{font-size:14.5px;line-height:1.9;margin-bottom:var(--s2);}
+.seolist .who{color:var(--muted);font-size:12.5px;}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "학교 연장통", "alternateName": ["학교 연장통 — 학교 업무를 바꾼 웹사이트", "바이브 코딩 학교 웹사이트 모음"], "url": "https://edu-hub-alpha-ten.vercel.app/", "description": "초등학교 교감이 바이브 코딩으로 만든 학교 업무용 웹 도구 30개 모음. 휴가·복무 확인, 반편성, 시간표, 연수, 생활지도까지 링크 하나로 바로 씁니다.", "inLanguage": "ko", "author": {"@type": "Person", "name": "최창훈", "jobTitle": "초등학교 교감"}, "keywords": "학교 연장통, 바이브 코딩, 학교 업무, 교사 웹 도구, 초등학교, 교감, 반편성, 휴가, 연수, 생활지도"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "ItemList", "name": "학교 연장통 도구 목록", "numberOfItems": 30, "itemListElement": [{"@type": "ListItem", "position": 1, "name": "외부강의·겸직 가능 여부 확인", "description": "신고 대상인지 겸직 허가 대상인지, 몇 가지 질문에 답하면 스스로 가려낼 수 있습니다.", "url": "https://external-lecture.vercel.app/"}, {"@type": "ListItem", "position": 2, "name": "교원 휴가 종류와 일수 확인", "description": "연가·병가·공가·경조사 등 열세 가지 휴가를 조건과 일수까지 한 화면에서 확인합니다.", "url": "https://leave-of-absence-nu.vercel.app/"}, {"@type": "ListItem", "position": 3, "name": "외국 국적 학생 학적 처리 안내", "description": "입교 상담부터 아포스티유, 학적 처리까지 순서대로 짚어 줍니다.", "url": "https://academic-record-management-for-fore.vercel.app/"}, {"@type": "ListItem", "position": 4, "name": "자율연수비 정산하기", "description": "연수 그룹과 명단을 만들고 지출을 입력하면 정산표가 엑셀로 나옵니다.", "url": "https://training-fee-manager.vercel.app/"}, {"@type": "ListItem", "position": 5, "name": "학부모 법정 의무교육 안내", "description": "해마다 인쇄해 보내던 열여섯 가지 법정 교육을 링크 하나로 대신합니다.", "url": "https://parent-education-zeta.vercel.app/"}, {"@type": "ListItem", "position": 6, "name": "학교 안전·긴급사항 대응 절차", "description": "응급환자 이송, 중대재해, 비상연락망까지 급할 때 열어 보는 절차를 모았습니다.", "url": "https://emergency-fh5s.vercel.app/"}, {"@type": "ListItem", "position": 7, "name": "단체 음료 주문 취합", "description": "각자 고른 음료가 자동으로 취합되고, 카페에 넘길 주문서가 정리되어 나옵니다.", "url": "https://cafe-order-xi.vercel.app/"}, {"@type": "ListItem", "position": 8, "name": "반별 시간표 짜기", "description": "전담 시간과 학년 시수를 맞춰 가며 시간표를 짜고, 충돌을 바로 잡아 줍니다.", "url": "https://elementary-class-timetable.vercel.app/"}, {"@type": "ListItem", "position": 9, "name": "방학 중 비근무 직종 근무일수 계산", "description": "달력에서 근무일을 고르면 연간 근무일수와 주휴 유급 여부가 자동으로 계산됩니다.", "url": "https://calculation-of-paid-vacation-days.vercel.app/"}, {"@type": "ListItem", "position": 10, "name": "보결 배정하기", "description": "빈 시간과 담당 시수를 함께 보며 보결을 고르게 나눠 배정합니다.", "url": "https://substitute-assignment-yiix.vercel.app/"}, {"@type": "ListItem", "position": 11, "name": "월중·주간계획 자동으로 만들기", "description": "한 번 입력한 일정이 월중계획과 주간계획으로 함께 만들어지는 구글 시트 자동화입니다.", "url": "https://monthly-plan-theta.vercel.app/"}, {"@type": "ListItem", "position": 12, "name": "공문·회의록 작성 가이드", "description": "공문과 회의록 쓰는 법을 예시로 익히고, 스물아홉 문항으로 스스로 점검합니다.", "url": "https://official-document.vercel.app/"}, {"@type": "ListItem", "position": 13, "name": "업무 인수인계 노트 만들기", "description": "월별로 하는 일을 적어 두면 파일 하나로 후임자에게 그대로 넘길 수 있습니다.", "url": "https://handover-pi.vercel.app/"}, {"@type": "ListItem", "position": 14, "name": "야외활동 가능 여부 확인", "description": "지금 우리 지역 수치로 야외 활동이 가능한지, 자제인지, 금지인지 한 줄로 답합니다.", "url": "https://fine-dust-heat-wave.vercel.app/"}, {"@type": "ListItem", "position": 15, "name": "감염병 등교중지·출석인정 확인", "description": "병명을 찾으면 등교 중지 기간과 출석 인정 절차를 학부모가 바로 확인할 수 있습니다.", "url": "https://infectious-diseases.vercel.app/"}, {"@type": "ListItem", "position": 16, "name": "교외체험학습 신청기한 계산", "description": "휴일을 빼고 신청 기한을 계산해 주고, 사유가 적절한지도 스스로 확인합니다.", "url": "https://educational-travel.vercel.app/"}, {"@type": "ListItem", "position": 17, "name": "생활기록부·통지표 문장 쓰기", "description": "수업 중에 남긴 관찰 기록을 생활기록부 문장으로 옮기는 과정을 도와줍니다.", "url": "https://student-record-seven.vercel.app/"}, {"@type": "ListItem", "position": 18, "name": "반편성하기", "description": "성적·성별·관계 조건을 놓고 여러 안을 만들어 보며 협의 자리에서 함께 결정합니다.", "url": "https://class-assignment-ruddy.vercel.app/"}, {"@type": "ListItem", "position": 19, "name": "신입생 반편성하기", "description": "예비소집 면접 기록을 모아 신입생 반을 나누고 명렬표까지 정리합니다.", "url": "https://freshman-class-assignment-nmos.vercel.app/"}, {"@type": "ListItem", "position": 20, "name": "청렴 연수 방탈출 게임", "description": "청탁금지법과 갑질 예방을 방탈출 게임으로 풀어 가는 참여형 연수입니다.", "url": "https://integrity-henna.vercel.app/"}, {"@type": "ListItem", "position": 21, "name": "교육활동보호 법률 용어 익히기", "description": "교육활동 침해와 관련된 법률 용어를 읽고, 열 문항 퀴즈로 확인합니다.", "url": "https://protection-of-educational-activitie.vercel.app/"}, {"@type": "ListItem", "position": 22, "name": "교육활동 침해 사안 대응 익히기", "description": "실제 상황을 놓고 어디까지가 침해인지, 무엇부터 해야 하는지 따라가 봅니다.", "url": "https://protection-of-educational-activitie-three.vercel.app/"}, {"@type": "ListItem", "position": 23, "name": "내 수업 성장 지도", "description": "스물네 가지 수업 장면에서 지금 내 모습을 고르면, 여섯 영역의 성장 지도와 다음 한 걸음을 보여 줍니다.", "url": "https://teaching-competency.vercel.app/"}, {"@type": "ListItem", "position": 24, "name": "학급규칙 세우기 수업 준비", "description": "학급 규칙을 학생들과 함께 정하는 수업을 준비하고, 미리 연습해 볼 수 있습니다.", "url": "https://class-rules.vercel.app/"}, {"@type": "ListItem", "position": 25, "name": "교우관계 설문과 관계도 그리기", "description": "학년군별 설문으로 교우 관계를 모아 관계도와 리포트로 보여 줍니다.", "url": "https://sociogram-hazel.vercel.app/"}, {"@type": "ListItem", "position": 26, "name": "나 전달법 배우고 연습하기", "description": "나 전달법을 단계로 배우고 서른 가지 상황으로 연습한 뒤 골든벨로 확인합니다.", "url": "https://i-message-nine.vercel.app/"}, {"@type": "ListItem", "position": 27, "name": "도전행동 생활지도 가이드", "description": "도전 행동을 만났을 때 무엇을 먼저 하고 무엇을 하지 말아야 하는지 안내합니다.", "url": "https://school-guidance-plus.vercel.app/"}, {"@type": "ListItem", "position": 28, "name": "학부모 상담 준비와 연습", "description": "학부모 상담의 흐름을 익히고, 어려운 장면을 미리 연습해 볼 수 있습니다.", "url": "https://parent-consultation-training.vercel.app/"}, {"@type": "ListItem", "position": 29, "name": "상담과 민원 구분하기", "description": "상담과 민원의 경계를 사례로 구분하고, 민원으로 넘어갔을 때의 절차를 안내합니다.", "url": "https://consultation-complaints.vercel.app/"}, {"@type": "ListItem", "position": 30, "name": "학교폭력 사안 처리 절차", "description": "학교폭력 신고 접수부터 처리까지의 절차와 기한을 순서대로 따라갑니다.", "url": "https://school-violence-alpha.vercel.app/"}]}</script>
+</head>
+<body>
+
+<div id="progress" aria-hidden="true"></div>
+
+<div class="topbar">
+  <div class="wrap">
+    <button class="brand" type="button" data-scroll="top">학교 연장통<span>학교 업무를 바꾼 웹사이트</span></button>
+    <nav class="topnav">
+      <button type="button" data-scroll="book">책 소개</button>
+      <button type="button" data-scroll="notes">이용 안내</button>
+    </nav>
+  </div>
+</div>
+
+<header class="hero" id="top">
+  <div class="wrap herogrid">
+    <div>
+      <h1>학교 일에는 매년 같은 질문이 돌아옵니다</h1>
+      <p class="lede" id="lede">초등학교 교감이 바이브 코딩으로 만들어 학교에서 실제로 쓰는 도구들입니다. 회원가입도 설치도 없습니다.</p>
+
+      <div class="searchrow">
+        <label class="sr" for="q">지금 하는 일이나 찾는 도구를 검색하세요</label>
+        <input id="q" type="search" autocomplete="off" placeholder="휴가, 반편성, 학교폭력… 지금 하는 일을 적어 보세요">
+        <button class="clearbtn" id="clear" aria-label="검색어 지우기">×</button>
+      </div>
+
+      <div class="chips" id="fpart" role="group" aria-label="분류로 걸러 보기"></div>
+
+      <button class="maptoggle" type="button" id="maptoggle" aria-expanded="false" aria-controls="mapbox">
+        <span id="maptoggletext">한눈에 보기</span><span class="mark" id="maptogglemark">펼치기</span>
+      </button>
+    </div>
+
+    <div class="mapbox" id="mapbox">
+      <div class="map" id="map" role="group" aria-label="도구 서른 개 한눈에 보기"></div>
+      <p class="maplabel" id="maplabel"></p>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="resultbar" id="resultbar" hidden>
+      <span id="resulttext"></span>
+      <button type="button" id="resetall">조건 지우기</button>
+    </div>
+  </div>
+</header>
+
+<main id="list">
+<div class="seolist wrap">
+<p class="seonote">아래 목록은 검색을 위한 기본 목록입니다. 화면이 모두 불러와지면 분류·검색 기능이 있는 목록으로 바뀝니다.</p>
+<section><h2>학교 업무 — 학교 업무를 조금 더 정확하고 편리하게</h2><ul>
+<li><a href="https://external-lecture.vercel.app/" rel="noopener"><strong>외부강의·겸직 가능 여부 확인</strong></a> — 신고 대상인지 겸직 허가 대상인지, 몇 가지 질문에 답하면 스스로 가려낼 수 있습니다. <span class="who">(모든 교직원 · 겸직)</span></li>
+<li><a href="https://leave-of-absence-nu.vercel.app/" rel="noopener"><strong>교원 휴가 종류와 일수 확인</strong></a> — 연가·병가·공가·경조사 등 열세 가지 휴가를 조건과 일수까지 한 화면에서 확인합니다. <span class="who">(모든 교직원 · 휴가)</span></li>
+<li><a href="https://academic-record-management-for-fore.vercel.app/" rel="noopener"><strong>외국 국적 학생 학적 처리 안내</strong></a> — 입교 상담부터 아포스티유, 학적 처리까지 순서대로 짚어 줍니다. <span class="who">(업무 담당자 · 외국국적)</span></li>
+<li><a href="https://training-fee-manager.vercel.app/" rel="noopener"><strong>자율연수비 정산하기</strong></a> — 연수 그룹과 명단을 만들고 지출을 입력하면 정산표가 엑셀로 나옵니다. <span class="who">(업무 담당자 · 연수비)</span></li>
+<li><a href="https://parent-education-zeta.vercel.app/" rel="noopener"><strong>학부모 법정 의무교육 안내</strong></a> — 해마다 인쇄해 보내던 열여섯 가지 법정 교육을 링크 하나로 대신합니다. <span class="who">(학부모 · 법정교육)</span></li>
+<li><a href="https://emergency-fh5s.vercel.app/" rel="noopener"><strong>학교 안전·긴급사항 대응 절차</strong></a> — 응급환자 이송, 중대재해, 비상연락망까지 급할 때 열어 보는 절차를 모았습니다. <span class="who">(모든 교직원 · 안전)</span></li>
+<li><a href="https://cafe-order-xi.vercel.app/" rel="noopener"><strong>단체 음료 주문 취합</strong></a> — 각자 고른 음료가 자동으로 취합되고, 카페에 넘길 주문서가 정리되어 나옵니다. <span class="who">(모든 교직원 · 음료)</span></li>
+<li><a href="https://elementary-class-timetable.vercel.app/" rel="noopener"><strong>반별 시간표 짜기</strong></a> — 전담 시간과 학년 시수를 맞춰 가며 시간표를 짜고, 충돌을 바로 잡아 줍니다. <span class="who">(업무 담당자 · 시간표)</span></li>
+<li><a href="https://calculation-of-paid-vacation-days.vercel.app/" rel="noopener"><strong>방학 중 비근무 직종 근무일수 계산</strong></a> — 달력에서 근무일을 고르면 연간 근무일수와 주휴 유급 여부가 자동으로 계산됩니다. <span class="who">(업무 담당자 · 근무일수)</span></li>
+<li><a href="https://substitute-assignment-yiix.vercel.app/" rel="noopener"><strong>보결 배정하기</strong></a> — 빈 시간과 담당 시수를 함께 보며 보결을 고르게 나눠 배정합니다. <span class="who">(업무 담당자 · 보결)</span></li>
+<li><a href="https://monthly-plan-theta.vercel.app/" rel="noopener"><strong>월중·주간계획 자동으로 만들기</strong></a> — 한 번 입력한 일정이 월중계획과 주간계획으로 함께 만들어지는 구글 시트 자동화입니다. <span class="who">(업무 담당자 · 월중계획)</span></li>
+<li><a href="https://official-document.vercel.app/" rel="noopener"><strong>공문·회의록 작성 가이드</strong></a> — 공문과 회의록 쓰는 법을 예시로 익히고, 스물아홉 문항으로 스스로 점검합니다. <span class="who">(모든 교직원 · 공문)</span></li>
+<li><a href="https://handover-pi.vercel.app/" rel="noopener"><strong>업무 인수인계 노트 만들기</strong></a> — 월별로 하는 일을 적어 두면 파일 하나로 후임자에게 그대로 넘길 수 있습니다. <span class="who">(모든 교직원 · 인수인계)</span></li>
+</ul></section>
+<section><h2>교실과 학급 — 교실과 학급 운영을 돕는 도구</h2><ul>
+<li><a href="https://fine-dust-heat-wave.vercel.app/" rel="noopener"><strong>야외활동 가능 여부 확인</strong></a> — 지금 우리 지역 수치로 야외 활동이 가능한지, 자제인지, 금지인지 한 줄로 답합니다. <span class="who">(담임교사 · 야외활동)</span></li>
+<li><a href="https://infectious-diseases.vercel.app/" rel="noopener"><strong>감염병 등교중지·출석인정 확인</strong></a> — 병명을 찾으면 등교 중지 기간과 출석 인정 절차를 학부모가 바로 확인할 수 있습니다. <span class="who">(학부모 · 감염병)</span></li>
+<li><a href="https://educational-travel.vercel.app/" rel="noopener"><strong>교외체험학습 신청기한 계산</strong></a> — 휴일을 빼고 신청 기한을 계산해 주고, 사유가 적절한지도 스스로 확인합니다. <span class="who">(학부모 · 체험학습)</span></li>
+<li><a href="https://student-record-seven.vercel.app/" rel="noopener"><strong>생활기록부·통지표 문장 쓰기</strong></a> — 수업 중에 남긴 관찰 기록을 생활기록부 문장으로 옮기는 과정을 도와줍니다. <span class="who">(담임교사 · 통지표)</span></li>
+<li><a href="https://class-assignment-ruddy.vercel.app/" rel="noopener"><strong>반편성하기</strong></a> — 성적·성별·관계 조건을 놓고 여러 안을 만들어 보며 협의 자리에서 함께 결정합니다. <span class="who">(담임교사 · 반편성)</span></li>
+<li><a href="https://freshman-class-assignment-nmos.vercel.app/" rel="noopener"><strong>신입생 반편성하기</strong></a> — 예비소집 면접 기록을 모아 신입생 반을 나누고 명렬표까지 정리합니다. <span class="who">(업무 담당자 · 신입생)</span></li>
+</ul></section>
+<section><h2>연수 — 듣는 연수에서 참여하는 연수로</h2><ul>
+<li><a href="https://integrity-henna.vercel.app/" rel="noopener"><strong>청렴 연수 방탈출 게임</strong></a> — 청탁금지법과 갑질 예방을 방탈출 게임으로 풀어 가는 참여형 연수입니다. <span class="who">(모든 교직원 · 청렴)</span></li>
+<li><a href="https://protection-of-educational-activitie.vercel.app/" rel="noopener"><strong>교육활동보호 법률 용어 익히기</strong></a> — 교육활동 침해와 관련된 법률 용어를 읽고, 열 문항 퀴즈로 확인합니다. <span class="who">(모든 교직원 · 교권용어)</span></li>
+<li><a href="https://protection-of-educational-activitie-three.vercel.app/" rel="noopener"><strong>교육활동 침해 사안 대응 익히기</strong></a> — 실제 상황을 놓고 어디까지가 침해인지, 무엇부터 해야 하는지 따라가 봅니다. <span class="who">(모든 교직원 · 교권대응)</span></li>
+<li><a href="https://teaching-competency.vercel.app/" rel="noopener"><strong>내 수업 성장 지도</strong></a> — 스물네 가지 수업 장면에서 지금 내 모습을 고르면, 여섯 영역의 성장 지도와 다음 한 걸음을 보여 줍니다. <span class="who">(모든 교직원 · 수업역량)</span></li>
+</ul></section>
+<section><h2>생활지도 — 학생 생활지도를 지원하는 도구</h2><ul>
+<li><a href="https://class-rules.vercel.app/" rel="noopener"><strong>학급규칙 세우기 수업 준비</strong></a> — 학급 규칙을 학생들과 함께 정하는 수업을 준비하고, 미리 연습해 볼 수 있습니다. <span class="who">(담임교사 · 학급규칙)</span></li>
+<li><a href="https://sociogram-hazel.vercel.app/" rel="noopener"><strong>교우관계 설문과 관계도 그리기</strong></a> — 학년군별 설문으로 교우 관계를 모아 관계도와 리포트로 보여 줍니다. <span class="who">(담임교사 · 관계도)</span></li>
+<li><a href="https://i-message-nine.vercel.app/" rel="noopener"><strong>나 전달법 배우고 연습하기</strong></a> — 나 전달법을 단계로 배우고 서른 가지 상황으로 연습한 뒤 골든벨로 확인합니다. <span class="who">(담임교사 · 나전달법)</span></li>
+<li><a href="https://school-guidance-plus.vercel.app/" rel="noopener"><strong>도전행동 생활지도 가이드</strong></a> — 도전 행동을 만났을 때 무엇을 먼저 하고 무엇을 하지 말아야 하는지 안내합니다. <span class="who">(담임교사 · 생활지도)</span></li>
+<li><a href="https://parent-consultation-training.vercel.app/" rel="noopener"><strong>학부모 상담 준비와 연습</strong></a> — 학부모 상담의 흐름을 익히고, 어려운 장면을 미리 연습해 볼 수 있습니다. <span class="who">(담임교사 · 상담준비)</span></li>
+<li><a href="https://consultation-complaints.vercel.app/" rel="noopener"><strong>상담과 민원 구분하기</strong></a> — 상담과 민원의 경계를 사례로 구분하고, 민원으로 넘어갔을 때의 절차를 안내합니다. <span class="who">(모든 교직원 · 민원구분)</span></li>
+<li><a href="https://school-violence-alpha.vercel.app/" rel="noopener"><strong>학교폭력 사안 처리 절차</strong></a> — 학교폭력 신고 접수부터 처리까지의 절차와 기한을 순서대로 따라갑니다. <span class="who">(모든 교직원 · 학교폭력)</span></li>
+</ul></section>
+</div>
+</main>
+
+<div class="below">
+  <div class="wrap">
+    <section class="book" id="book">
+      <h2>서른 개를 어떻게 만들었고, 무엇이 달라졌는지</h2>
+      <p>여기 있는 도구는 모두 학교에서 마주친 하나의 장면에서 시작됐습니다. 규정을 못 찾아 헤매던 오후, 같은 일정을 세 번 옮겨 적던 아침, 학생 앞에서 잠깐 망설였던 순간 같은 것들입니다. 그때마다 하나씩 만들다 보니 여기까지 왔습니다.</p>
+      <p>만드는 데 쓴 것은 바이브 코딩입니다. 전공자도 개발자도 아닌 사람이 필요한 것을 말로 설명해서 만들었습니다. 그래서 이 도구들은 잘 만든 소프트웨어라기보다 학교에서 쓸 만한 것에 가깝습니다.</p>
+      <p>이 가운데 서른 개를 골라, 왜 필요했고 만든 뒤에 무엇이 달라졌는지를 한 장에 하나씩 적어 책으로 묶고 있습니다. 지금 원고를 쓰는 중입니다.</p>
+      <ul class="tocmini" id="tocmini"></ul>
+      <span class="pending">출간되면 이 자리에 책 소개 링크가 올라갑니다.</span>
+    </section>
+
+    <section class="notes" id="notes">
+      <h2>쓰기 전에 알아 두시면 좋은 것</h2>
+      <div class="notelist">
+        <div>
+          <h3>무엇을 근거로 만들었나</h3>
+          <p>휴가·복무·겸직은 「국가공무원 복무규정」과 교육부 「교원 휴가에 관한 예규」를, 학교폭력과 교육활동보호는 해당 법률과 시행령을 그대로 따랐습니다. 개정이 있으면 반영하고, 마지막으로 손본 때를 아래에 적어 둡니다.</p>
+        </div>
+        <div>
+          <h3>‘서버 저장’ 표시가 있는 도구</h3>
+          <p>대부분의 도구는 입력한 내용이 브라우저 안에서만 처리되고 서버로 넘어가지 않습니다. 여럿이 함께 써야 하는 몇 가지만 저장이 필요하고, 그 도구에는 ‘서버 저장’ 표시를 붙였습니다. 사용이 끝나면 자료를 지워 주세요.</p>
+        </div>
+        <div>
+          <h3>PC에서 쓰는 것이 편한 도구</h3>
+          <p>반편성이나 시간표처럼 표를 넓게 보아야 하는 도구에는 ‘PC 권장’을 표시해 두었습니다. 스마트폰에서 누르면 한 번 더 안내가 나옵니다.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="wrap fr">
+      <div id="footcredit">만든이 최창훈 · 초등학교 교감 · 2026</div>
+      <div>
+        <button class="linkbtn" id="reportsite" hidden>잘못된 내용 알려 주기</button>
+        <button class="linkbtn" id="copyall">전체 목록을 텍스트로 복사</button>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mt">
+  <div class="bg" data-close></div>
+  <div class="box" id="modalbox"></div>
+</div>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<button type="button" id="licbtn" aria-haspopup="dialog" aria-controls="lic">ⓘ 오픈소스 라이선스</button>
+
+<div id="lic" role="dialog" aria-modal="true" aria-labelledby="lict" hidden>
+  <div class="bg" data-licclose></div>
+  <div class="panel">
+    <div class="head">
+      <h2 id="lict">오픈소스 라이선스·저작권 안내</h2>
+      <button type="button" class="x" data-licclose>닫기</button>
+    </div>
+    <div class="body">
+      <h3>저작권</h3>
+      <p>「학교 연장통」의 기획과 분류, 도구 소개 글과 안내 문구, 화면 디자인과 코드는 제작자가 직접 만든 것입니다. 목록에 연결된 각 도구 사이트는 그 사이트의 안내를 따릅니다.</p>
+      <p>© 2026 최창훈. All rights reserved.</p>
+
+      <h3>함께 쓴 오픈소스</h3>
+      <table>
+        <thead><tr><th>구성요소</th><th>라이선스</th><th>저작권자</th></tr></thead>
+        <tbody>
+          <tr><td>Pretendard 1.3.9<br><span class="small">본문 글꼴</span></td><td>SIL OFL 1.1</td><td>Kil Hyung-jin(길형진)<br><span class="small">포함 글꼴: Inter(The Inter Project Authors), Source Han Sans(Adobe), M PLUS 1p(The M+ FONTS Project Authors)</span></td></tr>
+          <tr><td>Gowun Batang<br><span class="small">제목 글꼴</span></td><td>SIL OFL 1.1</td><td>The Gowun Batang Project Authors(류양희)</td></tr>
+          <tr><td>QRCode.js 1.0.0<br><span class="small">QR 코드 만들기</span></td><td>MIT</td><td>davidshimjs</td></tr>
+        </tbody>
+      </table>
+      <p class="small">두 글꼴은 jsDelivr와 Google Fonts에서, QRCode.js는 cdnjs에서 원본 그대로 불러오며 수정하지 않았습니다. 이 사이트에는 Apache-2.0, BSD-3-Clause, ISC 라이선스로 배포되는 구성요소가 쓰이지 않았습니다.</p>
+
+      <h3>기기 글꼴</h3>
+      <p>위 글꼴을 불러오지 못하면 보는 분의 기기에 이미 설치된 글꼴(나눔명조, 바탕, 맑은 고딕, 시스템 글꼴 등)로 표시됩니다. 이 글꼴들은 이름만 지정할 뿐 파일을 포함하거나 배포하지 않습니다.</p>
+
+      <h3>그림·이모지</h3>
+      <p>이 사이트는 이미지 파일이나 이모지를 쓰지 않습니다. 배경의 옅은 종이 결은 제작자가 코드로 직접 그린 무늬입니다. ⓘ, ×, 「 」 같은 기호는 유니코드 표준 문자이며 기기 글꼴이 그립니다.</p>
+
+      <h3>상표</h3>
+      <p>QR코드는 (주)덴소웨이브(DENSO WAVE INCORPORATED)의 등록상표입니다. 구글 시트는 Google LLC의, 엑셀은 Microsoft Corporation의 상표입니다. 소개 글에 나오는 제품·서비스 이름은 기능을 설명하기 위한 것이며, 이 사이트는 어느 회사와도 제휴·후원 관계가 없습니다.</p>
+
+      <h3>근거 자료</h3>
+      <p>안내에 인용한 법령·훈령·예규는 저작권법 제7조에 따라 보호받지 않는 저작물입니다. 이 사이트는 교육부·시도교육청 등 어떤 기관의 공식 서비스도 아닙니다.</p>
+
+      <h3>라이선스 전문</h3>
+      <details><summary>MIT License — QRCode.js</summary><pre>The MIT License (MIT)
+---------------------
+Copyright (c) 2012 davidshimjs
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</pre></details>
+      <details><summary>SIL Open Font License 1.1 — Pretendard, Gowun Batang</summary><pre>Pretendard: Copyright (c) 2021, Kil Hyung-jin (https://github.com/orioncactus/pretendard), with Reserved Font Name Pretendard.
+  (includes glyphs from Inter — Copyright (c) 2016 The Inter Project Authors;
+   Source Han Sans — Copyright 2014-2021 Adobe (http://www.adobe.com/), with Reserved Font Name &#x27;Source&#x27;;
+   M PLUS 1p — Copyright 2016 The M+ FONTS Project Authors)
+Gowun Batang: Copyright 2021 The Gowun Batang Project Authors (https://github.com/yangheeryu/Gowun-Batang)
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license is copied below, and is also available with a FAQ at: https://openfontlicense.org
+
+-----------------------------------------------------------
+SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
+-----------------------------------------------------------
+
+PREAMBLE
+The goals of the Open Font License (OFL) are to stimulate worldwide development of collaborative font projects, to support the font creation efforts of academic and linguistic communities, and to provide a free and open framework in which fonts may be shared and improved in partnership with others.
+
+The OFL allows the licensed fonts to be used, studied, modified and redistributed freely as long as they are not sold by themselves. The fonts, including any derivative works, can be bundled, embedded, redistributed and/or sold with any software provided that any reserved names are not used by derivative works. The fonts and derivatives, however, cannot be released under any other type of license. The requirement for fonts to remain under this license does not apply to any document created using the fonts or their derivatives.
+
+DEFINITIONS
+&quot;Font Software&quot; refers to the set of files released by the Copyright Holder(s) under this license and clearly marked as such. This may include source files, build scripts and documentation.
+
+&quot;Reserved Font Name&quot; refers to any names specified as such after the copyright statement(s).
+
+&quot;Original Version&quot; refers to the collection of Font Software components as distributed by the Copyright Holder(s).
+
+&quot;Modified Version&quot; refers to any derivative made by adding to, deleting, or substituting -- in part or in whole -- any of the components of the Original Version, by changing formats or by porting the Font Software to a new environment.
+
+&quot;Author&quot; refers to any designer, engineer, programmer, technical writer or other person who contributed to the Font Software.
+
+PERMISSION &amp; CONDITIONS
+Permission is hereby granted, free of charge, to any person obtaining a copy of the Font Software, to use, study, copy, merge, embed, modify, redistribute, and sell modified and unmodified copies of the Font Software, subject to the following conditions:
+
+1) Neither the Font Software nor any of its individual components, in Original or Modified Versions, may be sold by itself.
+
+2) Original or Modified Versions of the Font Software may be bundled, redistributed and/or sold with any software, provided that each copy contains the above copyright notice and this license. These can be included either as stand-alone text files, human-readable headers or in the appropriate machine-readable metadata fields within text or binary files as long as those fields can be easily viewed by the user.
+
+3) No Modified Version of the Font Software may use the Reserved Font Name(s) unless explicit written permission is granted by the corresponding Copyright Holder. This restriction only applies to the primary font name as presented to the users.
+
+4) The name(s) of the Copyright Holder(s) and the Author(s) of the Font Software shall not be used to promote, endorse or advertise any Modified Version, except to acknowledge the contribution(s) of the Copyright Holder(s) and the Author(s) or with their explicit written permission.
+
+5) The Font Software, modified or unmodified, in part or in whole, must be distributed entirely under this license, and must not be distributed under any other license. The requirement for fonts to remain under this license does not apply to any document created using the Font Software.
+
+TERMINATION
+This license becomes null and void if any of the above conditions are not met.
+
+DISCLAIMER
+THE FONT SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM OTHER DEALINGS IN THE FONT SOFTWARE.</pre></details>
+    </div>
+  </div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+/* ══════════════════════════════════════════════════════════
+   고쳐 쓰실 곳
+   1) REPORT_EMAIL  — 오류 제보를 받을 메일 주소. 비우면 버튼이 안 나옵니다.
+   2) LAST_CHECKED  — 링크를 마지막으로 확인한 날. 푸터에 표시됩니다.
+   3) SHOW_BOOK_CHAPTER — 책이 나오면 true 로.
+   4) SITES         — 도구 이름(t), 설명(d), 대상(who), PC 권장(pc),
+                      지도 칸 글자(tag), 서버 저장(store), 준비물(prep)
+   ══════════════════════════════════════════════════════════ */
+
+const REPORT_EMAIL = "";              /* 예: "changhun@example.com" */
+const LAST_CHECKED = "2026. 9.";      /* 링크 점검한 달 */
+const SHOW_BOOK_CHAPTER = false;
+
+const PARTS = [
+  { id:"1", name:"학교 업무",   full:"학교 업무를 조금 더 정확하고 편리하게", book:"2부",
+    desc:"규정을 찾고, 숫자를 맞추고, 서류를 넘기는 일.", color:"var(--c1)", light:"var(--c1l)", tint:"var(--c1t)" },
+  { id:"2", name:"교실과 학급", full:"교실과 학급 운영을 돕는 도구", book:"3부",
+    desc:"담임이 그날그날 판단해야 하는 일들.", color:"var(--c2)", light:"var(--c2l)", tint:"var(--c2t)" },
+  { id:"3", name:"연수",       full:"듣는 연수에서 참여하는 연수로", book:"4부",
+    desc:"앉아서 듣기만 하던 연수를 손에 든 기기로 푸는 시간으로.", color:"var(--c3)", light:"var(--c3l)", tint:"var(--c3t)" },
+  { id:"4", name:"생활지도",   full:"학생 생활지도를 지원하는 도구", book:"5부",
+    desc:"학생 앞에서 잠깐 망설이게 되는 순간에 기댈 기준.", color:"var(--c4)", light:"var(--c4l)", tint:"var(--c4t)" }
+];
+
+const SITES = [
+/* ── 학교 업무 ── */
+{p:"1",n:1,tag:"겸직",t:"외부강의·겸직 가능 여부 확인",c:"“교감 선생님, 이거 해도 되나요”",u:"https://external-lecture.vercel.app/",
+ d:"신고 대상인지 겸직 허가 대상인지, 몇 가지 질문에 답하면 스스로 가려낼 수 있습니다.",who:"모든 교직원",pc:false,
+ k:"외부강의 겸직 복무 신고 허가 강의료 자가진단"},
+{p:"1",n:2,tag:"휴가",t:"교원 휴가 종류와 일수 확인",c:"“이거 연가예요, 병가예요?”",u:"https://leave-of-absence-nu.vercel.app/",
+ d:"연가·병가·공가·경조사 등 열세 가지 휴가를 조건과 일수까지 한 화면에서 확인합니다.",who:"모든 교직원",pc:false,
+ k:"휴가 연가 병가 공가 경조사 육아시간 장기재직 특별휴가 복무 며칠"},
+{p:"1",n:3,tag:"외국국적",t:"외국 국적 학생 학적 처리 안내",c:"외국 국적의 학생, 서류는 어디서부터일까",u:"https://academic-record-management-for-fore.vercel.app/",
+ d:"입교 상담부터 아포스티유, 학적 처리까지 순서대로 짚어 줍니다.",who:"업무 담당자",pc:false,
+ k:"외국국적 다문화 학적 입교 편입 아포스티유 재외국민 서류"},
+{p:"1",n:4,tag:"연수비",t:"자율연수비 정산하기",c:"연수는 즐거웠는데, 정산이 남았다",u:"https://training-fee-manager.vercel.app/",
+ d:"연수 그룹과 명단을 만들고 지출을 입력하면 정산표가 엑셀로 나옵니다.",who:"업무 담당자",pc:false,
+ store:"명단·지출 내역 서버 저장",prep:"참여자 명단",
+ k:"자율연수비 정산 연수비 지출 영수증 엑셀 그룹"},
+{p:"1",n:5,tag:"법정교육",t:"학부모 법정 의무교육 안내",c:"“올해도 그 책자, 만들어야 하죠”",u:"https://parent-education-zeta.vercel.app/",
+ d:"해마다 인쇄해 보내던 열여섯 가지 법정 교육을 링크 하나로 대신합니다.",who:"학부모",pc:false,
+ k:"학부모 법정교육 의무교육 안내 책자 가정통신문"},
+{p:"1",n:6,tag:"안전",t:"학교 안전·긴급사항 대응 절차",c:"그 순간, 무엇부터 해야 하는지 아무도 몰랐다",u:"https://emergency-fh5s.vercel.app/",
+ d:"응급환자 이송, 중대재해, 비상연락망까지 급할 때 열어 보는 절차를 모았습니다.",who:"모든 교직원",pc:false,
+ k:"긴급 안전 사고 응급 이송 중대재해 위험성평가 비상연락망 매뉴얼"},
+{p:"1",n:7,tag:"음료",t:"단체 음료 주문 취합",c:"아이스 스물셋, 핫 열아홉이 뒤섞이던 아침",u:"https://cafe-order-xi.vercel.app/",
+ d:"각자 고른 음료가 자동으로 취합되고, 카페에 넘길 주문서가 정리되어 나옵니다.",who:"모든 교직원",pc:false,
+ store:"주문 내역 서버 저장",
+ k:"음료 커피 주문 취합 단체 회식 간식 카페"},
+{p:"1",n:8,tag:"시간표",t:"반별 시간표 짜기",c:"한 칸을 고치면 열두 곳이 어긋난다",u:"https://elementary-class-timetable.vercel.app/",
+ d:"전담 시간과 학년 시수를 맞춰 가며 시간표를 짜고, 충돌을 바로 잡아 줍니다.",who:"업무 담당자",pc:true,
+ prep:"학년별 시수·전담 시간표",
+ k:"시간표 전담 시수 편성 교육과정 반별"},
+{p:"1",n:9,tag:"근무일수",t:"방학 중 비근무 직종 근무일수 계산",c:"근무 형태가 다르면 계산도 달라진다",u:"https://calculation-of-paid-vacation-days.vercel.app/",
+ d:"달력에서 근무일을 고르면 연간 근무일수와 주휴 유급 여부가 자동으로 계산됩니다.",who:"업무 담당자",pc:true,
+ prep:"학사일정(방학 날짜)",
+ k:"교육공무직 방학중 비근무 근무일수 유급 주휴 조리실무사 계산"},
+{p:"1",n:10,tag:"보결",t:"보결 배정하기",c:"2교시 10분 전, 3학년 2반이 비었다",u:"https://substitute-assignment-yiix.vercel.app/",
+ d:"빈 시간과 담당 시수를 함께 보며 보결을 고르게 나눠 배정합니다.",who:"업무 담당자",pc:true,
+ prep:"반별 시간표",
+ k:"보결 결강 대체 시간표 배정 출장 연가"},
+{p:"1",n:11,tag:"월중계획",t:"월중·주간계획 자동으로 만들기",c:"같은 일정을 세 번 옮겨 적고 있었다",u:"https://monthly-plan-theta.vercel.app/",
+ d:"한 번 입력한 일정이 월중계획과 주간계획으로 함께 만들어지는 구글 시트 자동화입니다.",who:"업무 담당자",pc:true,
+ prep:"구글 계정(시트 사본 만들기)",
+ k:"월중계획 주간계획 학사일정 구글시트 앱스스크립트 자동화"},
+{p:"1",n:12,tag:"공문",t:"공문·회의록 작성 가이드",c:"빈 화면과 깜빡이는 커서 앞에서",u:"https://official-document.vercel.app/",
+ d:"공문과 회의록 쓰는 법을 예시로 익히고, 스물아홉 문항으로 스스로 점검합니다.",who:"모든 교직원",pc:false,
+ k:"공문 기안 공문서 회의록 작성법 어문규정 결재"},
+{p:"1",n:13,tag:"인수인계",t:"업무 인수인계 노트 만들기",c:"“그건 작년에 하시던 선생님이 아세요”",u:"https://handover-pi.vercel.app/",
+ d:"월별로 하는 일을 적어 두면 파일 하나로 후임자에게 그대로 넘길 수 있습니다.",who:"모든 교직원",pc:false,
+ k:"인수인계 업무분장 후임 매뉴얼 월별 업무"},
+
+/* ── 교실과 학급 ── */
+{p:"2",n:1,tag:"야외활동",t:"야외활동 가능 여부 확인",c:"창밖은 뿌옇고, 5교시는 체육이다",u:"https://fine-dust-heat-wave.vercel.app/",
+ d:"지금 우리 지역 수치로 야외 활동이 가능한지, 자제인지, 금지인지 한 줄로 답합니다.",who:"담임교사",pc:false,
+ k:"미세먼지 폭염 야외활동 실외수업 체육 운동장 기상 대기질 날씨"},
+{p:"2",n:2,tag:"감염병",t:"감염병 등교중지·출석인정 확인",c:"진단서 없는 결석, 이건 출석 인정일까?",u:"https://infectious-diseases.vercel.app/",
+ d:"병명을 찾으면 등교 중지 기간과 출석 인정 절차를 학부모가 바로 확인할 수 있습니다.",who:"학부모",pc:false,
+ k:"감염병 등교중지 출석인정 결석 독감 수두 진단서 보건"},
+{p:"2",n:3,tag:"체험학습",t:"교외체험학습 신청기한 계산",c:"“월요일에 가는데 금요일에 내면 되죠?”",u:"https://educational-travel.vercel.app/",
+ d:"휴일을 빼고 신청 기한을 계산해 주고, 사유가 적절한지도 스스로 확인합니다.",who:"학부모",pc:false,
+ k:"교외체험학습 가정학습 신청 기한 결석 여행 학교장허가"},
+{p:"2",n:4,tag:"통지표",t:"생활기록부·통지표 문장 쓰기",c:"통지표의 빈칸을 무엇으로 채울까",u:"https://student-record-seven.vercel.app/",
+ d:"수업 중에 남긴 관찰 기록을 생활기록부 문장으로 옮기는 과정을 도와줍니다.",who:"담임교사",pc:false,
+ prep:"수업 중 남긴 관찰 기록",
+ k:"생활기록부 통지표 세특 행동특성 과정중심평가 문장 기록"},
+{p:"2",n:5,tag:"반편성",t:"반편성하기",c:"퇴근 시간이 다가와도 반편성은 끝나지 않았다",u:"https://class-assignment-ruddy.vercel.app/",
+ d:"성적·성별·관계 조건을 놓고 여러 안을 만들어 보며 협의 자리에서 함께 결정합니다.",who:"담임교사",pc:true,
+ prep:"학생 명단과 배정 자료",
+ k:"반편성 반배정 학급편성 학년말 협의"},
+{p:"2",n:6,tag:"신입생",t:"신입생 반편성하기",c:"아직 만나 본 적 없는 학생들을 나누는 일",u:"https://freshman-class-assignment-nmos.vercel.app/",
+ d:"예비소집 면접 기록을 모아 신입생 반을 나누고 명렬표까지 정리합니다.",who:"업무 담당자",pc:true,
+ prep:"예비소집 면접 기록",
+ k:"신입생 예비소집 반편성 1학년 취학 면접"},
+
+/* ── 연수 ── */
+{p:"3",n:1,tag:"청렴",t:"청렴 연수 방탈출 게임",c:"올해도 반부패 연수, 그런데 이번엔 사건이 일어난다",u:"https://integrity-henna.vercel.app/",
+ d:"청탁금지법과 갑질 예방을 방탈출 게임으로 풀어 가는 참여형 연수입니다.",who:"모든 교직원",pc:false,
+ prep:"참여자 각자의 스마트기기",
+ k:"청렴 반부패 갑질 청탁금지법 김영란법 방탈출 게임 연수"},
+{p:"3",n:2,tag:"교권용어",t:"교육활동보호 법률 용어 익히기",c:"뜻을 모른 채 넘겼던 단어들",u:"https://protection-of-educational-activitie.vercel.app/",
+ d:"교육활동 침해와 관련된 법률 용어를 읽고, 열 문항 퀴즈로 확인합니다.",who:"모든 교직원",pc:false,
+ k:"교육활동보호 교권 침해 법률 용어 퀴즈 연수"},
+{p:"3",n:3,tag:"교권대응",t:"교육활동 침해 사안 대응 익히기",c:"만약 내 교실에서 그 일이 일어난다면",u:"https://protection-of-educational-activitie-three.vercel.app/",
+ d:"실제 상황을 놓고 어디까지가 침해인지, 무엇부터 해야 하는지 따라가 봅니다.",who:"모든 교직원",pc:false,
+ k:"교육활동보호 교권 침해 사안 대응 절차 사례 신고"},
+{p:"3",n:4,tag:"수업역량",t:"내 수업 성장 지도",c:"나는 지금 어디쯤 와 있을까",u:"https://teaching-competency.vercel.app/",
+ d:"스물네 가지 수업 장면에서 지금 내 모습을 고르면, 여섯 영역의 성장 지도와 다음 한 걸음을 보여 줍니다.",who:"모든 교직원",pc:false,
+ k:"수업 성장 지도 수업역량 수업 역량 자기점검 진단 2022 개정 교육과정 맞춤 지원 과정 중심 평가 피드백 디지털 기초소양 AI 에듀테크 연수"},
+
+/* ── 생활지도 ── */
+{p:"4",n:1,tag:"학급규칙",t:"학급규칙 세우기 수업 준비",c:"규칙은 붙이는 것이 아니라 정하는 것이다",u:"https://class-rules.vercel.app/",
+ d:"학급 규칙을 학생들과 함께 정하는 수업을 준비하고, 미리 연습해 볼 수 있습니다.",who:"담임교사",pc:false,
+ k:"학급규칙 학급헌법 학급운영 3월 규칙 세우기 수업"},
+{p:"4",n:2,tag:"관계도",t:"교우관계 설문과 관계도 그리기",c:"쉬는 시간에만 보이는 우리 반의 지도",u:"https://sociogram-hazel.vercel.app/",
+ d:"학년군별 설문으로 교우 관계를 모아 관계도와 리포트로 보여 줍니다.",who:"담임교사",pc:false,
+ store:"학생 명단·응답 서버 저장",prep:"학생 명단, 학생이 응답할 기기",
+ k:"교우관계 소시오그램 관계도 또래 설문 학급 진단 상담"},
+{p:"4",n:3,tag:"나전달법",t:"나 전달법 배우고 연습하기",c:"“너 때문에” 대신 “나는”으로 시작하기",u:"https://i-message-nine.vercel.app/",
+ d:"나 전달법을 단계로 배우고 서른 가지 상황으로 연습한 뒤 골든벨로 확인합니다.",who:"담임교사",pc:false,
+ store:"게임 순위만 서버 저장",
+ k:"나전달법 아이메시지 의사소통 대화법 갈등 골든벨 학생"},
+{p:"4",n:4,tag:"생활지도",t:"도전행동 생활지도 가이드",c:"학생 앞에서 3초를 망설였다",u:"https://school-guidance-plus.vercel.app/",
+ d:"도전 행동을 만났을 때 무엇을 먼저 하고 무엇을 하지 말아야 하는지 안내합니다.",who:"담임교사",pc:false,
+ k:"생활지도 도전행동 문제행동 훈육 학생지도 대응"},
+{p:"4",n:5,tag:"상담준비",t:"학부모 상담 준비와 연습",c:"상담을 앞둔 밤, 잠이 오지 않았다",u:"https://parent-consultation-training.vercel.app/",
+ d:"학부모 상담의 흐름을 익히고, 어려운 장면을 미리 연습해 볼 수 있습니다.",who:"담임교사",pc:false,
+ k:"학부모상담 상담주간 대화 연습 학부모 소통"},
+{p:"4",n:6,tag:"민원구분",t:"상담과 민원 구분하기",c:"어디까지가 상담이고, 어디부터가 민원일까",u:"https://consultation-complaints.vercel.app/",
+ d:"상담과 민원의 경계를 사례로 구분하고, 민원으로 넘어갔을 때의 절차를 안내합니다.",who:"모든 교직원",pc:false,
+ k:"민원 상담 응대 악성민원 경계 절차 교육활동"},
+{p:"4",n:7,tag:"학교폭력",t:"학교폭력 사안 처리 절차",c:"신고를 받은 그날부터 무엇이 시작되는가",u:"https://school-violence-alpha.vercel.app/",
+ d:"학교폭력 신고 접수부터 처리까지의 절차와 기한을 순서대로 따라갑니다.",who:"모든 교직원",pc:false,
+ k:"학교폭력 학폭 신고 절차 심의위원회 사안처리 기한"}
+];
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const partOf = id => PARTS.find(p => p.id === id);
+const keyOf = s => s.p + "-" + s.n;
+const soften = () => !(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+const isNarrow = () => !(window.matchMedia && window.matchMedia("(min-width: 900px)").matches);
+SITES.forEach((s, i) => { s.seq = i + 1; });
+
+/* 개수를 우리말로: 30 → "서른", 32 → "서른두". 100 이상은 숫자로. */
+function koCount(n){
+  const tens = ["","열","스물","서른","마흔","쉰","예순","일흔","여든","아흔"];
+  const ones = ["","한","두","세","네","다섯","여섯","일곱","여덟","아홉"];
+  if (n < 1 || n > 99) return String(n);
+  return (tens[Math.floor(n / 10)] || "") + ones[n % 10];
+}
+const COUNT = SITES.length;
+const COUNT_KO = koCount(COUNT) + " 개";
+
+$("#lede").textContent = "초등학교 교감이 만들어 학교에서 실제로 쓰는 도구들입니다. 지금까지 " + COUNT_KO + ", 회원가입도 설치도 없습니다.";
+$("#maptoggletext").textContent = COUNT_KO + " 한눈에 보기";
+
+let fPart = "all", query = "";
+
+/* ── 검색: 조사를 떼고 맞춰 봅니다 ── */
+const JOSA = ["에서는","으로는","에게는","이라도","에서","으로","에게","한테","까지","부터","보다","처럼","이나","라도","은","는","이","가","을","를","의","에","도","만","로","과","와","랑"];
+function variants(word){
+  const out = [word];
+  JOSA.forEach(j => { if (word.length > j.length + 1 && word.endsWith(j)) out.push(word.slice(0, -j.length)); });
+  return out;
+}
+function hayOf(s){
+  return ((SHOW_BOOK_CHAPTER ? s.c + " " : "") + s.t + " " + s.d + " " + s.who + " " + s.tag + " " + s.k).toLowerCase();
+}
+function match(s){
+  if (fPart !== "all" && s.p !== fPart) return false;
+  if (!query) return true;
+  const hay = hayOf(s);
+  return query.toLowerCase().split(/\s+/).filter(Boolean)
+    .every(w => variants(w).some(v => hay.includes(v)));
+}
+/* 0건일 때 가까운 것 세 개 — 이름과 지도 글자에 걸리면 점수를 더 줍니다.
+   두 글자로 못 찾으면 한 글자씩이라도 맞춰 봅니다(오타 대비). */
+function nearest(q){
+  const clean = q.toLowerCase().replace(/\s+/g, "");
+  if (!clean) return [];
+  const pick = (parts) => SITES.map(s => {
+    const strong = (s.t + " " + s.tag).toLowerCase();
+    const hay = hayOf(s);
+    let sc = 0;
+    parts.forEach(g => { if (strong.includes(g)) sc += 2; else if (hay.includes(g)) sc += 1; });
+    return { s, sc };
+  }).filter(x => x.sc > 0).sort((a, b) => b.sc - a.sc).slice(0, 3).map(x => x.s);
+
+  const grams = [];
+  for (let i = 0; i < clean.length - 1; i++) grams.push(clean.slice(i, i + 2));
+  let out = grams.length ? pick(grams) : [];
+  if (!out.length) out = pick([...new Set(clean.split(""))].filter(ch => /[가-힣a-z0-9]/.test(ch)));
+  return out;
+}
+
+/* ── 분류 칩 ── */
+function renderFilters(){
+  const chip = (val, text, count, color, on) =>
+    `<button class="chip" data-val="${esc(val)}" aria-pressed="${on}"${color ? ` style="--k:${color}"` : ""}>`
+    + (color ? `<span class="dot"></span>` : "")
+    + `${esc(text)} <span class="n">${count}</span></button>`;
+  $("#fpart").innerHTML =
+    chip("all", "전체", SITES.length, null, fPart === "all") +
+    PARTS.map(p => chip(p.id, p.name, SITES.filter(s => s.p === p.id).length, p.color, fPart === p.id)).join("");
+}
+$("#fpart").addEventListener("click", e => {
+  const b = e.target.closest(".chip"); if (!b) return;
+  fPart = b.dataset.val; renderFilters(); render(); saveView();
+});
+
+/* ── 서른 칸 지도 ── */
+function renderMap(){
+  $("#map").innerHTML = SITES.map(s => {
+    const p = partOf(s.p);
+    return `<button class="cell" type="button" data-go="${keyOf(s)}"
+      style="--k:${p.color};--kl:${p.light}" aria-label="${esc(s.t)}">${esc(s.tag)}</button>`;
+  }).join("");
+  updateMapDim();
+}
+function updateMapDim(){
+  document.querySelectorAll(".cell").forEach(c => {
+    const s = SITES.find(x => keyOf(x) === c.dataset.go);
+    c.classList.toggle("dim", !match(s));
+  });
+}
+const DEFAULT_LABEL = "칸을 누르면 그 도구로 이동합니다.";
+$("#maplabel").textContent = DEFAULT_LABEL;
+$("#map").addEventListener("mouseover", e => {
+  const c = e.target.closest(".cell"); if (!c) return;
+  const s = SITES.find(x => keyOf(x) === c.dataset.go);
+  $("#maplabel").innerHTML = `<b>${esc(s.t)}</b> · ${esc(partOf(s.p).name)}`;
+});
+$("#map").addEventListener("mouseleave", () => { $("#maplabel").textContent = DEFAULT_LABEL; });
+
+const mapToggle = $("#maptoggle");
+mapToggle.addEventListener("click", () => {
+  const open = $("#mapbox").classList.toggle("open");
+  mapToggle.setAttribute("aria-expanded", String(open));
+  $("#maptogglemark").textContent = open ? "접기" : "펼치기";
+});
+function collapseMapOnNarrow(){
+  if (isNarrow() && $("#mapbox").classList.contains("open")){
+    $("#mapbox").classList.remove("open");
+    mapToggle.setAttribute("aria-expanded", "false");
+    $("#maptogglemark").textContent = "펼치기";
+  }
+}
+
+function goTo(key){
+  const s = SITES.find(x => keyOf(x) === key); if (!s) return;
+  if (!match(s)) resetAll();
+  collapseMapOnNarrow();
+  const el = document.getElementById("t-" + key); if (!el) return;
+  const off = document.querySelector(".topbar").offsetHeight + 12;
+  window.scrollTo({ top: Math.max(el.getBoundingClientRect().top + window.pageYOffset - off, 0), behavior: soften() ? "smooth" : "auto" });
+  document.querySelectorAll(".item.flash").forEach(x => x.classList.remove("flash"));
+  el.classList.add("flash");
+  setTimeout(() => el.classList.remove("flash"), 1600);
+  stripHash();
+}
+
+/* ── 카드 ── */
+function card(s, p){
+  const meta = [`<span>${esc(s.who)}</span>`];
+  if (s.pc) meta.push('<span>PC 권장</span>');
+  if (s.store) meta.push(`<span class="store">${esc(s.store)}</span>`);
+  return `<article class="item" id="t-${keyOf(s)}" style="--k:${p.color}" data-key="${keyOf(s)}" data-url="${esc(s.u)}">
+    <h3><a href="${esc(s.u)}" target="_blank" rel="noopener">${esc(s.t)}</a></h3>
+    <p class="desc">${esc(s.d)}</p>
+    <p class="who">${meta.join("")}</p>
+    ${s.prep ? `<p class="prep"><b>준비물</b> ${esc(s.prep)}</p>` : ''}
+    ${SHOW_BOOK_CHAPTER ? `<p class="chapline"><b>책 ${esc(p.book)} ${s.n}장</b> ${esc(s.c)}</p>` : ''}
+    <div class="acts">
+      <button data-qr="${keyOf(s)}">QR로 공유</button>
+      <button data-copy="${esc(s.u)}">링크 복사</button>
+    </div>
+  </article>`;
+}
+
+function render(){
+  let h = "", total = 0;
+  PARTS.forEach(p => {
+    const items = SITES.filter(s => s.p === p.id && match(s));
+    if (!items.length) return;
+    total += items.length;
+    h += `<section class="part" data-part="${p.id}" style="--k:${p.color};--tint:${p.tint}">
+      <div class="wrap">
+        <div class="partrule"></div>
+        <div class="parthead"><h2>${esc(p.name)}</h2><span class="count">${items.length}개</span></div>
+        <p class="partdesc">${esc(p.full)} — ${esc(p.desc)}</p>
+        <div class="grid">${items.map(s => card(s, p)).join("")}</div>
+      </div>
+    </section>`;
+  });
+  if (!total){
+    const near = query ? nearest(query) : [];
+    h = `<div class="empty wrap">
+      <div class="msg"><strong>찾으시는 낱말로는 나오는 것이 없습니다</strong>
+        ${near.length ? "혹시 이 가운데 있을까요?" : "낱말을 짧게 줄여 보세요. ‘휴가’, ‘반편성’, ‘연수’처럼 짧게 넣으면 잘 걸립니다."}
+        <div><button data-resetall>조건 지우고 전체 보기</button></div>
+      </div>
+      ${near.length ? `<h3 class="near">비슷한 도구</h3><div class="grid">${near.map(s => card(s, partOf(s.p))).join("")}</div>` : ""}
+    </div>`;
+  }
+  $("#list").innerHTML = h;
+  updateMapDim();
+
+  const on = (query || fPart !== "all");
+  $("#resultbar").hidden = !on;
+  if (on){
+    const bits = [];
+    if (query) bits.push("‘" + query + "’");
+    if (fPart !== "all") bits.push(partOf(fPart).name);
+    $("#resulttext").innerHTML = esc(bits.join(" · ")) + ` — <strong>${total}개</strong>`;
+  }
+}
+
+/* 책 코너 요약 */
+$("#tocmini").innerHTML = PARTS.map(p =>
+  `<li style="--k:${p.color}"><span class="k"></span>${esc(p.full)}<span class="num">${SITES.filter(s => s.p === p.id).length}개</span></li>`
+).join("");
+
+if (LAST_CHECKED) $("#footcredit").textContent += " · 링크 점검 " + LAST_CHECKED;
+if (REPORT_EMAIL) $("#reportsite").hidden = false;
+function reportLink(name, url){
+  return "mailto:" + REPORT_EMAIL
+    + "?subject=" + encodeURIComponent("[학교 연장통] 내용 제보: " + name)
+    + "&body=" + encodeURIComponent("도구: " + name + "\n주소: " + url + "\n\n어떤 내용이 잘못되었는지 적어 주세요.\n\n");
+}
+
+/* ── 검색 ── */
+const qEl = $("#q"), clearEl = $("#clear");
+qEl.addEventListener("input", () => {
+  query = qEl.value.trim();
+  clearEl.classList.toggle("on", !!query);
+  render(); saveView();
+});
+clearEl.addEventListener("click", () => { qEl.value = ""; query = ""; clearEl.classList.remove("on"); render(); saveView(); qEl.focus(); });
+
+function resetAll(){
+  qEl.value = ""; query = ""; fPart = "all";
+  clearEl.classList.remove("on"); renderFilters(); render(); saveView();
+}
+$("#resetall").addEventListener("click", resetAll);
+
+/* ── 클릭 처리 ── */
+document.addEventListener("click", e => {
+  const t = e.target.closest("[data-copy],[data-qr],[data-go],[data-scroll],[data-resetall],#copyall,#reportsite,[data-close],[data-modalcopy]");
+  if (t){
+    if (t.hasAttribute("data-go")) goTo(t.getAttribute("data-go"));
+    else if (t.hasAttribute("data-scroll")) scrollToId(t.getAttribute("data-scroll"));
+    else if (t.hasAttribute("data-copy")) copy(t.getAttribute("data-copy"), "링크를 복사했습니다");
+    else if (t.hasAttribute("data-modalcopy")) copy(t.getAttribute("data-modalcopy"), "링크를 복사했습니다");
+    else if (t.hasAttribute("data-qr")) openModal("qr", SITES.find(s => keyOf(s) === t.getAttribute("data-qr")));
+    else if (t.hasAttribute("data-resetall")) resetAll();
+    else if (t.id === "copyall") copyAll();
+    else if (t.id === "reportsite") location.href = "mailto:" + REPORT_EMAIL + "?subject=" + encodeURIComponent("[학교 연장통] 내용 제보");
+    else if (t.hasAttribute("data-close")) closeModal();
+    return;
+  }
+  const cardEl = e.target.closest(".item");
+  if (cardEl && !e.target.closest("a,button")) openTool(SITES.find(s => keyOf(s) === cardEl.dataset.key));
+});
+/* 제목 링크도 같은 안내를 거치게 */
+document.addEventListener("click", e => {
+  const a = e.target.closest(".item h3 a"); if (!a) return;
+  const s = SITES.find(x => keyOf(x) === a.closest(".item").dataset.key);
+  if (s && s.pc && isNarrow()){ e.preventDefault(); openModal("pc", s); }
+});
+
+function openTool(s){
+  if (!s) return;
+  if (s.pc && isNarrow()){ openModal("pc", s); return; }
+  window.open(s.u, "_blank", "noopener");
+}
+
+/* ── 상단 바의 현재 위치 ── */
+const barEl = $("#progress");
+let ticking = false;
+function updateBar(){
+  const doc = document.documentElement;
+  const max = doc.scrollHeight - window.innerHeight;
+  const ratio = max > 0 ? Math.min(window.pageYOffset / max, 1) : 0;
+  barEl.style.width = (ratio * 100).toFixed(2) + "%";
+  const y = window.pageYOffset + 90;
+  let cur = null;
+  document.querySelectorAll(".part").forEach(sec => { if (sec.offsetTop <= y) cur = sec; });
+  barEl.style.setProperty("--k", cur ? partOf(cur.dataset.part).color : "var(--ink)");
+  ticking = false;
+}
+window.addEventListener("scroll", () => {
+  if (!ticking){ ticking = true; requestAnimationFrame(updateBar); }
+}, { passive:true });
+window.addEventListener("resize", updateBar);
+
+/* ── 창 (QR / PC 권장 안내) ── */
+let lastFocus = null, modalPushed = false;
+function openModal(kind, s){
+  if (!s) return;
+  lastFocus = document.activeElement;
+  const box = $("#modalbox");
+  if (kind === "pc"){
+    box.innerHTML = `
+      <h3 id="mt">${esc(s.t)}</h3>
+      <p class="why">이 도구는 표를 넓게 보아야 해서 PC에서 쓰는 것이 좋습니다.
+      링크를 복사해 두었다가 컴퓨터에서 여시면 편합니다.</p>
+      <div class="row">
+        <button data-modalcopy="${esc(s.u)}">링크 복사</button>
+        <a class="primary" href="${esc(s.u)}" target="_blank" rel="noopener" data-close>그래도 열기</a>
+      </div>`;
+  } else {
+    box.innerHTML = `
+      <h3 id="mt">${esc(s.t)}</h3>
+      <p class="u">${esc(s.u)}</p>
+      <div id="qrbox"></div>
+      <p class="why" style="margin-bottom:var(--s4)">화면에 띄워 두면 각자 휴대전화로 찍어 바로 열 수 있습니다.</p>
+      <div class="row">
+        <button data-modalcopy="${esc(s.u)}">링크 복사</button>
+        <button class="primary" data-close>닫기</button>
+      </div>
+      ${REPORT_EMAIL ? `<p class="reportline">이 도구의 내용이 실제와 다른가요? <a href="${esc(reportLink(s.t, s.u))}">알려 주세요</a></p>` : ""}`;
+    const qb = box.querySelector("#qrbox");
+    if (window.QRCode){
+      new QRCode(qb, { text:s.u, width:300, height:300, colorDark:"#16202e", colorLight:"#ffffff", correctLevel:QRCode.CorrectLevel.M });
+    } else {
+      qb.innerHTML = '<p style="font-size:13px;color:#6d7873;margin:0">QR을 불러오지 못했습니다. 아래 링크를 복사해 주세요.</p>';
+    }
+  }
+  try { history.pushState({ modal:1 }, "", cleanURL()); modalPushed = true; } catch(err){ modalPushed = false; }
+  $("#modal").classList.add("on");
+  const first = box.querySelector("button,a"); if (first) first.focus();
+}
+function closeModal(fromHistory){
+  if (!$("#modal").classList.contains("on")) return;
+  $("#modal").classList.remove("on");
+  $("#modalbox").innerHTML = "";
+  if (lastFocus){ try { lastFocus.focus(); } catch(err){} }
+  if (modalPushed && !fromHistory){ modalPushed = false; try { history.back(); } catch(err){} }
+  else modalPushed = false;
+}
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal(); });
+window.addEventListener("popstate", () => {
+  if ($("#modal").classList.contains("on")) closeModal(true);
+  stripHash();
+});
+
+/* ── 복사 & 알림 ── */
+function copy(text, msg){
+  const done = () => toast(msg);
+  if (navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(text).then(done).catch(() => fallback(text, done));
+  } else fallback(text, done);
+}
+function fallback(text, done){
+  const ta = document.createElement("textarea");
+  ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+  document.body.appendChild(ta); ta.select();
+  try { document.execCommand("copy"); done(); } catch(err){ toast("복사하지 못했습니다. 주소를 길게 눌러 복사해 주세요"); }
+  document.body.removeChild(ta);
+}
+function copyAll(){
+  let out = "학교 연장통 — 학교 업무를 바꾼 웹사이트 (" + COUNT + "개)\n\n";
+  PARTS.forEach(p => {
+    out += p.name + "\n";
+    SITES.filter(s => s.p === p.id).forEach(s => { out += "  " + s.seq + ". " + s.t + "\n  " + s.u + "\n"; });
+    out += "\n";
+  });
+  copy(out.trim(), "목록 전체를 복사했습니다");
+}
+let tid;
+function toast(m){
+  const el = $("#toast");
+  el.textContent = m; el.classList.add("on");
+  clearTimeout(tid); tid = setTimeout(() => el.classList.remove("on"), 2200);
+}
+
+/* ── 주소에 해시를 남기지 않기 ── */
+function cleanURL(){ return location.pathname + location.search; }
+function stripHash(){ if (location.hash){ try { history.replaceState(history.state, "", cleanURL()); } catch(err){} } }
+function scrollToId(id){
+  const el = document.getElementById(id); if (!el) return;
+  const off = document.querySelector(".topbar").offsetHeight + 10;
+  window.scrollTo({ top: Math.max(el.getBoundingClientRect().top + window.pageYOffset - off, 0), behavior: soften() ? "smooth" : "auto" });
+  stripHash();
+}
+
+/* ── 새로고침해도 보던 자리 유지 ── */
+const KEY = "hub30.view";
+function saveView(){
+  try { sessionStorage.setItem(KEY, JSON.stringify({ q:qEl.value, p:fPart, y:window.pageYOffset })); } catch(err){}
+}
+function restoreView(){
+  let s = null;
+  try { s = JSON.parse(sessionStorage.getItem(KEY) || "null"); } catch(err){}
+  if (!s) return 0;
+  if (s.q){ qEl.value = s.q; query = s.q.trim(); clearEl.classList.add("on"); }
+  if (s.p) fPart = s.p;
+  return typeof s.y === "number" ? s.y : 0;
+}
+window.addEventListener("pagehide", saveView);
+document.addEventListener("visibilitychange", () => { if (document.visibilityState === "hidden") saveView(); });
+let sid;
+window.addEventListener("scroll", () => { clearTimeout(sid); sid = setTimeout(saveView, 250); }, { passive:true });
+
+try { history.scrollRestoration = "manual"; } catch(err){}
+stripHash();
+const savedY = restoreView();
+renderFilters();
+renderMap();
+render();
+if (savedY) window.scrollTo(0, savedY);
+updateBar();
+
+/* ── 오픈소스 라이선스 창 ── */
+(function(){
+  const btn = document.getElementById("licbtn"), dlg = document.getElementById("lic");
+  if (!btn || !dlg) return;
+  let back = null;
+  function open(){
+    back = document.activeElement;
+    dlg.hidden = false; dlg.classList.add("on");
+    document.body.style.overflow = "hidden";
+    dlg.querySelector(".x").focus();
+  }
+  function close(){
+    if (!dlg.classList.contains("on")) return;
+    dlg.classList.remove("on"); dlg.hidden = true;
+    document.body.style.overflow = "";
+    if (back){ try { back.focus(); } catch(e){} }
+  }
+  btn.addEventListener("click", open);
+  dlg.addEventListener("click", e => { if (e.target.closest("[data-licclose]")) close(); });
+  document.addEventListener("keydown", e => {
+    if (!dlg.classList.contains("on")) return;
+    if (e.key === "Escape"){ e.preventDefault(); close(); return; }
+    if (e.key === "Tab"){
+      const f = [...dlg.querySelectorAll("button,summary,a[href]")].filter(x => x.offsetParent !== null);
+      if (!f.length) return;
+      const a = f[0], z = f[f.length-1];
+      if (e.shiftKey && document.activeElement === a){ e.preventDefault(); z.focus(); }
+      else if (!e.shiftKey && document.activeElement === z){ e.preventDefault(); a.focus(); }
+    }
+  });
+})();
+</script>
+</body>
+</html>
