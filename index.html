@@ -104,6 +104,7 @@ a{color:inherit;}
 }
 .cell:hover,.cell:focus-visible{background:var(--k);color:#fff;transform:translateY(-2px);}
 .cell.dim{opacity:.3;}
+.cell.was{background:var(--k);color:#fff;box-shadow:0 0 0 3px var(--paper),0 0 0 5px var(--k);}
 .maplabel{margin:var(--s3) 0 0;font-size:13px;color:var(--muted);line-height:1.6;min-height:1.6em;}
 .maplabel b{color:var(--ink);font-weight:600;}
 @media(max-width:899px){
@@ -136,8 +137,40 @@ a{color:inherit;}
 
 .item{position:relative;border-bottom:1px solid var(--line);padding:var(--s5) var(--s3) var(--s4) var(--s4);display:flex;flex-direction:column;gap:var(--s2);cursor:pointer;background:transparent;transition:background-color .12s;}
 .item::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--k);transition:width .12s;}
-.item:hover,.item.flash{background:#fff;}
-.item:hover::before,.item.flash::before{width:7px;}
+.item:hover{background:#fff;}
+.item:hover::before{width:7px;}
+
+/* 지도 칸과 같은 글자·색의 배지 — 칸과 카드를 이어 줍니다 */
+.tagbadge{align-self:flex-start;display:inline-block;font-size:11.5px;font-weight:600;line-height:1.3;letter-spacing:-.02em;
+  color:var(--k);background:var(--kl);border-radius:2px;padding:3px var(--s2);transition:background-color .2s,color .2s;}
+
+/* 지도에서 눌러 도착한 카드 */
+.item.arrive{background:var(--kl);box-shadow:inset 0 0 0 2px var(--k);z-index:1;
+  animation:arrivePulse 1s ease-in-out 3;}
+.item.arrive::before{width:7px;}
+.item.arrive .tagbadge{background:var(--k);color:#fff;}
+.item.arrive h3 a{color:var(--k);}
+.item.arrive.leaving{background:transparent;box-shadow:inset 0 0 0 2px transparent;
+  transition:background-color .8s ease,box-shadow .8s ease;animation:none;}
+.item.arrive.leaving .tagbadge{background:var(--kl);color:var(--k);}
+@keyframes arrivePulse{
+  0%,100%{box-shadow:inset 0 0 0 2px var(--k),0 0 0 0 transparent;}
+  50%{box-shadow:inset 0 0 0 2px var(--k),0 0 0 6px var(--kl);}
+}
+/* 한눈에 보기로 되돌아가기 */
+#backmap{position:fixed;left:var(--s4);bottom:var(--s4);z-index:70;font-family:var(--sans);font-size:13.5px;font-weight:600;
+  color:#fff;background:var(--ink);border:0;border-radius:999px;padding:var(--s2) var(--s4);min-height:44px;cursor:pointer;
+  box-shadow:0 4px 14px rgba(22,32,46,.22);display:flex;align-items:center;gap:var(--s2);
+  opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .25s,transform .25s;}
+#backmap.on{opacity:1;transform:translateY(0);pointer-events:auto;}
+#backmap:hover{background:#26334a;}
+#backmap .arr{font-size:15px;line-height:1;}
+@media print{#backmap{display:none !important;}}
+
+/* 도착 순간 나머지 카드는 잠깐 흐리게 */
+#list .item{transition:background-color .12s,opacity .5s ease;}
+#list.focusing .item:not(.arrive){opacity:.35;}
+#list.focusing .partrule,#list.focusing .parthead,#list.focusing .partdesc{opacity:.45;transition:opacity .5s ease;}
 .item h3{margin:0;font-size:16.5px;line-height:1.45;font-weight:600;letter-spacing:-.01em;}
 .item h3 a{text-decoration:none;}
 .item:hover h3 a{color:var(--k);}
@@ -390,6 +423,8 @@ footer{padding-bottom:calc(var(--s8) + 24px);}
 </div>
 
 <div id="toast" role="status" aria-live="polite"></div>
+
+<button type="button" id="backmap" aria-hidden="true" tabindex="-1"><span class="arr" aria-hidden="true">↑</span><span id="backmaptext">한눈에 보기로</span></button>
 
 <button type="button" id="licbtn" aria-haspopup="dialog" aria-controls="lic">ⓘ 오픈소스 라이선스</button>
 
@@ -765,20 +800,117 @@ function goTo(key){
   if (!match(s)) resetAll();
   collapseMapOnNarrow();
   const el = document.getElementById("t-" + key); if (!el) return;
-  const off = document.querySelector(".topbar").offsetHeight + 12;
-  window.scrollTo({ top: Math.max(el.getBoundingClientRect().top + window.pageYOffset - off, 0), behavior: soften() ? "smooth" : "auto" });
-  document.querySelectorAll(".item.flash").forEach(x => x.classList.remove("flash"));
-  el.classList.add("flash");
-  setTimeout(() => el.classList.remove("flash"), 1600);
+  clearArrive();
+
+  /* 카드가 화면 가운데(상단 바 아래 보이는 영역의 약 40% 지점)에 오도록 */
+  const bar = document.querySelector(".topbar").offsetHeight;
+  const view = window.innerHeight - bar;
+  const r = el.getBoundingClientRect();
+  const absTop = r.top + window.pageYOffset;
+  const target = (r.height >= view - 24)
+    ? absTop - bar - 12
+    : absTop - bar - (view - r.height) * 0.4;
+  const maxY = document.documentElement.scrollHeight - window.innerHeight;
+  const y = Math.min(Math.max(target, 0), Math.max(maxY, 0));
+  const smooth = soften() && Math.abs(window.pageYOffset - y) > 4;
+  window.scrollTo({ top: y, behavior: smooth ? "smooth" : "auto" });
+
+  /* 스크롤이 멈춘 뒤에 강조 — 움직이는 동안 깜빡이면 눈에 안 들어옵니다 */
+  whenScrollSettles(smooth, () => { startArrive(el); showBackMap(key); });
   stripHash();
 }
+
+/* ── 한눈에 보기로 되돌아가기 ── */
+const backBtn = $("#backmap");
+let backKey = null;
+function mapInView(){
+  const box = $("#mapbox");
+  const t = (isNarrow() && !box.classList.contains("open")) ? $("#maptoggle") : box;
+  const r = t.getBoundingClientRect();
+  const bar = document.querySelector(".topbar").offsetHeight;
+  return r.bottom > bar + 20 && r.top < window.innerHeight - 20;
+}
+function showBackMap(key){
+  backKey = key;
+  if (mapInView()) return;
+  backBtn.classList.add("on");
+  backBtn.removeAttribute("aria-hidden");
+  backBtn.tabIndex = 0;
+}
+function hideBackMap(){
+  backBtn.classList.remove("on");
+  backBtn.setAttribute("aria-hidden", "true");
+  backBtn.tabIndex = -1;
+}
+backBtn.addEventListener("click", () => {
+  clearArrive();
+  hideBackMap();
+  /* 모바일에서는 접혀 있던 지도를 다시 펼쳐 둡니다 */
+  if (isNarrow() && !$("#mapbox").classList.contains("open")){
+    $("#mapbox").classList.add("open");
+    mapToggle.setAttribute("aria-expanded", "true");
+    $("#maptogglemark").textContent = "접기";
+  }
+  const target = isNarrow() ? $("#maptoggle") : $("#mapbox");
+  const bar = document.querySelector(".topbar").offsetHeight;
+  const y = Math.max(target.getBoundingClientRect().top + window.pageYOffset - bar - 16, 0);
+  window.scrollTo({ top: y, behavior: soften() ? "smooth" : "auto" });
+  /* 방금 눌렀던 칸에 포커스를 돌려 두어 다음 칸으로 이어 가기 쉽게 */
+  const cell = backKey && document.querySelector(`.cell[data-go="${backKey}"]`);
+  if (cell){
+    try { cell.focus({ preventScroll:true }); } catch(err){ cell.focus(); }
+    cell.classList.add("was");
+    setTimeout(() => cell.classList.remove("was"), 1800);
+  }
+});
+window.addEventListener("scroll", () => {
+  if (backBtn.classList.contains("on") && mapInView()) hideBackMap();
+}, { passive:true });
+
+let arriveTimers = [];
+function clearArrive(){
+  arriveTimers.forEach(clearTimeout); arriveTimers = [];
+  const list = document.getElementById("list");
+  if (list) list.classList.remove("focusing");
+  document.querySelectorAll(".item.arrive").forEach(x => x.classList.remove("arrive", "leaving"));
+}
+function startArrive(el){
+  if (!document.body.contains(el)) return;
+  const list = document.getElementById("list");
+  el.classList.add("arrive");
+  list.classList.add("focusing");
+  arriveTimers.push(setTimeout(() => list.classList.remove("focusing"), 2600));
+  arriveTimers.push(setTimeout(() => el.classList.add("leaving"), 3200));
+  arriveTimers.push(setTimeout(() => el.classList.remove("arrive", "leaving"), 4100));
+}
+function whenScrollSettles(smooth, fn){
+  if (!smooth){ arriveTimers.push(setTimeout(fn, 30)); return; }
+  let last = window.pageYOffset, still = 0, done = false;
+  const finish = () => { if (done) return; done = true; fn(); };
+  const tick = () => {
+    if (done) return;
+    const now = window.pageYOffset;
+    still = (Math.abs(now - last) < 1) ? still + 1 : 0;
+    last = now;
+    if (still >= 4) finish(); else requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+  arriveTimers.push(setTimeout(finish, 1500));   /* 혹시 멈춤을 못 잡아도 1.5초 뒤엔 강조 */
+}
+/* 다른 곳을 누르거나 손으로 스크롤하면 흐림은 바로 풀기 */
+["wheel","touchstart","keydown"].forEach(ev =>
+  window.addEventListener(ev, () => {
+    const list = document.getElementById("list");
+    if (list && list.classList.contains("focusing")) list.classList.remove("focusing");
+  }, { passive:true }));
 
 /* ── 카드 ── */
 function card(s, p){
   const meta = [`<span>${esc(s.who)}</span>`];
   if (s.pc) meta.push('<span>PC 권장</span>');
   if (s.store) meta.push(`<span class="store">${esc(s.store)}</span>`);
-  return `<article class="item" id="t-${keyOf(s)}" style="--k:${p.color}" data-key="${keyOf(s)}" data-url="${esc(s.u)}">
+  return `<article class="item" id="t-${keyOf(s)}" style="--k:${p.color};--kl:${p.light}" data-key="${keyOf(s)}" data-url="${esc(s.u)}">
+    <span class="tagbadge" aria-hidden="true">${esc(s.tag)}</span>
     <h3><a href="${esc(s.u)}" target="_blank" rel="noopener">${esc(s.t)}</a></h3>
     <p class="desc">${esc(s.d)}</p>
     <p class="who">${meta.join("")}</p>
@@ -792,6 +924,7 @@ function card(s, p){
 }
 
 function render(){
+  clearArrive();
   let h = "", total = 0;
   PARTS.forEach(p => {
     const items = SITES.filter(s => s.p === p.id && match(s));
