@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>학교 연장통 — 학교 업무를 바꾼 웹사이트</title>
-<meta name="description" content="학교 연장통 — 초등학교 교감이 바이브 코딩으로 만들어 학교에서 실제로 쓰는 웹 도구 40개 모음. 휴가·복무 확인부터 반편성, 시간표, 연수, 생활지도까지 링크 하나로 바로 씁니다.">
+<meta name="description" content="학교 연장통 — 초등학교 교감이 바이브 코딩으로 만들어 학교에서 실제로 쓰는 웹 도구 41개 모음. 휴가·복무 확인부터 반편성, 시간표, 연수, 생활지도까지 링크 하나로 바로 씁니다.">
 <meta name="keywords" content="학교 연장통, 바이브 코딩, 학교 업무, 교사 업무 도구, 초등학교, 교감, 반편성, 휴가, 연수, 생활지도">
 <meta name="author" content="최창훈">
 <meta property="og:title" content="학교 연장통 — 학교 업무를 바꾼 웹사이트">
@@ -75,6 +75,11 @@ a{color:inherit;}
 .searchrow input:focus{border-color:var(--ink);outline:none;box-shadow:0 0 0 3px rgba(22,32,46,.09);}
 .clearbtn{position:absolute;right:var(--s2);top:50%;transform:translateY(-50%);width:34px;height:34px;border:0;background:none;color:var(--muted);font-size:20px;line-height:1;cursor:pointer;border-radius:50%;display:none;}
 .clearbtn:hover{background:var(--paper);color:var(--ink);}
+.qcount{position:absolute;right:48px;top:50%;transform:translateY(-50%);font-size:12.5px;font-weight:700;color:#fff;background:var(--ink);padding:3px 9px;border-radius:999px;pointer-events:none;display:none;white-space:nowrap;}
+.qcount.on{display:block;}
+.qcount.zero{background:var(--new);}
+.searchrow input.hasq{padding-right:104px;}
+.searchrow input::-webkit-search-cancel-button{-webkit-appearance:none;display:none;}
 .clearbtn.on{display:block;}
 
 .chips{display:flex;flex-wrap:wrap;gap:var(--s2);margin-top:var(--s4);}
@@ -93,26 +98,38 @@ a{color:inherit;}
   align-items:center;justify-content:space-between;gap:var(--s2);margin-top:var(--s4);
 }
 .maptoggle .mark{font-size:11px;color:var(--muted);}
-.map{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--s2);}
-@media(min-width:900px){.map{grid-template-columns:repeat(6,1fr);}}
+.map{display:grid;grid-template-columns:repeat(6,1fr);gap:var(--s2);}
 .cell{
   min-height:46px;border:0;cursor:pointer;border-radius:2px;padding:var(--s1);
   background:var(--kl);color:var(--k);
-  font-family:var(--sans);font-size:11.5px;font-weight:600;line-height:1.3;letter-spacing:-.02em;
-  display:flex;align-items:center;justify-content:center;text-align:center;word-break:keep-all;
+  font-family:var(--sans);line-height:1.3;letter-spacing:-.02em;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;text-align:center;word-break:keep-all;
   transition:background-color .12s,color .12s,transform .12s;
 }
+.cell .ct{font-size:11.5px;font-weight:600;}
+.cell .cm{display:none;font-size:10.5px;font-weight:500;}
+.cell.all{--k:var(--ink);--kl:transparent;box-shadow:inset 0 0 0 1px var(--line-strong);}
+.cell.all .ca{font-size:12px;line-height:1;}
+.cell.all:hover,.cell.all:focus-visible{background:var(--ink);color:#fff;box-shadow:none;}
+.maplabel{display:flex;flex-direction:column;gap:2px;margin:var(--s3) 0 0;padding:10px 12px;min-height:58px;justify-content:center;
+  background:#fff;border:1px solid var(--line);border-left:4px solid var(--k,var(--line-strong));border-radius:2px;transition:border-color .12s;}
+.maplabel .lk{font-size:14px;color:var(--ink);line-height:1.4;}
+.maplabel .lk b{color:var(--k,var(--ink));font-weight:700;}
+.maplabel .lm{font-size:12.5px;color:var(--muted);line-height:1.4;}
+.maplabel:not(.on) .lk{color:var(--ink-soft);}
+.cell.press{background:var(--k);color:#fff;}
 .cell:hover,.cell:focus-visible{background:var(--k);color:#fff;transform:translateY(-2px);}
 .cell.dim{opacity:.3;}
 .cell.was{background:var(--k);color:#fff;box-shadow:0 0 0 3px var(--paper),0 0 0 5px var(--k);}
-.maplabel{margin:var(--s3) 0 0;font-size:13px;color:var(--muted);line-height:1.6;min-height:1.6em;}
-.maplabel b{color:var(--ink);font-weight:600;}
 @media(max-width:899px){
   .maptoggle{display:flex;}
   .mapbox{display:none;margin-top:var(--s3);}
   .mapbox.open{display:block;}
   .maplabel{display:none;}
-  .cell{min-height:58px;}
+  .map{grid-template-columns:repeat(4,1fr);gap:6px;}
+  .cell{min-height:60px;padding:6px 4px;}
+  .cell .ct{font-size:12px;font-weight:700;}
+  .cell .cm{display:block;opacity:.85;}
 }
 
 /* 결과 요약 */
@@ -185,6 +202,12 @@ a{color:inherit;}
 .acts button{font-family:var(--sans);font-size:12.5px;cursor:pointer;color:var(--muted);background:none;border:0;padding:var(--s2) 0;min-height:34px;text-decoration:underline;text-decoration-color:var(--line-strong);text-underline-offset:4px;}
 .acts button:hover{color:var(--ink);text-decoration-color:currentColor;}
 
+.results .bestlabel{font-size:13px;font-weight:700;color:var(--ink-soft);margin:0 0 var(--s2);letter-spacing:.02em;}
+.results .bestlabel.more{margin-top:var(--s6);}
+.results .grid.best{grid-template-columns:1fr;max-width:640px;}
+.results .grid.best .item{background:var(--kl);box-shadow:inset 0 0 0 1.5px var(--k);}
+.results .grid.best .item::before{width:7px;}
+.results .grid.best .item h3{font-size:18px;}
 .empty{padding:var(--s7) 0 0;}
 .empty .msg{text-align:center;color:var(--muted);padding-bottom:var(--s6);}
 .empty .msg strong{display:block;font-family:var(--serif);font-size:21px;color:var(--ink);margin-bottom:var(--s2);font-weight:700;}
@@ -231,6 +254,51 @@ footer .linkbtn:hover{color:var(--ink);}
 #toast{position:fixed;left:50%;bottom:var(--s5);transform:translateX(-50%) translateY(14px);background:var(--ink);color:#fff;font-size:13.5px;padding:var(--s3) var(--s4);border-radius:3px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:90;}
 #toast.on{opacity:1;transform:translateX(-50%) translateY(0);}
 
+/* ── 연장통 길잡이(규칙형 대화 안내) ── */
+#chatbtn{position:fixed;right:var(--s4);bottom:calc(var(--s4) + 48px);z-index:72;display:flex;align-items:center;gap:8px;
+  font-family:var(--sans);font-size:14px;font-weight:700;color:#fff;background:var(--ink);border:0;border-radius:999px;
+  padding:10px 16px 10px 10px;cursor:pointer;box-shadow:0 6px 18px rgba(22,32,46,.22);transition:transform .12s;}
+#chatbtn:hover{transform:translateY(-2px);}
+#chatbtn .cb-i{width:26px;height:26px;border-radius:50%;background:var(--new);display:flex;align-items:center;justify-content:center;font-size:15px;}
+#chatbtn.hide{display:none;}
+#chat{position:fixed;right:var(--s4);bottom:var(--s4);z-index:90;width:380px;max-width:calc(100vw - 32px);height:min(600px,calc(100vh - 96px));
+  display:flex;flex-direction:column;background:#fff;border:1px solid var(--line-strong);border-radius:6px;box-shadow:0 18px 50px rgba(22,32,46,.25);overflow:hidden;}
+#chat[hidden]{display:none;}
+.ch-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;padding:14px 14px 12px 16px;background:var(--ink);color:#fff;}
+.ch-head h2{margin:0;font-family:var(--serif);font-size:18px;font-weight:700;}
+.ch-head p{margin:2px 0 0;font-size:12.5px;color:rgba(255,255,255,.72);}
+.ch-x{width:34px;height:34px;border:0;background:transparent;color:#fff;font-size:22px;cursor:pointer;border-radius:50%;}
+.ch-x:hover{background:rgba(255,255,255,.12);}
+.ch-log{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;background:var(--paper);}
+.msg{max-width:88%;font-size:14px;line-height:1.55;padding:9px 12px;border-radius:12px;word-break:keep-all;}
+.msg.bot{align-self:flex-start;background:#fff;border:1px solid var(--line);border-top-left-radius:3px;color:var(--ink);}
+.msg.me{align-self:flex-end;background:var(--ink);color:#fff;border-top-right-radius:3px;}
+.ch-chips{display:flex;flex-wrap:wrap;gap:6px;align-self:flex-start;max-width:100%;}
+.ch-chips button{font-family:var(--sans);font-size:13px;padding:7px 11px;border:1px solid var(--line-strong);background:#fff;color:var(--ink);border-radius:999px;cursor:pointer;}
+.ch-chips button:hover,.ch-chips button:focus-visible{border-color:var(--ink);background:var(--ink);color:#fff;}
+.ch-chips button.ghost{border-style:dashed;color:var(--ink-soft);}
+.ch-card{align-self:stretch;background:#fff;border:1px solid var(--line);border-left:4px solid var(--k);border-radius:4px;padding:11px 12px;}
+.ch-card .cc-k{font-size:11.5px;font-weight:700;color:var(--k);}
+.ch-card .cc-t{display:block;margin-top:2px;font-size:15px;font-weight:700;color:var(--ink);}
+.ch-card .cc-d{margin:4px 0 8px;font-size:13px;color:var(--ink-soft);line-height:1.5;}
+.ch-card .cc-a{display:flex;gap:6px;flex-wrap:wrap;}
+.ch-card .cc-a a,.ch-card .cc-a button{font-family:var(--sans);font-size:12.5px;font-weight:600;padding:6px 10px;border-radius:3px;cursor:pointer;text-decoration:none;}
+.ch-card .cc-a a{background:var(--k);color:#fff;border:1px solid var(--k);}
+.ch-card .cc-a button{background:#fff;color:var(--ink);border:1px solid var(--line-strong);}
+.ch-card.main{background:var(--kl);}
+.ch-in{display:flex;gap:6px;padding:10px;border-top:1px solid var(--line);background:#fff;}
+.ch-in input{flex:1;min-width:0;font-family:var(--sans);font-size:16px;padding:10px 12px;border:1.5px solid var(--line-strong);border-radius:999px;}
+.ch-in input:focus{outline:none;border-color:var(--ink);}
+.ch-in button{width:42px;height:42px;flex:none;border:0;border-radius:50%;background:var(--ink);color:#fff;font-size:18px;font-weight:700;cursor:pointer;}
+.ch-note{margin:0;padding:0 12px 10px;font-size:11.5px;color:var(--muted);line-height:1.5;background:#fff;}
+@media(max-width:599px){
+  #chatbtn .cb-t{display:none;}
+  #chatbtn{padding:10px;}
+  #chatbtn .cb-i{width:30px;height:30px;font-size:17px;}
+  #chat{inset:0;width:auto;max-width:none;height:auto;border-radius:0;border:0;}
+}
+@media print{#chatbtn,#chat{display:none !important;}}
+
 /* 오픈소스 라이선스 */
 #licbtn{position:fixed;right:var(--s4);bottom:var(--s4);z-index:70;font-family:var(--sans);font-size:12.5px;color:var(--ink-soft);background:rgba(255,255,255,.94);border:1px solid var(--line-strong);border-radius:999px;padding:var(--s2) var(--s3);min-height:36px;cursor:pointer;box-shadow:0 2px 8px rgba(22,32,46,.08);}
 #licbtn:hover{color:var(--ink);border-color:var(--ink-soft);}
@@ -261,7 +329,7 @@ footer{padding-bottom:calc(var(--s8) + 24px);}
 
 @media (prefers-reduced-motion: reduce){*{transition:none !important;animation:none !important;}}
 @media print{
-  .topbar,.searchrow,.chips,.maptoggle,.mapbox,.acts,.modal,#toast,.notes,.pending,.resultbar{display:none !important;}
+  .topbar,.searchrow,.chips,.monthly,.maptoggle,.mapbox,.acts,.modal,#toast,.notes,.pending,.resultbar{display:none !important;}
   body{background:none;} .below,.part{background:none !important;}
   #progress{display:none !important;}
   .item{break-inside:avoid;cursor:auto;}
@@ -286,6 +354,30 @@ footer{padding-bottom:calc(var(--s8) + 24px);}
 .newtag{display:inline-flex;align-items:center;gap:5px;font-family:var(--sans);font-size:11.5px;font-weight:700;color:var(--new);letter-spacing:-.01em;}
 .newtag::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--new);}
 .herogrid>*{min-width:0;}
+.monthly{max-width:520px;margin-top:var(--s6);padding-top:var(--s5);border-top:1px solid var(--line);}
+.monthly[hidden]{display:none;}
+.monthly h2{margin:0;font-family:var(--serif);font-size:20px;font-weight:700;letter-spacing:-.02em;color:var(--ink);}
+.monthly .mmon{color:var(--new);}
+.monthly .mnote{margin:4px 0 var(--s3);font-size:13.5px;color:var(--muted);}
+.mlist{display:grid;grid-template-columns:1fr 1fr;gap:var(--s2);}
+.mcard{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:3px;text-align:left;cursor:pointer;
+  padding:12px 28px 12px 14px;background:#fff;border:1px solid var(--line);border-left:4px solid var(--k);border-radius:2px;
+  font-family:var(--sans);transition:background-color .12s,transform .12s;}
+.mcard:hover,.mcard:focus-visible{background:var(--kl);transform:translateY(-1px);}
+.mcard .mt{font-size:15px;font-weight:700;color:var(--k);letter-spacing:-.01em;}
+.mcard .mm{font-size:12.5px;color:var(--ink-soft);line-height:1.4;}
+.mcard .ma{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--k);font-size:18px;}
+@media(max-width:899px){.monthly{margin-top:var(--s5);}}
+.monthly.searching{margin-top:var(--s4);padding:var(--s4);border:1.5px solid var(--ink);background:#fff;border-radius:3px;}
+.monthly.searching .mnote{margin-bottom:var(--s3);}
+.mcard.best{grid-column:1 / -1;background:var(--kl);padding:14px 32px 14px 16px;}
+.mcard.best .mb{font-size:11.5px;font-weight:700;color:var(--k);letter-spacing:.02em;}
+.mcard.best .mt{font-size:17px;color:var(--ink);}
+.mcard.best .mm{font-size:13px;}
+.mall{grid-column:1 / -1;margin-top:2px;padding:10px;border:1px dashed var(--line-strong);background:transparent;cursor:pointer;font-family:var(--sans);font-size:13.5px;font-weight:600;color:var(--ink);border-radius:2px;}
+.mall:hover{background:var(--paper);}
+.cell.hit{background:var(--k);color:#fff;opacity:1;}
+.cell.top{box-shadow:0 0 0 2px var(--paper),0 0 0 4px var(--k);}
 .newbar{display:flex;align-items:stretch;max-width:520px;margin:0 0 var(--s4);border:1px solid color-mix(in srgb,var(--new) 35%,var(--line));background:#fff;border-radius:2px;}
 .newbar[hidden]{display:none;}
 .nb-go{flex:1;min-width:0;display:flex;align-items:center;gap:var(--s3);border:0;background:none;cursor:pointer;text-align:left;padding:10px var(--s4);font-family:var(--sans);font-size:14px;color:var(--ink);min-height:44px;}
@@ -298,8 +390,8 @@ footer{padding-bottom:calc(var(--s8) + 24px);}
 .nb-x:hover{color:var(--ink);}
 @media(max-width:600px){.nb-t{white-space:normal;line-height:1.45;}}
 </style>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "학교 연장통", "alternateName": ["학교 연장통 — 학교 업무를 바꾼 웹사이트", "바이브 코딩 학교 웹사이트 모음"], "url": "https://edu-hub-alpha-ten.vercel.app/", "description": "초등학교 교감이 바이브 코딩으로 만든 학교 업무용 웹 도구 40개 모음. 휴가·복무 확인, 반편성, 시간표, 연수, 생활지도까지 링크 하나로 바로 씁니다.", "inLanguage": "ko", "author": {"@type": "Person", "name": "최창훈", "jobTitle": "초등학교 교감"}, "keywords": "학교 연장통, 바이브 코딩, 학교 업무, 교사 웹 도구, 초등학교, 교감, 반편성, 휴가, 연수, 생활지도"}</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "ItemList", "name": "학교 연장통 도구 목록", "numberOfItems": 40, "itemListElement": [{"@type": "ListItem", "position": 1, "name": "교육공무원 복무 한눈에", "description": "초과근무 인정 시간, 출장 구분과 이동시간, 41조 연수, 결재라인까지 헷갈리는 복무를 그림과 계산기로 바로 확인합니다.", "url": "https://attendance-six-liard.vercel.app/"}, {"@type": "ListItem", "position": 2, "name": "교원 휴가 종류와 일수 확인", "description": "연가·병가·공가·경조사 등 열세 가지 휴가를 조건과 일수까지 한 화면에서 확인합니다.", "url": "https://leave-of-absence-nu.vercel.app/"}, {"@type": "ListItem", "position": 3, "name": "외부강의·겸직 가능 여부 확인", "description": "신고 대상인지 겸직 허가 대상인지, 몇 가지 질문에 답하면 스스로 가려낼 수 있습니다.", "url": "https://external-lecture.vercel.app/"}, {"@type": "ListItem", "position": 4, "name": "보결 배정하기", "description": "빈 시간과 담당 시수를 함께 보며 보결을 고르게 나눠 배정합니다.", "url": "https://substitute-assignment-yiix.vercel.app/"}, {"@type": "ListItem", "position": 5, "name": "방학 중 비근무 직종 근무일수 계산", "description": "달력에서 근무일을 고르면 연간 근무일수와 주휴 유급 여부가 자동으로 계산됩니다.", "url": "https://calculation-of-paid-vacation-days.vercel.app/"}, {"@type": "ListItem", "position": 6, "name": "반별 시간표 짜기", "description": "전담 시간과 학년 시수를 맞춰 가며 시간표를 짜고, 충돌을 바로 잡아 줍니다.", "url": "https://elementary-class-timetable.vercel.app/"}, {"@type": "ListItem", "position": 7, "name": "자율연수비 정산하기", "description": "연수 그룹과 명단을 만들고 지출을 입력하면 정산표가 엑셀로 나옵니다.", "url": "https://training-fee-manager.vercel.app/"}, {"@type": "ListItem", "position": 8, "name": "학부모 법정 의무교육 안내", "description": "해마다 인쇄해 보내던 열여섯 가지 법정 교육을 링크 하나로 대신합니다.", "url": "https://parent-education-zeta.vercel.app/"}, {"@type": "ListItem", "position": 9, "name": "월중·주간계획 자동으로 만들기", "description": "한 번 입력한 일정이 월중계획과 주간계획으로 함께 만들어지는 구글 시트 자동화입니다.", "url": "https://monthly-plan-theta.vercel.app/"}, {"@type": "ListItem", "position": 10, "name": "공문·회의록 작성 가이드", "description": "공문과 회의록 쓰는 법을 예시로 익히고, 스물아홉 문항으로 스스로 점검합니다.", "url": "https://official-document.vercel.app/"}, {"@type": "ListItem", "position": 11, "name": "업무 인수인계 노트 만들기", "description": "월별로 하는 일을 적어 두면 파일 하나로 후임자에게 그대로 넘길 수 있습니다.", "url": "https://handover-pi.vercel.app/"}, {"@type": "ListItem", "position": 12, "name": "단체 음료 주문 취합", "description": "각자 고른 음료가 자동으로 취합되고, 카페에 넘길 주문서가 정리되어 나옵니다.", "url": "https://cafe-order-xi.vercel.app/"}, {"@type": "ListItem", "position": 13, "name": "교내 인사 내규 점검하고 만들기", "description": "우리 학교 내규를 올리면 빠진 조항과 서로 어긋나는 조항을 찾아 고칠 문장까지 정리해 줍니다. 참고안을 바탕으로 새 내규를 만들고 인사점수도 계산합니다.", "url": "https://personnel-regulations.vercel.app/"}, {"@type": "ListItem", "position": 14, "name": "업무분장 한눈에", "description": "표준안을 보고 협의해 우리 학교 안을 만들고, 작년 분장표(.hwpx)와 비교해 빠진 업무와 담당이 다른 업무를 찾습니다. 갈등 조정 절차와 근거도 담았습니다.", "url": "https://division-of-work.vercel.app/"}, {"@type": "ListItem", "position": 15, "name": "교감 자격연수 점수 계산과 진로 설계", "description": "경력·연수·가산점을 넣으면 지금 서류 점수와 기준점까지 남은 점수를 보여 주고, 앞으로 몇 년 뒤 닿을지 시뮬레이션합니다.", "url": "https://careerplanning.vercel.app/"}, {"@type": "ListItem", "position": 16, "name": "외국 국적 학생 학적 처리 안내", "description": "입교 상담부터 아포스티유, 학적 처리까지 순서대로 짚어 줍니다.", "url": "https://academic-record-management-for-fore.vercel.app/"}, {"@type": "ListItem", "position": 17, "name": "교육활동 침해 판별과 대응 절차", "description": "있었던 일을 고르면 해당할 수 있는 침해 유형과 지금 할 일을 알려 주고, 담당자에게는 단계별 처리 절차와 기한을 안내합니다.", "url": "https://protection-of-educational-activitie-blond.vercel.app/"}, {"@type": "ListItem", "position": 18, "name": "학교 안전·긴급사항 대응 절차", "description": "응급환자 이송, 중대재해, 비상연락망까지 급할 때 열어 보는 절차를 모았습니다.", "url": "https://emergency-fh5s.vercel.app/"}, {"@type": "ListItem", "name": "출결 한눈에", "description": "결석 사유를 검색하면 처리 구분과 필요한 서류, 기한, 생활기록부 기재 여부를 한 화면에서 답합니다.", "url": "https://stattendance.vercel.app/", "position": 19}, {"@type": "ListItem", "position": 20, "name": "교외체험학습 신청기한 계산", "description": "휴일을 빼고 신청 기한을 계산해 주고, 사유가 적절한지도 스스로 확인합니다.", "url": "https://educational-travel.vercel.app/"}, {"@type": "ListItem", "position": 21, "name": "미인정결석 학생 업무 처리 안내", "description": "담임·업무 담당자·관리자를 고르면 결석 당일부터 NEIS 등록, 매월 확인, 복귀 보고까지 내 차례의 일을 순서대로 보여 줍니다.", "url": "https://unexcused-absence-sage.vercel.app/"}, {"@type": "ListItem", "position": 22, "name": "감염병 등교중지·출석인정 확인", "description": "병명을 찾으면 등교 중지 기간과 출석 인정 절차를 학부모가 바로 확인할 수 있습니다.", "url": "https://infectious-diseases.vercel.app/"}, {"@type": "ListItem", "position": 23, "name": "야외활동 가능 여부 확인", "description": "지금 우리 지역 수치로 야외 활동이 가능한지, 자제인지, 금지인지 한 줄로 답합니다.", "url": "https://fine-dust-heat-wave.vercel.app/"}, {"@type": "ListItem", "position": 24, "name": "해냄 보물상자", "description": "학생이 2022 개정 교육과정 성취기준에서 스스로 목표를 고르고, 보호자 확인과 선생님 인증을 모아 한 해 동안 쌓아 갑니다.", "url": "https://growth-opal.vercel.app/"}, {"@type": "ListItem", "position": 25, "name": "생활기록부·통지표 문장 쓰기", "description": "수업 중에 남긴 관찰 기록을 생활기록부 문장으로 옮기는 과정을 도와줍니다.", "url": "https://student-record-seven.vercel.app/"}, {"@type": "ListItem", "position": 26, "name": "반편성하기", "description": "성적·성별·관계 조건을 놓고 여러 안을 만들어 보며 협의 자리에서 함께 결정합니다.", "url": "https://class-assignment-ruddy.vercel.app/"}, {"@type": "ListItem", "position": 27, "name": "신입생 반편성하기", "description": "예비소집 면접 기록을 모아 신입생 반을 나누고 명렬표까지 정리합니다.", "url": "https://freshman-class-assignment-nmos.vercel.app/"}, {"@type": "ListItem", "position": 28, "name": "청렴 연수 방탈출 게임", "description": "청탁금지법과 갑질 예방을 방탈출 게임으로 풀어 가는 참여형 연수입니다.", "url": "https://integrity-henna.vercel.app/"}, {"@type": "ListItem", "position": 29, "name": "교육활동보호 법률 용어 익히기", "description": "교육활동 침해와 관련된 법률 용어를 읽고, 열 문항 퀴즈로 확인합니다.", "url": "https://protection-of-educational-activitie.vercel.app/"}, {"@type": "ListItem", "position": 30, "name": "교육활동 침해 사안 대응 익히기", "description": "실제 상황을 놓고 어디까지가 침해인지, 무엇부터 해야 하는지 따라가 봅니다.", "url": "https://protection-of-educational-activitie-three.vercel.app/"}, {"@type": "ListItem", "position": 31, "name": "내 수업 성장 지도", "description": "스물네 가지 수업 장면에서 지금 내 모습을 고르면, 여섯 영역의 성장 지도와 다음 한 걸음을 보여 줍니다.", "url": "https://teaching-competency.vercel.app/"}, {"@type": "ListItem", "position": 32, "name": "AI·디지털 교육 역량 진단", "description": "스물한 개 문항에 답하면 일곱 가지 역량의 성장 리포트와 이번 주 실천 미션을 보여 줍니다.", "url": "https://ai-digital-literacy.vercel.app/"}, {"@type": "ListItem", "position": 33, "name": "바이브 코딩 연수 길잡이", "description": "생성형 AI로 학교 업무용 웹사이트를 만들어 배포하는 연수를 2차시부터 15차시까지 단계별로 안내합니다.", "url": "https://vibecoding-zeta-seven.vercel.app/"}, {"@type": "ListItem", "position": 34, "name": "학급규칙 세우기 수업 준비", "description": "학급 규칙을 학생들과 함께 정하는 수업을 준비하고, 미리 연습해 볼 수 있습니다.", "url": "https://class-rules.vercel.app/"}, {"@type": "ListItem", "position": 35, "name": "교우관계 설문과 관계도 그리기", "description": "학년군별 설문으로 교우 관계를 모아 관계도와 리포트로 보여 줍니다.", "url": "https://sociogram-hazel.vercel.app/"}, {"@type": "ListItem", "position": 36, "name": "나 전달법 배우고 연습하기", "description": "나 전달법을 단계로 배우고 서른 가지 상황으로 연습한 뒤 골든벨로 확인합니다.", "url": "https://i-message-nine.vercel.app/"}, {"@type": "ListItem", "position": 37, "name": "도전행동 생활지도 가이드", "description": "도전 행동을 만났을 때 무엇을 먼저 하고 무엇을 하지 말아야 하는지 안내합니다.", "url": "https://school-guidance-plus.vercel.app/"}, {"@type": "ListItem", "position": 38, "name": "학부모 상담 준비와 연습", "description": "학부모 상담의 흐름을 익히고, 어려운 장면을 미리 연습해 볼 수 있습니다.", "url": "https://parent-consultation-training.vercel.app/"}, {"@type": "ListItem", "position": 39, "name": "상담과 민원 구분하기", "description": "상담과 민원의 경계를 사례로 구분하고, 민원으로 넘어갔을 때의 절차를 안내합니다.", "url": "https://consultation-complaints.vercel.app/"}, {"@type": "ListItem", "position": 40, "name": "학교폭력 사안 처리 절차", "description": "학교폭력 신고 접수부터 처리까지의 절차와 기한을 순서대로 따라갑니다.", "url": "https://school-violence-alpha.vercel.app/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "학교 연장통", "alternateName": ["학교 연장통 — 학교 업무를 바꾼 웹사이트", "바이브 코딩 학교 웹사이트 모음"], "url": "https://edu-hub-alpha-ten.vercel.app/", "description": "초등학교 교감이 바이브 코딩으로 만든 학교 업무용 웹 도구 41개 모음. 휴가·복무 확인, 반편성, 시간표, 연수, 생활지도까지 링크 하나로 바로 씁니다.", "inLanguage": "ko", "author": {"@type": "Person", "name": "최창훈", "jobTitle": "초등학교 교감"}, "keywords": "학교 연장통, 바이브 코딩, 학교 업무, 교사 웹 도구, 초등학교, 교감, 반편성, 휴가, 연수, 생활지도"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "ItemList", "name": "학교 연장통 도구 목록", "numberOfItems": 41, "itemListElement": [{"@type": "ListItem", "position": 1, "name": "교육공무원 복무 한눈에", "description": "초과근무 인정 시간, 출장 구분과 이동시간, 41조 연수, 결재라인까지 헷갈리는 복무를 그림과 계산기로 바로 확인합니다.", "url": "https://attendance-six-liard.vercel.app/"}, {"@type": "ListItem", "position": 2, "name": "교원 휴가 종류와 일수 확인", "description": "연가·병가·공가·경조사 등 열세 가지 휴가를 조건과 일수까지 한 화면에서 확인합니다.", "url": "https://leave-of-absence-nu.vercel.app/"}, {"@type": "ListItem", "position": 3, "name": "외부강의·겸직 가능 여부 확인", "description": "신고 대상인지 겸직 허가 대상인지, 몇 가지 질문에 답하면 스스로 가려낼 수 있습니다.", "url": "https://external-lecture.vercel.app/"}, {"@type": "ListItem", "position": 4, "name": "보결 배정하기", "description": "빈 시간과 담당 시수를 함께 보며 보결을 고르게 나눠 배정합니다.", "url": "https://substitute-assignment-yiix.vercel.app/"}, {"@type": "ListItem", "position": 5, "name": "방학 중 비근무 직종 근무일수 계산", "description": "달력에서 근무일을 고르면 연간 근무일수와 주휴 유급 여부가 자동으로 계산됩니다.", "url": "https://calculation-of-paid-vacation-days.vercel.app/"}, {"@type": "ListItem", "position": 6, "name": "반별 시간표 짜기", "description": "전담 시간과 학년 시수를 맞춰 가며 시간표를 짜고, 충돌을 바로 잡아 줍니다.", "url": "https://elementary-class-timetable.vercel.app/"}, {"@type": "ListItem", "position": 7, "name": "자율연수비 정산하기", "description": "연수 그룹과 명단을 만들고 지출을 입력하면 정산표가 엑셀로 나옵니다.", "url": "https://training-fee-manager.vercel.app/"}, {"@type": "ListItem", "position": 8, "name": "학부모 법정 의무교육 안내", "description": "해마다 인쇄해 보내던 열여섯 가지 법정 교육을 링크 하나로 대신합니다.", "url": "https://parent-education-zeta.vercel.app/"}, {"@type": "ListItem", "position": 9, "name": "월중·주간계획 자동으로 만들기", "description": "한 번 입력한 일정이 월중계획과 주간계획으로 함께 만들어지는 구글 시트 자동화입니다.", "url": "https://monthly-plan-theta.vercel.app/"}, {"@type": "ListItem", "position": 10, "name": "공문·회의록 작성 가이드", "description": "공문과 회의록 쓰는 법을 예시로 익히고, 스물아홉 문항으로 스스로 점검합니다.", "url": "https://official-document.vercel.app/"}, {"@type": "ListItem", "position": 11, "name": "업무 인수인계 노트 만들기", "description": "월별로 하는 일을 적어 두면 파일 하나로 후임자에게 그대로 넘길 수 있습니다.", "url": "https://handover-pi.vercel.app/"}, {"@type": "ListItem", "position": 12, "name": "단체 음료 주문 취합", "description": "각자 고른 음료가 자동으로 취합되고, 카페에 넘길 주문서가 정리되어 나옵니다.", "url": "https://cafe-order-xi.vercel.app/"}, {"@type": "ListItem", "position": 13, "name": "교내 인사 내규 점검하고 만들기", "description": "우리 학교 내규를 올리면 빠진 조항과 서로 어긋나는 조항을 찾아 고칠 문장까지 정리해 줍니다. 참고안을 바탕으로 새 내규를 만들고 인사점수도 계산합니다.", "url": "https://personnel-regulations.vercel.app/"}, {"@type": "ListItem", "position": 14, "name": "업무분장 한눈에", "description": "표준안을 보고 협의해 우리 학교 안을 만들고, 작년 분장표(.hwpx)와 비교해 빠진 업무와 담당이 다른 업무를 찾습니다. 갈등 조정 절차와 근거도 담았습니다.", "url": "https://division-of-work.vercel.app/"}, {"@type": "ListItem", "position": 15, "name": "교감 자격연수 점수 계산과 진로 설계", "description": "경력·연수·가산점을 넣으면 지금 서류 점수와 기준점까지 남은 점수를 보여 주고, 앞으로 몇 년 뒤 닿을지 시뮬레이션합니다.", "url": "https://careerplanning.vercel.app/"}, {"@type": "ListItem", "position": 16, "name": "학적 한눈에", "description": "입학·전학·유예·정원 외 관리까지, 상황을 고르거나 문장으로 물으면 처리 순서와 서류, 나이스 메뉴를 바로 찾아 줍니다.", "url": "https://academic-records-rosy.vercel.app/"}, {"@type": "ListItem", "position": 17, "name": "외국 국적 학생 학적 처리 안내", "description": "입교 상담부터 아포스티유, 학적 처리까지 순서대로 짚어 줍니다.", "url": "https://academic-record-management-for-fore.vercel.app/"}, {"@type": "ListItem", "position": 18, "name": "교육활동 침해 판별과 대응 절차", "description": "있었던 일을 고르면 해당할 수 있는 침해 유형과 지금 할 일을 알려 주고, 담당자에게는 단계별 처리 절차와 기한을 안내합니다.", "url": "https://protection-of-educational-activitie-blond.vercel.app/"}, {"@type": "ListItem", "position": 19, "name": "학교 안전·긴급사항 대응 절차", "description": "응급환자 이송, 중대재해, 비상연락망까지 급할 때 열어 보는 절차를 모았습니다.", "url": "https://emergency-fh5s.vercel.app/"}, {"@type": "ListItem", "name": "출결 한눈에", "description": "결석 사유를 검색하면 처리 구분과 필요한 서류, 기한, 생활기록부 기재 여부를 한 화면에서 답합니다.", "url": "https://stattendance.vercel.app/", "position": 20}, {"@type": "ListItem", "position": 21, "name": "교외체험학습 신청기한 계산", "description": "휴일을 빼고 신청 기한을 계산해 주고, 사유가 적절한지도 스스로 확인합니다.", "url": "https://educational-travel.vercel.app/"}, {"@type": "ListItem", "position": 22, "name": "미인정결석 학생 업무 처리 안내", "description": "담임·업무 담당자·관리자를 고르면 결석 당일부터 NEIS 등록, 매월 확인, 복귀 보고까지 내 차례의 일을 순서대로 보여 줍니다.", "url": "https://unexcused-absence-sage.vercel.app/"}, {"@type": "ListItem", "position": 23, "name": "감염병 등교중지·출석인정 확인", "description": "병명을 찾으면 등교 중지 기간과 출석 인정 절차를 학부모가 바로 확인할 수 있습니다.", "url": "https://infectious-diseases.vercel.app/"}, {"@type": "ListItem", "position": 24, "name": "야외활동 가능 여부 확인", "description": "지금 우리 지역 수치로 야외 활동이 가능한지, 자제인지, 금지인지 한 줄로 답합니다.", "url": "https://fine-dust-heat-wave.vercel.app/"}, {"@type": "ListItem", "position": 25, "name": "해냄 보물상자", "description": "학생이 2022 개정 교육과정 성취기준에서 스스로 목표를 고르고, 보호자 확인과 선생님 인증을 모아 한 해 동안 쌓아 갑니다.", "url": "https://growth-opal.vercel.app/"}, {"@type": "ListItem", "position": 26, "name": "생활기록부·통지표 문장 쓰기", "description": "수업 중에 남긴 관찰 기록을 생활기록부 문장으로 옮기는 과정을 도와줍니다.", "url": "https://student-record-seven.vercel.app/"}, {"@type": "ListItem", "position": 27, "name": "반편성하기", "description": "성적·성별·관계 조건을 놓고 여러 안을 만들어 보며 협의 자리에서 함께 결정합니다.", "url": "https://class-assignment-ruddy.vercel.app/"}, {"@type": "ListItem", "position": 28, "name": "신입생 반편성하기", "description": "예비소집 면접 기록을 모아 신입생 반을 나누고 명렬표까지 정리합니다.", "url": "https://freshman-class-assignment-nmos.vercel.app/"}, {"@type": "ListItem", "position": 29, "name": "청렴 연수 방탈출 게임", "description": "청탁금지법과 갑질 예방을 방탈출 게임으로 풀어 가는 참여형 연수입니다.", "url": "https://integrity-henna.vercel.app/"}, {"@type": "ListItem", "position": 30, "name": "교육활동보호 법률 용어 익히기", "description": "교육활동 침해와 관련된 법률 용어를 읽고, 열 문항 퀴즈로 확인합니다.", "url": "https://protection-of-educational-activitie.vercel.app/"}, {"@type": "ListItem", "position": 31, "name": "교육활동 침해 사안 대응 익히기", "description": "실제 상황을 놓고 어디까지가 침해인지, 무엇부터 해야 하는지 따라가 봅니다.", "url": "https://protection-of-educational-activitie-three.vercel.app/"}, {"@type": "ListItem", "position": 32, "name": "내 수업 성장 지도", "description": "스물네 가지 수업 장면에서 지금 내 모습을 고르면, 여섯 영역의 성장 지도와 다음 한 걸음을 보여 줍니다.", "url": "https://teaching-competency.vercel.app/"}, {"@type": "ListItem", "position": 33, "name": "AI·디지털 교육 역량 진단", "description": "스물한 개 문항에 답하면 일곱 가지 역량의 성장 리포트와 이번 주 실천 미션을 보여 줍니다.", "url": "https://ai-digital-literacy.vercel.app/"}, {"@type": "ListItem", "position": 34, "name": "바이브 코딩 연수 길잡이", "description": "생성형 AI로 학교 업무용 웹사이트를 만들어 배포하는 연수를 2차시부터 15차시까지 단계별로 안내합니다.", "url": "https://vibecoding-zeta-seven.vercel.app/"}, {"@type": "ListItem", "position": 35, "name": "학급규칙 세우기 수업 준비", "description": "학급 규칙을 학생들과 함께 정하는 수업을 준비하고, 미리 연습해 볼 수 있습니다.", "url": "https://class-rules.vercel.app/"}, {"@type": "ListItem", "position": 36, "name": "교우관계 설문과 관계도 그리기", "description": "학년군별 설문으로 교우 관계를 모아 관계도와 리포트로 보여 줍니다.", "url": "https://sociogram-hazel.vercel.app/"}, {"@type": "ListItem", "position": 37, "name": "나 전달법 배우고 연습하기", "description": "나 전달법을 단계로 배우고 서른 가지 상황으로 연습한 뒤 골든벨로 확인합니다.", "url": "https://i-message-nine.vercel.app/"}, {"@type": "ListItem", "position": 38, "name": "도전행동 생활지도 가이드", "description": "도전 행동을 만났을 때 무엇을 먼저 하고 무엇을 하지 말아야 하는지 안내합니다.", "url": "https://school-guidance-plus.vercel.app/"}, {"@type": "ListItem", "position": 39, "name": "학부모 상담 준비와 연습", "description": "학부모 상담의 흐름을 익히고, 어려운 장면을 미리 연습해 볼 수 있습니다.", "url": "https://parent-consultation-training.vercel.app/"}, {"@type": "ListItem", "position": 40, "name": "상담과 민원 구분하기", "description": "상담과 민원의 경계를 사례로 구분하고, 민원으로 넘어갔을 때의 절차를 안내합니다.", "url": "https://consultation-complaints.vercel.app/"}, {"@type": "ListItem", "position": 41, "name": "학교폭력 사안 처리 절차", "description": "학교폭력 신고 접수부터 처리까지의 절차와 기한을 순서대로 따라갑니다.", "url": "https://school-violence-alpha.vercel.app/"}]}</script>
 </head>
 <body>
 
@@ -328,11 +420,18 @@ footer{padding-bottom:calc(var(--s8) + 24px);}
 
       <div class="searchrow">
         <label class="sr" for="q">지금 하는 일이나 찾는 도구를 검색하세요</label>
-        <input id="q" type="search" autocomplete="off" placeholder="휴가, 반편성, 학교폭력… 지금 하는 일을 적어 보세요">
+        <input id="q" type="search" autocomplete="off" placeholder="낱말도 문장도 됩니다 — 예: 보결은 누가 들어가요?">
+        <span class="qcount" id="qcount" aria-live="polite"></span>
         <button class="clearbtn" id="clear" aria-label="검색어 지우기">×</button>
       </div>
 
       <div class="chips" id="fpart" role="group" aria-label="분류로 걸러 보기"></div>
+
+      <section class="monthly" id="monthly" aria-labelledby="mtitle" hidden>
+        <h2 id="mtitle"></h2>
+        <p class="mnote" id="mnote"></p>
+        <div class="mlist" id="mlist"></div>
+      </section>
 
       <button class="maptoggle" type="button" id="maptoggle" aria-expanded="false" aria-controls="mapbox">
         <span id="maptoggletext">한눈에 보기</span><span class="mark" id="maptogglemark">펼치기</span>
@@ -340,7 +439,7 @@ footer{padding-bottom:calc(var(--s8) + 24px);}
     </div>
 
     <div class="mapbox" id="mapbox">
-      <div class="map" id="map" role="group" aria-label="도구 서른세 개 한눈에 보기"></div>
+      <div class="map" id="map" role="group" aria-label="도구 한눈에 보기"></div>
       <p class="maplabel" id="maplabel"></p>
     </div>
   </div>
@@ -371,6 +470,7 @@ footer{padding-bottom:calc(var(--s8) + 24px);}
 <li><a href="https://personnel-regulations.vercel.app/" rel="noopener"><strong>교내 인사 내규 점검하고 만들기</strong></a> — 우리 학교 내규를 올리면 빠진 조항과 서로 어긋나는 조항을 찾아 고칠 문장까지 정리해 줍니다. 참고안을 바탕으로 새 내규를 만들고 인사점수도 계산합니다. <span class="who">(관리자·인사자문위원 · 인사내규)</span></li>
 <li><a href="https://division-of-work.vercel.app/" rel="noopener"><strong>업무분장 한눈에</strong></a> — 표준안을 보고 협의해 우리 학교 안을 만들고, 작년 분장표(.hwpx)와 비교해 빠진 업무와 담당이 다른 업무를 찾습니다. 갈등 조정 절차와 근거도 담았습니다. <span class="who">(관리자·업무 담당자 · 업무분장)</span></li>
 <li><a href="https://careerplanning.vercel.app/" rel="noopener"><strong>교감 자격연수 점수 계산과 진로 설계</strong></a> — 경력·연수·가산점을 넣으면 지금 서류 점수와 기준점까지 남은 점수를 보여 주고, 앞으로 몇 년 뒤 닿을지 시뮬레이션합니다. <span class="who">(교사 · 승진)</span></li>
+<li><a href="https://academic-records-rosy.vercel.app/" rel="noopener"><strong>학적 한눈에</strong></a> — 입학·전학·유예·정원 외 관리까지, 상황을 고르거나 문장으로 물으면 처리 순서와 서류, 나이스 메뉴를 바로 찾아 줍니다. <span class="who">(업무 담당자 · 학적)</span></li>
 <li><a href="https://academic-record-management-for-fore.vercel.app/" rel="noopener"><strong>외국 국적 학생 학적 처리 안내</strong></a> — 입교 상담부터 아포스티유, 학적 처리까지 순서대로 짚어 줍니다. <span class="who">(업무 담당자 · 외국국적)</span></li>
 <li><a href="https://protection-of-educational-activitie-blond.vercel.app/" rel="noopener"><strong>교육활동 침해 판별과 대응 절차</strong></a> — 있었던 일을 고르면 해당할 수 있는 침해 유형과 지금 할 일을 알려 주고, 담당자에게는 단계별 처리 절차와 기한을 안내합니다. <span class="who">(모든 교직원 · 교권침해)</span></li>
 <li><a href="https://emergency-fh5s.vercel.app/" rel="noopener"><strong>학교 안전·긴급사항 대응 절차</strong></a> — 응급환자 이송, 중대재해, 비상연락망까지 급할 때 열어 보는 절차를 모았습니다. <span class="who">(모든 교직원 · 안전)</span></li>
@@ -456,6 +556,19 @@ footer{padding-bottom:calc(var(--s8) + 24px);}
 
 <button type="button" id="backmap" aria-hidden="true" tabindex="-1"><span class="arr" aria-hidden="true">↑</span><span id="backmaptext">한눈에 보기로</span></button>
 
+<button type="button" id="chatbtn" aria-haspopup="dialog" aria-controls="chat"><span class="cb-i" aria-hidden="true">?</span><span class="cb-t">무엇을 도와드릴까요?</span></button>
+<section id="chat" role="dialog" aria-modal="false" aria-labelledby="chathd" hidden>
+  <div class="ch-head">
+    <div><h2 id="chathd">연장통 길잡이</h2><p>상황을 말하면 알맞은 도구를 찾아 드려요</p></div>
+    <button type="button" class="ch-x" id="chatx" aria-label="길잡이 닫기">×</button>
+  </div>
+  <div class="ch-log" id="chatlog" aria-live="polite"></div>
+  <form class="ch-in" id="chatform" autocomplete="off">
+    <input id="chatq" type="text" placeholder="예: 학생이 일주일째 연락이 안 돼요" aria-label="질문 입력" enterkeyhint="send">
+    <button type="submit" aria-label="보내기">↑</button>
+  </form>
+  <p class="ch-note">AI가 아닌 정해진 규칙으로 도구를 안내합니다. 입력한 내용은 이 기기 밖으로 나가지 않지만, 학생 이름 등 개인정보는 적지 마세요.</p>
+</section>
 <button type="button" id="licbtn" aria-haspopup="dialog" aria-controls="lic">ⓘ 오픈소스 라이선스</button>
 
 <div id="lic" role="dialog" aria-modal="true" aria-labelledby="lict" hidden>
@@ -569,7 +682,22 @@ THE FONT SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, E
 const REPORT_EMAIL = "";              /* 예: "changhun@example.com" */
 const LAST_CHECKED = "2026. 9.";      /* 링크 점검한 달 */
 const SHOW_BOOK_CHAPTER = false;
-const NEW_DAYS = 30;                   /* 추가한 날(added)로부터 며칠 동안 「새로」를 붙일지 */
+/* 이번 달에 꺼내는 도구 — 달마다 3~4개, 앞에 둔 것부터 보여 줍니다. 열쇠는 「부-번호」 */
+const MONTHLY = {
+  1:  { note:"새 학년도 업무분장과 신입생 맞이",     keys:["1-19","1-17","2-9","2-7"] },
+  2:  { note:"학년말 마무리와 새 학년 준비",         keys:["2-8","1-20","1-13","1-11"] },
+  3:  { note:"새 학기 첫 달, 규칙과 출결부터",       keys:["4-1","2-1","1-1","1-5"] },
+  4:  { note:"상담주간과 봄 체험학습",               keys:["4-5","4-2","2-5","1-6"] },
+  5:  { note:"체험학습 철, 스승의 날",               keys:["2-2","1-6","2-5","3-1"] },
+  6:  { note:"더위 시작, 1학기 생활지도 점검",       keys:["2-5","4-4","4-7","2-2"] },
+  7:  { note:"1학기 마무리와 방학 복무",             keys:["2-7","1-18","1-2","2-1"] },
+  8:  { note:"방학 연수와 2학기 준비",               keys:["1-8","3-6","3-5","3-4"] },
+  9:  { note:"2학기 시작, 다시 살피는 아이들",       keys:["4-5","2-3","2-6","1-3"] },
+  10: { note:"가을 체험학습과 교우관계 점검",         keys:["2-2","4-2","1-6","4-6"] },
+  11: { note:"학년말 준비와 연수비 정산",             keys:["2-8","1-4","1-15","2-4"] },
+  12: { note:"학기말 기록과 취학 업무",               keys:["2-7","1-20","1-4","1-17"] }
+};
+const NEW_DAYS = 14;                   /* 추가한 날(added)로부터 며칠 동안 「새로」를 붙일지 */
 
 const PARTS = [
   { id:"1", name:"학교 업무",   full:"학교 업무를 조금 더 정확하고 편리하게", book:"2부",
@@ -584,144 +712,147 @@ const PARTS = [
 
 const SITES = [
 /* ── 학교 업무 ── */
-{p:"1",n:18,tag:"복무",added:"2026-10-14",t:"교육공무원 복무 한눈에",c:"“이거 출장이에요, 41조예요?”",u:"https://attendance-six-liard.vercel.app/",
+{p:"1",n:18,tag:"복무",m:"초과근무·출장",added:"2026-10-14",t:"교육공무원 복무 한눈에",c:"“이거 출장이에요, 41조예요?”",u:"https://attendance-six-liard.vercel.app/",
  d:"초과근무 인정 시간, 출장 구분과 이동시간, 41조 연수, 결재라인까지 헷갈리는 복무를 그림과 계산기로 바로 확인합니다.",who:"모든 교직원",pc:false,
  k:"복무 초과근무 시간외근무 출장 여비 이동시간 41조 연수 결재라인 조퇴 지각 외출 나이스 사후결재 방학"},
-{p:"1",n:2,tag:"휴가",t:"교원 휴가 종류와 일수 확인",c:"“이거 연가예요, 병가예요?”",u:"https://leave-of-absence-nu.vercel.app/",
+{p:"1",n:2,tag:"휴가",m:"며칠 쓸 수 있나",t:"교원 휴가 종류와 일수 확인",c:"“이거 연가예요, 병가예요?”",u:"https://leave-of-absence-nu.vercel.app/",
  d:"연가·병가·공가·경조사 등 열세 가지 휴가를 조건과 일수까지 한 화면에서 확인합니다.",who:"모든 교직원",pc:false,
  k:"휴가 연가 병가 공가 경조사 육아시간 장기재직 특별휴가 복무 며칠"},
-{p:"1",n:1,tag:"겸직",t:"외부강의·겸직 가능 여부 확인",c:"“교감 선생님, 이거 해도 되나요”",u:"https://external-lecture.vercel.app/",
+{p:"1",n:1,tag:"겸직",m:"강의해도 되나",t:"외부강의·겸직 가능 여부 확인",c:"“교감 선생님, 이거 해도 되나요”",u:"https://external-lecture.vercel.app/",
  d:"신고 대상인지 겸직 허가 대상인지, 몇 가지 질문에 답하면 스스로 가려낼 수 있습니다.",who:"모든 교직원",pc:false,
  k:"외부강의 겸직 복무 신고 허가 강의료 자가진단"},
-{p:"1",n:10,tag:"보결",t:"보결 배정하기",c:"2교시 10분 전, 3학년 2반이 비었다",u:"https://substitute-assignment-yiix.vercel.app/",
+{p:"1",n:10,tag:"보결",m:"누가 들어가나",t:"보결 배정하기",c:"2교시 10분 전, 3학년 2반이 비었다",u:"https://substitute-assignment-yiix.vercel.app/",
  d:"빈 시간과 담당 시수를 함께 보며 보결을 고르게 나눠 배정합니다.",who:"업무 담당자",pc:true,
  prep:"반별 시간표",
  k:"보결 결강 대체 시간표 배정 출장 연가"},
-{p:"1",n:9,tag:"근무일수",t:"방학 중 비근무 직종 근무일수 계산",c:"근무 형태가 다르면 계산도 달라진다",u:"https://calculation-of-paid-vacation-days.vercel.app/",
+{p:"1",n:9,tag:"근무일수",m:"방학 비근무 계산",t:"방학 중 비근무 직종 근무일수 계산",c:"근무 형태가 다르면 계산도 달라진다",u:"https://calculation-of-paid-vacation-days.vercel.app/",
  d:"달력에서 근무일을 고르면 연간 근무일수와 주휴 유급 여부가 자동으로 계산됩니다.",who:"업무 담당자",pc:true,
  prep:"학사일정(방학 날짜)",
  k:"교육공무직 방학중 비근무 근무일수 유급 주휴 조리실무사 계산"},
-{p:"1",n:8,tag:"시간표",t:"반별 시간표 짜기",c:"한 칸을 고치면 열두 곳이 어긋난다",u:"https://elementary-class-timetable.vercel.app/",
+{p:"1",n:8,tag:"시간표",m:"반별로 짜기",t:"반별 시간표 짜기",c:"한 칸을 고치면 열두 곳이 어긋난다",u:"https://elementary-class-timetable.vercel.app/",
  d:"전담 시간과 학년 시수를 맞춰 가며 시간표를 짜고, 충돌을 바로 잡아 줍니다.",who:"업무 담당자",pc:true,
  prep:"학년별 시수·전담 시간표",
  k:"시간표 전담 시수 편성 교육과정 반별"},
-{p:"1",n:4,tag:"연수비",t:"자율연수비 정산하기",c:"연수는 즐거웠는데, 정산이 남았다",u:"https://training-fee-manager.vercel.app/",
+{p:"1",n:4,tag:"연수비",m:"정산표 만들기",t:"자율연수비 정산하기",c:"연수는 즐거웠는데, 정산이 남았다",u:"https://training-fee-manager.vercel.app/",
  d:"연수 그룹과 명단을 만들고 지출을 입력하면 정산표가 엑셀로 나옵니다.",who:"업무 담당자",pc:false,
  store:"명단·지출 내역 서버 저장",prep:"참여자 명단",
  k:"자율연수비 정산 연수비 지출 영수증 엑셀 그룹"},
-{p:"1",n:5,tag:"법정교육",t:"학부모 법정 의무교육 안내",c:"“올해도 그 책자, 만들어야 하죠”",u:"https://parent-education-zeta.vercel.app/",
+{p:"1",n:5,tag:"법정교육",m:"학부모 안내",t:"학부모 법정 의무교육 안내",c:"“올해도 그 책자, 만들어야 하죠”",u:"https://parent-education-zeta.vercel.app/",
  d:"해마다 인쇄해 보내던 열여섯 가지 법정 교육을 링크 하나로 대신합니다.",who:"학부모",pc:false,
  k:"학부모 법정교육 의무교육 안내 책자 가정통신문"},
-{p:"1",n:11,tag:"월중계획",t:"월중·주간계획 자동으로 만들기",c:"같은 일정을 세 번 옮겨 적고 있었다",u:"https://monthly-plan-theta.vercel.app/",
+{p:"1",n:11,tag:"월중계획",m:"자동으로 만들기",t:"월중·주간계획 자동으로 만들기",c:"같은 일정을 세 번 옮겨 적고 있었다",u:"https://monthly-plan-theta.vercel.app/",
  d:"한 번 입력한 일정이 월중계획과 주간계획으로 함께 만들어지는 구글 시트 자동화입니다.",who:"업무 담당자",pc:true,
  prep:"구글 계정(시트 사본 만들기)",
  k:"월중계획 주간계획 학사일정 구글시트 앱스스크립트 자동화"},
-{p:"1",n:12,tag:"공문",t:"공문·회의록 작성 가이드",c:"빈 화면과 깜빡이는 커서 앞에서",u:"https://official-document.vercel.app/",
+{p:"1",n:12,tag:"공문",m:"쓰는 법",t:"공문·회의록 작성 가이드",c:"빈 화면과 깜빡이는 커서 앞에서",u:"https://official-document.vercel.app/",
  d:"공문과 회의록 쓰는 법을 예시로 익히고, 스물아홉 문항으로 스스로 점검합니다.",who:"모든 교직원",pc:false,
  k:"공문 기안 공문서 회의록 작성법 어문규정 결재"},
-{p:"1",n:13,tag:"인수인계",t:"업무 인수인계 노트 만들기",c:"“그건 작년에 하시던 선생님이 아세요”",u:"https://handover-pi.vercel.app/",
+{p:"1",n:13,tag:"인수인계",m:"후임에게 넘기기",t:"업무 인수인계 노트 만들기",c:"“그건 작년에 하시던 선생님이 아세요”",u:"https://handover-pi.vercel.app/",
  d:"월별로 하는 일을 적어 두면 파일 하나로 후임자에게 그대로 넘길 수 있습니다.",who:"모든 교직원",pc:false,
  k:"인수인계 업무분장 후임 매뉴얼 월별 업무"},
-{p:"1",n:7,tag:"음료",t:"단체 음료 주문 취합",c:"아이스 스물셋, 핫 열아홉이 뒤섞이던 아침",u:"https://cafe-order-xi.vercel.app/",
+{p:"1",n:7,tag:"음료",m:"주문 모으기",t:"단체 음료 주문 취합",c:"아이스 스물셋, 핫 열아홉이 뒤섞이던 아침",u:"https://cafe-order-xi.vercel.app/",
  d:"각자 고른 음료가 자동으로 취합되고, 카페에 넘길 주문서가 정리되어 나옵니다.",who:"모든 교직원",pc:false,
  store:"주문 내역 서버 저장",
  k:"음료 커피 주문 취합 단체 회식 간식 카페"},
-{p:"1",n:17,tag:"인사내규",added:"2026-10-14",t:"교내 인사 내규 점검하고 만들기",c:"“올해도 학년 배정으로 한바탕 하겠네요”",u:"https://personnel-regulations.vercel.app/",
+{p:"1",n:17,tag:"인사내규",m:"점검·만들기",added:"2026-10-14",t:"교내 인사 내규 점검하고 만들기",c:"“올해도 학년 배정으로 한바탕 하겠네요”",u:"https://personnel-regulations.vercel.app/",
  d:"우리 학교 내규를 올리면 빠진 조항과 서로 어긋나는 조항을 찾아 고칠 문장까지 정리해 줍니다. 참고안을 바탕으로 새 내규를 만들고 인사점수도 계산합니다.",who:"관리자·인사자문위원",pc:false,
  k:"인사 내규 교내 인사 규정 인사자문위원회 담임 배정 학년 배정 부장 임용 부장교사 보직교사 교담 업무분장 인사점수 경력점 전보 유예 신구조문 대비표 HWPX 한글 내규 점검"},
-{p:"1",n:19,tag:"업무분장",added:"2026-11-05",t:"업무분장 한눈에",c:"“이 업무는 누구 일인가요?”",u:"https://division-of-work.vercel.app/",
+{p:"1",n:19,tag:"업무분장",m:"누구 일인가",added:"2026-11-05",t:"업무분장 한눈에",c:"“이 업무는 누구 일인가요?”",u:"https://division-of-work.vercel.app/",
  d:"표준안을 보고 협의해 우리 학교 안을 만들고, 작년 분장표(.hwpx)와 비교해 빠진 업무와 담당이 다른 업무를 찾습니다. 갈등 조정 절차와 근거도 담았습니다.",who:"관리자·업무 담당자",pc:false,
  prep:"비교할 때 작년 업무분장표(.hwpx)",
  k:"업무분장 업무 분장 업무분장표 표준안 표준 업무 업무 나누기 업무 조정 업무 갈등 교무 행정실 경계 업무 협의 교직원 업무 배정 학교업무최적화 협의회 HWPX 분장표 비교"},
 
-{p:"1",n:15,tag:"승진",added:"2026-10-14",t:"교감 자격연수 점수 계산과 진로 설계",c:"“저는 교감 언제쯤 될 수 있을까요?”",u:"https://careerplanning.vercel.app/",
+{p:"1",n:15,tag:"승진",m:"점수 계산",added:"2026-10-14",t:"교감 자격연수 점수 계산과 진로 설계",c:"“저는 교감 언제쯤 될 수 있을까요?”",u:"https://careerplanning.vercel.app/",
  d:"경력·연수·가산점을 넣으면 지금 서류 점수와 기준점까지 남은 점수를 보여 주고, 앞으로 몇 년 뒤 닿을지 시뮬레이션합니다.",who:"교사",pc:false,
  k:"승진 교감 자격연수 서류 점수 기준점 커트라인 경력평정 근무성적 연수성적 가산점 보직 연구학교 농어촌 1정 시뮬레이션 진로"},
-{p:"1",n:3,tag:"외국국적",t:"외국 국적 학생 학적 처리 안내",c:"외국 국적의 학생, 서류는 어디서부터일까",u:"https://academic-record-management-for-fore.vercel.app/",
+{p:"1",n:20,tag:"학적",m:"전학·유예 처리",added:"2026-11-11",t:"학적 한눈에",c:"“이 아이, 학적은 어떻게 처리하죠?”",u:"https://academic-records-rosy.vercel.app/",
+ d:"입학·전학·유예·정원 외 관리까지, 상황을 고르거나 문장으로 물으면 처리 순서와 서류, 나이스 메뉴를 바로 찾아 줍니다.",who:"업무 담당자",pc:false,
+ k:"학적 입학 취학 전입 전출 전학 편입 재취학 유예 면제 정원 외 장기결석 진급 졸업 조기입학 입학연기 위탁 교환학습 귀국 학적부 나이스 학적 업무"},
+{p:"1",n:3,tag:"외국국적",m:"입교 서류",t:"외국 국적 학생 학적 처리 안내",c:"외국 국적의 학생, 서류는 어디서부터일까",u:"https://academic-record-management-for-fore.vercel.app/",
  d:"입교 상담부터 아포스티유, 학적 처리까지 순서대로 짚어 줍니다.",who:"업무 담당자",pc:false,
  k:"외국국적 다문화 학적 입교 편입 아포스티유 재외국민 서류"},
-{p:"1",n:14,tag:"교권침해",added:"2026-10-14",t:"교육활동 침해 판별과 대응 절차",c:"“이것도 교권 침해일까요?”",u:"https://protection-of-educational-activitie-blond.vercel.app/",
+{p:"1",n:14,tag:"교권침해",m:"침해인가 판별",added:"2026-10-14",t:"교육활동 침해 판별과 대응 절차",c:"“이것도 교권 침해일까요?”",u:"https://protection-of-educational-activitie-blond.vercel.app/",
  d:"있었던 일을 고르면 해당할 수 있는 침해 유형과 지금 할 일을 알려 주고, 담당자에게는 단계별 처리 절차와 기한을 안내합니다.",who:"모든 교직원",pc:false,
  k:"교권 교권침해 교육활동 침해 판별 교권보호위원회 분리조치 특별휴가 사안처리 신고 기한 담당자"},
-{p:"1",n:6,tag:"안전",t:"학교 안전·긴급사항 대응 절차",c:"그 순간, 무엇부터 해야 하는지 아무도 몰랐다",u:"https://emergency-fh5s.vercel.app/",
+{p:"1",n:6,tag:"안전",m:"긴급 대응 순서",t:"학교 안전·긴급사항 대응 절차",c:"그 순간, 무엇부터 해야 하는지 아무도 몰랐다",u:"https://emergency-fh5s.vercel.app/",
  d:"응급환자 이송, 중대재해, 비상연락망까지 급할 때 열어 보는 절차를 모았습니다.",who:"모든 교직원",pc:false,
  k:"긴급 안전 사고 응급 이송 중대재해 위험성평가 비상연락망 매뉴얼"},
 /* ── 교실과 학급 ── */
-{p:"2",n:1,tag:"출결",added:"2026-10-16",t:"출결 한눈에",c:"“학원 때문에 빠지면 뭐로 처리돼요?”",u:"https://stattendance.vercel.app/",
+{p:"2",n:1,tag:"출결",m:"결석 처리 구분",added:"2026-10-16",t:"출결 한눈에",c:"“학원 때문에 빠지면 뭐로 처리돼요?”",u:"https://stattendance.vercel.app/",
  d:"결석 사유를 말하듯 검색하면 출석인정·질병·기타·미인정 중 무엇인지, 어떤 서류를 언제까지 내야 하는지, 생활기록부에 어떻게 남는지 한 화면에서 답합니다. 학부모와 담임이 같은 화면을 봅니다.",who:"학부모",pc:false,
  k:"출결 결석 지각 조퇴 결과 출석인정 질병 미인정 기타 경조사 결석신고서 생활기록부 학생선수 전학 방학"},
-{p:"2",n:2,tag:"체험학습",t:"교외체험학습 신청기한 계산",c:"“월요일에 가는데 금요일에 내면 되죠?”",u:"https://educational-travel.vercel.app/",
+{p:"2",n:2,tag:"체험학습",m:"신청 기한",t:"교외체험학습 신청기한 계산",c:"“월요일에 가는데 금요일에 내면 되죠?”",u:"https://educational-travel.vercel.app/",
  d:"휴일을 빼고 신청 기한을 계산해 주고, 사유가 적절한지도 스스로 확인합니다.",who:"학부모",pc:false,
  k:"교외체험학습 가정학습 신청 기한 결석 여행 학교장허가"},
-{p:"2",n:3,tag:"미인정결석",added:"2026-10-14",t:"미인정결석 학생 업무 처리 안내",c:"“연락 없이 사흘째, 지금 무엇부터 해야 하죠?”",u:"https://unexcused-absence-sage.vercel.app/",
+{p:"2",n:3,tag:"미인정결석",m:"할 일 순서",added:"2026-10-14",t:"미인정결석 학생 업무 처리 안내",c:"“연락 없이 사흘째, 지금 무엇부터 해야 하죠?”",u:"https://unexcused-absence-sage.vercel.app/",
  d:"담임·업무 담당자·관리자를 고르면 결석 당일부터 NEIS 등록, 매월 확인, 복귀 보고까지 내 차례의 일을 순서대로 보여 줍니다.",who:"모든 교직원",pc:false,
  k:"미인정결석 무단결석 장기결석 결석 소재 안전 확인 가정방문 내교 경찰 수사의뢰 NEIS 나이스 대상학생보고 집중관리대상자 복귀 취학관리전담기구 학업중단 담임 업무담당자 관리자 날짜 계산"},
-{p:"2",n:4,tag:"감염병",t:"감염병 등교중지·출석인정 확인",c:"진단서 없는 결석, 이건 출석 인정일까?",u:"https://infectious-diseases.vercel.app/",
+{p:"2",n:4,tag:"감염병",m:"등교중지 기간",t:"감염병 등교중지·출석인정 확인",c:"진단서 없는 결석, 이건 출석 인정일까?",u:"https://infectious-diseases.vercel.app/",
  d:"병명을 찾으면 등교 중지 기간과 출석 인정 절차를 학부모가 바로 확인할 수 있습니다.",who:"학부모",pc:false,
  k:"감염병 등교중지 출석인정 결석 독감 수두 진단서 보건"},
-{p:"2",n:5,tag:"야외활동",t:"야외활동 가능 여부 확인",c:"창밖은 뿌옇고, 5교시는 체육이다",u:"https://fine-dust-heat-wave.vercel.app/",
+{p:"2",n:5,tag:"야외활동",m:"오늘 나가도 되나",t:"야외활동 가능 여부 확인",c:"창밖은 뿌옇고, 5교시는 체육이다",u:"https://fine-dust-heat-wave.vercel.app/",
  d:"지금 우리 지역 수치로 야외 활동이 가능한지, 자제인지, 금지인지 한 줄로 답합니다.",who:"담임교사",pc:false,
  k:"미세먼지 폭염 야외활동 실외수업 체육 운동장 기상 대기질 날씨"},
-{p:"2",n:6,tag:"목표",added:"2026-10-31",t:"해냄 보물상자",c:"“선생님, 저 이거 해냈어요.”",u:"https://growth-opal.vercel.app/",
+{p:"2",n:6,tag:"목표",m:"학생 성취 인증",added:"2026-10-31",t:"해냄 보물상자",c:"“선생님, 저 이거 해냈어요.”",u:"https://growth-opal.vercel.app/",
  d:"학생이 2022 개정 교육과정 성취기준에서 스스로 목표를 고르고, 보호자 확인과 선생님 인증을 모아 한 해 동안 쌓아 갑니다.",who:"담임교사",pc:false,
  k:"목표 성취기준 인증 보물상자 해냄 학생주도 자기주도 성장 칭찬 증서 상장 학급 보호자 확인 2022개정교육과정"},
-{p:"2",n:7,tag:"통지표",t:"생활기록부·통지표 문장 쓰기",c:"통지표의 빈칸을 무엇으로 채울까",u:"https://student-record-seven.vercel.app/",
+{p:"2",n:7,tag:"통지표",m:"문장 쓰기",t:"생활기록부·통지표 문장 쓰기",c:"통지표의 빈칸을 무엇으로 채울까",u:"https://student-record-seven.vercel.app/",
  d:"수업 중에 남긴 관찰 기록을 생활기록부 문장으로 옮기는 과정을 도와줍니다.",who:"담임교사",pc:false,
  prep:"수업 중 남긴 관찰 기록",
  k:"생활기록부 통지표 세특 행동특성 과정중심평가 문장 기록"},
-{p:"2",n:8,tag:"반편성",t:"반편성하기",c:"퇴근 시간이 다가와도 반편성은 끝나지 않았다",u:"https://class-assignment-ruddy.vercel.app/",
+{p:"2",n:8,tag:"반편성",m:"학년말 반 배정",t:"반편성하기",c:"퇴근 시간이 다가와도 반편성은 끝나지 않았다",u:"https://class-assignment-ruddy.vercel.app/",
  d:"성적·성별·관계 조건을 놓고 여러 안을 만들어 보며 협의 자리에서 함께 결정합니다.",who:"담임교사",pc:true,
  prep:"학생 명단과 배정 자료",
  k:"반편성 반배정 학급편성 학년말 협의"},
-{p:"2",n:9,tag:"신입생",t:"신입생 반편성하기",c:"아직 만나 본 적 없는 학생들을 나누는 일",u:"https://freshman-class-assignment-nmos.vercel.app/",
+{p:"2",n:9,tag:"신입생",m:"1학년 반편성",t:"신입생 반편성하기",c:"아직 만나 본 적 없는 학생들을 나누는 일",u:"https://freshman-class-assignment-nmos.vercel.app/",
  d:"예비소집 면접 기록을 모아 신입생 반을 나누고 명렬표까지 정리합니다.",who:"업무 담당자",pc:true,
  prep:"예비소집 면접 기록",
  k:"신입생 예비소집 반편성 1학년 취학 면접"},
 
 /* ── 연수 ── */
-{p:"3",n:1,tag:"청렴",t:"청렴 연수 방탈출 게임",c:"올해도 반부패 연수, 그런데 이번엔 사건이 일어난다",u:"https://integrity-henna.vercel.app/",
+{p:"3",n:1,tag:"청렴",m:"방탈출 게임",t:"청렴 연수 방탈출 게임",c:"올해도 반부패 연수, 그런데 이번엔 사건이 일어난다",u:"https://integrity-henna.vercel.app/",
  d:"청탁금지법과 갑질 예방을 방탈출 게임으로 풀어 가는 참여형 연수입니다.",who:"모든 교직원",pc:false,
  prep:"참여자 각자의 스마트기기",
  k:"청렴 반부패 갑질 청탁금지법 김영란법 방탈출 게임 연수"},
-{p:"3",n:2,tag:"교권용어",t:"교육활동보호 법률 용어 익히기",c:"뜻을 모른 채 넘겼던 단어들",u:"https://protection-of-educational-activitie.vercel.app/",
+{p:"3",n:2,tag:"교권용어",m:"용어 퀴즈",t:"교육활동보호 법률 용어 익히기",c:"뜻을 모른 채 넘겼던 단어들",u:"https://protection-of-educational-activitie.vercel.app/",
  d:"교육활동 침해와 관련된 법률 용어를 읽고, 열 문항 퀴즈로 확인합니다.",who:"모든 교직원",pc:false,
  k:"교육활동보호 교권 침해 법률 용어 퀴즈 연수"},
-{p:"3",n:3,tag:"교권대응",t:"교육활동 침해 사안 대응 익히기",c:"만약 내 교실에서 그 일이 일어난다면",u:"https://protection-of-educational-activitie-three.vercel.app/",
+{p:"3",n:3,tag:"교권대응",m:"사안 대응 연습",t:"교육활동 침해 사안 대응 익히기",c:"만약 내 교실에서 그 일이 일어난다면",u:"https://protection-of-educational-activitie-three.vercel.app/",
  d:"실제 상황을 놓고 어디까지가 침해인지, 무엇부터 해야 하는지 따라가 봅니다.",who:"모든 교직원",pc:false,
  k:"교육활동보호 교권 침해 사안 대응 절차 사례 신고"},
-{p:"3",n:4,tag:"수업역량",added:"2026-10-14",t:"내 수업 성장 지도",c:"나는 지금 어디쯤 와 있을까",u:"https://teaching-competency.vercel.app/",
+{p:"3",n:4,tag:"수업역량",m:"내 수업 진단",added:"2026-10-14",t:"내 수업 성장 지도",c:"나는 지금 어디쯤 와 있을까",u:"https://teaching-competency.vercel.app/",
  d:"스물네 가지 수업 장면에서 지금 내 모습을 고르면, 여섯 영역의 성장 지도와 다음 한 걸음을 보여 줍니다.",who:"모든 교직원",pc:false,
  k:"수업 성장 지도 수업역량 수업 역량 자기점검 진단 2022 개정 교육과정 맞춤 지원 과정 중심 평가 피드백 디지털 기초소양 AI 에듀테크 연수"},
-{p:"3",n:5,tag:"AI역량",t:"AI·디지털 교육 역량 진단",c:"AI 수업, 나는 지금 어느 단계일까",u:"https://ai-digital-literacy.vercel.app/",
+{p:"3",n:5,tag:"AI역량",m:"역량 자가진단",t:"AI·디지털 교육 역량 진단",c:"AI 수업, 나는 지금 어느 단계일까",u:"https://ai-digital-literacy.vercel.app/",
  d:"스물한 개 문항에 답하면 일곱 가지 역량의 성장 리포트와 이번 주 실천 미션을 보여 줍니다.",who:"모든 교직원",pc:false,
  k:"AI 디지털 교육 역량 진단 자가진단 AI·디지털 리터러시 성장 리포트 실천 미션 에듀테크 수업 연수"},
-{p:"3",n:6,tag:"코딩연수",t:"바이브 코딩 연수 길잡이",c:"코딩은 몰라도, 업무 도구는 만들 수 있다",u:"https://vibecoding-zeta-seven.vercel.app/",
+{p:"3",n:6,tag:"코딩연수",m:"바이브코딩 배우기",t:"바이브 코딩 연수 길잡이",c:"코딩은 몰라도, 업무 도구는 만들 수 있다",u:"https://vibecoding-zeta-seven.vercel.app/",
  d:"생성형 AI로 학교 업무용 웹사이트를 만들어 배포하는 연수를 2차시부터 15차시까지 단계별로 안내합니다.",who:"모든 교직원",pc:false,
  prep:"노트북, 구글 계정",
  k:"바이브 코딩 바이브코딩 vibe coding 생성형 AI 인공지능 웹사이트 만들기 GitHub 깃허브 Vercel 버셀 Firebase 파이어베이스 배포 프롬프트 연수 직무연수"},
 
 /* ── 생활지도 ── */
-{p:"4",n:1,tag:"학급규칙",t:"학급규칙 세우기 수업 준비",c:"규칙은 붙이는 것이 아니라 정하는 것이다",u:"https://class-rules.vercel.app/",
+{p:"4",n:1,tag:"학급규칙",m:"규칙 세우기 수업",t:"학급규칙 세우기 수업 준비",c:"규칙은 붙이는 것이 아니라 정하는 것이다",u:"https://class-rules.vercel.app/",
  d:"학급 규칙을 학생들과 함께 정하는 수업을 준비하고, 미리 연습해 볼 수 있습니다.",who:"담임교사",pc:false,
  k:"학급규칙 학급헌법 학급운영 3월 규칙 세우기 수업"},
-{p:"4",n:2,tag:"관계도",t:"교우관계 설문과 관계도 그리기",c:"쉬는 시간에만 보이는 우리 반의 지도",u:"https://sociogram-hazel.vercel.app/",
+{p:"4",n:2,tag:"관계도",m:"교우관계 설문",t:"교우관계 설문과 관계도 그리기",c:"쉬는 시간에만 보이는 우리 반의 지도",u:"https://sociogram-hazel.vercel.app/",
  d:"학년군별 설문으로 교우 관계를 모아 관계도와 리포트로 보여 줍니다.",who:"담임교사",pc:false,
  store:"학생 명단·응답 서버 저장",prep:"학생 명단, 학생이 응답할 기기",
  k:"교우관계 소시오그램 관계도 또래 설문 학급 진단 상담"},
-{p:"4",n:3,tag:"나전달법",t:"나 전달법 배우고 연습하기",c:"“너 때문에” 대신 “나는”으로 시작하기",u:"https://i-message-nine.vercel.app/",
+{p:"4",n:3,tag:"나전달법",m:"대화법 연습",t:"나 전달법 배우고 연습하기",c:"“너 때문에” 대신 “나는”으로 시작하기",u:"https://i-message-nine.vercel.app/",
  d:"나 전달법을 단계로 배우고 서른 가지 상황으로 연습한 뒤 골든벨로 확인합니다.",who:"담임교사",pc:false,
  store:"게임 순위만 서버 저장",
  k:"나전달법 아이메시지 의사소통 대화법 갈등 골든벨 학생"},
-{p:"4",n:4,tag:"생활지도",t:"도전행동 생활지도 가이드",c:"학생 앞에서 3초를 망설였다",u:"https://school-guidance-plus.vercel.app/",
+{p:"4",n:4,tag:"생활지도",m:"문제행동 대응",t:"도전행동 생활지도 가이드",c:"학생 앞에서 3초를 망설였다",u:"https://school-guidance-plus.vercel.app/",
  d:"도전 행동을 만났을 때 무엇을 먼저 하고 무엇을 하지 말아야 하는지 안내합니다.",who:"담임교사",pc:false,
  k:"생활지도 도전행동 문제행동 훈육 학생지도 대응"},
-{p:"4",n:5,tag:"상담준비",t:"학부모 상담 준비와 연습",c:"상담을 앞둔 밤, 잠이 오지 않았다",u:"https://parent-consultation-training.vercel.app/",
+{p:"4",n:5,tag:"상담준비",m:"학부모 상담 연습",t:"학부모 상담 준비와 연습",c:"상담을 앞둔 밤, 잠이 오지 않았다",u:"https://parent-consultation-training.vercel.app/",
  d:"학부모 상담의 흐름을 익히고, 어려운 장면을 미리 연습해 볼 수 있습니다.",who:"담임교사",pc:false,
  k:"학부모상담 상담주간 대화 연습 학부모 소통"},
-{p:"4",n:6,tag:"민원구분",t:"상담과 민원 구분하기",c:"어디까지가 상담이고, 어디부터가 민원일까",u:"https://consultation-complaints.vercel.app/",
+{p:"4",n:6,tag:"민원구분",m:"상담인가 민원인가",t:"상담과 민원 구분하기",c:"어디까지가 상담이고, 어디부터가 민원일까",u:"https://consultation-complaints.vercel.app/",
  d:"상담과 민원의 경계를 사례로 구분하고, 민원으로 넘어갔을 때의 절차를 안내합니다.",who:"모든 교직원",pc:false,
  k:"민원 상담 응대 악성민원 경계 절차 교육활동"},
-{p:"4",n:7,tag:"학교폭력",t:"학교폭력 사안 처리 절차",c:"신고를 받은 그날부터 무엇이 시작되는가",u:"https://school-violence-alpha.vercel.app/",
+{p:"4",n:7,tag:"학교폭력",m:"사안 처리 절차",t:"학교폭력 사안 처리 절차",c:"신고를 받은 그날부터 무엇이 시작되는가",u:"https://school-violence-alpha.vercel.app/",
  d:"학교폭력 신고 접수부터 처리까지의 절차와 기한을 순서대로 따라갑니다.",who:"모든 교직원",pc:false,
  k:"학교폭력 학폭 신고 절차 심의위원회 사안처리 기한"}
 ];
@@ -753,23 +884,164 @@ $("#maptoggletext").textContent = COUNT_KO + " 한눈에 보기";
 
 let fPart = "all", query = "";
 
-/* ── 검색: 조사를 떼고 맞춰 봅니다 ── */
-const JOSA = ["에서는","으로는","에게는","이라도","에서","으로","에게","한테","까지","부터","보다","처럼","이나","라도","은","는","이","가","을","를","의","에","도","만","로","과","와","랑"];
-function variants(word){
-  const out = [word];
-  JOSA.forEach(j => { if (word.length > j.length + 1 && word.endsWith(j)) out.push(word.slice(0, -j.length)); });
-  return out;
+/* SEARCH-ENGINE-START */
+/* ── 검색: 문장으로 물어도 찾습니다 ──
+   ① 모든 낱말이 맞아야 하던 방식을 점수 순위로 바꿨습니다(이름·태그 > 키워드 > 설명).
+   ② 조사·어미를 떼고, ‘어떻게·하나요’ 같은 흔한 말은 뺍니다. 띄어 쓰지 않은 말도 찾습니다.
+   ③ 현장 말 사전(SYNS): 선생님들이 실제로 쓰는 말을 도구 키워드로 이어 줍니다.
+      [질문에 이런 표현이 있으면, 이 낱말로도 찾기]. 낱말 뒤 ^2는 두 배로 셉니다.
+      도구를 새로 넣을 때 여기에 한 줄씩 더하면 됩니다. */
+const SYNS = [
+  /* 복무·휴가·겸직 */
+  [/외출|조퇴|지각|출퇴근|근무\s*시간|초과\s*근무|시간\s*외|대체\s*휴무|휴일\s*근무|출장|41\s*조|근무지\s*외|사후\s*결재|복무|(주말|토요일|일요일|공휴일|휴일).{0,12}(나와|나왔|출근|행사|근무|운동회)|운동회.{0,10}수당|(방학|집에서).{0,8}연수/, "복무 초과근무 출장 41조"],
+  [/휴가|연가|병가|공가|특별\s*휴가|가족\s*돌봄|돌봄\s*휴가|육아\s*시간|모성\s*보호|경조사|며칠\s*(남|쓸)|쉬고\s*싶|하루\s*쉬|몸살|감기\s*(걸|때문)/, "휴가 연가 병가"],
+  [/(교사|선생님|교원|교직원|내가|제가).{0,12}(병원|진료|아프|아파|입원)/, "병가 휴가"],
+  [/겸직|유튜브|유튜버|크리에이터|강의료|원고료|외부\s*강의|강사로|쇼핑몰|부업|영리\s*(업무|활동)|투잡|사업자|인세|학원\s*강사|과외|블로그|광고\s*수익|수익을?\s*(얻|내|올)|알바|아르바이트|퇴근\s*후.{0,10}(일|강사|강의)/, "겸직^2 외부강의"],
+  [/보결|보강|결강|결근|대신\s*들어|대체\s*수업|수업을?\s*대신|빈\s*수업|수업을?\s*(진행하지|못\s*하|빠지)|시수.{0,4}확보/, "보결^2"],
+  [/누가\s*들어|들어갈\s*(사람|선생)|대신\s*(맡|봐)/, "보결^3"],
+  [/시간표|시수|시간\s*배당|수업\s*(교체|변경|맞교환)|수업이?\s*취소/, "시간표 시수"],
+  [/방학\s*중\s*비근무|교육\s*공무직|공무직|조리\s*(실무|사)|급식\s*(실무|종사)|근무\s*일수|유급\s*일/, "근무일수 방학중 비근무"],
+  /* 연수·법정교육·전문성 */
+  [/연수비|연수\s*(비용|경비|예산|지원)|영수증|정산/, "자율연수비 정산"],
+  [/법정\s*(의무)?\s*(교육|연수)|의무\s*(교육|연수)|의무\s*이수/, "법정교육 의무교육"],
+  [/수업\s*(역량|전문성|성장|나눔|공개|컨설팅|개선|진단)|교내\s*연수|전문적\s*학습\s*공동체|전학공|자율\s*연수.*(적용|공유)/, "수업역량 수업 성장"],
+  [/\bai\b|인공\s*지능|생성형|챗\s*gpt|chatgpt|gpt|에듀\s*테크|디지털/i, "AI 디지털 에듀테크"],
+  [/코딩|프로그래밍|소프트웨어|sw\s*교육|웹\s*(사이트|앱)\s*만들|바이브/i, "코딩 바이브코딩"],
+  [/원격\s*연수|직무\s*연수|연수\s*(실적|이수|시간)/, "직무연수 연수"],
+  /* 행정·공문·인사 */
+  [/월중|주간\s*계획|행사\s*계획|학사\s*일정/, "월중계획 주간계획"],
+  [/공문|기안|공문서|회의록|처리\s*기한/, "공문"],
+  [/업무\s*(분장|배정|조정|분담|량|나누)|담당자가?\s*(불분명|애매|모호|없)|누구\s*(일|업무)|일을?\s*누가/, "업무분장"],
+  [/인수\s*인계|후임|전임자|담당자가?\s*(바뀌|변경|교체)|업무를?\s*넘기|일을?\s*넘겨|넘겨\s*주|새로\s*온\s*(담당|사람)/, "인수인계 후임"],
+  [/음료|다과|커피|간식|회식/, "음료 간식"],
+  [/내규|인사\s*(규정|자문|관리\s*기준)|보직\s*교사|부장\s*(교사)?\s*(임용|배정|선정)|학년\s*배정|담임\s*배정/, "인사 내규 보직교사"],
+  [/승진|교감\s*(이\s*)?(되|으로|승진)|교장\s*(이\s*)?되|가산점|근무\s*평정|근평|경력\s*평정|휴직.*(경력|영향)/, "승진 교감 가산점"],
+  [/청탁|김영란|선물|상품권|촌지|금품|접대|갑질|청렴|부패|뇌물|쿠폰|기프티콘|답례|감사\s*(표시|선물)|성의/, "청렴^2 청탁금지법"],
+  /* 학적·출결·체험학습·감염병 */
+  [/외국\s*국적|외국인|다문화|이주\s*(배경|민)|난민|(외국|해외)에서\s*(온|왔)|한국어를?\s*(못|모르)|중도\s*입국|고려인|러시아|중국|베트남|우즈벡|필리핀|몽골|캄보디아|태국|카자흐|키르기스|네팔|파키스탄|미얀마|인도네시아/, "외국국적^2 다문화"],
+  [/학적|전학|전입|전출|편입|재취학|취학\s*(여부|유예|면제|의무|확인)|미취학|유예|면제|정원\s*외|졸업|진급|입학\s*(연기|서류|절차)|입학하거나|입학식.*(참석|불참|못|안)/, "학적 취학"],
+  [/중학교|진학|상급\s*학교/, "학적^2 졸업"],
+  [/결석|지각생|출석|출결|진단서|진료\s*확인서|소견서|(학생|아이|자녀).{0,12}(병원|아프|아파|조퇴)/, "출결 결석"],
+  [/(교외|가정)\s*체험|체험\s*학습\s*(신청|보고서|결과)|가정\s*학습|가족\s*여행|해외\s*여행/, "교외체험학습"],
+  [/무단\s*결석|미인정|장기\s*결석|장기간\s*결석|연락\s*(두절|이?\s*안\s*(되|돼)|되지|이?\s*닿지)|학교\s*(에\s*)?안\s*(오|와|나와)|며칠째|일주일째|소재|가정\s*방문|정당한\s*사유\s*없이|(안|못)\s*나오|나오지\s*않/, "미인정결석 장기결석"],
+  [/감염병|독감|인플루엔자|수두|코로나|수족구|결막염|전염|등교\s*중지|격리|의심\s*증상|확진/, "감염병 등교중지"],
+  /* 안전·야외활동 */
+  [/다치|다쳤|부상|사고|응급|119|공제회|구급|안전\s*(교육|서류|관리|점검)|현장\s*체험|수학\s*여행|소풍|인솔|답사|넘어지|넘어져|피가|골절|부딪|화상|삐었/, "안전 사고 응급 긴급"],
+  [/미세\s*먼지|초미세|폭염|더위|무더위|황사|기상\s*특보|한파|실외\s*(수업|체육)|운동장\s*(수업|체육)|체육\s*수업/, "야외활동 미세먼지 폭염"],
+  [/취학\s*(여부|확인)|취학하지|입학하지\s*않|미취학/, "학적^3 취학 소재"],
+  /* 신입생·반편성·통지표 */
+  [/신입생|예비\s*소집|입학식|입학\s*(전|초)|1\s*학년\s*(적응|입학)/, "신입생 1학년"],
+  [/반\s*편성|반\s*배정|반을?\s*나누|반\s*나누|학급\s*편성|같은\s*반|다른\s*반|반\s*배치/, "반편성"],
+  [/통지표|생활\s*기록부|생기부|세특|행동\s*특성|행발|종합\s*의견|학기말|성취도/, "통지표 생활기록부"],
+  [/(^|[^육])목표\s*(설정|세우)|성취\s*인증|칭찬\s*(스티커|제도)|자기\s*주도/, "목표 해냄"],
+  /* 학급운영·생활지도·상담 */
+  [/교우\s*관계|친구\s*(관계|사이)|관계도|소시오|사회성\s*측정|따돌림|왕따|소외|외톨이|혼자\s*(지내|놀|노는|있)|친밀도|또래/, "교우관계 관계도"],
+  [/학급\s*(규칙|약속|헌법|운영)|규칙을?\s*(만들|정하|세우)/, "학급규칙"],
+  [/문제\s*행동|도전\s*행동|생활\s*지도|훈육|방해|지시.{0,6}(따르지|불응|거부)|말을?\s*안\s*듣|산만|공격적|떼쓰|돌발|돌아다니|소리를?\s*지르|때리|던지|자리\s*이탈|가만히\s*있지/, "생활지도^2 도전행동"],
+  [/학부모\s*상담|상담\s*(준비|주간|기록|자료|과정|에서)|보호자\s*상담|면담/, "학부모상담 상담"],
+  [/나\s*전달법|아이\s*메시지|i\s*-?\s*message|감정을?\s*(말로|표현)|대화법/i, "나전달법 대화법"],
+  /* 교권·민원·학교폭력 */
+  [/교권|교육\s*활동\s*(침해|보호)|침해\s*행위|욕설|폭언|모욕|악성\s*민원|반복적으로\s*(전화|문자)|협박|교보위|욕을?\s*(했|하|해)|(학부모|보호자|엄마|아빠).{0,12}(밤|새벽|주말|계속|자꾸|매일|밤마다).{0,8}(전화|문자|카톡|연락)|카톡|문자\s*폭탄/, "교권 침해 교육활동 판별"],
+  [/용어|뜻이|뜻은|의미와|차이는|정의(는|가|를)/, "용어^2"],
+  [/민원|항의|이의를?\s*제기|불만|컴플레인/, "민원 상담"],
+  [/학교\s*폭력|학폭|다툼|싸움|괴롭힘|피해\s*학생|가해\s*학생|심의\s*위원회/, "학교폭력"]
+];
+/* 질문에 흔히 붙어 점수에 넣지 않는 말 */
+const STOP = new Set(["초등학교","초등","초등학생","학교","학생","학생이","교사","교사가","선생님","담임","담임교사","교직원","아이","아동","어떻게","어떤","어느","무엇","무엇이","무엇인가","언제","어디","어디까지","경우","해야","하나","되나","있나","없나","필요한가","가능한가","가능","방법","방법은","절차","절차가","순서","단계","처리","처리해야","대응","조치","기준","내용","사항","관련","위해","위한","대해","반드시","별도","별도의","다른","같은","모든","각각","어떤","효과적","효과적인","적절","적절한","바람직한","구체적인","좋을","좋은","우리","저희","혹시","그리고","그런데","정말","이런","그런","수","때","및","등","것","거","것이","것은","있는","하는","되는","받을","받아야","있을","해도","되나요","하나요","있나요","인가요","할까요","될까요","실시","진행","운영","발생","주의","주의해야","확인","확인해야","준비","적용","반영","포함","제공","인정","인정받을","요청","사용","활용","지원","지도","필요","필요한","학교에서","학교는","학교의"]);
+/* 흔해서 약하게만 세는 말 */
+const LOW = new Set(["수업","학부모","연수","교육","학급","학년","업무","계획","서류","상담","안전","결석"]);
+const SUFFIX = ["으로부터","에서부터","이라면","에게서","으로서","으로써","이에요","이었는데","했는데","었는데","았는데","하려면","으려면","려면","해야","하고","하는","하면","해서","했을","하였","에서는","으로는","에게는","에서","에게","한테","까지","부터","으로","이랑","처럼","보다","이나","이며","이고","인데","는데","은데","하여","되어","된다","한다","하다","이다","습니다","합니다","니다","나요","가요","까요","어요","아요","해요","에요","예요","라도","이라도","은","는","이","가","을","를","에","의","도","만","와","과","로","요","고","면","지","한","할","된","될"];
+function stemKo(w){
+  if (/^[0-9a-z]+$/i.test(w)) return w.toLowerCase();
+  for (let i = 0; i < 2; i++){
+    const s = SUFFIX.find(x => w.length > x.length + 1 && w.endsWith(x));
+    if (!s) break;
+    w = w.slice(0, -s.length);
+  }
+  return w;
 }
+function qWords(q){
+  return String(q).toLowerCase().replace(/[^\p{L}\p{N}\s-]/gu, " ").split(/\s+/).filter(Boolean);
+}
+/* 질문 → [{w, wt}] 낱말 목록 */
+function queryTerms(q){
+  const map = new Map();
+  const add = (w, wt) => { if (w.length < 2 && !/\d/.test(w)) return; map.set(w, Math.max(map.get(w) || 0, wt)); };
+  qWords(q).forEach(raw => {
+    if (STOP.has(raw)) return;
+    const w = stemKo(raw);
+    if (STOP.has(w)) return;
+    add(w, LOW.has(w) ? 0.35 : 1);
+  });
+  SYNS.forEach(([re, words]) => { if (re.test(q)) words.split(/\s+/).forEach(x => { const [w, b] = x.toLowerCase().split("^"); add(w, (LOW.has(w) ? 0.5 : 1.3) * (b ? +b : 1)); }); });
+  return [...map].map(([w, wt]) => ({ w, wt }));
+}
+/* 도구별 색인: 이름·태그(3) > 키워드(2) > 설명(1) */
+let SIDX = null;
+function buildSearchIndex(){
+  SIDX = SITES.map(s => {
+    const T = (s.t + " " + s.tag).toLowerCase().replace(/\s+/g, " ");
+    const K = (s.k || "").toLowerCase();
+    const D = ((SHOW_BOOK_CHAPTER ? s.c + " " : "") + s.d + " " + s.who).toLowerCase();
+    const toks = new Set((T + " " + K).split(/[\s·,()]+/).filter(x => x.length >= 2));
+    return { s, T, K, D, all: T + " " + K + " " + D, toks: [...toks].sort((a, b) => b.length - a.length) };
+  });
+}
+function idfOf(w){
+  const df = SIDX.filter(d => d.all.includes(w)).length;
+  return Math.log((SIDX.length + 1) / (df + 0.5));
+}
+function fieldHit(d, w){ return d.T.includes(w) ? 3 : d.K.includes(w) ? 2 : d.D.includes(w) ? 1 : 0; }
+function rankSites(q){
+  if (!SIDX) buildSearchIndex();
+  const terms = queryTerms(q);
+  if (!terms.length) return [];
+  const idf = new Map();
+  const getIdf = w => { if (!idf.has(w)) idf.set(w, idfOf(w)); return idf.get(w); };
+  const out = SIDX.map(d => {
+    let sc = 0;
+    terms.forEach(({ w, wt }) => {
+      let f = fieldHit(d, w);
+      if (f){ sc += wt * getIdf(w) * f * (1 + Math.min(w.length, 6) * 0.08); return; }
+      /* 띄어 쓰지 않은 말: 질문 낱말 안에 도구 키워드가 들어 있으면 */
+      if (w.length >= 3){
+        const t = d.toks.find(x => x.length >= 2 && x.length < w.length && w.includes(x) && !STOP.has(x) && !LOW.has(x));
+        if (t){ sc += wt * getIdf(t) * fieldHit(d, t) * 0.7; }
+      }
+    });
+    return { s: d.s, sc };
+  }).filter(x => x.sc > 0).sort((a, b) => b.sc - a.sc);
+  if (!out.length) return out;
+  /* 짧은 낱말 검색은 예전처럼 그 낱말이 들어 있는 도구를 모두 보여 줍니다 */
+  const raw = qWords(q).map(stemKo).filter(w => w.length >= 2 && !STOP.has(w));
+  const hasAll = d => raw.length && raw.every(w => d.all.includes(w));
+  const top = out[0].sc;
+  return out.filter(x => x.sc >= top * 0.3 || hasAll(SIDX.find(d => d.s === x.s))).slice(0, 12);
+}
+/* SEARCH-ENGINE-END */
+
 function hayOf(s){
   return ((SHOW_BOOK_CHAPTER ? s.c + " " : "") + s.t + " " + s.d + " " + s.who + " " + s.tag + " " + s.k).toLowerCase();
+}
+/* 같은 검색어면 순위를 다시 계산하지 않습니다 */
+const WEAK_SCORE = 3;   /* 1순위 점수가 이보다 낮으면 약한 결과로 봅니다 */
+let RANKQ = null, RANK = new Map(), RANKWEAK = false;   /* RANKWEAK: 낱말 일부만 겹친 결과 */
+function ranked(){
+  if (RANKQ !== query){
+    RANKQ = query; const r = rankSites(query);
+    RANK = new Map(r.map((x, i) => [keyOf(x.s), i]));
+    /* 점수가 낮고, 핵심 낱말 두 개 이상 가운데 1순위에 없는 말이 있으면 ‘딱 맞는 도구 없음’ */
+    const raw = qWords(query).map(stemKo).filter(w => w.length >= 2 && !STOP.has(w));
+    const top = r.length && SIDX.find(d => d.s === r[0].s);
+    RANKWEAK = !!top && r[0].sc < WEAK_SCORE && raw.length >= 2 && !raw.every(w => top.all.includes(w));
+  }
+  return RANK;
 }
 function match(s){
   if (fPart === "new"){ if (!isNew(s)) return false; }
   else if (fPart !== "all" && s.p !== fPart) return false;
   if (!query) return true;
-  const hay = hayOf(s);
-  return query.toLowerCase().split(/\s+/).filter(Boolean)
-    .every(w => variants(w).some(v => hay.includes(v)));
+  return ranked().has(keyOf(s));
 }
 /* 0건일 때 가까운 것 세 개 — 이름과 지도 글자에 걸리면 점수를 더 줍니다.
    두 글자로 못 찾으면 한 글자씩이라도 맞춰 봅니다(오타 대비). */
@@ -806,29 +1078,65 @@ $("#fpart").addEventListener("click", e => {
   fPart = b.dataset.val; renderFilters(); render(); saveView();
 });
 
+/* ── 빠른 이동: 거리와 상관없이 0.3초 안팎 ──
+   멀면 목적지 바로 앞까지 순간 이동한 뒤 마지막 구간만 부드럽게 내려갑니다. */
+let scrollAnim = 0;
+function fastScroll(y, done){
+  cancelAnimationFrame(scrollAnim);
+  const fin = () => { if (done) done(); };
+  if (!soften()){ window.scrollTo(0, y); fin(); return; }
+  const vh = window.innerHeight;
+  let from = window.pageYOffset;
+  if (Math.abs(y - from) < 2){ fin(); return; }
+  if (Math.abs(y - from) > vh * 0.9){ from = y - Math.sign(y - from) * vh * 0.5; window.scrollTo(0, from); }
+  const dist = y - from, dur = 280, t0 = performance.now();
+  const ease = t => 1 - Math.pow(1 - t, 3);
+  let stopped = false;
+  const stop = () => { stopped = true; };
+  window.addEventListener("wheel", stop, { once:true, passive:true });
+  window.addEventListener("touchstart", stop, { once:true, passive:true });
+  const step = now => {
+    if (stopped){ fin(); return; }
+    const t = Math.min((now - t0) / dur, 1);
+    window.scrollTo(0, from + dist * ease(t));
+    if (t < 1) scrollAnim = requestAnimationFrame(step); else fin();
+  };
+  scrollAnim = requestAnimationFrame(step);
+}
+
 /* ── 서른 칸 지도 ── */
 function renderMap(){
+  /* 한 덩어리 모자이크: 영역은 색으로 이어지고, 하는 일은 아래 이름표 띠에 보입니다.
+     (휴대폰은 마우스를 올릴 수 없어 칸 안에 하는 일을 함께 씁니다) */
   $("#map").innerHTML = SITES.map(s => {
     const p = partOf(s.p);
-    return `<button class="cell" type="button" data-go="${keyOf(s)}"
-      style="--k:${p.color};--kl:${p.light}" aria-label="${esc(s.t)}${isNew(s) ? " (새로 들어온 도구)" : ""}">${esc(s.tag)}${isNew(s) ? '<i class="nd" aria-hidden="true"></i>' : ""}</button>`;
-  }).join("");
+    return `<button class="cell" type="button" data-go="${keyOf(s)}" style="--k:${p.color};--kl:${p.light}"
+      aria-label="${esc(s.t)}${s.m ? " — " + esc(s.m) : ""}${isNew(s) ? " (새로 들어온 도구)" : ""}"><span class="ct">${esc(s.tag)}</span>${s.m ? `<span class="cm">${esc(s.m)}</span>` : ""}${isNew(s) ? '<i class="nd" aria-hidden="true"></i>' : ""}</button>`;
+  }).join("") + `<button class="cell all" type="button" data-scroll="list" aria-label="전체 목록으로"><span class="ct">전체 목록</span><span class="ca" aria-hidden="true">↓</span></button>`;
   updateMapDim();
 }
 function updateMapDim(){
-  document.querySelectorAll(".cell").forEach(c => {
+  document.querySelectorAll(".cell[data-go]").forEach(c => {
     const s = SITES.find(x => keyOf(x) === c.dataset.go);
     c.classList.toggle("dim", !match(s));
   });
 }
-const DEFAULT_LABEL = "칸을 누르면 그 도구로 이동합니다.";
-$("#maplabel").textContent = DEFAULT_LABEL;
-$("#map").addEventListener("mouseover", e => {
-  const c = e.target.closest(".cell"); if (!c) return;
-  const s = SITES.find(x => keyOf(x) === c.dataset.go);
-  $("#maplabel").innerHTML = `<b>${esc(s.t)}</b> · ${esc(partOf(s.p).name)}`;
-});
-$("#map").addEventListener("mouseleave", () => { $("#maplabel").textContent = DEFAULT_LABEL; });
+/* 이름표 띠: 칸에 마우스를 올리거나 키보드로 고르면 하는 일과 도구 이름을 보여 줍니다 */
+const DEFAULT_LABEL = `<span class="lk">칸에 마우스를 올리면 하는 일이 보입니다</span><span class="lm">누르면 그 도구로 바로 이동합니다</span>`;
+$("#maplabel").innerHTML = DEFAULT_LABEL;
+function showLabel(c){
+  const s = c && SITES.find(x => keyOf(x) === c.dataset.go);
+  const box = $("#maplabel");
+  if (!s){ box.innerHTML = DEFAULT_LABEL; box.style.removeProperty("--k"); box.classList.remove("on"); return; }
+  const p = partOf(s.p);
+  box.style.setProperty("--k", p.color);
+  box.classList.add("on");
+  box.innerHTML = `<span class="lk"><b>${esc(s.tag)}</b>${s.m ? " — " + esc(s.m) : ""}</span><span class="lm">${esc(s.t)} · ${esc(p.name)}</span>`;
+}
+$("#map").addEventListener("mouseover", e => showLabel(e.target.closest(".cell")));
+$("#map").addEventListener("focusin", e => showLabel(e.target.closest(".cell")));
+$("#map").addEventListener("mouseleave", () => showLabel(null));
+$("#map").addEventListener("focusout", e => { if (!$("#map").contains(e.relatedTarget)) showLabel(null); });
 
 const mapToggle = $("#maptoggle");
 mapToggle.addEventListener("click", () => {
@@ -861,11 +1169,8 @@ function goTo(key){
     : absTop - bar - (view - r.height) * 0.4;
   const maxY = document.documentElement.scrollHeight - window.innerHeight;
   const y = Math.min(Math.max(target, 0), Math.max(maxY, 0));
-  const smooth = soften() && Math.abs(window.pageYOffset - y) > 4;
-  window.scrollTo({ top: y, behavior: smooth ? "smooth" : "auto" });
-
-  /* 스크롤이 멈춘 뒤에 강조 — 움직이는 동안 깜빡이면 눈에 안 들어옵니다 */
-  whenScrollSettles(smooth, () => { startArrive(el); showBackMap(key); });
+  /* 0.3초 안팎으로 이동하고 도착하자마자 강조 */
+  fastScroll(y, () => { startArrive(el); showBackMap(key); });
   stripHash();
 }
 
@@ -903,7 +1208,7 @@ backBtn.addEventListener("click", () => {
   const target = isNarrow() ? $("#maptoggle") : $("#mapbox");
   const bar = document.querySelector(".topbar").offsetHeight;
   const y = Math.max(target.getBoundingClientRect().top + window.pageYOffset - bar - 16, 0);
-  window.scrollTo({ top: y, behavior: soften() ? "smooth" : "auto" });
+  fastScroll(y);
   /* 방금 눌렀던 칸에 포커스를 돌려 두어 다음 칸으로 이어 가기 쉽게 */
   const cell = backKey && document.querySelector(`.cell[data-go="${backKey}"]`);
   if (cell){
@@ -975,7 +1280,25 @@ function card(s, p){
 function render(){
   clearArrive();
   let h = "", total = 0;
-  PARTS.forEach(p => {
+  if (query){
+    const R = ranked();
+    const items = SITES.filter(match).sort((a, b) => R.get(keyOf(a)) - R.get(keyOf(b)));
+    total = items.length;
+    if (total){
+      const best = items[0], rest = items.slice(1);
+      h = `<section class="part results" style="--k:var(--ink);--tint:#fff">
+      <div class="wrap">
+        <div class="partrule"></div>
+        <div class="parthead"><h2>검색 결과</h2><span class="count">${total}개</span></div>
+        <p class="partdesc">질문과 잘 맞는 순서로 보여 줍니다. 문장으로 물어도 됩니다.</p>
+        <p class="bestlabel">가장 잘 맞는 도구</p>
+        <div class="grid best">${card(best, partOf(best.p))}</div>
+        ${rest.length ? `<p class="bestlabel more">함께 볼 만한 도구</p><div class="grid">${rest.map(s => card(s, partOf(s.p))).join("")}</div>` : ""}
+      </div>
+    </section>`;
+    }
+  }
+  else PARTS.forEach(p => {
     const items = SITES.filter(s => s.p === p.id && match(s));
     if (!items.length) return;
     total += items.length;
@@ -1010,6 +1333,59 @@ function render(){
     else if (fPart !== "all") bits.push(partOf(fPart).name);
     $("#resulttext").innerHTML = esc(bits.join(" · ")) + ` — <strong>${total}개</strong>`;
   }
+  /* 검색창 바로 아래 결과 상자와 검색창 안 개수 */
+  const hits = query ? SITES.filter(match).sort((a, b) => ranked().get(keyOf(a)) - ranked().get(keyOf(b))) : [];
+  renderQuick(hits);
+  const qc = $("#qcount");
+  qc.classList.toggle("on", !!query);
+  qc.classList.toggle("zero", !!query && !hits.length);
+  qc.textContent = query ? (hits.length ? hits.length + "개" : "0개") : "";
+  $("#q").classList.toggle("hasq", !!query);
+  /* 오른쪽 타일: 맞는 칸은 진하게, 1순위는 이름표 띠에 */
+  document.querySelectorAll(".cell[data-go]").forEach(c => {
+    c.classList.toggle("hit", !!query && hits.some(s => keyOf(s) === c.dataset.go));
+    c.classList.toggle("top", !!query && hits.length > 0 && keyOf(hits[0]) === c.dataset.go);
+  });
+  showLabel(query && hits.length ? document.querySelector(`.cell[data-go="${keyOf(hits[0])}"]`) : null);
+}
+
+/* 이번 달에 꺼내는 도구 ↔ 검색 중에는 같은 자리에 검색 결과 */
+const MONTH_NO = TODAY0.getMonth() + 1;
+function mcard(s, best, label){
+  const p = partOf(s.p);
+  return `<button type="button" class="mcard${best ? " best" : ""}" data-go="${keyOf(s)}" style="--k:${p.color};--kl:${p.light}">
+    ${best ? `<span class="mb">${label || "가장 잘 맞는 도구"}</span>` : ""}<span class="mt">${esc(best ? s.t : s.tag)}</span><span class="mm">${esc(best ? s.d : (s.m || s.t))}</span><span class="ma" aria-hidden="true">›</span></button>`;
+}
+function renderQuick(items){
+  const box = $("#monthly");
+  if (query){
+    box.classList.add("searching");
+    box.hidden = false;
+    if (items.length && RANKWEAK){
+      $("#mtitle").innerHTML = `딱 맞는 도구는 <span class="mmon">없습니다</span>`;
+      $("#mnote").textContent = "낱말이 일부 겹치는 도구입니다. ‘휴가’, ‘반편성’처럼 핵심 낱말로 다시 찾아보세요.";
+      $("#mlist").innerHTML = items.slice(0, 4).map(s => mcard(s)).join("");
+    } else if (items.length){
+      $("#mtitle").innerHTML = `검색 결과 <span class="mmon">${items.length}개</span>`;
+      $("#mnote").textContent = "질문과 잘 맞는 순서입니다. Enter(검색 키)를 누르면 첫 번째 도구로 갑니다.";
+      $("#mlist").innerHTML = mcard(items[0], true) + items.slice(1, 4).map(s => mcard(s)).join("")
+        + `<button type="button" class="mall" data-scroll="list">결과 ${items.length}개 모두 보기 ↓</button>`;
+    } else {
+      const near = nearest(query);
+      $("#mtitle").innerHTML = `찾는 낱말로는 <span class="mmon">없습니다</span>`;
+      $("#mnote").textContent = near.length ? "혹시 이 가운데 있을까요? ‘휴가’, ‘반편성’처럼 짧게 넣어도 됩니다." : "‘휴가’, ‘반편성’, ‘연수’처럼 짧게 넣어 보세요.";
+      $("#mlist").innerHTML = near.map(s => mcard(s)).join("");
+    }
+    return;
+  }
+  box.classList.remove("searching");
+  const M = MONTHLY[MONTH_NO];
+  const list = M ? M.keys.map(k => SITES.find(s => keyOf(s) === k)).filter(Boolean).slice(0, 4) : [];
+  if (!list.length){ box.hidden = true; return; }
+  $("#mtitle").innerHTML = `<span class="mmon">${MONTH_NO}월</span>에 자주 꺼내는 도구`;
+  $("#mnote").textContent = M.note;
+  $("#mlist").innerHTML = list.map(s => mcard(s)).join("");
+  box.hidden = false;
 }
 
 /* 책 코너 요약 */
@@ -1052,6 +1428,12 @@ qEl.addEventListener("input", () => {
   clearEl.classList.toggle("on", !!query);
   render(); saveView();
 });
+qEl.addEventListener("keydown", e => {
+  if (e.key !== "Enter" || e.isComposing) return;
+  e.preventDefault();
+  const first = query && SITES.filter(match).sort((a, b) => ranked().get(keyOf(a)) - ranked().get(keyOf(b)))[0];
+  if (first){ qEl.blur(); goTo(keyOf(first)); }
+});
 clearEl.addEventListener("click", () => { qEl.value = ""; query = ""; clearEl.classList.remove("on"); render(); saveView(); qEl.focus(); });
 
 function resetAll(){
@@ -1064,7 +1446,10 @@ $("#resetall").addEventListener("click", resetAll);
 document.addEventListener("click", e => {
   const t = e.target.closest("[data-copy],[data-qr],[data-go],[data-scroll],[data-resetall],#copyall,#reportsite,[data-close],[data-modalcopy]");
   if (t){
-    if (t.hasAttribute("data-go")) goTo(t.getAttribute("data-go"));
+    if (t.hasAttribute("data-go")){
+      if (t.classList.contains("cell")){ t.classList.add("press"); setTimeout(() => t.classList.remove("press"), 380); }
+      goTo(t.getAttribute("data-go"));
+    }
     else if (t.hasAttribute("data-scroll")) scrollToId(t.getAttribute("data-scroll"));
     else if (t.hasAttribute("data-copy")) copy(t.getAttribute("data-copy"), "링크를 복사했습니다");
     else if (t.hasAttribute("data-modalcopy")) copy(t.getAttribute("data-modalcopy"), "링크를 복사했습니다");
@@ -1102,7 +1487,8 @@ function updateBar(){
   const y = window.pageYOffset + 90;
   let cur = null;
   document.querySelectorAll(".part").forEach(sec => { if (sec.offsetTop <= y) cur = sec; });
-  barEl.style.setProperty("--k", cur ? partOf(cur.dataset.part).color : "var(--ink)");
+  const cp = cur && cur.dataset.part && partOf(cur.dataset.part);
+  barEl.style.setProperty("--k", cp ? cp.color : "var(--ink)");
   ticking = false;
 }
 window.addEventListener("scroll", () => {
@@ -1160,6 +1546,127 @@ window.addEventListener("popstate", () => {
   if ($("#modal").classList.contains("on")) closeModal(true);
   stripHash();
 });
+
+/* ── 연장통 길잡이: 규칙형 대화 안내 ──
+   AI가 아니라 검색 엔진(rankSites)과 아래 메뉴·되묻기 규칙으로 답합니다.
+   도구를 새로 넣으면 CHAT_MENU나 CHAT_ASK에 한 줄씩 더하면 됩니다. 열쇠는 「부-번호」 */
+const CHAT_MENU = [
+  { label:"복무·휴가", ask:"어떤 것이 궁금하세요?", opts:[["휴가 종류와 일수","1-2"],["초과근무·출장·외출","1-18"],["외부강의·겸직","1-1"],["승진 점수","1-15"],["방학 중 비근무 직종 근무일수","1-9"]] },
+  { label:"학생 출결", ask:"어떤 결석인가요?", opts:[["아파서·병원 진료","2-1"],["감염병(독감·수두 등)","2-4"],["체험학습·가족여행","2-2"],["사유 없이 안 오거나 연락 두절","2-3"]] },
+  { label:"학적·전학", ask:"어떤 학적 업무인가요?", opts:[["전입·전출·유예·정원 외","1-20"],["외국 국적 학생","1-3"],["신입생 반편성","2-9"],["학년말 반편성","2-8"]] },
+  { label:"학급·생활지도", ask:"어떤 상황인가요?", opts:[["문제행동 지도","4-4"],["친구 관계·소외","4-2"],["학급규칙 만들기","4-1"],["나 전달법 대화","4-3"],["통지표·생활기록부 문장","2-7"],["학생 목표 인증","2-6"]] },
+  { label:"학부모·교권·학폭", ask:"어떤 일이 있었나요?", opts:[["학부모 상담 준비","4-5"],["상담인지 민원인지","4-6"],["교육활동 침해(교권)","1-14"],["학교폭력 사안","4-7"],["선물·청탁금지법","3-1"]] },
+  { label:"업무·행정", ask:"어떤 업무인가요?", opts:[["업무분장","1-19"],["보결 배정","1-10"],["시간표","1-8"],["공문·회의록","1-12"],["인수인계","1-13"],["월중·주간계획","1-11"],["인사 내규","1-17"],["연수비 정산","1-4"],["음료 주문 취합","1-7"]] },
+  { label:"연수", ask:"어떤 연수인가요?", opts:[["바이브 코딩 연수","3-6"],["수업 역량 진단","3-4"],["AI·디지털 역량 진단","3-5"],["청렴 연수 게임","3-1"],["교육활동보호 용어","3-2"],["교권 사안 대응 연습","3-3"],["학부모 법정교육 안내","1-5"]] },
+  { label:"안전·날씨", ask:"어떤 상황인가요?", opts:[["사고·응급·긴급 대응","1-6"],["미세먼지·폭염, 밖에 나가도 될까","2-5"],["감염병 등교중지","2-4"]] }
+];
+/* 짧고 애매한 질문이면 한 번 되묻습니다: [이런 말이 있고, 이런 말이 없으면, 이렇게 묻기] */
+const CHAT_ASK = [
+  [/결석|빠지|안\s*나와|못\s*나와|안\s*와/, /아프|아파|병원|감염|독감|수두|체험|여행|연락|무단|미인정|학원|코로나/, 1],
+  [/전학|전입|전출/, /외국|국적|다문화/, { ask:"어떤 전학인가요?", opts:[["일반 전입·전출","1-20"],["외국 국적·외국에서 온 학생","1-3"]] }],
+  [/상담/, /민원|준비|친구|관계/, { ask:"어떤 상담인가요?", opts:[["학부모 상담 준비·연습","4-5"],["상담인지 민원인지 구분","4-6"],["친구 관계 고민","4-2"]] }],
+  [/체험\s*학습|현장\s*학습|소풍/, /교외|가정|가족|여행|현장|인솔|안전|사고/, { ask:"어떤 체험학습인가요?", opts:[["가정에서 신청하는 교외체험학습","2-2"],["학교에서 가는 현장체험학습 안전","1-6"]] }],
+  [/반\s*편성|반\s*배정/, /신입|1\s*학년|예비/, { ask:"누구의 반편성인가요?", opts:[["재학생 학년말 반편성","2-8"],["신입생 반편성","2-9"]] }],
+  [/교권|침해/, /용어|퀴즈|연습|사례/, { ask:"무엇이 필요하세요?", opts:[["지금 일어난 일 판별·대응","1-14"],["연수용 사례 대응 연습","3-3"],["법률 용어 익히기","3-2"]] }],
+  [/연수/, /비|정산|영수증|코딩|바이브|ai|디지털|수업|청렴|교권|41|방학|법정|학부모/i, 6]
+];
+const chat = { el:$("#chat"), log:$("#chatlog"), q:$("#chatq"), pushed:false, started:false };
+const siteBy = k => SITES.find(s => keyOf(s) === k);
+function chatScroll(){ chat.log.scrollTop = chat.log.scrollHeight; }
+function chatSay(html, who){
+  const d = document.createElement("div");
+  d.className = "msg " + (who || "bot");
+  d.innerHTML = html;
+  chat.log.appendChild(d); chatScroll();
+}
+function chatChips(list){   /* list: [[글자, 동작], …] 동작 = "go:키" | "menu:번호" | "home" | "q:질문" */
+  const d = document.createElement("div");
+  d.className = "ch-chips";
+  d.innerHTML = list.map(([t, a, ghost]) => `<button type="button" class="${ghost ? "ghost" : ""}" data-ca="${esc(a)}">${esc(t)}</button>`).join("");
+  chat.log.appendChild(d); chatScroll();
+}
+function chatCard(s, main){
+  const p = partOf(s.p);
+  const d = document.createElement("div");
+  d.className = "ch-card" + (main ? " main" : "");
+  d.style.setProperty("--k", p.color); d.style.setProperty("--kl", p.light);
+  d.innerHTML = `<span class="cc-k">${esc(s.tag)}${s.m ? " · " + esc(s.m) : ""}</span><span class="cc-t">${esc(s.t)}</span>
+    ${main ? `<p class="cc-d">${esc(s.d)}</p>` : ""}
+    <div class="cc-a"><a href="${esc(s.u)}" target="_blank" rel="noopener">바로 열기 ↗</a><button type="button" data-ca="list:${keyOf(s)}">목록에서 보기</button></div>`;
+  chat.log.appendChild(d); chatScroll();
+}
+const MORE = [["다른 질문하기", "again", 1], ["처음으로", "home", 1]];
+function chatHome(){
+  chatSay("안녕하세요. 지금 어떤 일을 하고 계세요?<br>아래에서 고르거나, 상황을 문장으로 적어 주세요.");
+  chatChips(CHAT_MENU.map((m, i) => [m.label, "menu:" + i]));
+}
+function chatAnswer(keys, intro){
+  const list = keys.map(siteBy).filter(Boolean);
+  if (!list.length) return;
+  chatSay(intro || "이 도구가 가장 잘 맞아요.");
+  chatCard(list[0], true);
+  if (list.length > 1){ chatSay("함께 보면 좋은 도구예요."); list.slice(1, 3).forEach(s => chatCard(s)); }
+  chatChips(MORE);
+}
+function chatAskOpts(o){ chatSay(o.ask); chatChips(o.opts.map(([t, k]) => [t, "go:" + k]).concat([["잘 모르겠어요", "again", 1]])); }
+function chatQuery(text){
+  chatSay(esc(text), "me");
+  const raw = qWords(text).map(stemKo).filter(w => w.length >= 2 && !STOP.has(w));
+  /* 짧고 애매하면 되묻기 */
+  if (raw.length <= 3){
+    for (const [has, not, o] of CHAT_ASK){
+      if (has.test(text) && !not.test(text)){ chatAskOpts(typeof o === "number" ? CHAT_MENU[o] : o); return; }
+    }
+  }
+  const r = rankSites(text);
+  if (!r.length){
+    const near = nearest(text);
+    if (near.length){ chatAnswer(near.map(keyOf), "딱 맞는 도구를 찾지 못했어요. 혹시 이 가운데 있을까요?"); }
+    else { chatSay("딱 맞는 도구를 찾지 못했어요. 어느 쪽 일인지 골라 주시겠어요?"); chatChips(CHAT_MENU.map((m, i) => [m.label, "menu:" + i])); }
+    return;
+  }
+  const top = SIDX.find(d => d.s === r[0].s);
+  const weak = r[0].sc < WEAK_SCORE && raw.length >= 2 && !raw.every(w => top.all.includes(w));
+  if (weak){
+    chatSay("딱 맞는 도구는 없어요. 낱말이 일부 겹치는 도구를 보여 드릴게요.");
+    r.slice(0, 2).forEach(x => chatCard(x.s));
+    chatSay("어느 쪽 일인지 골라 주시면 더 정확히 찾아 드려요.");
+    chatChips(CHAT_MENU.map((m, i) => [m.label, "menu:" + i]));
+    return;
+  }
+  chatAnswer(r.slice(0, 3).map(x => keyOf(x.s)));
+}
+function chatAct(a){
+  if (a.startsWith("menu:")){ const m = CHAT_MENU[+a.slice(5)]; chatSay(esc(m.label), "me"); chatAskOpts(m); }
+  else if (a.startsWith("go:")){ const s = siteBy(a.slice(3)); if (s){ chatSay(esc(s.m || s.tag), "me"); chatAnswer([keyOf(s)]); } }
+  else if (a.startsWith("list:")){ const k = a.slice(5); if (isNarrow()) chatClose(); goTo(k); }
+  else if (a === "home"){ chatHome(); }
+  else if (a === "again"){ chatSay("네, 상황을 문장으로 적거나 아래에서 골라 주세요."); chatChips(CHAT_MENU.map((m, i) => [m.label, "menu:" + i])); chat.q.focus(); }
+}
+function chatOpen(){
+  if (!SIDX) buildSearchIndex();
+  chat.el.hidden = false; $("#chatbtn").classList.add("hide");
+  if (!chat.started){ chat.started = true; chatHome(); }
+  try { history.pushState({ chat:1 }, "", cleanURL()); chat.pushed = true; } catch(err){ chat.pushed = false; }
+  if (!isNarrow()) chat.q.focus();
+}
+function chatClose(fromHistory){
+  if (chat.el.hidden) return;
+  chat.el.hidden = true; $("#chatbtn").classList.remove("hide");
+  if (chat.pushed && !fromHistory){ chat.pushed = false; try { history.back(); } catch(err){} }
+  else chat.pushed = false;
+  $("#chatbtn").focus({ preventScroll:true });
+}
+$("#chatbtn").addEventListener("click", chatOpen);
+$("#chatx").addEventListener("click", () => chatClose());
+chat.log.addEventListener("click", e => { const b = e.target.closest("[data-ca]"); if (b) chatAct(b.dataset.ca); });
+$("#chatform").addEventListener("submit", e => {
+  e.preventDefault();
+  const t = chat.q.value.trim(); if (!t) return;
+  chat.q.value = ""; chatQuery(t);
+});
+document.addEventListener("keydown", e => { if (e.key === "Escape" && !chat.el.hidden && !$("#modal").classList.contains("on")) chatClose(); });
+window.addEventListener("popstate", () => { if (!chat.el.hidden) chatClose(true); });
 
 /* ── 복사 & 알림 ── */
 function copy(text, msg){
