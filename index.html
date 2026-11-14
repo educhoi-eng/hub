@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>학교 연장통 — 학교 업무를 바꾼 웹사이트</title>
-<meta name="description" content="학교 연장통 — 초등학교 교감이 바이브 코딩으로 만들어 학교에서 실제로 쓰는 웹 도구 41개 모음. 휴가·복무 확인부터 반편성, 시간표, 연수, 생활지도까지 링크 하나로 바로 씁니다.">
+<meta name="description" content="학교 연장통 — 초등학교 교감이 바이브 코딩으로 만들어 학교에서 실제로 쓰는 웹 도구 42개 모음. 휴가·복무 확인부터 반편성, 시간표, 연수, 생활지도까지 링크 하나로 바로 씁니다.">
 <meta name="keywords" content="학교 연장통, 바이브 코딩, 학교 업무, 교사 업무 도구, 초등학교, 교감, 반편성, 휴가, 연수, 생활지도">
 <meta name="author" content="최창훈">
 <meta property="og:title" content="학교 연장통 — 학교 업무를 바꾼 웹사이트">
@@ -276,6 +276,7 @@ footer .linkbtn:hover{color:var(--ink);}
 .ch-chips{display:flex;flex-wrap:wrap;gap:6px;align-self:flex-start;max-width:100%;}
 .ch-chips button{font-family:var(--sans);font-size:13px;padding:7px 11px;border:1px solid var(--line-strong);background:#fff;color:var(--ink);border-radius:999px;cursor:pointer;}
 .ch-chips button:hover,.ch-chips button:focus-visible{border-color:var(--ink);background:var(--ink);color:#fff;}
+.ch-chips .ch-call{font-family:var(--sans);font-size:13.5px;font-weight:700;padding:8px 14px;border-radius:999px;background:var(--new);color:#fff;text-decoration:none;}
 .ch-chips button.ghost{border-style:dashed;color:var(--ink-soft);}
 .ch-card{align-self:stretch;background:#fff;border:1px solid var(--line);border-left:4px solid var(--k);border-radius:4px;padding:11px 12px;}
 .ch-card .cc-k{font-size:11.5px;font-weight:700;color:var(--k);}
@@ -286,6 +287,7 @@ footer .linkbtn:hover{color:var(--ink);}
 .ch-card .cc-a a{background:var(--k);color:#fff;border:1px solid var(--k);}
 .ch-card .cc-a button{background:#fff;color:var(--ink);border:1px solid var(--line-strong);}
 .ch-card.main{background:var(--kl);}
+.ch-card .cc-f{margin:-4px 0 8px;font-size:12px;color:var(--muted);}
 .ch-in{display:flex;gap:6px;padding:10px;border-top:1px solid var(--line);background:#fff;}
 .ch-in input{flex:1;min-width:0;font-family:var(--sans);font-size:16px;padding:10px 12px;border:1.5px solid var(--line-strong);border-radius:999px;}
 .ch-in input:focus{outline:none;border-color:var(--ink);}
@@ -298,6 +300,12 @@ footer .linkbtn:hover{color:var(--ink);}
   #chat{inset:0;width:auto;max-width:none;height:auto;border-radius:0;border:0;}
 }
 @media print{#chatbtn,#chat{display:none !important;}}
+
+#visits{margin-left:6px;}
+#visits::before{content:"· ";}
+#visits b{font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums;}
+@media(max-width:599px){#visits{display:block;margin:4px 0 0;}#visits::before{content:"";}}
+#visits[hidden]{display:none;}
 
 /* 오픈소스 라이선스 */
 #licbtn{position:fixed;right:var(--s4);bottom:var(--s4);z-index:70;font-family:var(--sans);font-size:12.5px;color:var(--ink-soft);background:rgba(255,255,255,.94);border:1px solid var(--line-strong);border-radius:999px;padding:var(--s2) var(--s3);min-height:36px;cursor:pointer;box-shadow:0 2px 8px rgba(22,32,46,.08);}
@@ -378,20 +386,104 @@ footer{padding-bottom:calc(var(--s8) + 24px);}
 .mall:hover{background:var(--paper);}
 .cell.hit{background:var(--k);color:#fff;opacity:1;}
 .cell.top{box-shadow:0 0 0 2px var(--paper),0 0 0 4px var(--k);}
-.newbar{display:flex;align-items:stretch;max-width:520px;margin:0 0 var(--s4);border:1px solid color-mix(in srgb,var(--new) 35%,var(--line));background:#fff;border-radius:2px;}
+/* ── 알림 띠: 언제나 한 줄. 소식(새로·보탬·고침)이 먼저, 없으면 이용 팁(알아 두기) ── */
+:root{--upd:var(--c2);}
+.newbar{--nbk:var(--new);display:flex;align-items:stretch;max-width:520px;margin:0 0 var(--s4);border:1px solid color-mix(in srgb,var(--nbk) 35%,var(--line));background:#fff;border-radius:2px;}
+.newbar[data-kind="up"],.newbar[data-kind="fix"]{--nbk:var(--upd);}
+.newbar[data-kind="tip"]{--nbk:var(--ink-soft);border-color:var(--line);}
 .newbar[hidden]{display:none;}
 .nb-go{flex:1;min-width:0;display:flex;align-items:center;gap:var(--s3);border:0;background:none;cursor:pointer;text-align:left;padding:10px var(--s4);font-family:var(--sans);font-size:14px;color:var(--ink);min-height:44px;}
-.nb-k{flex:0 0 auto;display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;color:var(--new);}
-.nb-k::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--new);}
+.nb-k{flex:0 0 auto;display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;color:var(--nbk);}
+.nb-k::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--nbk);}
+.newbar[data-kind="tip"] .nb-k::before{background:transparent;box-shadow:inset 0 0 0 1.5px var(--nbk);}
 .nb-t{flex:1;min-width:0;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.nb-a{color:var(--new);font-size:18px;line-height:1;}
-.nb-go:hover .nb-t{text-decoration:underline;text-underline-offset:3px;}
+.newbar[data-kind="tip"] .nb-t{font-weight:500;color:var(--ink-soft);}
+.nb-try{flex:none;font-size:12.5px;font-weight:600;color:var(--ink);text-decoration:underline;text-decoration-color:var(--line-strong);text-underline-offset:3px;}
+.nb-try[hidden]{display:none;}
+.nb-a{color:var(--nbk);font-size:18px;line-height:1;}
+.newbar:not([data-kind="tip"]) .nb-go:hover .nb-t{text-decoration:underline;text-underline-offset:3px;}
+.nb-go:hover .nb-try{text-decoration-color:currentColor;}
 .nb-x{flex:0 0 44px;border:0;border-left:1px solid var(--line);background:none;cursor:pointer;font-size:18px;color:var(--muted);}
 .nb-x:hover{color:var(--ink);}
-@media(max-width:600px){.nb-t{white-space:normal;line-height:1.45;}}
+@media(max-width:600px){.nb-t{white-space:normal;line-height:1.45;} .nb-try{display:none !important;} .nb-go{gap:var(--s2);padding:10px 12px;}}
+
+/* 카드·지도의 업데이트 표시(보탬·고침) — 새 도구(주황)와 색만 다르게 */
+.newtag.up{color:var(--upd);}
+.newtag.up::before{background:var(--upd);}
+.cell .nd.up{background:var(--upd);}
+.item .upline{margin:0;font-size:12.5px;color:var(--upd);line-height:1.6;}
+.item .upline b{font-weight:700;font-variant-numeric:tabular-nums;}
+
+/* 상단 「새 소식」 단추와 안 읽은 개수 */
+.topnav #newsbtn{display:inline-flex;align-items:center;gap:5px;}
+.nbadge{min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--new);color:#fff;font-size:11px;font-weight:700;line-height:18px;text-align:center;font-variant-numeric:tabular-nums;}
+.nbadge[hidden]{display:none;}
+@media(max-width:420px){.topbar .wrap{padding:0 var(--s4);} .topnav button{padding:var(--s2) 7px;font-size:13px;}}
+
+/* 새 소식 창 */
+.modal .box.news{max-width:560px;text-align:left;max-height:calc(100vh - 48px);overflow-y:auto;-webkit-overflow-scrolling:touch;padding:var(--s5);}
+.modal .box.news h3{font-family:var(--serif);font-size:20px;font-weight:700;margin:0 0 var(--s1);}
+.nw-sub{margin:0 0 var(--s4);font-size:13px;color:var(--muted);}
+.nwlist{list-style:none;margin:0;padding:0;border-top:1px solid var(--line);}
+.nwlist li{display:grid;grid-template-columns:40px 34px minmax(0,1fr);gap:var(--s2);align-items:baseline;padding:10px 0;border-bottom:1px solid var(--line);font-size:13.5px;}
+.nw-d{position:relative;color:var(--muted);font-size:12.5px;font-variant-numeric:tabular-nums;}
+.nwlist li.unread .nw-d::before{content:"";position:absolute;left:-11px;top:50%;width:6px;height:6px;border-radius:50%;background:var(--new);transform:translateY(-50%);}
+.nw-k{font-size:11.5px;font-weight:700;color:var(--new);white-space:nowrap;}
+.nw-k.k-up,.nw-k.k-fix{color:var(--upd);}
+.nw-t{font-family:var(--sans);font-size:14px;font-weight:600;color:var(--ink);background:none;border:0;padding:0;cursor:pointer;text-align:left;text-decoration:underline;text-decoration-color:var(--line-strong);text-underline-offset:3px;}
+.nw-t:hover{color:var(--k);text-decoration-color:currentColor;}
+.nw-x{display:block;margin-top:2px;color:var(--ink-soft);font-size:13px;line-height:1.55;}
+.nw-empty{margin:0;padding:var(--s4) 0;border-bottom:1px solid var(--line);font-size:13.5px;color:var(--muted);}
+.nw-h{margin:var(--s5) 0 var(--s2);font-size:14px;font-weight:600;color:var(--ink);}
+.nwtips{list-style:none;margin:0 0 var(--s4);padding:0;display:grid;gap:6px;}
+.nwtips button{width:100%;display:flex;justify-content:space-between;align-items:baseline;gap:var(--s3);text-align:left;font-family:var(--sans);font-size:13.5px;line-height:1.5;color:var(--ink-soft);background:var(--paper);border:1px solid var(--line);border-radius:2px;padding:9px 12px;cursor:pointer;}
+.nwtips button:hover{border-color:var(--line-strong);background:#fff;}
+.nwtips .try{flex:none;font-size:12.5px;font-weight:600;color:var(--ink);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line-strong);}
+
+/* 이용 안내의 「이렇게 쓰면 편해요」 */
+.howto{margin:0 0 var(--s6);padding-bottom:var(--s5);border-bottom:1px solid var(--line);}
+.howto h3{font-size:14.5px;font-weight:600;margin:0 0 var(--s3);}
+.howlist{list-style:none;margin:0;padding:0;display:grid;gap:2px var(--s6);}
+@media(min-width:760px){.howlist{grid-template-columns:1fr 1fr;}}
+.howlist li{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s3);padding:6px 0;font-size:13.5px;line-height:1.7;color:var(--muted);border-bottom:1px dashed var(--line);}
+.howlist button{flex:none;font-family:var(--sans);font-size:12.5px;color:var(--ink-soft);background:none;border:0;padding:var(--s1) 0;cursor:pointer;text-decoration:underline;text-decoration-color:var(--line-strong);text-underline-offset:4px;}
+.howlist button:hover{color:var(--ink);text-decoration-color:currentColor;}
+
+/* 도구 속 항목(체험학습 사고) 카드 */
+.tcard .tlv{font-size:11.5px;font-weight:700;color:var(--muted);}
+.tlv.lv-red{color:var(--c4);} .tlv.lv-orange{color:var(--new);}
+.tcard .tnowh{margin:var(--s1) 0 0;font-size:12.5px;font-weight:700;color:var(--k);}
+.tcard .tnow{margin:0;padding-left:1.3em;font-size:14px;line-height:1.65;color:var(--ink);}
+.tcard .tnow li{margin-bottom:3px;}
+.tcard .tnow li::marker{color:var(--k);font-weight:700;}
+.acts a{display:inline-flex;align-items:center;font-family:var(--sans);font-size:12.5px;color:var(--muted);padding:var(--s2) 0;min-height:34px;text-decoration:underline;text-decoration-color:var(--line-strong);text-underline-offset:4px;}
+.acts a:hover{color:var(--ink);text-decoration-color:currentColor;}
+.acts a.pri{color:var(--k);font-weight:700;}
+.tcard .acts{flex-wrap:wrap;column-gap:var(--s4);row-gap:0;}
+a.mcard{text-decoration:none;color:inherit;}
+.mcard .mnow{margin:4px 0 0;padding-left:1.25em;font-size:13px;line-height:1.55;color:var(--ink-soft);}
+.mcard .mnow li{margin-bottom:2px;}
+.mcard .mnow li::marker{color:var(--k);font-weight:700;}
+.ch-card .cc-nh{margin:2px 0 2px;font-size:12px;font-weight:700;color:var(--k);}
+.ch-card .cc-now{margin:0 0 8px;padding-left:18px;font-size:13px;line-height:1.55;color:var(--ink);}
+.ch-card .cc-now li{margin-bottom:3px;}
+.ch-card .cc-a a.ghost{background:#fff;color:var(--ink);border:1px solid var(--line-strong);}
+
+/* 도구 속 내용 카드 */
+.dcard .dhint{font-size:11.5px;font-weight:700;color:var(--muted);}
+.dcard .dsnip{color:var(--ink);}
+.dsnip mark,.mcard mark{background:color-mix(in srgb,var(--new) 20%,#fff);color:inherit;padding:0 1px;border-radius:2px;}
+.dcard .dtip{font-size:12px;color:var(--muted);align-self:center;}
+
+/* 팁 「해 보기」를 눌렀을 때 한 번만 가리켜 주기 */
+.map.hint .cell[data-go]{animation:cellHint .9s ease-in-out 1;animation-delay:calc(var(--i, 0) * 22ms);}
+@keyframes cellHint{40%{background:var(--k);color:#fff;}}
+.monthly.hint .mcard{animation:mcHint 1s ease-in-out 2;}
+@keyframes mcHint{50%{background:var(--kl);transform:translateY(-2px);}}
+@media print{.newbar,.howto{display:none !important;}}
 </style>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "학교 연장통", "alternateName": ["학교 연장통 — 학교 업무를 바꾼 웹사이트", "바이브 코딩 학교 웹사이트 모음"], "url": "https://edu-hub-alpha-ten.vercel.app/", "description": "초등학교 교감이 바이브 코딩으로 만든 학교 업무용 웹 도구 41개 모음. 휴가·복무 확인, 반편성, 시간표, 연수, 생활지도까지 링크 하나로 바로 씁니다.", "inLanguage": "ko", "author": {"@type": "Person", "name": "최창훈", "jobTitle": "초등학교 교감"}, "keywords": "학교 연장통, 바이브 코딩, 학교 업무, 교사 웹 도구, 초등학교, 교감, 반편성, 휴가, 연수, 생활지도"}</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "ItemList", "name": "학교 연장통 도구 목록", "numberOfItems": 41, "itemListElement": [{"@type": "ListItem", "position": 1, "name": "교육공무원 복무 한눈에", "description": "초과근무 인정 시간, 출장 구분과 이동시간, 41조 연수, 결재라인까지 헷갈리는 복무를 그림과 계산기로 바로 확인합니다.", "url": "https://attendance-six-liard.vercel.app/"}, {"@type": "ListItem", "position": 2, "name": "교원 휴가 종류와 일수 확인", "description": "연가·병가·공가·경조사 등 열세 가지 휴가를 조건과 일수까지 한 화면에서 확인합니다.", "url": "https://leave-of-absence-nu.vercel.app/"}, {"@type": "ListItem", "position": 3, "name": "외부강의·겸직 가능 여부 확인", "description": "신고 대상인지 겸직 허가 대상인지, 몇 가지 질문에 답하면 스스로 가려낼 수 있습니다.", "url": "https://external-lecture.vercel.app/"}, {"@type": "ListItem", "position": 4, "name": "보결 배정하기", "description": "빈 시간과 담당 시수를 함께 보며 보결을 고르게 나눠 배정합니다.", "url": "https://substitute-assignment-yiix.vercel.app/"}, {"@type": "ListItem", "position": 5, "name": "방학 중 비근무 직종 근무일수 계산", "description": "달력에서 근무일을 고르면 연간 근무일수와 주휴 유급 여부가 자동으로 계산됩니다.", "url": "https://calculation-of-paid-vacation-days.vercel.app/"}, {"@type": "ListItem", "position": 6, "name": "반별 시간표 짜기", "description": "전담 시간과 학년 시수를 맞춰 가며 시간표를 짜고, 충돌을 바로 잡아 줍니다.", "url": "https://elementary-class-timetable.vercel.app/"}, {"@type": "ListItem", "position": 7, "name": "자율연수비 정산하기", "description": "연수 그룹과 명단을 만들고 지출을 입력하면 정산표가 엑셀로 나옵니다.", "url": "https://training-fee-manager.vercel.app/"}, {"@type": "ListItem", "position": 8, "name": "학부모 법정 의무교육 안내", "description": "해마다 인쇄해 보내던 열여섯 가지 법정 교육을 링크 하나로 대신합니다.", "url": "https://parent-education-zeta.vercel.app/"}, {"@type": "ListItem", "position": 9, "name": "월중·주간계획 자동으로 만들기", "description": "한 번 입력한 일정이 월중계획과 주간계획으로 함께 만들어지는 구글 시트 자동화입니다.", "url": "https://monthly-plan-theta.vercel.app/"}, {"@type": "ListItem", "position": 10, "name": "공문·회의록 작성 가이드", "description": "공문과 회의록 쓰는 법을 예시로 익히고, 스물아홉 문항으로 스스로 점검합니다.", "url": "https://official-document.vercel.app/"}, {"@type": "ListItem", "position": 11, "name": "업무 인수인계 노트 만들기", "description": "월별로 하는 일을 적어 두면 파일 하나로 후임자에게 그대로 넘길 수 있습니다.", "url": "https://handover-pi.vercel.app/"}, {"@type": "ListItem", "position": 12, "name": "단체 음료 주문 취합", "description": "각자 고른 음료가 자동으로 취합되고, 카페에 넘길 주문서가 정리되어 나옵니다.", "url": "https://cafe-order-xi.vercel.app/"}, {"@type": "ListItem", "position": 13, "name": "교내 인사 내규 점검하고 만들기", "description": "우리 학교 내규를 올리면 빠진 조항과 서로 어긋나는 조항을 찾아 고칠 문장까지 정리해 줍니다. 참고안을 바탕으로 새 내규를 만들고 인사점수도 계산합니다.", "url": "https://personnel-regulations.vercel.app/"}, {"@type": "ListItem", "position": 14, "name": "업무분장 한눈에", "description": "표준안을 보고 협의해 우리 학교 안을 만들고, 작년 분장표(.hwpx)와 비교해 빠진 업무와 담당이 다른 업무를 찾습니다. 갈등 조정 절차와 근거도 담았습니다.", "url": "https://division-of-work.vercel.app/"}, {"@type": "ListItem", "position": 15, "name": "교감 자격연수 점수 계산과 진로 설계", "description": "경력·연수·가산점을 넣으면 지금 서류 점수와 기준점까지 남은 점수를 보여 주고, 앞으로 몇 년 뒤 닿을지 시뮬레이션합니다.", "url": "https://careerplanning.vercel.app/"}, {"@type": "ListItem", "position": 16, "name": "학적 한눈에", "description": "입학·전학·유예·정원 외 관리까지, 상황을 고르거나 문장으로 물으면 처리 순서와 서류, 나이스 메뉴를 바로 찾아 줍니다.", "url": "https://academic-records-rosy.vercel.app/"}, {"@type": "ListItem", "position": 17, "name": "외국 국적 학생 학적 처리 안내", "description": "입교 상담부터 아포스티유, 학적 처리까지 순서대로 짚어 줍니다.", "url": "https://academic-record-management-for-fore.vercel.app/"}, {"@type": "ListItem", "position": 18, "name": "교육활동 침해 판별과 대응 절차", "description": "있었던 일을 고르면 해당할 수 있는 침해 유형과 지금 할 일을 알려 주고, 담당자에게는 단계별 처리 절차와 기한을 안내합니다.", "url": "https://protection-of-educational-activitie-blond.vercel.app/"}, {"@type": "ListItem", "position": 19, "name": "학교 안전·긴급사항 대응 절차", "description": "응급환자 이송, 중대재해, 비상연락망까지 급할 때 열어 보는 절차를 모았습니다.", "url": "https://emergency-fh5s.vercel.app/"}, {"@type": "ListItem", "name": "출결 한눈에", "description": "결석 사유를 검색하면 처리 구분과 필요한 서류, 기한, 생활기록부 기재 여부를 한 화면에서 답합니다.", "url": "https://stattendance.vercel.app/", "position": 20}, {"@type": "ListItem", "position": 21, "name": "교외체험학습 신청기한 계산", "description": "휴일을 빼고 신청 기한을 계산해 주고, 사유가 적절한지도 스스로 확인합니다.", "url": "https://educational-travel.vercel.app/"}, {"@type": "ListItem", "position": 22, "name": "미인정결석 학생 업무 처리 안내", "description": "담임·업무 담당자·관리자를 고르면 결석 당일부터 NEIS 등록, 매월 확인, 복귀 보고까지 내 차례의 일을 순서대로 보여 줍니다.", "url": "https://unexcused-absence-sage.vercel.app/"}, {"@type": "ListItem", "position": 23, "name": "감염병 등교중지·출석인정 확인", "description": "병명을 찾으면 등교 중지 기간과 출석 인정 절차를 학부모가 바로 확인할 수 있습니다.", "url": "https://infectious-diseases.vercel.app/"}, {"@type": "ListItem", "position": 24, "name": "야외활동 가능 여부 확인", "description": "지금 우리 지역 수치로 야외 활동이 가능한지, 자제인지, 금지인지 한 줄로 답합니다.", "url": "https://fine-dust-heat-wave.vercel.app/"}, {"@type": "ListItem", "position": 25, "name": "해냄 보물상자", "description": "학생이 2022 개정 교육과정 성취기준에서 스스로 목표를 고르고, 보호자 확인과 선생님 인증을 모아 한 해 동안 쌓아 갑니다.", "url": "https://growth-opal.vercel.app/"}, {"@type": "ListItem", "position": 26, "name": "생활기록부·통지표 문장 쓰기", "description": "수업 중에 남긴 관찰 기록을 생활기록부 문장으로 옮기는 과정을 도와줍니다.", "url": "https://student-record-seven.vercel.app/"}, {"@type": "ListItem", "position": 27, "name": "반편성하기", "description": "성적·성별·관계 조건을 놓고 여러 안을 만들어 보며 협의 자리에서 함께 결정합니다.", "url": "https://class-assignment-ruddy.vercel.app/"}, {"@type": "ListItem", "position": 28, "name": "신입생 반편성하기", "description": "예비소집 면접 기록을 모아 신입생 반을 나누고 명렬표까지 정리합니다.", "url": "https://freshman-class-assignment-nmos.vercel.app/"}, {"@type": "ListItem", "position": 29, "name": "청렴 연수 방탈출 게임", "description": "청탁금지법과 갑질 예방을 방탈출 게임으로 풀어 가는 참여형 연수입니다.", "url": "https://integrity-henna.vercel.app/"}, {"@type": "ListItem", "position": 30, "name": "교육활동보호 법률 용어 익히기", "description": "교육활동 침해와 관련된 법률 용어를 읽고, 열 문항 퀴즈로 확인합니다.", "url": "https://protection-of-educational-activitie.vercel.app/"}, {"@type": "ListItem", "position": 31, "name": "교육활동 침해 사안 대응 익히기", "description": "실제 상황을 놓고 어디까지가 침해인지, 무엇부터 해야 하는지 따라가 봅니다.", "url": "https://protection-of-educational-activitie-three.vercel.app/"}, {"@type": "ListItem", "position": 32, "name": "내 수업 성장 지도", "description": "스물네 가지 수업 장면에서 지금 내 모습을 고르면, 여섯 영역의 성장 지도와 다음 한 걸음을 보여 줍니다.", "url": "https://teaching-competency.vercel.app/"}, {"@type": "ListItem", "position": 33, "name": "AI·디지털 교육 역량 진단", "description": "스물한 개 문항에 답하면 일곱 가지 역량의 성장 리포트와 이번 주 실천 미션을 보여 줍니다.", "url": "https://ai-digital-literacy.vercel.app/"}, {"@type": "ListItem", "position": 34, "name": "바이브 코딩 연수 길잡이", "description": "생성형 AI로 학교 업무용 웹사이트를 만들어 배포하는 연수를 2차시부터 15차시까지 단계별로 안내합니다.", "url": "https://vibecoding-zeta-seven.vercel.app/"}, {"@type": "ListItem", "position": 35, "name": "학급규칙 세우기 수업 준비", "description": "학급 규칙을 학생들과 함께 정하는 수업을 준비하고, 미리 연습해 볼 수 있습니다.", "url": "https://class-rules.vercel.app/"}, {"@type": "ListItem", "position": 36, "name": "교우관계 설문과 관계도 그리기", "description": "학년군별 설문으로 교우 관계를 모아 관계도와 리포트로 보여 줍니다.", "url": "https://sociogram-hazel.vercel.app/"}, {"@type": "ListItem", "position": 37, "name": "나 전달법 배우고 연습하기", "description": "나 전달법을 단계로 배우고 서른 가지 상황으로 연습한 뒤 골든벨로 확인합니다.", "url": "https://i-message-nine.vercel.app/"}, {"@type": "ListItem", "position": 38, "name": "도전행동 생활지도 가이드", "description": "도전 행동을 만났을 때 무엇을 먼저 하고 무엇을 하지 말아야 하는지 안내합니다.", "url": "https://school-guidance-plus.vercel.app/"}, {"@type": "ListItem", "position": 39, "name": "학부모 상담 준비와 연습", "description": "학부모 상담의 흐름을 익히고, 어려운 장면을 미리 연습해 볼 수 있습니다.", "url": "https://parent-consultation-training.vercel.app/"}, {"@type": "ListItem", "position": 40, "name": "상담과 민원 구분하기", "description": "상담과 민원의 경계를 사례로 구분하고, 민원으로 넘어갔을 때의 절차를 안내합니다.", "url": "https://consultation-complaints.vercel.app/"}, {"@type": "ListItem", "position": 41, "name": "학교폭력 사안 처리 절차", "description": "학교폭력 신고 접수부터 처리까지의 절차와 기한을 순서대로 따라갑니다.", "url": "https://school-violence-alpha.vercel.app/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "학교 연장통", "alternateName": ["학교 연장통 — 학교 업무를 바꾼 웹사이트", "바이브 코딩 학교 웹사이트 모음"], "url": "https://edu-hub-alpha-ten.vercel.app/", "description": "초등학교 교감이 바이브 코딩으로 만든 학교 업무용 웹 도구 42개 모음. 휴가·복무 확인, 반편성, 시간표, 연수, 생활지도까지 링크 하나로 바로 씁니다.", "inLanguage": "ko", "author": {"@type": "Person", "name": "최창훈", "jobTitle": "초등학교 교감"}, "keywords": "학교 연장통, 바이브 코딩, 학교 업무, 교사 웹 도구, 초등학교, 교감, 반편성, 휴가, 연수, 생활지도"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "ItemList", "name": "학교 연장통 도구 목록", "numberOfItems": 42, "itemListElement": [{"@type": "ListItem", "position": 1, "name": "교육공무원 복무 한눈에", "description": "초과근무 인정 시간, 출장 구분과 이동시간, 41조 연수, 결재라인까지 헷갈리는 복무를 그림과 계산기로 바로 확인합니다.", "url": "https://attendance-six-liard.vercel.app/"}, {"@type": "ListItem", "position": 2, "name": "교원 휴가 종류와 일수 확인", "description": "연가·병가·공가·경조사 등 열세 가지 휴가를 조건과 일수까지 한 화면에서 확인합니다.", "url": "https://leave-of-absence-nu.vercel.app/"}, {"@type": "ListItem", "position": 3, "name": "외부강의·겸직 가능 여부 확인", "description": "신고 대상인지 겸직 허가 대상인지, 몇 가지 질문에 답하면 스스로 가려낼 수 있습니다.", "url": "https://external-lecture.vercel.app/"}, {"@type": "ListItem", "position": 4, "name": "보결 배정하기", "description": "빈 시간과 담당 시수를 함께 보며 보결을 고르게 나눠 배정합니다.", "url": "https://substitute-assignment-yiix.vercel.app/"}, {"@type": "ListItem", "position": 5, "name": "방학 중 비근무 직종 근무일수 계산", "description": "달력에서 근무일을 고르면 연간 근무일수와 주휴 유급 여부가 자동으로 계산됩니다.", "url": "https://calculation-of-paid-vacation-days.vercel.app/"}, {"@type": "ListItem", "position": 6, "name": "반별 시간표 짜기", "description": "전담 시간과 학년 시수를 맞춰 가며 시간표를 짜고, 충돌을 바로 잡아 줍니다.", "url": "https://elementary-class-timetable.vercel.app/"}, {"@type": "ListItem", "position": 7, "name": "자율연수비 정산하기", "description": "연수 그룹과 명단을 만들고 지출을 입력하면 정산표가 엑셀로 나옵니다.", "url": "https://training-fee-manager.vercel.app/"}, {"@type": "ListItem", "position": 8, "name": "학부모 법정 의무교육 안내", "description": "해마다 인쇄해 보내던 열여섯 가지 법정 교육을 링크 하나로 대신합니다.", "url": "https://parent-education-zeta.vercel.app/"}, {"@type": "ListItem", "position": 9, "name": "월중·주간계획 자동으로 만들기", "description": "한 번 입력한 일정이 월중계획과 주간계획으로 함께 만들어지는 구글 시트 자동화입니다.", "url": "https://monthly-plan-theta.vercel.app/"}, {"@type": "ListItem", "position": 10, "name": "공문·회의록 작성 가이드", "description": "공문과 회의록 쓰는 법을 예시로 익히고, 스물아홉 문항으로 스스로 점검합니다.", "url": "https://official-document.vercel.app/"}, {"@type": "ListItem", "position": 11, "name": "업무 인수인계 노트 만들기", "description": "월별로 하는 일을 적어 두면 파일 하나로 후임자에게 그대로 넘길 수 있습니다.", "url": "https://handover-pi.vercel.app/"}, {"@type": "ListItem", "position": 12, "name": "단체 음료 주문 취합", "description": "각자 고른 음료가 자동으로 취합되고, 카페에 넘길 주문서가 정리되어 나옵니다.", "url": "https://cafe-order-xi.vercel.app/"}, {"@type": "ListItem", "position": 13, "name": "교내 인사 내규 점검하고 만들기", "description": "우리 학교 내규를 올리면 빠진 조항과 서로 어긋나는 조항을 찾아 고칠 문장까지 정리해 줍니다. 참고안을 바탕으로 새 내규를 만들고 인사점수도 계산합니다.", "url": "https://personnel-regulations.vercel.app/"}, {"@type": "ListItem", "position": 14, "name": "업무분장 한눈에", "description": "표준안을 보고 협의해 우리 학교 안을 만들고, 작년 분장표(.hwpx)와 비교해 빠진 업무와 담당이 다른 업무를 찾습니다. 갈등 조정 절차와 근거도 담았습니다.", "url": "https://division-of-work.vercel.app/"}, {"@type": "ListItem", "position": 15, "name": "교감 자격연수 점수 계산과 진로 설계", "description": "경력·연수·가산점을 넣으면 지금 서류 점수와 기준점까지 남은 점수를 보여 주고, 앞으로 몇 년 뒤 닿을지 시뮬레이션합니다.", "url": "https://careerplanning.vercel.app/"}, {"@type": "ListItem", "position": 16, "name": "학적 한눈에", "description": "입학·전학·유예·정원 외 관리까지, 상황을 고르거나 문장으로 물으면 처리 순서와 서류, 나이스 메뉴를 바로 찾아 줍니다.", "url": "https://academic-records-rosy.vercel.app/"}, {"@type": "ListItem", "position": 17, "name": "외국 국적 학생 학적 처리 안내", "description": "입교 상담부터 아포스티유, 학적 처리까지 순서대로 짚어 줍니다.", "url": "https://academic-record-management-for-fore.vercel.app/"}, {"@type": "ListItem", "position": 18, "name": "교육활동 침해 판별과 대응 절차", "description": "있었던 일을 고르면 해당할 수 있는 침해 유형과 지금 할 일을 알려 주고, 담당자에게는 단계별 처리 절차와 기한을 안내합니다.", "url": "https://protection-of-educational-activitie-blond.vercel.app/"}, {"@type": "ListItem", "position": 19, "name": "학교 안전·긴급사항 대응 절차", "description": "응급환자 이송, 중대재해, 비상연락망까지 급할 때 열어 보는 절차를 모았습니다.", "url": "https://emergency-fh5s.vercel.app/"}, {"@type": "ListItem", "name": "출결 한눈에", "description": "결석 사유를 검색하면 처리 구분과 필요한 서류, 기한, 생활기록부 기재 여부를 한 화면에서 답합니다.", "url": "https://stattendance.vercel.app/", "position": 20}, {"@type": "ListItem", "position": 21, "name": "교외체험학습 신청기한 계산", "description": "휴일을 빼고 신청 기한을 계산해 주고, 사유가 적절한지도 스스로 확인합니다.", "url": "https://educational-travel.vercel.app/"}, {"@type": "ListItem", "position": 22, "name": "미인정결석 학생 업무 처리 안내", "description": "담임·업무 담당자·관리자를 고르면 결석 당일부터 NEIS 등록, 매월 확인, 복귀 보고까지 내 차례의 일을 순서대로 보여 줍니다.", "url": "https://unexcused-absence-sage.vercel.app/"}, {"@type": "ListItem", "position": 23, "name": "감염병 등교중지·출석인정 확인", "description": "병명을 찾으면 등교 중지 기간과 출석 인정 절차를 학부모가 바로 확인할 수 있습니다.", "url": "https://infectious-diseases.vercel.app/"}, {"@type": "ListItem", "position": 24, "name": "야외활동 가능 여부 확인", "description": "지금 우리 지역 수치로 야외 활동이 가능한지, 자제인지, 금지인지 한 줄로 답합니다.", "url": "https://fine-dust-heat-wave.vercel.app/"}, {"@type": "ListItem", "position": 25, "name": "해냄 보물상자", "description": "학생이 2022 개정 교육과정 성취기준에서 스스로 목표를 고르고, 보호자 확인과 선생님 인증을 모아 한 해 동안 쌓아 갑니다.", "url": "https://growth-opal.vercel.app/"}, {"@type": "ListItem", "position": 26, "name": "생활기록부·통지표 문장 쓰기", "description": "수업 중에 남긴 관찰 기록을 생활기록부 문장으로 옮기는 과정을 도와줍니다.", "url": "https://student-record-seven.vercel.app/"}, {"@type": "ListItem", "name": "학생부 점검 한눈에", "description": "나이스에서 PDF로 저장한 학교생활기록부(생기부)를 올리면, 학년마다 그해 기재요령으로 읽어 고칠 곳과 근거를 짚어 줍니다. 파일은 기기 밖으로 나가지 않습니다.", "url": "https://student-record-review.vercel.app/", "position": 27}, {"@type": "ListItem", "position": 28, "name": "반편성하기", "description": "성적·성별·관계 조건을 놓고 여러 안을 만들어 보며 협의 자리에서 함께 결정합니다.", "url": "https://class-assignment-ruddy.vercel.app/"}, {"@type": "ListItem", "position": 29, "name": "신입생 반편성하기", "description": "예비소집 면접 기록을 모아 신입생 반을 나누고 명렬표까지 정리합니다.", "url": "https://freshman-class-assignment-nmos.vercel.app/"}, {"@type": "ListItem", "position": 30, "name": "청렴 연수 방탈출 게임", "description": "청탁금지법과 갑질 예방을 방탈출 게임으로 풀어 가는 참여형 연수입니다.", "url": "https://integrity-henna.vercel.app/"}, {"@type": "ListItem", "position": 31, "name": "교육활동보호 법률 용어 익히기", "description": "교육활동 침해와 관련된 법률 용어를 읽고, 열 문항 퀴즈로 확인합니다.", "url": "https://protection-of-educational-activitie.vercel.app/"}, {"@type": "ListItem", "position": 32, "name": "교육활동 침해 사안 대응 익히기", "description": "실제 상황을 놓고 어디까지가 침해인지, 무엇부터 해야 하는지 따라가 봅니다.", "url": "https://protection-of-educational-activitie-three.vercel.app/"}, {"@type": "ListItem", "position": 33, "name": "내 수업 성장 지도", "description": "스물네 가지 수업 장면에서 지금 내 모습을 고르면, 여섯 영역의 성장 지도와 다음 한 걸음을 보여 줍니다.", "url": "https://teaching-competency.vercel.app/"}, {"@type": "ListItem", "position": 34, "name": "AI·디지털 교육 역량 진단", "description": "스물한 개 문항에 답하면 일곱 가지 역량의 성장 리포트와 이번 주 실천 미션을 보여 줍니다.", "url": "https://ai-digital-literacy.vercel.app/"}, {"@type": "ListItem", "position": 35, "name": "바이브 코딩 연수 길잡이", "description": "생성형 AI로 학교 업무용 웹사이트를 만들어 배포하는 연수를 2차시부터 15차시까지 단계별로 안내합니다.", "url": "https://vibecoding-zeta-seven.vercel.app/"}, {"@type": "ListItem", "position": 36, "name": "학급규칙 세우기 수업 준비", "description": "학급 규칙을 학생들과 함께 정하는 수업을 준비하고, 미리 연습해 볼 수 있습니다.", "url": "https://class-rules.vercel.app/"}, {"@type": "ListItem", "position": 37, "name": "교우관계 설문과 관계도 그리기", "description": "학년군별 설문으로 교우 관계를 모아 관계도와 리포트로 보여 줍니다.", "url": "https://sociogram-hazel.vercel.app/"}, {"@type": "ListItem", "position": 38, "name": "나 전달법 배우고 연습하기", "description": "나 전달법을 단계로 배우고 서른 가지 상황으로 연습한 뒤 골든벨로 확인합니다.", "url": "https://i-message-nine.vercel.app/"}, {"@type": "ListItem", "position": 39, "name": "도전행동 생활지도 가이드", "description": "도전 행동을 만났을 때 무엇을 먼저 하고 무엇을 하지 말아야 하는지 안내합니다.", "url": "https://school-guidance-plus.vercel.app/"}, {"@type": "ListItem", "position": 40, "name": "학부모 상담 준비와 연습", "description": "학부모 상담의 흐름을 익히고, 어려운 장면을 미리 연습해 볼 수 있습니다.", "url": "https://parent-consultation-training.vercel.app/"}, {"@type": "ListItem", "position": 41, "name": "상담과 민원 구분하기", "description": "상담과 민원의 경계를 사례로 구분하고, 민원으로 넘어갔을 때의 절차를 안내합니다.", "url": "https://consultation-complaints.vercel.app/"}, {"@type": "ListItem", "position": 42, "name": "학교폭력 사안 처리 절차", "description": "학교폭력 신고 접수부터 처리까지의 절차와 기한을 순서대로 따라갑니다.", "url": "https://school-violence-alpha.vercel.app/"}]}</script>
 </head>
 <body>
 
@@ -401,6 +493,7 @@ footer{padding-bottom:calc(var(--s8) + 24px);}
   <div class="wrap">
     <button class="brand" type="button" data-scroll="top">학교 연장통<span>학교 업무를 바꾼 웹사이트</span></button>
     <nav class="topnav">
+      <button type="button" id="newsbtn" aria-haspopup="dialog">새 소식<span class="nbadge" id="nbadge" hidden></span></button>
       <button type="button" data-scroll="book">책 소개</button>
       <button type="button" data-scroll="notes">이용 안내</button>
     </nav>
@@ -414,8 +507,8 @@ footer{padding-bottom:calc(var(--s8) + 24px);}
       <p class="lede" id="lede">초등학교 교감이 바이브 코딩으로 만들어 학교에서 실제로 쓰는 도구들입니다. 회원가입도 설치도 없습니다.</p>
 
       <div class="newbar" id="newbar" hidden>
-        <button type="button" class="nb-go" id="nbgo"><span class="nb-k">새로</span><span class="nb-t" id="nbt"></span><span class="nb-a" aria-hidden="true">›</span></button>
-        <button type="button" class="nb-x" id="nbx" aria-label="새 도구 알림 닫기">×</button>
+        <button type="button" class="nb-go" id="nbgo"><span class="nb-k" id="nbk">새로</span><span class="nb-t" id="nbt"></span><span class="nb-try" id="nbtry" hidden>해 보기</span><span class="nb-a" aria-hidden="true">›</span></button>
+        <button type="button" class="nb-x" id="nbx" aria-label="이 알림 닫기">×</button>
       </div>
 
       <div class="searchrow">
@@ -483,6 +576,7 @@ footer{padding-bottom:calc(var(--s8) + 24px);}
 <li><a href="https://fine-dust-heat-wave.vercel.app/" rel="noopener"><strong>야외활동 가능 여부 확인</strong></a> — 지금 우리 지역 수치로 야외 활동이 가능한지, 자제인지, 금지인지 한 줄로 답합니다. <span class="who">(담임교사 · 야외활동)</span></li>
 <li><a href="https://growth-opal.vercel.app/" rel="noopener"><strong>해냄 보물상자</strong></a> — 학생이 2022 개정 교육과정 성취기준에서 스스로 목표를 고르고, 보호자 확인과 선생님 인증을 모아 한 해 동안 쌓아 갑니다. <span class="who">(담임교사 · 목표)</span></li>
 <li><a href="https://student-record-seven.vercel.app/" rel="noopener"><strong>생활기록부·통지표 문장 쓰기</strong></a> — 수업 중에 남긴 관찰 기록을 생활기록부 문장으로 옮기는 과정을 도와줍니다. <span class="who">(담임교사 · 통지표)</span></li>
+<li><a href="https://student-record-review.vercel.app/" rel="noopener"><strong>학생부 점검 한눈에</strong></a> — 나이스에서 PDF로 저장한 학교생활기록부(생기부)를 올리면, 학년마다 그해 기재요령으로 읽어 고칠 곳과 근거를 짚어 줍니다. 파일은 기기 밖으로 나가지 않습니다. <span class="who">(담임교사 · 학생부점검)</span></li>
 <li><a href="https://class-assignment-ruddy.vercel.app/" rel="noopener"><strong>반편성하기</strong></a> — 성적·성별·관계 조건을 놓고 여러 안을 만들어 보며 협의 자리에서 함께 결정합니다. <span class="who">(담임교사 · 반편성)</span></li>
 <li><a href="https://freshman-class-assignment-nmos.vercel.app/" rel="noopener"><strong>신입생 반편성하기</strong></a> — 예비소집 면접 기록을 모아 신입생 반을 나누고 명렬표까지 정리합니다. <span class="who">(업무 담당자 · 신입생)</span></li>
 </ul></section>
@@ -519,6 +613,10 @@ footer{padding-bottom:calc(var(--s8) + 24px);}
 
     <section class="notes" id="notes">
       <h2>쓰기 전에 알아 두시면 좋은 것</h2>
+      <div class="howto">
+        <h3>이렇게 쓰면 편해요</h3>
+        <ul class="howlist" id="howlist"></ul>
+      </div>
       <div class="notelist">
         <div>
           <h3>무엇을 근거로 만들었나</h3>
@@ -538,7 +636,7 @@ footer{padding-bottom:calc(var(--s8) + 24px);}
 
   <footer>
     <div class="wrap fr">
-      <div id="footcredit">만든이 최창훈 · 초등학교 교감 · 2026</div>
+      <div id="footcredit">만든이 최창훈 · 초등학교 교감 · 2026<span id="visits" hidden></span></div>
       <div>
         <button class="linkbtn" id="reportsite" hidden>잘못된 내용 알려 주기</button>
         <button class="linkbtn" id="copyall">전체 목록을 텍스트로 복사</button>
@@ -673,19 +771,21 @@ THE FONT SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, E
 /* ══════════════════════════════════════════════════════════
    고쳐 쓰실 곳
    1) REPORT_EMAIL  — 오류 제보를 받을 메일 주소. 비우면 버튼이 안 나옵니다.
-   2) LAST_CHECKED  — 링크를 마지막으로 확인한 날. 푸터에 표시됩니다.
+   2) COUNTER_DB    — 방문자 수를 셀 Firebase Realtime Database 주소. 비우면 숫자가 안 나옵니다.
    3) SHOW_BOOK_CHAPTER — 책이 나오면 true 로.
    4) SITES         — 도구 이름(t), 설명(d), 대상(who), PC 권장(pc),
                       지도 칸 글자(tag), 서버 저장(store), 준비물(prep)
+                      새 도구는 added 날짜만 적으면 「새로」 소식이 저절로 생깁니다.
+   5) NEWSLOG       — 이미 있는 도구가 바뀌었을 때 한 줄씩. (SITES 아래에 있습니다)
    ══════════════════════════════════════════════════════════ */
 
 const REPORT_EMAIL = "";              /* 예: "changhun@example.com" */
-const LAST_CHECKED = "2026. 9.";      /* 링크 점검한 달 */
+const COUNTER_DB = "https://edu-hub-5f30d-default-rtdb.asia-southeast1.firebasedatabase.app/";   /* 방문자 수 Firebase 주소 */
 const SHOW_BOOK_CHAPTER = false;
 /* 이번 달에 꺼내는 도구 — 달마다 3~4개, 앞에 둔 것부터 보여 줍니다. 열쇠는 「부-번호」 */
 const MONTHLY = {
   1:  { note:"새 학년도 업무분장과 신입생 맞이",     keys:["1-19","1-17","2-9","2-7"] },
-  2:  { note:"학년말 마무리와 새 학년 준비",         keys:["2-8","1-20","1-13","1-11"] },
+  2:  { note:"학년말 마무리와 새 학년 준비",         keys:["2-10","2-8","1-20","1-13"] },
   3:  { note:"새 학기 첫 달, 규칙과 출결부터",       keys:["4-1","2-1","1-1","1-5"] },
   4:  { note:"상담주간과 봄 체험학습",               keys:["4-5","4-2","2-5","1-6"] },
   5:  { note:"체험학습 철, 스승의 날",               keys:["2-2","1-6","2-5","3-1"] },
@@ -695,7 +795,7 @@ const MONTHLY = {
   9:  { note:"2학기 시작, 다시 살피는 아이들",       keys:["4-5","2-3","2-6","1-3"] },
   10: { note:"가을 체험학습과 교우관계 점검",         keys:["2-2","4-2","1-6","4-6"] },
   11: { note:"학년말 준비와 연수비 정산",             keys:["2-8","1-4","1-15","2-4"] },
-  12: { note:"학기말 기록과 취학 업무",               keys:["2-7","1-20","1-4","1-17"] }
+  12: { note:"학기말 기록과 취학 업무",               keys:["2-7","2-10","1-20","1-17"] }
 };
 const NEW_DAYS = 14;                   /* 추가한 날(added)로부터 며칠 동안 「새로」를 붙일지 */
 
@@ -756,11 +856,11 @@ const SITES = [
  k:"음료 커피 주문 취합 단체 회식 간식 카페"},
 {p:"1",n:17,tag:"인사내규",m:"점검·만들기",added:"2026-10-14",t:"교내 인사 내규 점검하고 만들기",c:"“올해도 학년 배정으로 한바탕 하겠네요”",u:"https://personnel-regulations.vercel.app/",
  d:"우리 학교 내규를 올리면 빠진 조항과 서로 어긋나는 조항을 찾아 고칠 문장까지 정리해 줍니다. 참고안을 바탕으로 새 내규를 만들고 인사점수도 계산합니다.",who:"관리자·인사자문위원",pc:false,
- k:"인사 내규 교내 인사 규정 인사자문위원회 담임 배정 학년 배정 부장 임용 부장교사 보직교사 교담 업무분장 인사점수 경력점 전보 유예 신구조문 대비표 HWPX 한글 내규 점검"},
+ k:"인사 내규 교내 인사 규정 인사자문위원회 담임 배정 학년 배정 부장 임용 부장교사 보직교사 교담 업무분장 인사점수 경력점 전보 유예 전보유예 신구조문 대비표 HWPX 한글 내규 점검 정족수 제척 이의신청 동점자 교담교사 기초학력 전담교사 포상 추천"},
 {p:"1",n:19,tag:"업무분장",m:"누구 일인가",added:"2026-11-05",t:"업무분장 한눈에",c:"“이 업무는 누구 일인가요?”",u:"https://division-of-work.vercel.app/",
  d:"표준안을 보고 협의해 우리 학교 안을 만들고, 작년 분장표(.hwpx)와 비교해 빠진 업무와 담당이 다른 업무를 찾습니다. 갈등 조정 절차와 근거도 담았습니다.",who:"관리자·업무 담당자",pc:false,
  prep:"비교할 때 작년 업무분장표(.hwpx)",
- k:"업무분장 업무 분장 업무분장표 표준안 표준 업무 업무 나누기 업무 조정 업무 갈등 교무 행정실 경계 업무 협의 교직원 업무 배정 학교업무최적화 협의회 HWPX 분장표 비교"},
+ k:"업무분장 업무 분장 업무분장표 표준안 표준 업무 업무 나누기 업무 조정 업무 갈등 교무 행정실 경계 업무 협의 교직원 업무 배정 학교업무최적화 협의회 HWPX 분장표 비교 늘봄 업무 돌봄 방과후 담당 CCTV 담당 누구 업무 법제처 해석 교육공무직 업무"},
 
 {p:"1",n:15,tag:"승진",m:"점수 계산",added:"2026-10-14",t:"교감 자격연수 점수 계산과 진로 설계",c:"“저는 교감 언제쯤 될 수 있을까요?”",u:"https://careerplanning.vercel.app/",
  d:"경력·연수·가산점을 넣으면 지금 서류 점수와 기준점까지 남은 점수를 보여 주고, 앞으로 몇 년 뒤 닿을지 시뮬레이션합니다.",who:"교사",pc:false,
@@ -773,10 +873,10 @@ const SITES = [
  k:"외국국적 다문화 학적 입교 편입 아포스티유 재외국민 서류"},
 {p:"1",n:14,tag:"교권침해",m:"침해인가 판별",added:"2026-10-14",t:"교육활동 침해 판별과 대응 절차",c:"“이것도 교권 침해일까요?”",u:"https://protection-of-educational-activitie-blond.vercel.app/",
  d:"있었던 일을 고르면 해당할 수 있는 침해 유형과 지금 할 일을 알려 주고, 담당자에게는 단계별 처리 절차와 기한을 안내합니다.",who:"모든 교직원",pc:false,
- k:"교권 교권침해 교육활동 침해 판별 교권보호위원회 분리조치 특별휴가 사안처리 신고 기한 담당자"},
+ k:"교권 교권침해 교육활동 침해 판별 교권보호위원회 분리조치 특별휴가 사안처리 신고 기한 담당자 지역교권보호위원회 긴급조치 분쟁조정 교원보호공제 심리상담 법률 지원 모욕 명예훼손 부당 간섭"},
 {p:"1",n:6,tag:"안전",m:"긴급 대응 순서",t:"학교 안전·긴급사항 대응 절차",c:"그 순간, 무엇부터 해야 하는지 아무도 몰랐다",u:"https://emergency-fh5s.vercel.app/",
  d:"응급환자 이송, 중대재해, 비상연락망까지 급할 때 열어 보는 절차를 모았습니다.",who:"모든 교직원",pc:false,
- k:"긴급 안전 사고 응급 이송 중대재해 위험성평가 비상연락망 매뉴얼"},
+ k:"긴급 안전 사고 응급 이송 중대재해 위험성평가 비상연락망 매뉴얼 현장체험학습 체험학습 안전 수학여행 소풍 인솔 식중독 배탈 구토 설사 보존식 실종 미아 물놀이 익수 알레르기 아나필락시스 온열질환 열사병 교통사고 화재 대피"},
 /* ── 교실과 학급 ── */
 {p:"2",n:1,tag:"출결",m:"결석 처리 구분",added:"2026-10-16",t:"출결 한눈에",c:"“학원 때문에 빠지면 뭐로 처리돼요?”",u:"https://stattendance.vercel.app/",
  d:"결석 사유를 말하듯 검색하면 출석인정·질병·기타·미인정 중 무엇인지, 어떤 서류를 언제까지 내야 하는지, 생활기록부에 어떻게 남는지 한 화면에서 답합니다. 학부모와 담임이 같은 화면을 봅니다.",who:"학부모",pc:false,
@@ -800,6 +900,10 @@ const SITES = [
  d:"수업 중에 남긴 관찰 기록을 생활기록부 문장으로 옮기는 과정을 도와줍니다.",who:"담임교사",pc:false,
  prep:"수업 중 남긴 관찰 기록",
  k:"생활기록부 통지표 세특 행동특성 과정중심평가 문장 기록"},
+{p:"2",n:10,tag:"학생부점검",m:"기재요령 점검",added:"2026-11-13",t:"학생부 점검 한눈에",c:"“이 문장, 올해 기재요령으로 보면 괜찮을까요?”",u:"https://student-record-review.vercel.app/",
+ d:"나이스에서 PDF로 저장한 학교생활기록부(생기부)나 생활통지표를 올리면, 그해 기재요령과 이번 학기 통지 항목으로 읽어 고칠 곳과 근거를 짚어 줍니다. 파일은 기기 밖으로 나가지 않습니다.",who:"담임교사",pc:false,
+ prep:"나이스에서 PDF로 저장한 학교생활기록부Ⅱ 또는 생활통지표",
+ k:"학생부 점검 생기부 점검 생활기록부 점검 학교생활기록부 기재요령 자동 점검 검토 오류 세특 교과 성취수준 특기사항 행동특성 종합의견 창의적 체험활동 창체 동아리 봉사활동 출결 금지어 입력 금지 글자수 바이트 PDF 나이스 NEIS 학년말 마감 엑셀 생활통지표 통지표 점검 통지표 교차점검 학기말 담임명 수업일수"},
 {p:"2",n:8,tag:"반편성",m:"학년말 반 배정",t:"반편성하기",c:"퇴근 시간이 다가와도 반편성은 끝나지 않았다",u:"https://class-assignment-ruddy.vercel.app/",
  d:"성적·성별·관계 조건을 놓고 여러 안을 만들어 보며 협의 자리에서 함께 결정합니다.",who:"담임교사",pc:true,
  prep:"학생 명단과 배정 자료",
@@ -834,7 +938,7 @@ const SITES = [
 /* ── 생활지도 ── */
 {p:"4",n:1,tag:"학급규칙",m:"규칙 세우기 수업",t:"학급규칙 세우기 수업 준비",c:"규칙은 붙이는 것이 아니라 정하는 것이다",u:"https://class-rules.vercel.app/",
  d:"학급 규칙을 학생들과 함께 정하는 수업을 준비하고, 미리 연습해 볼 수 있습니다.",who:"담임교사",pc:false,
- k:"학급규칙 학급헌법 학급운영 3월 규칙 세우기 수업"},
+ k:"학급규칙 학급헌법 학급운영 3월 규칙 세우기 수업 학급 약속 만들기 약속 투표 학생 자치 회복적 생활교육 복원 질문 학부모 안내문 학급회의"},
 {p:"4",n:2,tag:"관계도",m:"교우관계 설문",t:"교우관계 설문과 관계도 그리기",c:"쉬는 시간에만 보이는 우리 반의 지도",u:"https://sociogram-hazel.vercel.app/",
  d:"학년군별 설문으로 교우 관계를 모아 관계도와 리포트로 보여 줍니다.",who:"담임교사",pc:false,
  store:"학생 명단·응답 서버 저장",prep:"학생 명단, 학생이 응답할 기기",
@@ -864,10 +968,213 @@ const keyOf = s => s.p + "-" + s.n;
 const soften = () => !(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
 const isNarrow = () => !(window.matchMedia && window.matchMedia("(min-width: 900px)").matches);
 SITES.forEach((s, i) => { s.seq = i + 1; });
-/* ── 새로 들어온 도구: added 날짜로부터 NEW_DAYS일 동안 ── */
 const TODAY0 = (() => { const d = new Date(); d.setHours(0,0,0,0); return d; })();
-const isNew = s => { if (!s.added) return false; const d = new Date(s.added + "T00:00:00"); const diff = (TODAY0 - d) / 864e5; return diff >= 0 && diff < NEW_DAYS; };
+
+/* ══ 새 소식 ══════════════════════════════════════════════
+   이미 있는 도구가 바뀌었을 때 여기에 한 줄씩 더합니다(최근 것을 위에).
+     d    : 날짜 "YYYY-MM-DD"   key : 도구 열쇠 「부-번호」
+     kind : "up"(보탬 — 기능·탭 추가) | "fix"(고침 — 규정 개정·내용 바로잡기)
+     text : 무엇이 달라졌는지 한 문장
+   새 도구는 SITES의 added만 적으면 「새로」 소식이 저절로 만들어집니다.
+   오타 수정처럼 쓰는 사람이 느끼지 못하는 변화는 적지 않습니다. */
+const NEWSLOG = [
+  { d:"2026-11-14", key:"4-7", kind:"up", text:"연장통 검색·길잡이가 학부모를 위한 학교폭력 사안처리 안내의 단계별 설명·자주 묻는 질문까지 찾아 그 단계를 바로 엽니다" },
+  { d:"2026-11-14", key:"4-6", kind:"up", text:"연장통 검색·길잡이가 상담일까? 민원일까?의 사례 카드·판정 근거·대응 절차까지 찾아 그 사례를 바로 펼칩니다" },
+  { d:"2026-11-14", key:"4-5", kind:"up", text:"연장통 검색·길잡이가 학부모 상담 훈련 시뮬레이터의 시나리오(상황·대화·모범 응답)까지 찾아 그 시나리오 카드를 바로 보여 줍니다" },
+  { d:"2026-11-14", key:"4-4", kind:"up", text:"연장통 검색·길잡이가 생활지도 PLUS의 학습 내용·고시 Q&A·상황별 대응 카드까지 찾아 그 자리를 펼쳐 엽니다" },
+  { d:"2026-11-14", key:"4-3", kind:"up", text:"연장통 검색·길잡이가 나 전달법 배움터의 배우기 슬라이드·연습 문제·생활 속 상황 30가지까지 찾아 그 장면을 바로 엽니다" },
+  { d:"2026-11-14", key:"4-1", kind:"up", text:"연장통 검색·길잡이가 학급규칙 설계소의 교사 학습 내용과 수업 단계(학생 목소리·가치·약속 투표 등)까지 찾아 그 자리를 바로 엽니다" },
+  { d:"2026-11-14", key:"3-5", kind:"up", text:"연장통 검색·길잡이가 AI·디지털 수업 성장 체크의 문항과 영역 설명까지 찾아 그 문항을 바로 엽니다" },
+  { d:"2026-11-14", key:"3-4", kind:"up", text:"연장통 검색·길잡이가 내 수업 성장 지도의 수업 장면 문항과 영역 설명까지 찾아 그 문항을 바로 엽니다" },
+  { d:"2026-11-14", key:"3-1", kind:"up", text:"연장통 검색·길잡이가 청렴 방탈출의 청탁금지법 자료실(스승의 날 선물·경조사비 등)까지 찾아 그 질문을 펼쳐 엽니다" },
+  { d:"2026-11-14", key:"3-6", kind:"up", text:"연장통 검색·길잡이가 바이브 코딩 연수 길잡이의 차시 내용(배포·Firebase·프롬프트 등)까지 찾아 그 차시를 펼쳐 엽니다" },
+  { d:"2026-11-14", key:"2-6", kind:"up", text:"연장통 검색·길잡이가 해냄 보물상자 소개 글(성취기준 목표·보호자 확인·선생님 인증 등)까지 찾아 그 자리를 바로 엽니다" },
+  { d:"2026-11-14", key:"2-3", kind:"up", text:"연장통 검색·길잡이가 미인정결석 한눈에의 상황 안내·자주 묻는 질문·서식까지 찾아 그 자리를 바로 엽니다" },
+  { d:"2026-11-14", key:"2-7", kind:"up", text:"연장통 검색·길잡이가 생활기록부 작성 연구소 안의 기재 요령·개선 사례·행동특성 영역까지 찾아 그 자리를 바로 엽니다" },
+  { d:"2026-11-14", key:"2-2", kind:"up", text:"연장통 검색·길잡이가 교외체험학습 신청 기한 계산의 안내(신청 기한·사유·출석 인정 등)까지 찾아 그 자리를 바로 엽니다" },
+  { d:"2026-11-14", key:"2-4", kind:"up", text:"연장통 검색·길잡이에서 병명(수두·수족구·독감 등)을 찾으면 감염병 등교중지 안내의 그 병 화면이 바로 열립니다" },
+  { d:"2026-11-14", key:"1-19", kind:"up", text:"연장통 검색·길잡이가 업무분장 한눈에 안의 표준 업무·협의 업무(CCTV·방과후·늘봄 등)까지 찾아 그 업무를 바로 엽니다" },
+  { d:"2026-11-14", key:"1-17", kind:"up", text:"연장통 검색·길잡이가 교내 인사 내규 길잡이의 참고안 조문(육아시간·담임 배정·부장 임용 등)까지 찾아 그 조문을 바로 엽니다" },
+  { d:"2026-11-14", key:"1-15", kind:"up", text:"연장통 검색·길잡이가 교감 자격연수 내비게이터 안의 규정·조견표(가산점·근무성적·보직 등)까지 찾아 그 자리를 바로 엽니다" },
+  { d:"2026-11-14", key:"1-14", kind:"up", text:"연장통 검색·길잡이가 교육활동 침해 판별 도우미 안의 내용(침해 유형·분리조치·특별휴가 등)까지 찾아 그 자리를 바로 엽니다" },
+  { d:"2026-11-14", key:"2-10", kind:"up", text:"학생부 점검 한눈에가 이제 생활통지표도 점검합니다 — 1·2학기 통지표 PDF를 올리면 빈칸·과목 누락·담임명·수업일수까지 살핍니다" },
+  { d:"2026-11-13", key:"1-12", kind:"up", text:"연장통 검색·길잡이가 공문·회의록 작성 가이드 안의 규칙(날짜 표기·붙임·결재선 등)까지 찾아 그 자리를 바로 엽니다" },
+  { d:"2026-11-13", key:"1-3", kind:"up", text:"연장통 검색·길잡이가 외국 국적 학적도우미의 Q&A·안내 내용까지 찾아 바로 엽니다" },
+  { d:"2026-11-13", key:"1-2", kind:"up", text:"연장통 검색·길잡이가 휴가 규정 도우미 안의 내용까지 찾아 그 탭을 바로 엽니다" },
+  { d:"2026-11-13", key:"1-1", kind:"up", text:"연장통 검색·길잡이가 외부강의·겸직 도우미 안의 내용(태양광·동대표 등)까지 찾아 바로 엽니다" },
+  { d:"2026-11-13", key:"2-10", kind:"up", text:"연장통 검색·길잡이가 학생부 점검 한눈에의 점검 기준·도움말 내용까지 찾아 그 자리를 바로 엽니다" },
+  { d:"2026-11-13", key:"2-1", kind:"up", text:"연장통 검색·길잡이가 출결 한눈에 안의 내용(가습기살균제 피해 결석 등)까지 찾아 바로 엽니다" },
+  { d:"2026-11-13", key:"1-20", kind:"up", text:"연장통 검색·길잡이가 학적 한눈에 안의 내용(교육환경 전환 등)까지 찾아 바로 엽니다" },
+  { d:"2026-11-13", key:"1-6", kind:"up", text:"현장체험학습 안전 탭을 더했습니다" },
+  { d:"2026-11-13", key:"1-6", kind:"up", text:"체험학습 사고 9가지(식중독·실종 등)를 연장통 검색과 길잡이에서 바로 엽니다" }
+];
+const NEWS_KIND = { new:"새로", up:"보탬", fix:"고침" };
+const ymd = d => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+const TODAY_S = ymd(TODAY0);
+const daysAgo = n => ymd(new Date(TODAY0.getTime() - n * 864e5));
+const fmtMD = d => (+d.slice(5, 7)) + "." + (+d.slice(8, 10));
+const lsGet = (k, dflt) => { try { const v = localStorage.getItem(k); return v == null ? dflt : v; } catch(err){ return dflt; } };
+const lsSet = (k, v) => { try { localStorage.setItem(k, v); } catch(err){} };
+const lsSetOf = k => { try { return new Set(JSON.parse(localStorage.getItem(k) || "[]")); } catch(err){ return new Set(); } };
+/* 모든 소식(최근 것이 앞): NEWSLOG + added에서 만든 「새로」 */
+const ALLNEWS = (() => {
+  const has = k => SITES.some(s => keyOf(s) === k);
+  const out = NEWSLOG.filter(n => has(n.key) && n.d <= TODAY_S).map(n => Object.assign({}, n));
+  SITES.forEach(s => {
+    if (s.added && s.added <= TODAY_S && !out.some(n => n.key === keyOf(s) && n.kind === "new"))
+      out.push({ d:s.added, key:keyOf(s), kind:"new", text:"" });
+  });
+  out.forEach(n => { n.id = n.d + ":" + n.key + ":" + n.kind; n.s = SITES.find(s => keyOf(s) === n.key); });
+  return out.sort((a, b) => b.d.localeCompare(a.d) || ((b.kind === "new") - (a.kind === "new")));
+})();
+/* 지난번 방문: 날이 바뀌어 처음 들어온 순간, 그 전 방문일을 기준으로 삼습니다(그날 안에는 같은 기준) */
+const VISIT = (() => {
+  const last = lsGet("hub.last", "");
+  let since = lsGet("hub.since", "");
+  if (last && last !== TODAY_S){ since = last; lsSet("hub.since", since); }
+  else if (!last) since = "";
+  lsSet("hub.last", TODAY_S);
+  return { first: !since, since };
+})();
+const NEW_FLOOR = daysAgo(NEW_DAYS - 1);                         /* 적어도 NEW_DAYS일은 표시 */
+const UNREAD_FLOOR = VISIT.first ? NEW_FLOOR : VISIT.since;      /* 처음 온 사람은 최근 NEW_DAYS일 */
+const MARK_FLOOR = UNREAD_FLOOR < NEW_FLOOR ? UNREAD_FLOOR : NEW_FLOOR;   /* 오래 안 온 사람은 그만큼 더 길게 */
+let READ = lsSetOf("hub.newsread");
+const unreadNews = () => ALLNEWS.filter(n => n.d >= UNREAD_FLOOR && !READ.has(n.id));
+function markRead(list){
+  list.forEach(n => READ.add(n.id));
+  lsSet("hub.newsread", JSON.stringify([...READ].filter(id => ALLNEWS.some(n => n.id === id))));
+  updateNewsBadge();
+}
+/* 카드·지도에 붙일 표시: 그 도구의 가장 최근 소식 */
+const markOf = s => ALLNEWS.find(n => n.key === keyOf(s) && n.d >= MARK_FLOOR) || null;
+const isNew = s => !!markOf(s);
 const NEWS = SITES.filter(isNew);
+
+/* ══ 도구 속 항목: 체험학습 사고 9가지 ══════════════════════
+   「학교 안전·긴급사항 대응 절차」(1-6) 안의 사고 유형 카드를 검색·길잡이에서 바로 엽니다.
+   now(지금 바로 할 일)는 안전 사이트의 같은 카드와 맞춰 둡니다 — 안전 사이트를 고치면 여기도 함께.
+     k  : 이 말이 있으면 그 유형(띄어쓰기 무시)
+     kc : 체험학습·여행·버스 같은 말이 함께 있을 때만 그 유형(학교 안 일과 헷갈리지 않게) */
+const TOPIC_BASE = "https://emergency-fh5s.vercel.app/";
+const TOPIC_LV = { red:"생명 위급 가능", orange:"여러 명 피해 가능", blue:"개별 대응" };
+const TOPICS = [
+  { id:"traffic", site:"1-6", name:"교통사고", lv:"red", sub:"버스 충돌·접촉, 휴게소·주차장 차량 사고",
+    k:"교통사고 버스사고 차량사고 접촉사고 충돌사고 추돌 버스충돌 차사고", kc:"충돌 접촉 휴게소 주차장 고속도로 블랙박스 차에치",
+    now:["비상등·안전삼각대를 켜고, 학생을 차 밖 안전한 곳(가드레일 바깥 등)으로 대피","119·112 신고 — 다친 사람 수와 위치(도로명·이정표·휴게소명)를 정확히","좌석표로 인원을 대조하고, 다친 학생부터 상태 확인"] },
+  { id:"missing", site:"1-6", name:"실종·미아", lv:"red", sub:"집합 시각에 나타나지 않음, 연락 두절",
+    k:"실종 미아 길을잃 길잃 집합시각에안 집합에안", kc:"연락두절 연락이안 사라졌 없어졌 안보여 안보이 이탈",
+    now:["마지막으로 본 시각·장소, 함께 있던 친구를 바로 확인","학생 휴대전화로 연락하고, 시설 안내데스크에 방송·출입구 확인 요청","짧게 정해 둔 수색 시간 안에 못 찾으면 지체 없이 112 신고"] },
+  { id:"water", site:"1-6", name:"물놀이·익수", lv:"red", sub:"계곡·바다·수영장 체험 중 물에 빠짐",
+    k:"물놀이 익수 물에빠 물에빠졌 계곡 바다에빠 구명조끼", kc:"수영 물에서",
+    now:["큰 소리로 알리고 안전요원·119에 즉시 신고","직접 뛰어들지 말고 구명튜브·막대·로프 등 던질 것으로 구조","물 밖으로 나오면 의식·호흡 확인 → 없으면 바로 심폐소생술·AED"] },
+  { id:"allergy", site:"1-6", name:"알레르기 쇼크", lv:"red", sub:"음식·벌 쏘임 뒤 호흡곤란·두드러기·어지럼",
+    k:"알레르기 알러지 아나필락시스 에피펜 에피네프린 자가주사 벌에쏘 벌쏘임 벌에물", kc:"두드러기 호흡곤란 숨을못 숨이차 땅콩 견과",
+    now:["즉시 119 — \"아나필락시스 의심\"이라고 알리기","에피네프린 자가주사기를 가진 학생이면 바로 사용(허벅지 바깥쪽)","편히 눕히고(숨차면 앉힌 자세) 혼자 두지 않기"] },
+  { id:"food", site:"1-6", name:"식중독·집단 복통", lv:"orange", sub:"같은 음식을 먹은 학생 여럿이 복통·구토·설사",
+    k:"식중독 집단복통 집단설사 집단구토 보존식 역학조사 배탈", kc:"구토 토해 토하 토했 설사 복통 배아 배가아",
+    now:["증상 학생을 따로 모으고 명단(이름·증상·시작 시각·먹은 음식) 작성","같은 증세가 2명 이상이면 식중독 의심 → 학교 보고 후 관할 보건소·교육(지원)청에 즉시 유선 신고","남은 음식·구토물을 버리지 말고, 식당에 보존식 보관 요청"] },
+  { id:"heat", site:"1-6", name:"폭염·온열질환", lv:"orange", sub:"어지럼·두통·메스꺼움, 몸이 뜨겁고 땀이 안 남",
+    k:"온열질환 열사병 일사병 열탈진", kc:"폭염 더위 더워서 어지럼 어지러 탈수 쓰러",
+    now:["그늘·냉방된 곳으로 옮기고 옷을 느슨하게","젖은 수건·부채·얼음팩(목·겨드랑이·사타구니)으로 몸 식히기","의식이 흐리거나 말이 어눌하면 즉시 119 — 억지로 물 먹이지 않기"] },
+  { id:"fire", site:"1-6", name:"화재·대피", lv:"orange", sub:"숙소·체험시설 화재, 지진 등 긴급 대피",
+    k:"숙소화재 숙소에불 숙소에서불", kc:"화재 불이 불났 대피 지진 연기 비상벨 화재경보",
+    now:["\"불이야\" 크게 알리고 비상벨, 119 신고","젖은 수건으로 코·입을 막고 자세를 낮춰 계단으로 대피(엘리베이터 금지)","대피 장소에서 반별 인원 확인 — 없는 학생은 소방대에 바로 알리기"] },
+  { id:"injury", site:"1-6", name:"부상(낙상·골절)", lv:"blue", sub:"넘어짐·부딪힘·체험기구 사고",
+    k:"", kc:"부상 다쳐 다쳤 다친 넘어 낙상 골절 부러 출혈 피가 삐었 부딪",
+    now:["주변 위험부터 치우고, 다친 학생을 함부로 움직이지 않게 하기","출혈은 깨끗한 거즈로 눌러 지혈, 붓거나 휜 곳은 고정·냉찜질","상태로 3분류 — 병원치료 불필요 / 병원치료 필요 / 생명위급(119)"] },
+  { id:"conflict", site:"1-6", name:"다툼·일탈", lv:"blue", sub:"학생 간 폭력, 무단 이탈, 숙소 야간 이탈",
+    k:"", kc:"다툼 싸움 싸웠 때렸 일탈 무단이탈 야간이탈 숙소이탈 숙소를나 가출 몰래나",
+    now:["관련 학생을 즉시 떼어 놓고, 다친 학생부터 확인","피해 학생은 교사 곁에서 안정시키고, 상대 학생은 다른 교사가 맡기","무단 이탈이면 위치부터 확인 — 연락이 안 되면 실종 대응으로 전환"] }
+];
+const TRIP_CTX = /체험|현장\s*학습|수학\s*여행|수련|소풍|견학|여행|숙소|숙박|버스|인솔|휴게소|캠프|야영|박물관|과학관|놀이\s*공원|테마\s*파크|계곡|바다/;
+const topicUrl = (t, seg) => TOPIC_BASE + "?ft=" + t.id + (seg ? "&seg=" + seg : "");
+const topicBy = id => TOPICS.find(t => t.id === id);
+/* 질문에 맞는 사고 유형 하나(점수 2 이상). k는 2점, kc는 체험학습 맥락이 있을 때 1점 */
+function topicMatch(text){
+  const s = String(text).toLowerCase().replace(/\s+/g, ""), ctx = TRIP_CTX.test(text);
+  let best = null, bs = 0;
+  TOPICS.forEach(t => {
+    let sc = 0;
+    t.k.split(/\s+/).filter(Boolean).forEach(w => { if (s.includes(w)) sc += 2; });
+    if (ctx) t.kc.split(/\s+/).filter(Boolean).forEach(w => { if (s.includes(w)) sc += 1; });
+    if (ctx && sc) sc += 1;
+    if (sc > bs){ bs = sc; best = t; }
+  });
+  return bs >= 2 ? best : null;
+}
+
+/* ══ 도구 속 내용 색인(deep-index.json) — 두 번째 그물 ══════════
+   검색어 수집기(build-deep-index.mjs)가 각 도구 사이트에서 모은 문장입니다.
+   도구 이름·검색어로 못 찾은 말이 어느 도구 안에 나오는지 찾아 줍니다.
+   파일은 처음 검색하거나 길잡이를 열 때 한 번만 불러옵니다(없으면 조용히 건너뜀). */
+const DEEP_URL = "deep-index.json";
+/* 주소에 ?q=검색어 를 붙이면 그 사이트 검색이 바로 열리는 도구 — 기능을 넣은 사이트를 여기에 더합니다 */
+const DEEP_QLINK = new Set(["1-20", "1-6", "2-1", "2-10", "1-1", "1-2", "1-3", "1-12", "1-14", "1-15", "1-17", "1-19", "2-4", "2-2", "2-7", "2-3", "2-6", "3-6", "3-1", "3-4", "3-5", "4-1", "4-3", "4-4", "4-5", "4-6", "4-7"]);
+let DEEP = null, DEEP_LOADING = null;
+function loadDeep(){
+  if (!DEEP_LOADING){
+    DEEP_LOADING = fetch(DEEP_URL, { cache:"no-cache" })
+      .then(r => r.ok ? r.json() : null)
+      .then(j => {
+        if (!j || !j.sites) return null;
+        DEEP = Object.entries(j.sites).map(([key, list]) => ({ key, s:SITES.find(x => keyOf(x) === key), list,
+          norm:list.map(x => x.toLowerCase().replace(/\s+/g, "")) })).filter(d => d.s && d.list.length);
+        return DEEP;
+      })
+      .catch(() => null);
+  }
+  return DEEP_LOADING;
+}
+/* 질문의 핵심 낱말(조사·흔한 말 뺀 것). 띄어 쓴 말은 붙인 꼴로도 찾습니다: 교육환경 전환 = 교육환경전환 */
+/* 묻는 말(뭐예요·알려 주세요·어떻게…)은 찾을 낱말에서 뺍니다 */
+/* 묻는 말은 도구 속 낱말 찾기에서 뺍니다(‘누가기록’처럼 낱말 일부인 경우는 남김) */
+const DEEP_ASK = /^(뭐|뭔|무슨|무엇|어떻|어떡|어디|언제|왜|누가(?!기록)|누구|얼마|몇|알려|알고|궁금|설명|의미|뜻|해야|하려|되나|하나|있나|없나|인가|일까|할까|될까|좋을|싶|주세|쓰는$|쓰나|써야)/;
+function deepWords(q){
+  return [...new Set(qWords(q).map(stemKo).filter(w => w.length >= 2 && !STOP.has(w) && !LOW.has(w) && !DEEP_ASK.test(w)))];
+}
+function deepSearch(q){
+  if (!DEEP) return [];
+  const words = deepWords(q); if (!words.length) return [];
+  const joined = words.join(""), weight = w => (w.length >= 3 ? 2 : 1);
+  const full = words.reduce((a, w) => a + weight(w), 0);
+  const pass = need => {
+    const out = [];
+    DEEP.forEach(d => {
+      let best = -1, bs = 0, cnt = 0;
+      d.norm.forEach((n, i) => {
+        let sc = (words.length > 1 && n.includes(joined)) ? full + 2 : 0;
+        if (!sc){ words.forEach(w => { if (n.includes(w)) sc += weight(w); }); if (sc < need) sc = 0; }
+        if (sc){ cnt++; if (sc > bs){ bs = sc; best = i; } }
+      });
+      if (best >= 0) out.push({ d, key:d.key, s:d.s, sc:bs * 100 + Math.min(cnt, 50), cnt, snip:d.list[best], words, orig:q });
+    });
+    return out.sort((a, b) => b.sc - a.sc).slice(0, 5);
+  };
+  let r = pass(full);                                  /* 모든 낱말이 한 문장에 */
+  if (!r.length && words.length >= 2) r = pass(Math.ceil(full * 0.6));   /* 아니면 낱말 대부분이 한 문장에 */
+  return r;
+}
+function deepUrl(h){
+  if (!DEEP_QLINK.has(h.key)) return h.s.u;
+  /* 낱말은 소문자로 맞춰 찾았지만, 도구에는 쓴 그대로(CCTV·NEIS 등) 넘깁니다 */
+  const o = String(h.orig || ""), lo = o.toLowerCase();
+  const ws = h.words.map(w => { const i = lo.indexOf(w); return i >= 0 ? o.substr(i, w.length) : w; });
+  return h.s.u + "?q=" + encodeURIComponent(ws.join(" "));
+}
+/* 띄어쓰기가 달라도 찾은 말에 형광펜, 너무 길면 그 말 둘레만 */
+function deepSnip(h, max){
+  const pats = [h.words.join(""), ...h.words].sort((a, b) => b.length - a.length)
+    .map(w => [...w].map(c => c.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("\\s*"));
+  const re = new RegExp("(" + pats.join("|") + ")", "i");
+  let t = h.snip; max = max || 96;
+  const m = t.match(re);
+  if (t.length > max){
+    const at = m ? m.index : 0, st = Math.max(0, Math.min(at - 24, t.length - max));
+    t = (st > 0 ? "…" : "") + t.slice(st, st + max) + (st + max < t.length ? "…" : "");
+  }
+  return esc(t).replace(new RegExp(pats.join("|"), "gi"), x => `<mark>${x}</mark>`);
+}
 
 /* 개수를 우리말로: 30 → "서른", 32 → "서른두". 100 이상은 숫자로. */
 function koCount(n){
@@ -893,17 +1200,20 @@ let fPart = "all", query = "";
       도구를 새로 넣을 때 여기에 한 줄씩 더하면 됩니다. */
 const SYNS = [
   /* 복무·휴가·겸직 */
-  [/외출|조퇴|지각|출퇴근|근무\s*시간|초과\s*근무|시간\s*외|대체\s*휴무|휴일\s*근무|출장|41\s*조|근무지\s*외|사후\s*결재|복무|(주말|토요일|일요일|공휴일|휴일).{0,12}(나와|나왔|출근|행사|근무|운동회)|운동회.{0,10}수당|(방학|집에서).{0,8}연수/, "복무 초과근무 출장 41조"],
+  [/외출|출퇴근|(교사|선생님|내가|제가).{0,10}(조퇴|지각)|근무\s*시간|초과\s*근무|시간\s*외|대체\s*휴무|휴일\s*근무|출장|41\s*조|근무지\s*외|사후\s*결재|복무|(주말|토요일|일요일|공휴일|휴일).{0,12}(나와|나왔|출근|행사|근무|운동회)|운동회.{0,10}수당|(방학|집에서).{0,8}연수/, "복무 초과근무 출장 41조"],
   [/휴가|연가|병가|공가|특별\s*휴가|가족\s*돌봄|돌봄\s*휴가|육아\s*시간|모성\s*보호|경조사|며칠\s*(남|쓸)|쉬고\s*싶|하루\s*쉬|몸살|감기\s*(걸|때문)/, "휴가 연가 병가"],
   [/(교사|선생님|교원|교직원|내가|제가).{0,12}(병원|진료|아프|아파|입원)/, "병가 휴가"],
   [/겸직|유튜브|유튜버|크리에이터|강의료|원고료|외부\s*강의|강사로|쇼핑몰|부업|영리\s*(업무|활동)|투잡|사업자|인세|학원\s*강사|과외|블로그|광고\s*수익|수익을?\s*(얻|내|올)|알바|아르바이트|퇴근\s*후.{0,10}(일|강사|강의)/, "겸직^2 외부강의"],
   [/보결|보강|결강|결근|대신\s*들어|대체\s*수업|수업을?\s*대신|빈\s*수업|수업을?\s*(진행하지|못\s*하|빠지)|시수.{0,4}확보/, "보결^2"],
-  [/누가\s*들어|들어갈\s*(사람|선생)|대신\s*(맡|봐)/, "보결^3"],
+  [/누가\s*(들어|대신)|들어갈\s*(사람|선생)|대신\s*(맡|봐|해|하|들어)/, "보결^3"],
   [/시간표|시수|시간\s*배당|수업\s*(교체|변경|맞교환)|수업이?\s*취소/, "시간표 시수"],
   [/방학\s*중\s*비근무|교육\s*공무직|공무직|조리\s*(실무|사)|급식\s*(실무|종사)|근무\s*일수|유급\s*일/, "근무일수 방학중 비근무"],
   /* 연수·법정교육·전문성 */
   [/연수비|연수\s*(비용|경비|예산|지원)|영수증|정산/, "자율연수비 정산"],
   [/법정\s*(의무)?\s*(교육|연수)|의무\s*(교육|연수)|의무\s*이수/, "법정교육 의무교육"],
+  [/예방\s*교육/, "법정교육^2 의무교육"],
+  [/(저|나|제게|교사|선생님|담임)(한테|에게|보고).{0,24}(라고|이라고|욕)/, "교권^2 침해 교육활동 판별"],
+  [/(친구|다른\s*(학생|아이)|반\s*친구)(한테|에게|를|보고).{0,24}(라고|이라고|불렀|놀렸|놀려)/, "학교폭력^2"],
   [/수업\s*(역량|전문성|성장|나눔|공개|컨설팅|개선|진단)|교내\s*연수|전문적\s*학습\s*공동체|전학공|자율\s*연수.*(적용|공유)/, "수업역량 수업 성장"],
   [/\bai\b|인공\s*지능|생성형|챗\s*gpt|chatgpt|gpt|에듀\s*테크|디지털/i, "AI 디지털 에듀테크"],
   [/코딩|프로그래밍|소프트웨어|sw\s*교육|웹\s*(사이트|앱)\s*만들|바이브/i, "코딩 바이브코딩"],
@@ -914,14 +1224,16 @@ const SYNS = [
   [/업무\s*(분장|배정|조정|분담|량|나누)|담당자가?\s*(불분명|애매|모호|없)|누구\s*(일|업무)|일을?\s*누가/, "업무분장"],
   [/인수\s*인계|후임|전임자|담당자가?\s*(바뀌|변경|교체)|업무를?\s*넘기|일을?\s*넘겨|넘겨\s*주|새로\s*온\s*(담당|사람)/, "인수인계 후임"],
   [/음료|다과|커피|간식|회식/, "음료 간식"],
-  [/내규|인사\s*(규정|자문|관리\s*기준)|보직\s*교사|부장\s*(교사)?\s*(임용|배정|선정)|학년\s*배정|담임\s*배정/, "인사 내규 보직교사"],
+  [/내규|인사\s*(규정|자문|관리\s*기준)|전보\s*유예|보직\s*교사|부장\s*(교사)?\s*(임용|배정|선정)|학년\s*배정|담임\s*배정/, "인사 내규 보직교사"],
   [/승진|교감\s*(이\s*)?(되|으로|승진)|교장\s*(이\s*)?되|가산점|근무\s*평정|근평|경력\s*평정|휴직.*(경력|영향)/, "승진 교감 가산점"],
   [/청탁|김영란|선물|상품권|촌지|금품|접대|갑질|청렴|부패|뇌물|쿠폰|기프티콘|답례|감사\s*(표시|선물)|성의/, "청렴^2 청탁금지법"],
   /* 학적·출결·체험학습·감염병 */
   [/외국\s*국적|외국인|다문화|이주\s*(배경|민)|난민|(외국|해외)에서\s*(온|왔)|한국어를?\s*(못|모르)|중도\s*입국|고려인|러시아|중국|베트남|우즈벡|필리핀|몽골|캄보디아|태국|카자흐|키르기스|네팔|파키스탄|미얀마|인도네시아/, "외국국적^2 다문화"],
-  [/학적|전학|전입|전출|편입|재취학|취학\s*(여부|유예|면제|의무|확인)|미취학|유예|면제|정원\s*외|졸업|진급|입학\s*(연기|서류|절차)|입학하거나|입학식.*(참석|불참|못|안)/, "학적 취학"],
+  [/학적|전학|전입|전출|편입|재취학|취학\s*(여부|유예|면제|의무|확인)|미취학|(?<!전보\s*)유예|면제|정원\s*외|졸업|진급|입학\s*(연기|서류|절차)|입학하거나|입학식.*(참석|불참|못|안)/, "학적 취학"],
   [/중학교|진학|상급\s*학교/, "학적^2 졸업"],
-  [/결석|지각생|출석|출결|진단서|진료\s*확인서|소견서|(학생|아이|자녀).{0,12}(병원|아프|아파|조퇴)/, "출결 결석"],
+  [/귀국|(해외|외국)에서\s*(살|지내|거주|공부)/, "학적^3 취학"],
+  [/학원|대회|시합|시험.{0,6}(빠|결석)|빠진\s*(건|날|것|거)/, "출결^2 결석"],
+  [/결석|지각생|출석|출결|진단서|진료\s*확인서|소견서|(학생|아이|자녀).{0,12}(병원|아프|아파|조퇴)|(조퇴|병원).{0,12}(학생|아이)/, "출결 결석"],
   [/(교외|가정)\s*체험|체험\s*학습\s*(신청|보고서|결과)|가정\s*학습|가족\s*여행|해외\s*여행/, "교외체험학습"],
   [/무단\s*결석|미인정|장기\s*결석|장기간\s*결석|연락\s*(두절|이?\s*안\s*(되|돼)|되지|이?\s*닿지)|학교\s*(에\s*)?안\s*(오|와|나와)|며칠째|일주일째|소재|가정\s*방문|정당한\s*사유\s*없이|(안|못)\s*나오|나오지\s*않/, "미인정결석 장기결석"],
   [/감염병|독감|인플루엔자|수두|코로나|수족구|결막염|전염|등교\s*중지|격리|의심\s*증상|확진/, "감염병 등교중지"],
@@ -931,23 +1243,24 @@ const SYNS = [
   [/취학\s*(여부|확인)|취학하지|입학하지\s*않|미취학/, "학적^3 취학 소재"],
   /* 신입생·반편성·통지표 */
   [/신입생|예비\s*소집|입학식|입학\s*(전|초)|1\s*학년\s*(적응|입학)/, "신입생 1학년"],
-  [/반\s*편성|반\s*배정|반을?\s*나누|반\s*나누|학급\s*편성|같은\s*반|다른\s*반|반\s*배치/, "반편성"],
+  [/반\s*편성|반\s*배정|반을?\s*나누|반\s*나누|학급\s*편성|같은\s*반|다른\s*반|반\s*배치/, "반편성^2"],
   [/통지표|생활\s*기록부|생기부|세특|행동\s*특성|행발|종합\s*의견|학기말|성취도/, "통지표 생활기록부"],
+  [/(생활\s*기록부|생기부|학생부|세특|행발|종합\s*의견).{0,14}(점검|검토|검사|확인|오류|틀린|틀렸|맞는지|괜찮|마감|기재\s*요령)|기재\s*요령|기재\s*금지|입력\s*(금지|불가)|금지\s*어|글자\s*수|바이트|byte/i, "학생부점검^3 기재요령"],
   [/(^|[^육])목표\s*(설정|세우)|성취\s*인증|칭찬\s*(스티커|제도)|자기\s*주도/, "목표 해냄"],
   /* 학급운영·생활지도·상담 */
   [/교우\s*관계|친구\s*(관계|사이)|관계도|소시오|사회성\s*측정|따돌림|왕따|소외|외톨이|혼자\s*(지내|놀|노는|있)|친밀도|또래/, "교우관계 관계도"],
   [/학급\s*(규칙|약속|헌법|운영)|규칙을?\s*(만들|정하|세우)/, "학급규칙"],
-  [/문제\s*행동|도전\s*행동|생활\s*지도|훈육|방해|지시.{0,6}(따르지|불응|거부)|말을?\s*안\s*듣|산만|공격적|떼쓰|돌발|돌아다니|소리를?\s*지르|때리|던지|자리\s*이탈|가만히\s*있지/, "생활지도^2 도전행동"],
+  [/문제\s*행동|도전\s*행동|생활\s*지도|훈육|방해|지시.{0,6}(따르지|불응|거부)|말을?\s*안\s*듣|산만|공격적|떼쓰|돌발|때렸|때려|발로\s*차|돌아다니|소리를?\s*지르|때리|던지|자리\s*이탈|가만히\s*있지/, "생활지도^2 도전행동"],
   [/학부모\s*상담|상담\s*(준비|주간|기록|자료|과정|에서)|보호자\s*상담|면담/, "학부모상담 상담"],
   [/나\s*전달법|아이\s*메시지|i\s*-?\s*message|감정을?\s*(말로|표현)|대화법/i, "나전달법 대화법"],
   /* 교권·민원·학교폭력 */
   [/교권|교육\s*활동\s*(침해|보호)|침해\s*행위|욕설|폭언|모욕|악성\s*민원|반복적으로\s*(전화|문자)|협박|교보위|욕을?\s*(했|하|해)|(학부모|보호자|엄마|아빠).{0,12}(밤|새벽|주말|계속|자꾸|매일|밤마다).{0,8}(전화|문자|카톡|연락)|카톡|문자\s*폭탄/, "교권 침해 교육활동 판별"],
   [/용어|뜻이|뜻은|의미와|차이는|정의(는|가|를)/, "용어^2"],
   [/민원|항의|이의를?\s*제기|불만|컴플레인/, "민원 상담"],
-  [/학교\s*폭력|학폭|다툼|싸움|괴롭힘|피해\s*학생|가해\s*학생|심의\s*위원회/, "학교폭력"]
+  [/학교\s*폭력|학폭|다툼|싸움|괴롭힘|친구를?\s*(때|밀|놀리)|피해\s*학생|가해\s*학생|심의\s*위원회/, "학교폭력"]
 ];
 /* 질문에 흔히 붙어 점수에 넣지 않는 말 */
-const STOP = new Set(["초등학교","초등","초등학생","학교","학생","학생이","교사","교사가","선생님","담임","담임교사","교직원","아이","아동","어떻게","어떤","어느","무엇","무엇이","무엇인가","언제","어디","어디까지","경우","해야","하나","되나","있나","없나","필요한가","가능한가","가능","방법","방법은","절차","절차가","순서","단계","처리","처리해야","대응","조치","기준","내용","사항","관련","위해","위한","대해","반드시","별도","별도의","다른","같은","모든","각각","어떤","효과적","효과적인","적절","적절한","바람직한","구체적인","좋을","좋은","우리","저희","혹시","그리고","그런데","정말","이런","그런","수","때","및","등","것","거","것이","것은","있는","하는","되는","받을","받아야","있을","해도","되나요","하나요","있나요","인가요","할까요","될까요","실시","진행","운영","발생","주의","주의해야","확인","확인해야","준비","적용","반영","포함","제공","인정","인정받을","요청","사용","활용","지원","지도","필요","필요한","학교에서","학교는","학교의"]);
+const STOP = new Set(["사이트","사이트를","사이트는","초등학교","초등","초등학생","학교","학생","학생이","교사","교사가","선생님","담임","담임교사","교직원","아이","아동","어떻게","어떤","어느","무엇","무엇이","무엇인가","언제","어디","어디까지","경우","해야","하나","되나","있나","없나","필요한가","가능한가","가능","방법","방법은","절차","절차가","순서","단계","처리","처리해야","대응","조치","기준","내용","사항","관련","위해","위한","대해","반드시","별도","별도의","다른","같은","모든","각각","어떤","효과적","효과적인","적절","적절한","바람직한","구체적인","좋을","좋은","우리","저희","혹시","그리고","그런데","정말","이런","그런","수","때","및","등","것","거","것이","것은","있는","하는","되는","받을","받아야","있을","해도","되나요","하나요","있나요","인가요","할까요","될까요","실시","진행","운영","발생","주의","주의해야","확인","확인해야","준비","적용","반영","포함","제공","인정","인정받을","요청","사용","활용","지원","지도","필요","필요한","학교에서","학교는","학교의"]);
 /* 흔해서 약하게만 세는 말 */
 const LOW = new Set(["수업","학부모","연수","교육","학급","학년","업무","계획","서류","상담","안전","결석"]);
 const SUFFIX = ["으로부터","에서부터","이라면","에게서","으로서","으로써","이에요","이었는데","했는데","었는데","았는데","하려면","으려면","려면","해야","하고","하는","하면","해서","했을","하였","에서는","으로는","에게는","에서","에게","한테","까지","부터","으로","이랑","처럼","보다","이나","이며","이고","인데","는데","은데","하여","되어","된다","한다","하다","이다","습니다","합니다","니다","나요","가요","까요","어요","아요","해요","에요","예요","라도","이라도","은","는","이","가","을","를","에","의","도","만","와","과","로","요","고","면","지","한","할","된","될"];
@@ -1108,10 +1421,10 @@ function fastScroll(y, done){
 function renderMap(){
   /* 한 덩어리 모자이크: 영역은 색으로 이어지고, 하는 일은 아래 이름표 띠에 보입니다.
      (휴대폰은 마우스를 올릴 수 없어 칸 안에 하는 일을 함께 씁니다) */
-  $("#map").innerHTML = SITES.map(s => {
-    const p = partOf(s.p);
-    return `<button class="cell" type="button" data-go="${keyOf(s)}" style="--k:${p.color};--kl:${p.light}"
-      aria-label="${esc(s.t)}${s.m ? " — " + esc(s.m) : ""}${isNew(s) ? " (새로 들어온 도구)" : ""}"><span class="ct">${esc(s.tag)}</span>${s.m ? `<span class="cm">${esc(s.m)}</span>` : ""}${isNew(s) ? '<i class="nd" aria-hidden="true"></i>' : ""}</button>`;
+  $("#map").innerHTML = SITES.map((s, i) => {
+    const p = partOf(s.p), mk = markOf(s);
+    return `<button class="cell" type="button" data-go="${keyOf(s)}" style="--k:${p.color};--kl:${p.light};--i:${i}"
+      aria-label="${esc(s.t)}${s.m ? " — " + esc(s.m) : ""}${mk ? " (새 소식: " + NEWS_KIND[mk.kind] + ")" : ""}"><span class="ct">${esc(s.tag)}</span>${s.m ? `<span class="cm">${esc(s.m)}</span>` : ""}${mk ? `<i class="nd${mk.kind !== "new" ? " up" : ""}" aria-hidden="true"></i>` : ""}</button>`;
   }).join("") + `<button class="cell all" type="button" data-scroll="list" aria-label="전체 목록으로"><span class="ct">전체 목록</span><span class="ca" aria-hidden="true">↓</span></button>`;
   updateMapDim();
 }
@@ -1259,14 +1572,23 @@ function whenScrollSettles(smooth, fn){
   }, { passive:true }));
 
 /* ── 카드 ── */
+/* 검색 중이면, 그 말이 도구 안에도 있을 때 카드 제목 링크가 그 자리(?q=)로 바로 열립니다 */
+let QH_KEY = "", QH = new Map();
+function toolHref(s){
+  if (!query || !DEEP || !DEEP_QLINK.has(keyOf(s))) return s.u;
+  if (QH_KEY !== query){ QH_KEY = query; QH = new Map(deepSearch(query).map(h => [h.key, deepUrl(h)])); }
+  return QH.get(keyOf(s)) || s.u;
+}
 function card(s, p){
   const meta = [`<span>${esc(s.who)}</span>`];
   if (s.pc) meta.push('<span>PC 권장</span>');
   if (s.store) meta.push(`<span class="store">${esc(s.store)}</span>`);
+  const mk = markOf(s);
   return `<article class="item" id="t-${keyOf(s)}" style="--k:${p.color};--kl:${p.light}" data-key="${keyOf(s)}" data-url="${esc(s.u)}">
-    <span class="tagrow"><span class="tagbadge" aria-hidden="true">${esc(s.tag)}</span>${isNew(s) ? '<span class="newtag">새로</span>' : ""}</span>
-    <h3><a href="${esc(s.u)}" target="_blank" rel="noopener">${esc(s.t)}</a></h3>
+    <span class="tagrow"><span class="tagbadge" aria-hidden="true">${esc(s.tag)}</span>${mk ? `<span class="newtag${mk.kind !== "new" ? " up" : ""}">${NEWS_KIND[mk.kind]}</span>` : ""}</span>
+    <h3><a href="${esc(toolHref(s))}" target="_blank" rel="noopener">${esc(s.t)}</a></h3>
     <p class="desc">${esc(s.d)}</p>
+    ${mk && mk.kind !== "new" && mk.text ? `<p class="upline"><b>${fmtMD(mk.d)} ${NEWS_KIND[mk.kind]}</b> ${esc(mk.text)}</p>` : ""}
     <p class="who">${meta.join("")}</p>
     ${s.prep ? `<p class="prep"><b>준비물</b> ${esc(s.prep)}</p>` : ''}
     ${SHOW_BOOK_CHAPTER ? `<p class="chapline"><b>책 ${esc(p.book)} ${s.n}장</b> ${esc(s.c)}</p>` : ''}
@@ -1277,23 +1599,65 @@ function card(s, p){
   </article>`;
 }
 
+/* 도구 속 내용 카드 — 그 말이 나오는 도구와 문장 한 줄 */
+let CUR_DEEP = [];
+function dcard(h){
+  const p = partOf(h.s.p), u = deepUrl(h), q = DEEP_QLINK.has(h.key);
+  return `<article class="item dcard" style="--k:${p.color};--kl:${p.light}" data-turl="${esc(u)}" data-url="${esc(u)}">
+    <span class="tagrow"><span class="tagbadge" aria-hidden="true">${esc(h.s.tag)}</span><span class="dhint">도구 안의 내용</span></span>
+    <h3><a href="${esc(u)}" target="_blank" rel="noopener">${esc(h.s.t)}</a></h3>
+    <p class="desc dsnip">${deepSnip(h, 150)}</p>
+    <p class="who"><span>이 도구 안 ${h.cnt}곳에 나옵니다</span></p>
+    <div class="acts">
+      <a class="pri" href="${esc(u)}" target="_blank" rel="noopener">${q ? "그 내용 바로 찾아 열기 ↗" : "도구 열기 ↗"}</a>
+      ${q ? "" : `<span class="dtip">열린 뒤 ‘${esc(h.words.join(" "))}’를 찾아보세요</span>`}
+    </div>
+  </article>`;
+}
+/* 도구 속 항목 카드(체험학습 사고 유형) — 누르면 안전 사이트의 그 카드가 바로 열립니다 */
+let CUR_TOPIC = null;
+function tcard(t){
+  const s = SITES.find(x => keyOf(x) === t.site), p = partOf(s.p), u = topicUrl(t);
+  return `<article class="item tcard" style="--k:${p.color};--kl:${p.light}" data-turl="${esc(u)}" data-url="${esc(u)}">
+    <span class="tagrow"><span class="tagbadge">체험학습 사고</span><span class="tlv lv-${t.lv}">${TOPIC_LV[t.lv]}</span></span>
+    <h3><a href="${esc(u)}" target="_blank" rel="noopener">${esc(t.name)}</a></h3>
+    <p class="desc">${esc(t.sub)}</p>
+    <p class="tnowh">지금 바로 할 일</p>
+    <ol class="tnow">${t.now.map(x => `<li>${esc(x)}</li>`).join("")}</ol>
+    <p class="who"><span>「${esc(s.t)}」 안의 항목</span></p>
+    <div class="acts">
+      <a class="pri" href="${esc(u)}" target="_blank" rel="noopener">대처 전체 보기 ↗</a>
+      <a href="${esc(topicUrl(t, "b"))}" target="_blank" rel="noopener">보고·안내 문구 만들기 ↗</a>
+      ${t.lv === "red" ? `<a href="tel:119">119 전화</a>` : ""}
+    </div>
+  </article>`;
+}
 function render(){
   clearArrive();
   let h = "", total = 0;
+  CUR_TOPIC = query && (fPart === "all" || fPart === "1") ? topicMatch(query) : null;
+  /* 한 학생 배탈 결석 같은 출결 질문에는 식중독 카드를 띄우지 않습니다 */
+  if (CUR_TOPIC && CUR_TOPIC.id === "food" && !TRIP_CTX.test(query) && /결석|조퇴|지각|출결|출석/.test(query) && !FOOD_GROUP.test(query)) CUR_TOPIC = null;
   if (query){
     const R = ranked();
     const items = SITES.filter(match).sort((a, b) => R.get(keyOf(a)) - R.get(keyOf(b)));
+    const tp = CUR_TOPIC;
+    /* 사고 유형이 잡히면 그 항목이 들어 있는 도구도 꼭 함께 보여 줍니다 */
+    if (tp){ const ts = SITES.find(s => keyOf(s) === tp.site); const i = items.indexOf(ts); if (i > 0) items.splice(i, 1); if (ts && i !== 0) items.unshift(ts); }
     total = items.length;
     if (total){
       const best = items[0], rest = items.slice(1);
       h = `<section class="part results" style="--k:var(--ink);--tint:#fff">
       <div class="wrap">
         <div class="partrule"></div>
-        <div class="parthead"><h2>검색 결과</h2><span class="count">${total}개</span></div>
+        <div class="parthead"><h2>검색 결과</h2><span class="count">${total + (tp ? 1 : 0)}개</span></div>
         <p class="partdesc">질문과 잘 맞는 순서로 보여 줍니다. 문장으로 물어도 됩니다.</p>
-        <p class="bestlabel">가장 잘 맞는 도구</p>
+        ${tp ? `<p class="bestlabel">가장 잘 맞는 항목</p>
+        <div class="grid best">${tcard(tp)}</div>
+        <p class="bestlabel more">함께 볼 만한 도구</p>
+        <div class="grid">${items.map(s => card(s, partOf(s.p))).join("")}</div>` : `<p class="bestlabel">가장 잘 맞는 도구</p>
         <div class="grid best">${card(best, partOf(best.p))}</div>
-        ${rest.length ? `<p class="bestlabel more">함께 볼 만한 도구</p><div class="grid">${rest.map(s => card(s, partOf(s.p))).join("")}</div>` : ""}
+        ${rest.length ? `<p class="bestlabel more">함께 볼 만한 도구</p><div class="grid">${rest.map(s => card(s, partOf(s.p))).join("")}</div>` : ""}`}
       </div>
     </section>`;
     }
@@ -1311,6 +1675,25 @@ function render(){
       </div>
     </section>`;
   });
+  /* 도구 속 내용: 위 결과에 없는 도구에서만, 또는 결과가 없거나 약할 때 */
+  CUR_DEEP = [];
+  if (query && fPart === "all" && DEEP){
+    const shown = new Set(query ? SITES.filter(match).map(keyOf) : []);
+    if (CUR_TOPIC) shown.add(CUR_TOPIC.site);
+    CUR_DEEP = deepSearch(query).filter(x => !shown.has(x.key) || !total || RANKWEAK);
+  }
+  if (CUR_DEEP.length){
+    const block = `<p class="bestlabel${total ? " more" : ""}">도구 안 내용에서 찾은 말</p>
+        <div class="grid">${CUR_DEEP.map(dcard).join("")}</div>`;
+    if (total) h = h.replace(/<\/div>\s*<\/section>\s*$/, block + "</div></section>");
+    else {
+      h = `<section class="part results" style="--k:var(--ink);--tint:#fff"><div class="wrap">
+        <div class="partrule"></div>
+        <div class="parthead"><h2>검색 결과</h2><span class="count">${CUR_DEEP.length}개</span></div>
+        <p class="partdesc">도구 이름에는 없지만, 아래 도구 안에 이 말이 나옵니다.</p>${block}</div></section>`;
+      total = CUR_DEEP.length;
+    }
+  }
   if (!total){
     const near = query ? nearest(query) : [];
     h = `<div class="empty wrap">
@@ -1329,17 +1712,18 @@ function render(){
   if (on){
     const bits = [];
     if (query) bits.push("‘" + query + "’");
-    if (fPart === "new") bits.push("새로 들어온 도구");
+    if (fPart === "new") bits.push("새 소식이 있는 도구");
     else if (fPart !== "all") bits.push(partOf(fPart).name);
     $("#resulttext").innerHTML = esc(bits.join(" · ")) + ` — <strong>${total}개</strong>`;
   }
   /* 검색창 바로 아래 결과 상자와 검색창 안 개수 */
   const hits = query ? SITES.filter(match).sort((a, b) => ranked().get(keyOf(a)) - ranked().get(keyOf(b))) : [];
+  if (CUR_TOPIC){ const ts = SITES.find(s => keyOf(s) === CUR_TOPIC.site); const i = hits.indexOf(ts); if (i > 0) hits.splice(i, 1); if (ts && i !== 0) hits.unshift(ts); }
   renderQuick(hits);
-  const qc = $("#qcount");
+  const qc = $("#qcount"), qn = hits.length + (CUR_TOPIC ? 1 : 0) + CUR_DEEP.filter(x => !hits.some(s => keyOf(s) === x.key)).length;
   qc.classList.toggle("on", !!query);
-  qc.classList.toggle("zero", !!query && !hits.length);
-  qc.textContent = query ? (hits.length ? hits.length + "개" : "0개") : "";
+  qc.classList.toggle("zero", !!query && !qn);
+  qc.textContent = query ? qn + "개" : "";
   $("#q").classList.toggle("hasq", !!query);
   /* 오른쪽 타일: 맞는 칸은 진하게, 1순위는 이름표 띠에 */
   document.querySelectorAll(".cell[data-go]").forEach(c => {
@@ -1361,6 +1745,28 @@ function renderQuick(items){
   if (query){
     box.classList.add("searching");
     box.hidden = false;
+    const tp = CUR_TOPIC;
+    if (tp){
+      const u = topicUrl(tp), p = partOf(SITES.find(s => keyOf(s) === tp.site).p);
+      $("#mtitle").innerHTML = `체험학습 사고 <span class="mmon">${esc(tp.name)}</span>`;
+      $("#mnote").textContent = "지금 바로 할 일입니다. 누르면 대처 전체가 새 창으로 열립니다(Enter도 됩니다).";
+      $("#mlist").innerHTML = `<a class="mcard best topic" href="${esc(u)}" target="_blank" rel="noopener" style="--k:${p.color};--kl:${p.light}">
+          <span class="mb">가장 잘 맞는 항목 · ${TOPIC_LV[tp.lv]}</span><span class="mt">${esc(tp.name)}</span>
+          <ol class="mnow">${tp.now.map(x => `<li>${esc(x)}</li>`).join("")}</ol><span class="ma" aria-hidden="true">›</span></a>`
+        + items.slice(0, 2).map(s => mcard(s)).join("")
+        + `<button type="button" class="mall" data-scroll="list">결과 ${items.length + 1}개 모두 보기 ↓</button>`;
+      return;
+    }
+    const dq = CUR_DEEP.filter(x => !items.some(s => keyOf(s) === x.key));
+    if (dq.length && (!items.length || RANKWEAK)){
+      $("#mtitle").innerHTML = `도구 안에서 <span class="mmon">찾았습니다</span>`;
+      $("#mnote").textContent = "도구 이름에는 없지만, 아래 도구 안에 나오는 말입니다. 누르면 새 창으로 열립니다(Enter도 됩니다).";
+      $("#mlist").innerHTML = dq.slice(0, 3).map((h, i) => { const p = partOf(h.s.p);
+        return `<a class="mcard${i === 0 ? " best" : ""}" href="${esc(deepUrl(h))}" target="_blank" rel="noopener" style="--k:${p.color};--kl:${p.light}">
+          ${i === 0 ? `<span class="mb">도구 안의 내용 · ${h.cnt}곳</span>` : ""}<span class="mt">${esc(i === 0 ? h.s.t : h.s.tag)}</span><span class="mm">${deepSnip(h, i === 0 ? 110 : 60)}</span><span class="ma" aria-hidden="true">›</span></a>`; }).join("")
+        + (items.length ? items.slice(0, 2).map(s => mcard(s)).join("") : "");
+      return;
+    }
     if (items.length && RANKWEAK){
       $("#mtitle").innerHTML = `딱 맞는 도구는 <span class="mmon">없습니다</span>`;
       $("#mnote").textContent = "낱말이 일부 겹치는 도구입니다. ‘휴가’, ‘반편성’처럼 핵심 낱말로 다시 찾아보세요.";
@@ -1393,27 +1799,174 @@ $("#tocmini").innerHTML = PARTS.map(p =>
   `<li style="--k:${p.color}"><span class="k"></span>${esc(p.full)}<span class="num">${SITES.filter(s => s.p === p.id).length}개</span></li>`
 ).join("");
 
-/* 새 도구 알림 띠 — 닫으면 이 기기에서는 같은 목록일 때 다시 띄우지 않습니다 */
-(function(){
-  if (!NEWS.length) return;
-  const sig = NEWS.map(keyOf).sort().join(",");
-  let seen = ""; try { seen = localStorage.getItem("hub.newseen") || ""; } catch(err){}
-  if (seen === sig) return;
-  const bar = $("#newbar");
-  $("#nbt").textContent = NEWS.length === 1
-    ? NEWS[0].t
-    : "새로 들어온 도구 " + NEWS.length + "개 · " + NEWS.slice(0, 3).map(s => s.tag).join(", ") + (NEWS.length > 3 ? " 외" : "");
-  bar.hidden = false;
-  $("#nbgo").addEventListener("click", () => {
-    if (NEWS.length === 1){ goTo(keyOf(NEWS[0])); return; }
-    fPart = "new"; renderFilters(); render(); saveView();
-    const l = document.getElementById("list"); const bar0 = document.querySelector(".topbar").offsetHeight;
-    window.scrollTo({ top: l.getBoundingClientRect().top + window.pageYOffset - bar0 - 8, behavior: soften() ? "smooth" : "auto" });
-  });
-  $("#nbx").addEventListener("click", () => { bar.hidden = true; try { localStorage.setItem("hub.newseen", sig); } catch(err){} });
-})();
+/* ══ 이용 팁 ══════════════════════════════════════════════
+   하루에 하나씩, 이미 써 본 기능이나 닫은 팁은 다시 띄우지 않습니다.
+   「해 보기」를 누르면 그 기능이 실제로 한 번 실행됩니다. */
+const TIPS = [
+  { id:"sentence", short:"문장으로 검색", text:"검색창에 문장 그대로 물어도 찾아요",
+    act:() => tryQuery("보결은 누가 들어가요?", "문장 그대로 찾았습니다. 낱말 하나만 넣어도 됩니다") },
+  { id:"chat", short:"길잡이에게 묻기", text:"오른쪽 아래 길잡이에게 상황을 말하면 도구를 골라 줘요",
+    act:() => chatOpen() },
+  { id:"map", short:"색깔 칸 지도", text:"색깔 칸 하나가 도구 하나예요. 누르면 그 도구로 바로 가요",
+    act:hintMap },
+  MONTHLY[MONTH_NO] ? { id:"monthly", short:"이달에 자주 쓰는 도구", text:`검색창 아래에 ${MONTH_NO}월에 자주 꺼내는 도구를 모아 두었어요`,
+    act:hintMonthly } : null,
+  { id:"enter", short:"Enter로 바로 가기", text:"검색하고 Enter를 누르면 가장 잘 맞는 도구로 곧장 가요",
+    act:() => tryQuery("학생이 일주일째 연락이 안 돼요", "이제 Enter(검색 키)를 눌러 보세요", true) },
+  { id:"news", short:"새 소식 모아 보기", btn:"보기", text:"새로 들어오거나 바뀐 도구는 맨 위 「새 소식」에 모여요",
+    act:() => openNews() },
+  { id:"qr", short:"QR로 공유", text:"연수나 회의 때는 카드의 「QR로 공유」를 화면에 띄워 보세요",
+    act:() => openModal("qr", siteBy((monthKeys()[0]) || "1-2") || SITES[0]) },
+  { id:"copyall", short:"목록 통째로 복사", btn:"복사하기", text:"도구 목록 전체를 글자로 복사해 메신저로 보낼 수 있어요",
+    act:() => copyAll() },
+  { id:"pc", short:"PC 권장 도구", btn:"자세히", text:"「PC 권장」 도구는 휴대폰에서 링크만 복사해 두었다가 컴퓨터에서 여세요",
+    act:() => scrollToId("notes") }
+].filter(Boolean);
+const tipBtn = t => t.btn || "해 보기";
+function markTipDone(id){
+  const s = lsSetOf("hub.tipsdone");
+  if (!s.has(id)){ s.add(id); lsSet("hub.tipsdone", JSON.stringify([...s])); }
+}
+/* 오늘의 팁: 날이 바뀌면 지난번 팁 다음 것으로. 오늘 것을 이미 써 봤으면 오늘은 쉬어 갑니다 */
+function todayTip(){
+  const done = lsSetOf("hub.tipsdone");
+  let st = {}; try { st = JSON.parse(lsGet("hub.tip", "{}")) || {}; } catch(err){}
+  if (st.day === TODAY_S) return TIPS.find(t => t.id === st.id && !done.has(t.id)) || null;
+  const prev = TIPS.findIndex(t => t.id === st.id);
+  return TIPS.slice(prev + 1).concat(TIPS.slice(0, prev + 1)).find(t => !done.has(t.id)) || null;
+}
+function runTip(id){
+  const t = TIPS.find(x => x.id === id); if (!t) return;
+  markTipDone(id);
+  if (strip.mode === "tip" && strip.tip && strip.tip.id === id) hideStrip();
+  t.act();
+}
+function tryQuery(ex, msg, focus){
+  qEl.value = ex; query = ex; clearEl.classList.add("on"); render(); saveView();
+  const row = document.querySelector(".searchrow"), bar = document.querySelector(".topbar").offsetHeight;
+  window.scrollTo({ top: Math.max(row.getBoundingClientRect().top + window.pageYOffset - bar - 16, 0), behavior: soften() ? "smooth" : "auto" });
+  if (focus || !isNarrow()){ try { qEl.focus({ preventScroll:true }); } catch(err){ qEl.focus(); } }
+  toast(msg);
+}
+function hintMap(){
+  if (isNarrow() && !$("#mapbox").classList.contains("open")) mapToggle.click();
+  const t = isNarrow() ? $("#maptoggle") : $("#mapbox"), bar = document.querySelector(".topbar").offsetHeight;
+  fastScroll(Math.max(t.getBoundingClientRect().top + window.pageYOffset - bar - 16, 0));
+  const m = $("#map"); m.classList.remove("hint"); void m.offsetWidth; m.classList.add("hint");
+  setTimeout(() => m.classList.remove("hint"), 2600);
+}
+function hintMonthly(){
+  if (query){ qEl.value = ""; query = ""; clearEl.classList.remove("on"); render(); saveView(); }
+  const box = $("#monthly"); if (box.hidden) return;
+  const bar = document.querySelector(".topbar").offsetHeight;
+  fastScroll(Math.max(box.getBoundingClientRect().top + window.pageYOffset - bar - 16, 0));
+  box.classList.remove("hint"); void box.offsetWidth; box.classList.add("hint");
+  setTimeout(() => box.classList.remove("hint"), 2200);
+}
 
-if (LAST_CHECKED) $("#footcredit").textContent += " · 링크 점검 " + LAST_CHECKED;
+/* ══ 알림 띠 — 한 번에 하나만: 처음 온 사람은 팁, 그 밖에는 소식이 먼저, 없으면 오늘의 팁 ══ */
+const strip = { el:$("#newbar"), mode:null, tip:null, items:[] };
+function hideStrip(){ strip.el.hidden = true; strip.mode = null; }
+function renderStrip(){
+  const un = unreadNews(), tip = todayTip();
+  strip.mode = null;
+  if (un.length && !(VISIT.first && tip)){
+    const one = un.length === 1 ? un[0] : null, tags = [...new Set(un.map(n => n.s.tag))];
+    strip.mode = "news"; strip.items = un;
+    strip.el.dataset.kind = one ? one.kind : "new";
+    $("#nbk").textContent = one ? NEWS_KIND[one.kind] : "새 소식";
+    $("#nbt").textContent = one
+      ? one.s.t + (one.text ? " — " + one.text : "")
+      : (VISIT.first ? "최근 " : "지난번 방문 뒤로 ") + un.length + "개 · " + tags.slice(0, 3).join(", ") + (tags.length > 3 ? " 외" : "");
+    $("#nbtry").hidden = true;
+  } else if (tip){
+    strip.mode = "tip"; strip.tip = tip;
+    strip.el.dataset.kind = "tip";
+    $("#nbk").textContent = "알아 두기";
+    $("#nbt").textContent = tip.text;
+    $("#nbtry").textContent = tipBtn(tip); $("#nbtry").hidden = false;
+    lsSet("hub.tip", JSON.stringify({ day:TODAY_S, id:tip.id }));
+  }
+  strip.el.hidden = !strip.mode;
+}
+$("#nbgo").addEventListener("click", () => {
+  if (strip.mode === "news"){
+    const items = strip.items; hideStrip();
+    if (items.length === 1){ markRead(items); goTo(items[0].key); } else openNews();
+  } else if (strip.mode === "tip") runTip(strip.tip.id);
+});
+$("#nbx").addEventListener("click", () => {
+  if (strip.mode === "news") markRead(strip.items);
+  else if (strip.mode === "tip") markTipDone(strip.tip.id);
+  hideStrip();
+});
+
+/* ══ 상단 「새 소식」 단추와 소식 창 ══ */
+function updateNewsBadge(){
+  const n = unreadNews().length, b = $("#nbadge");
+  b.textContent = n > 9 ? "9+" : String(n); b.hidden = !n;
+  $("#newsbtn").setAttribute("aria-label", "새 소식" + (n ? ", 읽지 않은 소식 " + n + "개" : ""));
+}
+function newsHTML(){
+  const un = new Set(unreadNews().map(n => n.id));
+  const rows = ALLNEWS.slice(0, 30).map(n => `<li class="${un.has(n.id) ? "unread" : ""}" style="--k:${partOf(n.s.p).color}">
+      <span class="nw-d">${fmtMD(n.d)}</span>
+      <span class="nw-k k-${n.kind}">${NEWS_KIND[n.kind]}</span>
+      <span><button type="button" class="nw-t" data-ngo="${keyOf(n.s)}">${esc(n.s.t)}</button><span class="nw-x">${esc(n.text || "새 도구로 들어왔습니다")}</span></span>
+    </li>`).join("");
+  return `<h3 id="mt">새 소식</h3>
+    <p class="nw-sub">새로 들어오거나 달라진 도구를 날짜순으로 모았습니다.${un.size ? " 주황 점은 아직 못 보신 소식입니다." : ""}</p>
+    ${rows ? `<ol class="nwlist">${rows}</ol>` : `<p class="nw-empty">아직 올라온 소식이 없습니다.</p>`}
+    <p class="nw-h">이렇게 쓰면 편해요</p>
+    <ul class="nwtips">${TIPS.filter(t => t.id !== "news").map(t => `<li><button type="button" data-ntip="${t.id}"><span>${esc(t.text)}</span><span class="try">${tipBtn(t)}</span></button></li>`).join("")}</ul>
+    <div class="row">
+      ${NEWS.length ? `<button type="button" data-nall>카드로 모아 보기</button>` : ""}
+      <button type="button" class="primary" data-close>닫기</button>
+    </div>`;
+}
+function openNews(){ openModal("news", {}); }
+function showNewCards(){
+  fPart = "new"; renderFilters(); render(); saveView();
+  const l = document.getElementById("list"), bar0 = document.querySelector(".topbar").offsetHeight;
+  window.scrollTo({ top: l.getBoundingClientRect().top + window.pageYOffset - bar0 - 8, behavior: soften() ? "smooth" : "auto" });
+}
+$("#newsbtn").addEventListener("click", openNews);
+$("#modalbox").addEventListener("click", e => {
+  const b = e.target.closest("[data-ngo],[data-ntip],[data-nall]"); if (!b) return;
+  if (b.hasAttribute("data-ngo")){ const k = b.getAttribute("data-ngo"); closeModalThen(() => goTo(k)); }
+  else if (b.hasAttribute("data-ntip")){ const id = b.getAttribute("data-ntip"); closeModalThen(() => runTip(id)); }
+  else closeModalThen(showNewCards);
+});
+
+/* 이용 안내의 「이렇게 쓰면 편해요」 */
+$("#howlist").innerHTML = TIPS.map(t => `<li><span>${esc(t.text)}</span><button type="button" data-tip="${t.id}">${tipBtn(t)}</button></li>`).join("");
+
+renderStrip();
+updateNewsBadge();
+
+/* ── 방문자 수 (Firebase Realtime Database, SDK 없이 REST로) ──
+   같은 기기는 하루에 한 번만 셉니다. 날짜는 한국 시간 기준입니다. */
+(function(){
+  if (!COUNTER_DB) return;
+  const base = COUNTER_DB.replace(/\/+$/, "");
+  const day = new Date().toLocaleDateString("sv-SE", { timeZone:"Asia/Seoul" });   /* 2026-11-11 */
+  const el = $("#visits");
+  const fmt = n => Number(n || 0).toLocaleString("ko-KR");
+  const show = (today, total) => {
+    el.innerHTML = `오늘 <b>${fmt(today)}</b>명 · 지금까지 <b>${fmt(total)}</b>명이 다녀갔습니다`;
+    el.hidden = false;
+  };
+  let seen = ""; try { seen = localStorage.getItem("hub.visit") || ""; } catch(err){}
+  const read = () => Promise.all([
+    fetch(base + "/stats/total.json").then(r => r.json()),
+    fetch(base + "/stats/days/" + day + ".json").then(r => r.json())
+  ]).then(([total, today]) => show(today, total));
+  const inc = { ".sv": { "increment": 1 } };
+  const job = (seen === day) ? read()
+    : fetch(base + "/stats.json", { method:"PATCH", body: JSON.stringify({ "total": inc, ["days/" + day]: inc }) })
+        .then(r => { if (!r.ok) throw new Error("count " + r.status); try { localStorage.setItem("hub.visit", day); } catch(err){} return read(); });
+  job.catch(() => { el.hidden = true; });
+})();
 if (REPORT_EMAIL) $("#reportsite").hidden = false;
 function reportLink(name, url){
   return "mailto:" + REPORT_EMAIL
@@ -1426,13 +1979,17 @@ const qEl = $("#q"), clearEl = $("#clear");
 qEl.addEventListener("input", () => {
   query = qEl.value.trim();
   clearEl.classList.toggle("on", !!query);
+  if (query.length >= 6 && /\s/.test(query)) markTipDone("sentence");
+  if (!DEEP) loadDeep().then(() => { if (query) render(); });
   render(); saveView();
 });
 qEl.addEventListener("keydown", e => {
   if (e.key !== "Enter" || e.isComposing) return;
   e.preventDefault();
+  if (query && CUR_TOPIC){ markTipDone("enter"); window.open(topicUrl(CUR_TOPIC), "_blank", "noopener"); return; }
   const first = query && SITES.filter(match).sort((a, b) => ranked().get(keyOf(a)) - ranked().get(keyOf(b)))[0];
-  if (first){ qEl.blur(); goTo(keyOf(first)); }
+  if (query && CUR_DEEP.length && (!first || RANKWEAK)){ markTipDone("enter"); window.open(deepUrl(CUR_DEEP[0]), "_blank", "noopener"); return; }
+  if (first){ markTipDone("enter"); qEl.blur(); goTo(keyOf(first)); }
 });
 clearEl.addEventListener("click", () => { qEl.value = ""; query = ""; clearEl.classList.remove("on"); render(); saveView(); qEl.focus(); });
 
@@ -1444,10 +2001,12 @@ $("#resetall").addEventListener("click", resetAll);
 
 /* ── 클릭 처리 ── */
 document.addEventListener("click", e => {
-  const t = e.target.closest("[data-copy],[data-qr],[data-go],[data-scroll],[data-resetall],#copyall,#reportsite,[data-close],[data-modalcopy]");
+  const t = e.target.closest("[data-copy],[data-qr],[data-go],[data-scroll],[data-resetall],#copyall,#reportsite,[data-close],[data-modalcopy],[data-tip]");
   if (t){
-    if (t.hasAttribute("data-go")){
-      if (t.classList.contains("cell")){ t.classList.add("press"); setTimeout(() => t.classList.remove("press"), 380); }
+    if (t.hasAttribute("data-tip")) runTip(t.getAttribute("data-tip"));
+    else if (t.hasAttribute("data-go")){
+      if (t.classList.contains("cell")){ markTipDone("map"); t.classList.add("press"); setTimeout(() => t.classList.remove("press"), 380); }
+      if (t.classList.contains("mcard") && !query) markTipDone("monthly");
       goTo(t.getAttribute("data-go"));
     }
     else if (t.hasAttribute("data-scroll")) scrollToId(t.getAttribute("data-scroll"));
@@ -1461,7 +2020,10 @@ document.addEventListener("click", e => {
     return;
   }
   const cardEl = e.target.closest(".item");
-  if (cardEl && !e.target.closest("a,button")) openTool(SITES.find(s => keyOf(s) === cardEl.dataset.key));
+  if (cardEl && !e.target.closest("a,button")){
+    if (cardEl.dataset.turl) window.open(cardEl.dataset.turl, "_blank", "noopener");
+    else openTool(SITES.find(s => keyOf(s) === cardEl.dataset.key));
+  }
 });
 /* 제목 링크도 같은 안내를 거치게 */
 document.addEventListener("click", e => {
@@ -1502,7 +2064,15 @@ function openModal(kind, s){
   if (!s) return;
   lastFocus = document.activeElement;
   const box = $("#modalbox");
-  if (kind === "pc"){
+  box.className = "box";
+  if (kind === "news"){
+    box.classList.add("news");
+    box.innerHTML = newsHTML();
+    markRead(unreadNews());
+    markTipDone("news");
+    if (strip.mode === "news") hideStrip();
+  } else if (kind === "pc"){
+    markTipDone("pc");
     box.innerHTML = `
       <h3 id="mt">${esc(s.t)}</h3>
       <p class="why">이 도구는 표를 넓게 보아야 해서 PC에서 쓰는 것이 좋습니다.
@@ -1512,6 +2082,7 @@ function openModal(kind, s){
         <a class="primary" href="${esc(s.u)}" target="_blank" rel="noopener" data-close>그래도 열기</a>
       </div>`;
   } else {
+    markTipDone("qr");
     box.innerHTML = `
       <h3 id="mt">${esc(s.t)}</h3>
       <p class="u">${esc(s.u)}</p>
@@ -1546,32 +2117,276 @@ window.addEventListener("popstate", () => {
   if ($("#modal").classList.contains("on")) closeModal(true);
   stripHash();
 });
+/* 창·길잡이를 닫으며(뒤로가기 기록 되돌림) 다른 동작을 이어 할 때: 되돌림이 끝난 뒤에 실행 */
+let afterPop = null;
+function thenAfterPop(pushed, fn){
+  if (!pushed){ fn(); return; }
+  afterPop = fn;
+  setTimeout(() => { if (afterPop === fn){ afterPop = null; fn(); } }, 500);
+}
+window.addEventListener("popstate", () => { if (afterPop){ const f = afterPop; afterPop = null; setTimeout(f, 0); } });
+function closeModalThen(fn){ const p = modalPushed; closeModal(); thenAfterPop(p, fn); }
 
 /* ── 연장통 길잡이: 규칙형 대화 안내 ──
-   AI가 아니라 검색 엔진(rankSites)과 아래 메뉴·되묻기 규칙으로 답합니다.
-   도구를 새로 넣으면 CHAT_MENU나 CHAT_ASK에 한 줄씩 더하면 됩니다. 열쇠는 「부-번호」 */
+   AI가 아니라 검색 엔진(rankSites)과 아래 규칙으로 답합니다. 순서:
+   ① 이름 같은 개인정보 경고 → ② 도구 이름을 직접 말했는지 → ③ 사이트 안내(CHAT_INFO)
+   → ④ 비교 → ⑤ 대상별(CHAT_WHO)·시기별(CHAT_WHEN) 추천 → ⑥ 짧고 애매하면 되묻기(CHAT_ASK) → ⑦ 검색
+   도구를 새로 넣으면 아래 표에 한 줄씩 더하면 됩니다. 열쇠는 「부-번호」 */
 const CHAT_MENU = [
   { label:"복무·휴가", ask:"어떤 것이 궁금하세요?", opts:[["휴가 종류와 일수","1-2"],["초과근무·출장·외출","1-18"],["외부강의·겸직","1-1"],["승진 점수","1-15"],["방학 중 비근무 직종 근무일수","1-9"]] },
   { label:"학생 출결", ask:"어떤 결석인가요?", opts:[["아파서·병원 진료","2-1"],["감염병(독감·수두 등)","2-4"],["체험학습·가족여행","2-2"],["사유 없이 안 오거나 연락 두절","2-3"]] },
   { label:"학적·전학", ask:"어떤 학적 업무인가요?", opts:[["전입·전출·유예·정원 외","1-20"],["외국 국적 학생","1-3"],["신입생 반편성","2-9"],["학년말 반편성","2-8"]] },
-  { label:"학급·생활지도", ask:"어떤 상황인가요?", opts:[["문제행동 지도","4-4"],["친구 관계·소외","4-2"],["학급규칙 만들기","4-1"],["나 전달법 대화","4-3"],["통지표·생활기록부 문장","2-7"],["학생 목표 인증","2-6"]] },
+  { label:"학급·생활지도", ask:"어떤 상황인가요?", opts:[["문제행동 지도","4-4"],["친구 관계·소외","4-2"],["학급규칙 만들기","4-1"],["나 전달법 대화","4-3"],["통지표·생활기록부 문장","2-7"],["생활기록부 기재 점검","2-10"],["학생 목표 인증","2-6"]] },
   { label:"학부모·교권·학폭", ask:"어떤 일이 있었나요?", opts:[["학부모 상담 준비","4-5"],["상담인지 민원인지","4-6"],["교육활동 침해(교권)","1-14"],["학교폭력 사안","4-7"],["선물·청탁금지법","3-1"]] },
   { label:"업무·행정", ask:"어떤 업무인가요?", opts:[["업무분장","1-19"],["보결 배정","1-10"],["시간표","1-8"],["공문·회의록","1-12"],["인수인계","1-13"],["월중·주간계획","1-11"],["인사 내규","1-17"],["연수비 정산","1-4"],["음료 주문 취합","1-7"]] },
   { label:"연수", ask:"어떤 연수인가요?", opts:[["바이브 코딩 연수","3-6"],["수업 역량 진단","3-4"],["AI·디지털 역량 진단","3-5"],["청렴 연수 게임","3-1"],["교육활동보호 용어","3-2"],["교권 사안 대응 연습","3-3"],["학부모 법정교육 안내","1-5"]] },
-  { label:"안전·날씨", ask:"어떤 상황인가요?", opts:[["사고·응급·긴급 대응","1-6"],["미세먼지·폭염, 밖에 나가도 될까","2-5"],["감염병 등교중지","2-4"]] }
+  { label:"안전·날씨", ask:"어떤 상황인가요?", opts:[["사고·응급·긴급 대응","1-6"],["체험학습 중 사고 9가지","tplist:"],["미세먼지·폭염, 밖에 나가도 될까","2-5"],["감염병 등교중지","2-4"]] }
 ];
-/* 짧고 애매한 질문이면 한 번 되묻습니다: [이런 말이 있고, 이런 말이 없으면, 이렇게 묻기] */
+/* 짧고 애매한 질문이면 한 번 되묻습니다: [이런 말이 있고, 이런 말이 없으면, 이렇게 묻기(숫자는 CHAT_MENU 번호)] */
 const CHAT_ASK = [
-  [/결석|빠지|안\s*나와|못\s*나와|안\s*와/, /아프|아파|병원|감염|독감|수두|체험|여행|연락|무단|미인정|학원|코로나/, 1],
-  [/전학|전입|전출/, /외국|국적|다문화/, { ask:"어떤 전학인가요?", opts:[["일반 전입·전출","1-20"],["외국 국적·외국에서 온 학생","1-3"]] }],
-  [/상담/, /민원|준비|친구|관계/, { ask:"어떤 상담인가요?", opts:[["학부모 상담 준비·연습","4-5"],["상담인지 민원인지 구분","4-6"],["친구 관계 고민","4-2"]] }],
-  [/체험\s*학습|현장\s*학습|소풍/, /교외|가정|가족|여행|현장|인솔|안전|사고/, { ask:"어떤 체험학습인가요?", opts:[["가정에서 신청하는 교외체험학습","2-2"],["학교에서 가는 현장체험학습 안전","1-6"]] }],
-  [/반\s*편성|반\s*배정/, /신입|1\s*학년|예비/, { ask:"누구의 반편성인가요?", opts:[["재학생 학년말 반편성","2-8"],["신입생 반편성","2-9"]] }],
-  [/교권|침해/, /용어|퀴즈|연습|사례/, { ask:"무엇이 필요하세요?", opts:[["지금 일어난 일 판별·대응","1-14"],["연수용 사례 대응 연습","3-3"],["법률 용어 익히기","3-2"]] }],
+  [/결석|빠지|안\s*나와|못\s*나와|안\s*와/, /아프|아파|병원|감염|전염|독감|수두|체험|여행|연락|무단|미인정|학원|코로나|장기|가정\s*방문|경찰|며칠째|일주일|감기|열|결혼|경조사|선수|대회|조퇴/, 1],
+  [/전학|전입|전출/, /외국|국적|다문화|졸업|진급|귀국/, { ask:"어떤 전학인가요?", opts:[["일반 전입·전출","1-20"],["외국 국적·외국에서 온 학생","1-3"]] }],
+  [/상담/, /민원|준비|친구|관계|주간|연습/, { ask:"어떤 상담인가요?", opts:[["학부모 상담 준비·연습","4-5"],["상담인지 민원인지 구분","4-6"],["친구 관계 고민","4-2"]] }],
+  [/체험\s*학습|현장\s*학습|소풍/, /교외|가정|가족|여행|현장|인솔|안전|사고|보고서|신청|기한/, { ask:"어떤 체험학습인가요?", opts:[["가정에서 신청하는 교외체험학습","2-2"],["학교에서 가는 현장체험학습 안전","1-6"],["체험학습 중 사고가 났어요","tplist:"]] }],
+  [/반\s*편성|반\s*배정/, /신입|1\s*학년|예비|내년|학년말|재학생|기준/, { ask:"누구의 반편성인가요?", opts:[["재학생 학년말 반편성","2-8"],["신입생 반편성","2-9"]] }],
+  [/교권|침해/, /용어|퀴즈|연습|사례|욕|전화|문자/, { ask:"무엇이 필요하세요?", opts:[["지금 일어난 일 판별·대응","1-14"],["연수용 사례 대응 연습","3-3"],["법률 용어 익히기","3-2"]] }],
+  [/생활\s*기록부|생기부|학생부|통지표/, /점검|검토|오류|기재\s*요령|금지|문장|쓰기|쓰는|작성|세특|행동/, { ask:"무엇이 필요하세요?", opts:[["관찰 기록을 문장으로 쓰기","2-7"],["다 쓴 기록을 기재요령으로 점검","2-10"]] }],
   [/연수/, /비|정산|영수증|코딩|바이브|ai|디지털|수업|청렴|교권|41|방학|법정|학부모/i, 6]
 ];
-const chat = { el:$("#chat"), log:$("#chatlog"), q:$("#chatq"), pushed:false, started:false };
+/* 대상별 추천: [누구, 추천 도구] — '추천·필요·쓸 만한' 같은 말과 함께 나올 때 */
+const CHAT_WHO = [
+  [/1\s*학년\s*담임/, "1학년 담임 선생님께", ["2-9","4-1","2-1"]],
+  [/6\s*학년\s*담임/, "6학년 담임 선생님께", ["1-20","2-7","2-10","2-8"]],
+  [/신규|새로\s*온\s*(교사|선생)|처음\s*(온|발령)|초임/, "새로 오신 선생님께", ["2-1","1-2","4-5","1-12"]],
+  [/교감|관리자|교장/, "교감·관리자께", ["1-10","1-19","1-17","1-14"]],
+  [/교무\s*부장|교무/, "교무 업무 담당께", ["1-11","1-8","1-19"]],
+  [/학적\s*담당|학적/, "학적 담당자께", ["1-20","1-3","2-3"]],
+  [/생활\s*(지도)?\s*부장|생활\s*부/, "생활지도 담당께", ["4-4","4-7","1-14"]],
+  [/연수\s*담당|연수\s*업무/, "연수 담당자께", ["3-1","3-3","3-6","3-2"]],
+  [/보건/, "보건 선생님께", ["2-4","1-6","2-5"]],
+  [/공무직|조리|실무사/, "교육공무직 선생님께", ["1-9","1-2"]],
+  [/학부모(에게|께|한테)|가정에\s*(보내|안내)/, "학부모에게 보내기 좋은 도구", ["2-2","2-4","2-1"]],
+  [/담임/, "담임 선생님께", ["2-1","4-1","4-2","2-7","2-10"]]
+];
+/* 시기별 추천: [때, 도구] — 'n월'과 '이번 달'은 이번 달 표(MONTHLY)를 씁니다 */
+const CHAT_WHEN = [
+  [/학기\s*말|학년\s*말|방학\s*(전|앞)|겨울\s*방학|여름\s*방학|종업/, "학기말·방학 전에는", ["2-7","2-10","2-1","1-18"]],
+  [/새\s*학년|학년\s*초|새\s*학기|신학기/, "새 학년도 준비에는", ["1-19","1-17","2-8","4-1"]],
+  [/상담\s*주간/, "상담주간 즈음에는", ["4-5","4-2","4-6"]],
+  [/체험\s*학습\s*철|소풍\s*철|봄\s*소풍|가을\s*소풍/, "체험학습 철에는", ["2-2","1-6","2-5"]],
+  [/여름/, "여름에는", ["2-5","1-2","1-18"]],
+  [/겨울/, "겨울에는", ["2-4","2-7","1-2"]]
+];
+const RECO_CUE = /추천|필요한|필요해|쓸\s*만한|볼\s*만한|쓸\s*도구|쓰는\s*도구|쓰면\s*좋|챙길|알아야|할\s*일|도와주는|보내\s*줄|자주\s*쓸|쓸만|도구는\??$|도구$/;
+/* 사이트 안내·인사·범위 밖: [이런 말이면, 이렇게 답하기] — 답은 함수로 써서 숫자가 늘 맞게 */
 const siteBy = k => SITES.find(s => keyOf(s) === k);
+const listTags = arr => arr.map(s => "「" + esc(s.t) + "」").join(", ");
+const CHAT_INFO = [
+  [/^(안녕|하이|hi|hello|반가|좋은\s*(아침|하루))/i, () => ({ html:"안녕하세요! 지금 어떤 일을 하고 계세요?<br>분야를 고르거나 상황을 문장으로 적어 주세요.", chips:"menu" })],
+  [/고마|감사|땡큐|thank|도움이\s*됐|도움이\s*되었/i, () => ({ html:"도움이 되었다니 다행이에요. 다른 일이 생기면 언제든 물어봐 주세요.", chips:"more" })],
+  [/도움이?\s*안|엉뚱|이상한\s*답|못\s*알아/, () => ({ html:"원하는 답을 못 드려 죄송해요. 분야를 고르시거나, 핵심 낱말 두세 개로 다시 물어봐 주세요. (예: 전학 졸업, 결석 서류)", chips:"menu" })],
+  [/처음\s*(으로|부터)|메뉴\s*(보여|다시)|다시\s*시작/, () => ({ act:"home" })],
+  [/^(아무\s*거나|뭐든|그냥|몰라|모르겠어)/, () => ({ html:"괜찮아요. 아래에서 지금 하는 일과 가까운 분야를 골라 보세요.", chips:"menu" })],
+  [/^(뭐라고|어떻게)\s*(물어|질문)|질문\s*예시|예시\s*(좀|보여)/, () => ({ html:"이렇게 물어보시면 돼요.", chips:"examples" })],
+  [/(너|넌|길잡이)(는|은)?\s*(누구|뭐|무엇)|길잡이.{0,6}(ai|인공\s*지능)|(^|\s)(ai|인공\s*지능|챗\s*gpt)(야|니|예요|에요|인가요)\??$/i, () => ({ html:"저는 학교 연장통의 <b>길잡이</b>예요. AI가 아니라 정해진 규칙과 검색으로 알맞은 도구를 찾아 드려요. 그래서 규정을 직접 판단해 답하지는 않고, 확인할 수 있는 도구로 안내해요. 적은 내용은 이 기기 밖으로 나가지 않아요.", chips:"menu" })],
+  [/상담원|사람(과|이랑|하고|한테)\s*(연결|상담|얘기)|직원\s*연결|전화\s*(연결|상담)/, () => ({ html:"사람 상담 연결은 없어요. 상황을 적어 주시면 알맞은 도구를 찾아 드릴게요.", chips:"menu" })],
+  [/(도구들|도구\s*(전부|모두|전체)|모든\s*도구|전체\s*도구).{0,10}(설명|소개|알려)|하나씩\s*(설명|소개)/, () => ({ html:"도구는 네 갈래로 나뉘어 있어요. " + PARTS.map(p => `<b>${esc(p.name)}</b> ${SITES.filter(s => s.p === p.id).length}개`).join(" · ") + ".<br>분야를 고르시면 그 안의 도구를 하나씩 보여 드릴게요.", chips:"menu" })],
+  [/^(이|그|저)\s*도구\s*(설명|소개|뭐)/, () => ({ html:"어느 도구가 궁금하세요? 도구 이름을 적거나 분야를 골라 주세요.", chips:"menu" })],
+  [/(연장통|이\s*사이트|사이트|여기)\s*(를|을|은|는)?\s*(어떻게\s*(써|쓰|사용|이용)|사용법|이용법|쓰는\s*법|사용\s*방법|이용\s*방법)|^(사용법|이용법|쓰는\s*법|사용\s*방법|이용\s*방법|사용\s*팁|이용\s*팁)|기능.{0,6}(알려|소개|뭐가|뭐\s*있)|(꿀)?팁\s*(좀|알려|있)/, () => ({ html:"학교 연장통은 이렇게 쓰면 편해요. 누르면 바로 해 볼 수 있어요.", chips: TIPS.filter(t => t.id !== "chat").map(t => [t.short, "tip:" + t.id]) })],
+  [/(이|여기|이\s*사이트|이곳)\s*(는|은)?\s*(뭐|무엇|어떤)\s*(하는|곳|사이트)|연장통(이|은|는)?\s*(뭐|무엇|어떤)|뭐\s*하는\s*(곳|사이트)|(사이트|연장통|여기|이곳)(을|를|에\s*대해)?\s*(소개|설명|알려)|^소개(해|좀|부탁)/, () => ({ html:`학교 연장통은 초등학교 교감이 바이브 코딩으로 만들어 학교에서 실제로 쓰는 웹 도구 <b>${SITES.length}개</b>를 모은 곳이에요. 회원가입이나 설치 없이 링크 하나로 바로 씁니다.`, chips:"menu" })],
+  [/(도구|사이트)(가|는)?\s*(모두|전부|총)?\s*몇\s*(개|가지)|개수/, () => ({ html:`지금 도구는 모두 <b>${SITES.length}개</b>예요. ` + PARTS.map(p => `${esc(p.name)} ${SITES.filter(s => s.p === p.id).length}`).join(" · ") + "." })],
+  [/무료|유료|공짜|돈\s*(내|들|드)|사용료|이용료|회원\s*가입|로그인|가입해야/, () => ({ html:"모두 <b>무료</b>예요. 회원가입이나 로그인, 설치도 필요 없어요." })],
+  [/pc\s*(에서만|전용|권장)|컴퓨터\s*(에서만|로만)/i, () => pcInfo(), 1],
+  [/휴대\s*폰|핸드폰|스마트\s*폰|모바일|태블릿|아이\s*패드|패드로|갤럭시|폰에서|폰으로/, () => pcInfo(true), 1],
+  [/공식|정부|국가에서|공공\s*기관|교육청에서\s*만든|교육부에서\s*만든|믿어도/, () => ({ html:"교육청이나 교육부의 <b>공식 사이트는 아니에요</b>. 현장 교사가 만든 참고용 도구라서, 실제 업무는 교육청 지침과 규정을 함께 확인해 주세요." })],
+  [/누가\s*(만들|운영|관리)|만든\s*(사람|이|분)|운영자|제작자|개발자/, () => ({ html:"초등학교 교감 <b>최창훈</b> 선생님이 바이브 코딩으로 만들었어요." })],
+  [/개인\s*정보|저장(돼|되|하)|서버|보안|안전한가/, () => storeInfo(), 1],
+  [/새로\s*(들어온|나온|생긴|추가|올라온)|신규\s*도구|최근\s*(도구|추가|나온)|신상|업데이트|새\s*소식|바뀐\s*(것|게|거|점|내용)|달라진|변경\s*(사항|내용|된)|뭐가\s*(바뀌|달라)/, () => newInfo()],
+  [/많이\s*(쓰|찾|보|이용)|인기|요즘\s*(뜨|쓰)/, () => ({ html:"도구별 이용 횟수는 아직 따로 세지 않아요. 대신 이번 달에 자주 꺼내는 도구를 보여 드릴게요.", keys: monthKeys(), intro:null })],
+  [/qr|큐알|공유|뿌리|퍼뜨|널리\s*알리|홍보|링크\s*(복사|보내|전달)|메신저|카톡으로\s*보내|단톡/i, () => ({ html:"도구 카드마다 <b>「링크 복사」</b>와 <b>「QR로 공유」</b> 버튼이 있어요. 모든 도구를 한꺼번에 보내려면 아래 버튼을 누르세요. 도구 이름과 주소가 글자로 복사되어 메신저에 그대로 붙일 수 있어요.", chips:[["전체 목록 복사하기","copyall"]] })],
+  [/책|도서|출판|출간/, () => ({ html:"여기 있는 도구 가운데 서른 개를 만든 이야기를 책으로 묶고 있어요. 지금 원고를 쓰는 중이고, 출간되면 「책 소개」에 링크가 올라가요.", chips:[["책 소개 보기","scroll:book"]] })],
+  [/방문자|몇\s*명(이|이나)?\s*(왔|다녀|방문|들어)/, () => ({ html:"사이트 맨 아래에 <b>오늘·누적 방문자 수</b>가 나와요. 같은 기기는 하루에 한 번만 세요." })],
+  [/(틀린|잘못된|오류|버그|안\s*맞는)\s*(것|게|내용|정보|부분)|제보|틀렸|고쳐\s*(주|줘)/, () => ({ html: REPORT_EMAIL ? `알려 주셔서 고마워요. <a href="mailto:${esc(REPORT_EMAIL)}">${esc(REPORT_EMAIL)}</a>로 어떤 도구의 어느 부분인지 적어 보내 주세요.` : "알려 주셔서 고마워요. 지금은 사이트 안에 제보 창구가 따로 없어요. 학교 연장통을 소개받은 경로(연수, 메신저 등)로 만든이에게 알려 주시면 고칠게요." })],
+  [/만들어\s*(주|줄)\s*(세요|수|래)|새\s*도구\s*(만들|제안|요청)|이런\s*도구|도구\s*(제안|요청)/, () => ({ html:"좋은 생각이에요. 학교 연장통의 도구는 모두 학교에서 실제로 마주친 장면에서 시작됐어요. 필요한 도구가 있으면 만든이에게 그 장면을 들려주세요." })],
+  [/검색(은|을|하는|어떻게)|어떻게\s*찾/, () => ({ html:"맨 위 검색창에 낱말이나 문장을 그대로 넣으면 돼요. 예: <b>보결은 누가 들어가요?</b> Enter를 누르면 가장 잘 맞는 도구로 바로 가요. 이 길잡이에 물어보셔도 같아요." })],
+  [/한눈에\s*보기|칸(은|이|들)|타일/, () => ({ html:"첫 화면의 색깔 칸들이 <b>도구 지도</b>예요. 칸을 누르면 그 도구로 바로 이동해요. 휴대폰에서는 「한눈에 보기」를 펼치면 나와요." })],
+  [/설치|우리\s*학교(에|용)\s*(도|따로)?|학교별/, () => ({ html:"도구마다 달라요. 대부분은 링크로 바로 쓰고, 일부 도구는 학교별로 따로 설치해 쓰는 안내가 있어요. 각 도구 화면의 안내를 확인해 주세요." })],
+  [/오프라인|인터넷\s*(없|안|끊)|와이파이/, () => ({ html:"인터넷이 연결되어 있어야 써요." })],
+  [/라이선스|오픈\s*소스|저작권/, () => ({ html:"글꼴 같은 오픈소스 자료를 썼기 때문에, 그 라이선스를 오른쪽 아래 「오픈소스 라이선스」에 밝혀 두었어요." })],
+  [/날씨|기온|비\s*(와|오)/, () => ({ html:"날씨 자체를 알려 드리지는 못해요. 미세먼지나 폭염 때문에 <b>밖에 나가도 되는지</b>는 이 도구에서 확인할 수 있어요.", keys:["2-5"] })],
+  [/지도안|수업안|수업\s*계획안|교안/, () => ({ html:"수업 지도안을 대신 만들어 드리지는 못해요. 내 수업을 점검해 보는 도구는 있어요.", keys:["3-4"] })],
+  [/나이스\s*(비밀\s*번호|비번|로그인|인증서)|비밀\s*번호/, () => ({ html:"나이스 비밀번호나 인증서 문제는 학교 정보 담당자나 교육청 나이스 안내로 문의해 주세요. 학교 연장통에서는 도와드리기 어려워요." })],
+  [/(급식|식단)\s*(메뉴|표|뭐|알려|어디|시간)|오늘\s*급식|전화\s*번호|연락처|주소\s*(알려|좀)/, () => ({ html:"그 정보는 학교 연장통에 없어서 도와드리기 어려워요. 학교 누리집이나 교육청 누리집을 확인해 주세요.", chips:"menu" })]
+];
+function pcInfo(mobile){
+  const pc = SITES.filter(s => s.pc);
+  return { html:(mobile ? "대부분의 도구는 휴대폰에서도 잘 열려요. " : "") + (pc.length ? `다만 화면이 넓어야 편한 다음 도구는 <b>PC에서 쓰는 것을 권해요</b>: ${listTags(pc)}.` : "PC 전용 도구는 없어요.") };
+}
+function storeInfo(){
+  const st = SITES.filter(s => s.store);
+  return { html:(st.length ? `서버에 내용을 저장하는 도구는 다음과 같아요: ${st.map(s => "「" + esc(s.t) + "」(" + esc(s.store) + ")").join(", ")}. ` : "") + "나머지 도구의 저장 방식은 각 도구의 안내를 확인해 주세요. 학생 이름 같은 개인정보는 꼭 필요한 곳에만 넣어 주시고, 이 길잡이에 적은 내용은 기기 밖으로 나가지 않아요." };
+}
+function newInfo(){
+  const un = unreadNews(), list = (un.length ? un : ALLNEWS).slice(0, 4);
+  if (!list.length) return { html:"아직 올라온 소식이 없어요." };
+  const lines = list.map(n => `• ${fmtMD(n.d)} <b>${NEWS_KIND[n.kind]}</b> ${esc(n.s.t)}${n.text ? " — " + esc(n.text) : ""}`).join("<br>");
+  return { html:(un.length ? `아직 못 보신 소식이 <b>${un.length}개</b> 있어요.` : "새로 못 보신 소식은 없어요. 최근 소식을 보여 드릴게요.") + "<br>" + lines,
+    chips:[["새 소식 모두 보기", "news"]] };
+}
+function monthKeys(m){ const M = MONTHLY[m || MONTH_NO]; return M ? M.keys.slice(0, 4) : []; }
+/* 도구 이름을 직접 말했는지: 이름의 두 낱말 이상 이어진 부분(4자 이상)이나 한 낱말 이름 */
+const NAMEIDX = SITES.map(s => {
+  const w = s.t.replace(/[·,()]/g, " ").split(/\s+/).filter(Boolean), out = [];
+  for (let i = 0; i < w.length; i++) for (let j = i + 1; j <= w.length; j++){
+    const p = w.slice(i, j).join("");
+    if ((j - i >= 2 && p.length >= 4) || (w.length === 1 && p.length >= 4)) out.push(p);
+  }
+  if (s.tag.length >= 2) out.push(s.tag + "도구", s.tag + "사이트");
+  return { s, names: out };
+});
+/* 글 안에 그대로 들어 있는 도구 태그(3자 이상: ‘안전’ 같은 흔한 두 글자는 빼고) */
+function tagsIn(text){ const t = text.replace(/\s/g, ""); return SITES.filter(s => s.tag.length >= 3 && t.includes(s.tag)); }
+function mentioned(text){
+  const t = text.replace(/[\s·,()?]/g, "");
+  const hit = [];
+  NAMEIDX.forEach(({ s, names }) => {
+    const n = names.filter(x => t.includes(x)).sort((a, b) => b.length - a.length)[0];
+    if (n) hit.push({ s, len:n.length });
+  });
+  return hit.sort((a, b) => b.len - a.len).map(x => x.s);
+}
+const PERSONAL = /(^|\s)[김이박최정강조윤장임한오서신권황안송류유전홍고문양손배백허남심노하곽성차주우구민진나지엄채원천방공현함변염여추도소석선설마길연위표명기반왕금옥육인맹제모탁국어은편용예봉경]([가-힣]{1,2})\s*(학생|어린이|군|양)(이|은|는|가|을|의|한테|에게)?(\s|$)|(^|\s)[가-힣]{2,3}(이가|이는|이를|이랑|이한테)\s/;
+const NOT_NAME = /국적|길잡|사이|놀이|도우|지킴|고등|중등|초등|대상|해당|전학|전입|신규|정원|장기|유예|해외|외국|조퇴|결석|담임|우리|다른|모든|해당|피해|가해|장애|특수|일반|재학|졸업|입학|신입|기존|문제|위기|학폭|모범|전담|고학|저학|선수|해당|남학|여학|친구|아이|학년/;
+function looksPersonal(text){
+  const m = text.match(PERSONAL); if (!m) return false;
+  const w = m[0].trim().replace(/(학생|어린이|군|양)?(이가|이는|이를|이랑|이한테|이|은|는|가|을|의|한테|에게)?$/, "").replace(/\s*(학생|어린이)$/, "");
+  return !NOT_NAME.test(m[0]) && !SITES.some(s => s.tag === w || w.startsWith(s.tag));
+}
+const NUM_Q = /며칠|몇\s*일|몇일|몇\s*시간|몇\s*번|몇\s*회|기한|언제까지|몇\s*년|몇\s*개월/;
+/* ── 먼저 거르는 말: 위기 신호 · 욕설 · 의미 없는 입력 · 업무 밖 질문 · 감정 토로 ──
+   입력 내용은 저장하지 않고 기기 밖으로 보내지 않습니다. 차단·신고 없이 응답만 정중하게 바꿉니다. */
+const CRISIS = /죽고\s*싶|죽을\s*것\s*같|죽어\s*버리|자살|자해|사라지고\s*싶|없어지고\s*싶|살기\s*싫|살고\s*싶지\s*않|다\s*끝내고\s*싶|목숨을?\s*끊|극단적\s*선택|손목을?\s*긋/;
+const CRISIS_NOT = /예방\s*교육|법정\s*교육|연수\s*자료|교육\s*자료/;
+const ABUSE = /씨발|씨바|시발|ㅅㅂ|ㅆㅂ|ㅅㅂ|씹|좆|좃|ㅈ같|존나|졸라|병신|ㅂㅅ|븅신|빙신|미친\s*(놈|년|새)|개새|개색|개세|ㄱㅅㄲ|새끼(?!\s*(손|발|줄|고양|강아|양|돼지|곰))|쌔끼|닥쳐|꺼져|엿\s*먹|지랄|ㅈㄹ|(^|[^감전])염병|썅|등신|또라이|멍청|바보(?!\s*상자)|fuck|shit|bitch/i;
+/* 욕설을 '들은 일'을 설명하는 질문은 거르지 않고 교권·생활지도로 안내합니다 */
+const ABUSE_REPORT = /욕(을|설|했|해|하|먹)|라고\s*(했|말|하|불러|욕)|이라고|들었|불렀|한테\s*.{0,12}(했|해요)/;
+const OFFTOPIC = /로또|복권|주식|코인|비트\s*코인|점심\s*(메뉴|뭐)|저녁\s*(메뉴|뭐)|뭐\s*먹(지|을까)|맛집|연애|애인|운세|사주|타로|게임\s*추천|노래\s*추천|영화\s*추천|드라마\s*추천|부동산|집값|아파트\s*값/;
+const EMOTION = /짜증|화가?\s*나|열\s*받|힘들(어|다|네|고|었)|지쳤|지친|지쳐|우울|속상|억울|스트레스|번아웃|그만두고\s*싶|때려\s*치|울고\s*싶|무서워|불안해|괴로/;
+const LATIN_OK = /^(ai|qr|pc|gpt|chatgpt|neis|sw|hwp|hwpx|vercel|github|firebase|wee|ok|hi|hello|thanks?)$/i;
+function isGibberish(text){
+  const t = text.replace(/[\s\p{P}\p{S}\d]/gu, "");
+  if (!t) return true;                                     /* 기호·숫자만 */
+  if (/^[ㄱ-ㅎㅏ-ㅣ]+$/.test(t)) return true;                /* ㅋㅋ·ㅇㅇ처럼 자모만 */
+  if (/^[a-z]+$/i.test(t) && !LATIN_OK.test(t) && t.length >= 3) return true;   /* 자판 막 누르기 */
+  const top = Math.max(...[...new Set(t)].map(c => t.split(c).length - 1));
+  return t.length >= 5 && top / t.length >= 0.7;           /* 같은 글자 반복 */
+}
+/* 감정 토로에 덧붙일 도구: [이런 말이 있으면, 이 도구] */
+const EMO_HELP = [
+  [/학부모|보호자|민원|전화|문자|카톡/, ["4-6","1-14"]],
+  [/학생|아이|반\s*애들|수업\s*방해/, ["4-4","1-14"]],
+  [/업무|일이\s*(많|너무)|공문|야근|초과/, ["1-19","1-2"]],
+  [/교장|교감|관리자|동료|선배|부장/, ["1-2"]]
+];
+/* 식중독 신호: 증상 + 먹은 것 */
+const FOOD_SIGN = /식중독|배탈|구토|토하|토해|토했|설사|복통|배가?\s*아/;
+const FOOD_GROUP = /여러|집단|명이|명\s*이상|모두|단체|전체|애들|아이들|학생들|몇\s*명|[2-9]\s*명|두\s*명|세\s*명|반\s*아이/;
+const FOOD_EAT = /급식|점심|저녁|아침|식사|먹고|먹은|먹었|음식|도시락|간식/;
+/* 질문 → 답의 설계도(화면 없이 판단만) */
+function chatDecide(text){
+  const plan = { warn: looksPersonal(text) };
+  /* ① 위기 신호: 다른 처리보다 먼저, 도구 안내를 멈춥니다 */
+  if (CRISIS.test(text) && !CRISIS_NOT.test(text)) return { type:"crisis" };
+  /* ② 욕설·비하 (욕설을 들은 상황 설명은 제외) */
+  if (ABUSE.test(text) && !ABUSE_REPORT.test(text)) return { type:"info", html:"그런 말에는 답하기 어려워요. 학교 일로 도울 일이 있으면 편하게 말씀해 주세요.", chips:"menu" };
+  /* ③ 의미 없는 입력 */
+  if (isGibberish(text)) return { type:"info", html:"무슨 일인지 조금 더 적어 주시겠어요? 이렇게 물어보셔도 돼요.", chips:"examples" };
+  /* ④ 업무와 무관한 질문 */
+  if (OFFTOPIC.test(text)) return { type:"info", html:"길잡이는 학교 연장통의 업무 도구만 안내할 수 있어요. 그 질문은 도와드리기 어려워요.", chips:"menu" };
+  /* ⑤ 체험학습 사고 유형(도구 속 항목) — 급한 일이라 감정 토로보다 먼저 */
+  const tp = topicMatch(text), ctx = TRIP_CTX.test(text);
+  /* 한 학생의 배탈 결석은 출결 질문으로 — 여러 명이거나 '식중독'이라고 말할 때만 식중독으로 봅니다 */
+  const group = FOOD_GROUP.test(text) || /식중독|집단|보존식|역학\s*조사/.test(text);
+  const foodish = group && ((tp && tp.id === "food") || (FOOD_SIGN.test(text) && FOOD_EAT.test(text)));
+  if (foodish && !ctx){
+    if (/급식|교내|학교|교실|급식실|식당/.test(text)) return { type:"foodschool", warn:plan.warn };
+    return { type:"ask", warn:plan.warn, ask:"어디에서 생긴 일인가요?", opts:[["체험학습·여행 중이에요","tp:food"],["학교 급식·교내예요","foodschool:"]] };
+  }
+  if (tp && !(tp.id === "food" && !ctx)) return { type:"topic", tp, warn:plan.warn };
+  if (ctx && /사고|큰일|응급|위급|비상|일이\s*(났|생겼)|문제가?\s*생/.test(text) && !/신청|기한|계획서|서류|보고서\s*양식|철에/.test(text))
+    return { type:"ask", warn:plan.warn, ask:"체험학습 중 어떤 사고인가요?", opts:TOPICS.map(t => [t.name, "tp:" + t.id]) };
+  /* ⑥ 감정 토로: 공감 한마디를 앞에 붙이고, 맞는 도구가 없으면 조심스럽게 제안 */
+  plan.empathy = EMOTION.test(text);
+  const out = chatDecideTools(text, plan);
+  /* 감정 토로인데 도구 점수가 낮으면(‘교장’→‘학교장 허가’처럼 우연히 겹친 경우) 엉뚱한 도구 대신 공감 답 */
+  const shaky = out.type === "tools" && !out.list && out.topScore !== undefined && out.topScore < 10;
+  if (plan.empathy && (out.type === "none" || out.type === "weak" || out.type === "near" || shaky)){
+    const keys = []; EMO_HELP.forEach(([re, ks]) => { if (re.test(text)) ks.forEach(k => { if (!keys.includes(k)) keys.push(k); }); });
+    return { type:"info", warn:plan.warn, html:"많이 힘드셨겠어요. 잠시라도 숨을 고르시길 바라요." + (keys.length ? " 도움이 될 만한 도구도 함께 놓아 둘게요." : "") + "<br>마음이 계속 무겁다면 교육청 <b>교원치유지원센터</b>(교권보호센터)에서 상담을 받을 수 있어요.", keys:keys.slice(0, 2) };
+  }
+  return out;
+}
+function chatDecideTools(text, plan){
+  const raw = qWords(text).map(stemKo).filter(w => w.length >= 2 && !STOP.has(w));
+  const ment = mentioned(text);
+  const compare = /차이|달라|다른\s*점|다르|비교|뭘\s*먼저|무엇을\s*먼저|어느\s*(게|것|쪽)|같이\s*써|둘\s*다|중에?서?\s*.{0,12}(뭐가|어느|어디|먼저|좋아)|vs/i.test(text);
+  /* 비교: 이름 둘 이상, 또는 비교 말과 함께 검색 상위 2개 */
+  if (compare){
+    let two = ment.slice(0, 2);
+    tagsIn(text).forEach(s => { if (two.length < 2 && !two.includes(s)) two.push(s); });
+    if (two.length < 2){ const r = rankSites(text).map(x => x.s); r.forEach(s => { if (two.length < 2 && !two.includes(s)) two.push(s); }); }
+    if (two.length === 2) return Object.assign(plan, { type:"compare", keys:two.map(keyOf) });
+  }
+  /* 사이트 안내 (도구 이름을 말한 경우는 그 도구 답이 먼저) */
+  if (!ment.length){
+    const tagHit = tagsIn(text).length > 0;
+    for (const [re, fn, toolish] of CHAT_INFO){ if (toolish && tagHit) continue; if (re.test(text)) return Object.assign(plan, { type:"info" }, fn()); }
+  }
+  /* 대상별·시기별 추천 */
+  if (!ment.length && RECO_CUE.test(text)){
+    const m = text.match(/(1[0-2]|[1-9])\s*월/);
+    if (m && MONTHLY[+m[1]]) return Object.assign(plan, { type:"tools", keys:monthKeys(+m[1]), intro:`${+m[1]}월에는 ${MONTHLY[+m[1]].note} 도구를 자주 꺼내요.`, list:true });
+    if (/이번\s*달|요즘|지금\s*시기|이맘때/.test(text)) return Object.assign(plan, { type:"tools", keys:monthKeys(), intro:`${MONTH_NO}월에는 ${MONTHLY[MONTH_NO].note} 도구를 자주 꺼내요.`, list:true });
+    for (const [re, who, keys] of CHAT_WHO){ if (re.test(text)) return Object.assign(plan, { type:"tools", keys, intro:`${who} 이런 도구를 권해요.`, list:true }); }
+    for (const [re, when, keys] of CHAT_WHEN){ if (re.test(text)) return Object.assign(plan, { type:"tools", keys, intro:`${when} 이런 도구를 자주 꺼내요.`, list:true }); }
+  }
+  /* 도구 이름을 직접 말했으면 그 도구 */
+  if (ment.length){
+    const rest = rankSites(text).map(x => x.s).filter(s => s !== ment[0]).slice(0, 1);
+    return Object.assign(plan, { type:"tools", keys:[ment[0], ...rest].map(keyOf), detail:true, num:NUM_Q.test(text) });
+  }
+  /* 짧고 애매하면 되묻기 */
+  if (raw.length <= 3){
+    for (const [has, not, o] of CHAT_ASK){
+      if (has.test(text) && !not.test(text)){ const q = typeof o === "number" ? CHAT_MENU[o] : o; return Object.assign(plan, { type:"ask", ask:q.ask, opts:q.opts }); }
+    }
+  }
+  const r = rankSites(text);
+  const dh = deepSearch(text).filter(x => !r.slice(0, 3).some(y => keyOf(y.s) === x.key));
+  if (!r.length) return Object.assign(plan, dh.length ? { type:"deep", hits:dh } : { type:"none" });   /* 글자 하나씩 맞춘 ‘가까운 도구’는 길잡이에서 쓰지 않습니다 */
+  const top = SIDX.find(d => d.s === r[0].s);
+  if (r[0].sc < WEAK_SCORE && raw.length >= 2 && !raw.every(w => top.all.includes(w)))
+    return Object.assign(plan, dh.length ? { type:"deep", hits:dh } : { type:"weak", keys:r.slice(0, 2).map(x => keyOf(x.s)) });
+  return Object.assign(plan, { type:"tools", keys:r.slice(0, 3).map(x => keyOf(x.s)), detail:true, num:NUM_Q.test(text), topScore:r[0].sc });
+}
+/* 도구 한 줄 정보: 대상 · PC 권장 · 서버 저장 · 준비물 */
+function factLine(s){
+  const f = ["대상 " + s.who];
+  if (s.pc) f.push("PC 권장");
+  if (s.store) f.push(s.store);
+  if (s.prep) f.push("준비물: " + s.prep);
+  return f.join(" · ");
+}
+/* 세부 질문(휴대폰·저장·준비물)에 맞춘 한 문장 */
+function detailSentence(s, text){
+  if (/휴대\s*폰|핸드폰|모바일|폰으로|폰에서|pc|컴퓨터|태블릿/i.test(text)) return s.pc ? `「${s.t}」은(는) 화면이 넓어야 편해서 <b>PC에서 쓰는 것을 권해요</b>.` : `「${s.t}」은(는) 휴대폰에서도 쓸 수 있어요.`;
+  if (/저장|어디에\s*남|기록(은|이)\s*어디|서버/.test(text)) return s.store ? `「${s.t}」은(는) <b>${esc(s.store)}</b> 방식이에요.` : `「${s.t}」에는 서버 저장 표시가 없어요. 자세한 저장 방식은 도구 안내를 확인해 주세요.`;
+  if (/준비|필요한\s*(파일|것|자료)|올릴|업로드/.test(text)) return s.prep ? `준비물은 <b>${esc(s.prep)}</b>예요.` : `따로 준비할 파일은 없어요.`;
+  return "";
+}
+/* CHAT-LOGIC-END */
+
+const chat = { el:$("#chat"), log:$("#chatlog"), q:$("#chatq"), pushed:false, started:false };
 function chatScroll(){ chat.log.scrollTop = chat.log.scrollHeight; }
 function chatSay(html, who){
   const d = document.createElement("div");
@@ -1579,72 +2394,160 @@ function chatSay(html, who){
   d.innerHTML = html;
   chat.log.appendChild(d); chatScroll();
 }
-function chatChips(list){   /* list: [[글자, 동작], …] 동작 = "go:키" | "menu:번호" | "home" | "q:질문" */
+function chatChips(list){   /* list: [[글자, 동작, 흐리게], …] 동작 = go:키 | menu:번호 | home | again | q:질문 | copyall | scroll:id */
   const d = document.createElement("div");
   d.className = "ch-chips";
   d.innerHTML = list.map(([t, a, ghost]) => `<button type="button" class="${ghost ? "ghost" : ""}" data-ca="${esc(a)}">${esc(t)}</button>`).join("");
   chat.log.appendChild(d); chatScroll();
 }
-function chatCard(s, main){
+function chatCard(s, main, text){
   const p = partOf(s.p);
   const d = document.createElement("div");
   d.className = "ch-card" + (main ? " main" : "");
   d.style.setProperty("--k", p.color); d.style.setProperty("--kl", p.light);
   d.innerHTML = `<span class="cc-k">${esc(s.tag)}${s.m ? " · " + esc(s.m) : ""}</span><span class="cc-t">${esc(s.t)}</span>
-    ${main ? `<p class="cc-d">${esc(s.d)}</p>` : ""}
+    ${main ? `<p class="cc-d">${esc(s.d)}</p><p class="cc-f">${esc(factLine(s))}</p>` : ""}
     <div class="cc-a"><a href="${esc(s.u)}" target="_blank" rel="noopener">바로 열기 ↗</a><button type="button" data-ca="list:${keyOf(s)}">목록에서 보기</button></div>`;
   chat.log.appendChild(d); chatScroll();
 }
 const MORE = [["다른 질문하기", "again", 1], ["처음으로", "home", 1]];
+/* 길잡이 속 도구 내용 카드 */
+function chatDeepCard(h, main){
+  const p = partOf(h.s.p), u = deepUrl(h), q = DEEP_QLINK.has(h.key);
+  const d = document.createElement("div");
+  d.className = "ch-card" + (main ? " main" : "");
+  d.style.setProperty("--k", p.color); d.style.setProperty("--kl", p.light);
+  d.innerHTML = `<span class="cc-k">${esc(h.s.tag)} · 도구 안의 내용</span><span class="cc-t">${esc(h.s.t)}</span>
+    <p class="cc-d dsnip">${deepSnip(h, 120)}</p>
+    <p class="cc-f">이 도구 안 ${h.cnt}곳에 나옵니다${q ? "" : ` · 열린 뒤 ‘${esc(h.words.join(" "))}’를 찾아보세요`}</p>
+    <div class="cc-a"><a href="${esc(u)}" target="_blank" rel="noopener">${q ? "그 내용 바로 찾아 열기 ↗" : "도구 열기 ↗"}</a></div>`;
+  chat.log.appendChild(d); chatScroll();
+}
+/* 길잡이 속 사고 유형 카드 */
+function chatTopicCard(t){
+  const s = siteBy(t.site), p = partOf(s.p), u = topicUrl(t);
+  const d = document.createElement("div");
+  d.className = "ch-card main";
+  d.style.setProperty("--k", p.color); d.style.setProperty("--kl", p.light);
+  d.innerHTML = `<span class="cc-k">체험학습 사고 · ${TOPIC_LV[t.lv]}</span><span class="cc-t">${esc(t.name)}</span>
+    <p class="cc-d">${esc(t.sub)}</p>
+    <p class="cc-nh">지금 바로 할 일</p>
+    <ol class="cc-now">${t.now.map(x => `<li>${esc(x)}</li>`).join("")}</ol>
+    <p class="cc-f">「${esc(s.t)}」 안의 항목</p>
+    <div class="cc-a"><a href="${esc(u)}" target="_blank" rel="noopener">대처 전체 보기 ↗</a><a class="ghost" href="${esc(topicUrl(t, "b"))}" target="_blank" rel="noopener">보고·안내 문구 ↗</a>${t.lv === "red" ? `<a class="ghost" href="tel:119">119 전화</a>` : ""}</div>`;
+  chat.log.appendChild(d); chatScroll();
+}
+const EXAMPLES = ["학생이 일주일째 연락이 안 돼요", "체험학습에서 여러 명이 배가 아파요", "보결은 누가 들어가요?", "6학년으로 전학 왔는데 졸업할 수 있나요?", "학부모가 밤마다 문자를 보내요", "3월에 쓰면 좋은 도구는?"];
+const menuChips = () => CHAT_MENU.map((m, i) => [m.label, "menu:" + i]);
 function chatHome(){
   chatSay("안녕하세요. 지금 어떤 일을 하고 계세요?<br>아래에서 고르거나, 상황을 문장으로 적어 주세요.");
-  chatChips(CHAT_MENU.map((m, i) => [m.label, "menu:" + i]));
+  chatChips(menuChips());
 }
-function chatAnswer(keys, intro){
-  const list = keys.map(siteBy).filter(Boolean);
-  if (!list.length) return;
-  chatSay(intro || "이 도구가 가장 잘 맞아요.");
-  chatCard(list[0], true);
-  if (list.length > 1){ chatSay("함께 보면 좋은 도구예요."); list.slice(1, 3).forEach(s => chatCard(s)); }
-  chatChips(MORE);
-}
-function chatAskOpts(o){ chatSay(o.ask); chatChips(o.opts.map(([t, k]) => [t, "go:" + k]).concat([["잘 모르겠어요", "again", 1]])); }
-function chatQuery(text){
-  chatSay(esc(text), "me");
-  const raw = qWords(text).map(stemKo).filter(w => w.length >= 2 && !STOP.has(w));
-  /* 짧고 애매하면 되묻기 */
-  if (raw.length <= 3){
-    for (const [has, not, o] of CHAT_ASK){
-      if (has.test(text) && !not.test(text)){ chatAskOpts(typeof o === "number" ? CHAT_MENU[o] : o); return; }
+function chatRender(plan, text){
+  if (plan.warn) chatSay("💡 학생 이름 같은 개인정보는 빼고 물어봐 주세요. 이 길잡이는 내용을 저장하지 않지만, 습관이 되면 다른 곳에서도 안전해요.");
+  const sites = (plan.keys || []).map(siteBy).filter(Boolean);
+  if (plan.type === "crisis"){
+    chatSay("많이 힘드시군요. 이 마음을 혼자 견디지 않으셔도 돼요.<br>지금 이야기할 사람이 필요하면 <b>자살예방 상담전화 109</b>에 전화해 주세요. 24시간 열려 있어요. 위급한 상황이면 <b>112</b>나 <b>119</b>에 바로 연락해 주세요.<br><br>학생에 관한 일이라면 혼자 판단하지 마시고, 학교 위기관리위원회·Wee 클래스와 함께 바로 대응해 주세요.");
+    const d = document.createElement("div"); d.className = "ch-chips";
+    d.innerHTML = `<a class="ch-call" href="tel:109">109에 전화하기</a><button type="button" class="ghost" data-ca="home">처음으로</button>`;
+    chat.log.appendChild(d); chatScroll();
+    return;
+  }
+  if (plan.empathy && plan.type !== "info") chatSay("많이 힘드셨겠어요. 도움이 될 만한 도구를 찾아볼게요.");
+  switch (plan.type){
+    case "info":
+      if (plan.act === "home"){ chatHome(); return; }
+      chatSay(plan.html);
+      sites.forEach((s, i) => chatCard(s, i === 0 && sites.length === 1, text));
+      if (plan.chips === "menu") chatChips(menuChips());
+      else if (plan.chips === "examples") chatChips(EXAMPLES.map(q => [q, "q:" + q]));
+      else if (Array.isArray(plan.chips)) chatChips(plan.chips.concat(MORE));
+      else chatChips(MORE);
+      return;
+    case "ask":
+      chatSay(plan.ask);
+      chatChips(plan.opts.map(([t, k]) => [t, k.includes(":") ? k : "go:" + k]).concat([["잘 모르겠어요", "again", 1]]));
+      return;
+    case "topic": {
+      const t = plan.tp;
+      chatSay((t.lv === "red" ? "위급하면 먼저 <b>119</b>에 신고하세요.<br>" : "") + `체험학습 중 「${esc(t.name)}」이라면 지금 바로 이것부터 하세요.`);
+      chatTopicCard(t);
+      chatChips([["다른 사고 유형 보기", "tplist:"]].concat(MORE));
+      return;
+    }
+    case "deep":
+      chatSay("도구 이름에는 없지만, 이 도구 안에 그 내용이 있어요.");
+      plan.hits.slice(0, 2).forEach((h, i) => chatDeepCard(h, i === 0));
+      chatChips(MORE);
+      return;
+    case "foodschool":
+      chatSay("학교 급식·교내에서 생긴 식중독 대응은 아직 연장통에 따로 정리된 도구가 없어요. 어디서든 공통으로 먼저 할 일만 알려 드릴게요.<br>① 증상 학생을 따로 모으고 명단(증상·시작 시각·먹은 음식)을 적어요.<br>② 같은 증세가 2명 이상이면 식중독 의심 — 관리자에게 보고하고 관할 보건소·교육(지원)청에 바로 알려요.<br>③ 남은 음식·보존식은 버리지 말고 그대로 보관해요.<br>자세한 절차는 보건교사·영양(교)사와 함께 교육청 지침을 확인해 주세요.");
+      chatChips([["체험학습 중이라면", "tp:food"], ["119 전화", "tel:119"]].concat(MORE));
+      return;
+    case "compare":
+      chatSay("두 도구는 이렇게 달라요.<br>" + sites.map(s => `• <b>${esc(s.t)}</b> — ${esc(s.d)}`).join("<br>"));
+      sites.forEach(s => chatCard(s));
+      chatChips(MORE);
+      return;
+    case "weak":
+      chatSay("딱 맞는 도구는 없어요. 낱말이 일부 겹치는 도구를 보여 드릴게요.");
+      sites.forEach(s => chatCard(s));
+      chatSay("어느 쪽 일인지 골라 주시면 더 정확히 찾아 드려요.");
+      chatChips(menuChips());
+      return;
+    case "near":
+      chatSay("딱 맞는 도구를 찾지 못했어요. 혹시 이 가운데 있을까요?");
+      sites.forEach(s => chatCard(s));
+      chatChips(MORE);
+      return;
+    case "none":
+      chatSay("딱 맞는 도구를 찾지 못했어요. 어느 쪽 일인지 골라 주시겠어요?");
+      chatChips(menuChips());
+      return;
+    default: {   /* tools */
+      if (!sites.length){ chatSay("딱 맞는 도구를 찾지 못했어요."); chatChips(menuChips()); return; }
+      if (plan.list){
+        chatSay(plan.intro);
+        sites.forEach(s => chatCard(s));
+        chatChips(MORE);
+        return;
+      }
+      const ds = plan.detail ? detailSentence(sites[0], text) : "";
+      chatSay(ds || (plan.num ? "정확한 일수·기한은 규정과 지침이 바뀔 수 있어요. 이 도구에서 확인해 주세요." : "이 도구가 가장 잘 맞아요."));
+      chatCard(sites[0], true, text);
+      if (sites.length > 1){ chatSay("함께 보면 좋은 도구예요."); sites.slice(1, 3).forEach(s => chatCard(s)); }
+      chatChips(MORE);
     }
   }
-  const r = rankSites(text);
-  if (!r.length){
-    const near = nearest(text);
-    if (near.length){ chatAnswer(near.map(keyOf), "딱 맞는 도구를 찾지 못했어요. 혹시 이 가운데 있을까요?"); }
-    else { chatSay("딱 맞는 도구를 찾지 못했어요. 어느 쪽 일인지 골라 주시겠어요?"); chatChips(CHAT_MENU.map((m, i) => [m.label, "menu:" + i])); }
-    return;
-  }
-  const top = SIDX.find(d => d.s === r[0].s);
-  const weak = r[0].sc < WEAK_SCORE && raw.length >= 2 && !raw.every(w => top.all.includes(w));
-  if (weak){
-    chatSay("딱 맞는 도구는 없어요. 낱말이 일부 겹치는 도구를 보여 드릴게요.");
-    r.slice(0, 2).forEach(x => chatCard(x.s));
-    chatSay("어느 쪽 일인지 골라 주시면 더 정확히 찾아 드려요.");
-    chatChips(CHAT_MENU.map((m, i) => [m.label, "menu:" + i]));
-    return;
-  }
-  chatAnswer(r.slice(0, 3).map(x => keyOf(x.s)));
+}
+function chatQuery(text){
+  chatSay(esc(text), "me");
+  /* 도구 속 내용 색인을 아직 못 불러왔으면 기다렸다가 답합니다(없으면 바로) */
+  const go = () => chatRender(chatDecide(text), text);
+  if (DEEP) go(); else loadDeep().then(go);
 }
 function chatAct(a){
-  if (a.startsWith("menu:")){ const m = CHAT_MENU[+a.slice(5)]; chatSay(esc(m.label), "me"); chatAskOpts(m); }
-  else if (a.startsWith("go:")){ const s = siteBy(a.slice(3)); if (s){ chatSay(esc(s.m || s.tag), "me"); chatAnswer([keyOf(s)]); } }
+  if (a.startsWith("menu:")){ const m = CHAT_MENU[+a.slice(5)]; chatSay(esc(m.label), "me"); chatRender({ type:"ask", ask:m.ask, opts:m.opts }); }
+  else if (a.startsWith("go:")){ const s = siteBy(a.slice(3)); if (s){ chatSay(esc(s.m || s.tag), "me"); chatRender({ type:"tools", keys:[keyOf(s)] }); } }
+  else if (a.startsWith("q:")){ chatQuery(a.slice(2)); }
+  else if (a.startsWith("tp:")){ const t = topicBy(a.slice(3)); if (t){ chatSay(esc(t.name), "me"); chatRender({ type:"topic", tp:t }); } }
+  else if (a === "tplist:"){ chatSay("체험학습 중 사고", "me"); chatRender({ type:"ask", ask:"체험학습 중 어떤 사고인가요?", opts:TOPICS.map(t => [t.name, "tp:" + t.id]) }); }
+  else if (a === "foodschool:"){ chatSay("학교 급식·교내예요", "me"); chatRender({ type:"foodschool" }); }
+  else if (a === "tel:119"){ location.href = "tel:119"; }
   else if (a.startsWith("list:")){ const k = a.slice(5); if (isNarrow()) chatClose(); goTo(k); }
+  else if (a.startsWith("scroll:")){ if (isNarrow()) chatClose(); scrollToId(a.slice(7)); }
+  else if (a.startsWith("tip:") || a === "news"){
+    const fn = a === "news" ? openNews : () => runTip(a.slice(4));
+    if (isNarrow() && !chat.el.hidden){ const p = chat.pushed; chatClose(); thenAfterPop(p, fn); } else fn();
+  }
+  else if (a === "copyall"){ $("#copyall").click(); }
   else if (a === "home"){ chatHome(); }
-  else if (a === "again"){ chatSay("네, 상황을 문장으로 적거나 아래에서 골라 주세요."); chatChips(CHAT_MENU.map((m, i) => [m.label, "menu:" + i])); chat.q.focus(); }
+  else if (a === "again"){ chatSay("네, 상황을 문장으로 적거나 아래에서 골라 주세요."); chatChips(menuChips()); chat.q.focus(); }
 }
 function chatOpen(){
   if (!SIDX) buildSearchIndex();
+  loadDeep();
+  markTipDone("chat");
   chat.el.hidden = false; $("#chatbtn").classList.add("hide");
   if (!chat.started){ chat.started = true; chatHome(); }
   try { history.pushState({ chat:1 }, "", cleanURL()); chat.pushed = true; } catch(err){ chat.pushed = false; }
@@ -1683,6 +2586,7 @@ function fallback(text, done){
   document.body.removeChild(ta);
 }
 function copyAll(){
+  markTipDone("copyall");
   let out = "학교 연장통 — 학교 업무를 바꾼 웹사이트 (" + COUNT + "개)\n\n";
   PARTS.forEach(p => {
     out += p.name + "\n";
@@ -1729,6 +2633,7 @@ window.addEventListener("scroll", () => { clearTimeout(sid); sid = setTimeout(sa
 try { history.scrollRestoration = "manual"; } catch(err){}
 stripHash();
 const savedY = restoreView();
+if (query) loadDeep().then(() => { if (query) render(); });
 renderFilters();
 renderMap();
 render();
