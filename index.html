@@ -481,6 +481,26 @@ a.mcard{text-decoration:none;color:inherit;}
 .monthly.hint .mcard{animation:mcHint 1s ease-in-out 2;}
 @keyframes mcHint{50%{background:var(--kl);transform:translateY(-2px);}}
 @media print{.newbar,.howto{display:none !important;}}
+
+/* ── 많이 찾은 도구(달마다 새로 세는 열람 순위) ── */
+.mcard .mrow{display:flex;align-items:center;gap:6px;min-height:19px;margin-bottom:1px;}
+.mcard .mrk{font-size:11.5px;font-weight:700;line-height:1.5;color:#fff;background:var(--k);border-radius:2px;padding:0 6px;font-variant-numeric:tabular-nums;}
+.mcard .mlab{font-size:11px;font-weight:700;line-height:1.5;color:var(--muted);border:1px solid var(--line-strong);border-radius:2px;padding:0 5px;}
+.mcard .mlab.new{color:var(--new);border-color:color-mix(in srgb,var(--new) 45%,#fff);}
+.mup{font-size:11.5px;font-weight:700;color:var(--new);white-space:nowrap;}
+.newtag.hot{color:var(--new);}
+.newtag.hot::before{content:"↑";width:auto;height:auto;background:none;border-radius:0;font-size:12px;}
+/* 열람 순위 전체 보기(주소에 ?stats) */
+.modal .box.stats{max-width:720px;}
+.sttools{display:flex;gap:var(--s2) var(--s3);align-items:center;flex-wrap:wrap;margin:0 0 var(--s3);font-size:13px;color:var(--muted);}
+.sttools select{font-family:var(--sans);font-size:14px;padding:6px 8px;border:1px solid var(--line-strong);border-radius:2px;background:#fff;color:var(--ink);}
+.sttools b{color:var(--ink);font-variant-numeric:tabular-nums;}
+.sttbl{width:100%;border-collapse:collapse;font-size:13px;margin:0 0 var(--s4);}
+.sttbl th,.sttbl td{border-bottom:1px solid var(--line);padding:6px;text-align:left;vertical-align:baseline;}
+.sttbl th{font-weight:600;color:var(--ink);background:var(--paper);position:sticky;top:-24px;}
+.sttbl .n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;}
+.sttbl td.z{color:var(--muted);}
+@media(max-width:560px){.sttbl .opt{display:none;}}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "학교 연장통", "alternateName": ["학교 연장통 — 학교 업무를 바꾼 웹사이트", "바이브 코딩 학교 웹사이트 모음"], "url": "https://edu-hub-alpha-ten.vercel.app/", "description": "초등학교 교감이 바이브 코딩으로 만든 학교 업무용 웹 도구 45개 모음. 휴가·휴직·복무 확인, 반편성, 시간표, 연수, 생활지도까지 링크 하나로 바로 씁니다.", "inLanguage": "ko", "author": {"@type": "Person", "name": "최창훈", "jobTitle": "초등학교 교감"}, "keywords": "학교 연장통, 바이브 코딩, 학교 업무, 교사 웹 도구, 초등학교, 교감, 반편성, 휴가, 휴직, 연수, 생활지도, 학급회의, 학생자치"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "ItemList", "name": "학교 연장통 도구 목록", "numberOfItems": 45, "itemListElement": [{"@type": "ListItem", "position": 1, "name": "교육공무원 복무 한눈에", "description": "초과근무 인정 시간, 출장 구분과 이동시간, 41조 연수, 결재라인까지 헷갈리는 복무를 그림과 계산기로 바로 확인합니다.", "url": "https://attendance-six-liard.vercel.app/"}, {"@type": "ListItem", "position": 2, "name": "외부강의·겸직 가능 여부 확인", "description": "신고 대상인지 겸직 허가 대상인지, 몇 가지 질문에 답하면 스스로 가려낼 수 있습니다.", "url": "https://external-lecture.vercel.app/"}, {"@type": "ListItem", "position": 3, "name": "교원 휴가 종류와 일수 확인", "description": "연가·병가·공가·경조사 등 열세 가지 휴가를 조건과 일수까지 한 화면에서 확인합니다.", "url": "https://leave-of-absence-nu.vercel.app/"}, {"@type": "ListItem", "name": "휴직 한눈에", "description": "육아·질병·가족돌봄·유학 등 교육공무원 휴직 14종의 요건, 기간, 보수, 경력·승급을 한눈에 비교합니다. 상황을 고르거나 검색하면 맞는 휴직을 찾아 주고, 육아휴직수당·질병휴직 봉급·남은 휴직 기간을 계산하며, 서류 제출부터 복귀 신고까지 일정을 캘린더로 내보냅니다.", "url": "https://leave-blue-nu.vercel.app/", "position": 4}, {"@type": "ListItem", "position": 5, "name": "보결 배정하기", "description": "빈 시간과 담당 시수를 함께 보며 보결을 고르게 나눠 배정합니다.", "url": "https://substitute-assignment-yiix.vercel.app/"}, {"@type": "ListItem", "position": 6, "name": "방학 중 비근무 직종 근무일수 계산", "description": "달력에서 근무일을 고르면 연간 근무일수와 주휴 유급 여부가 자동으로 계산됩니다.", "url": "https://calculation-of-paid-vacation-days.vercel.app/"}, {"@type": "ListItem", "position": 7, "name": "반별 시간표 짜기", "description": "전담 시간과 학년 시수를 맞춰 가며 시간표를 짜고, 충돌을 바로 잡아 줍니다.", "url": "https://elementary-class-timetable.vercel.app/"}, {"@type": "ListItem", "position": 8, "name": "자율연수비 정산하기", "description": "연수 그룹과 명단을 만들고 지출을 입력하면 정산표가 엑셀로 나옵니다.", "url": "https://training-fee-manager.vercel.app/"}, {"@type": "ListItem", "position": 9, "name": "학부모 법정 의무교육 안내", "description": "해마다 인쇄해 보내던 열여섯 가지 법정 교육을 링크 하나로 대신합니다.", "url": "https://parent-education-zeta.vercel.app/"}, {"@type": "ListItem", "position": 10, "name": "월중·주간계획 자동으로 만들기", "description": "한 번 입력한 일정이 월중계획과 주간계획으로 함께 만들어지는 구글 시트 자동화입니다.", "url": "https://monthly-plan-theta.vercel.app/"}, {"@type": "ListItem", "position": 11, "name": "공문·회의록 작성 가이드", "description": "공문과 회의록 쓰는 법을 예시로 익히고, 스물아홉 문항으로 스스로 점검합니다.", "url": "https://official-document.vercel.app/"}, {"@type": "ListItem", "position": 12, "name": "업무 인수인계 노트 만들기", "description": "월별로 하는 일을 적어 두면 파일 하나로 후임자에게 그대로 넘길 수 있습니다.", "url": "https://handover-pi.vercel.app/"}, {"@type": "ListItem", "position": 13, "name": "단체 음료 주문 취합", "description": "각자 고른 음료가 자동으로 취합되고, 카페에 넘길 주문서가 정리되어 나옵니다.", "url": "https://cafe-order-xi.vercel.app/"}, {"@type": "ListItem", "position": 14, "name": "교내 인사 내규 점검하고 만들기", "description": "우리 학교 내규를 올리면 빠진 조항과 서로 어긋나는 조항을 찾아 고칠 문장까지 정리해 줍니다. 참고안을 바탕으로 새 내규를 만들고 인사점수도 계산합니다.", "url": "https://personnel-regulations.vercel.app/"}, {"@type": "ListItem", "position": 15, "name": "업무분장 한눈에", "description": "표준안을 보고 협의해 우리 학교 안을 만들고, 작년 분장표(.hwpx)와 비교해 빠진 업무와 담당이 다른 업무를 찾습니다. 갈등 조정 절차와 근거도 담았습니다.", "url": "https://division-of-work.vercel.app/"}, {"@type": "ListItem", "position": 16, "name": "교감 자격연수 점수 계산과 진로 설계", "description": "경력·연수·가산점을 넣으면 지금 서류 점수와 기준점까지 남은 점수를 보여 주고, 앞으로 몇 년 뒤 닿을지 시뮬레이션합니다.", "url": "https://careerplanning.vercel.app/"}, {"@type": "ListItem", "position": 17, "name": "학적 한눈에", "description": "입학·전학·유예·정원 외 관리까지, 상황을 고르거나 문장으로 물으면 처리 순서와 서류, 나이스 메뉴를 바로 찾아 줍니다.", "url": "https://academic-records-rosy.vercel.app/"}, {"@type": "ListItem", "position": 18, "name": "외국 국적 학생 학적 처리 안내", "description": "입교 상담부터 아포스티유, 학적 처리까지 순서대로 짚어 줍니다.", "url": "https://academic-record-management-for-fore.vercel.app/"}, {"@type": "ListItem", "position": 19, "name": "교육활동 침해 판별과 대응 절차", "description": "있었던 일을 고르면 해당할 수 있는 침해 유형과 지금 할 일을 알려 주고, 담당자에게는 단계별 처리 절차와 기한을 안내합니다.", "url": "https://protection-of-educational-activitie-blond.vercel.app/"}, {"@type": "ListItem", "position": 20, "name": "학교 안전·긴급사항 대응 절차", "description": "응급환자 이송, 중대재해, 비상연락망까지 급할 때 열어 보는 절차를 모았습니다.", "url": "https://emergency-fh5s.vercel.app/"}, {"@type": "ListItem", "position": 21, "name": "옆 학교는?", "description": "업무 갈등이나 공문 핑퐁처럼 학교마다 판단이 갈리는 안건을 올리면, 전국 초등학교가 학교별 1표로 판단과 이유를 남기고 해마다 기록이 쌓입니다. 로그인 없이 학교만 고르면 참여합니다.", "url": "https://survey-rho-drab.vercel.app/"}, {"@type": "ListItem", "name": "출결 한눈에", "description": "결석 사유를 말하듯 검색하면 출석인정·질병·기타·미인정 중 무엇인지, 어떤 서류를 언제까지 내야 하는지, 생활기록부에 어떻게 남는지 한 화면에서 답합니다. 학부모와 담임이 같은 화면을 봅니다.", "url": "https://stattendance.vercel.app/", "position": 22}, {"@type": "ListItem", "position": 23, "name": "교외체험학습 신청기한 계산", "description": "휴일을 빼고 신청 기한을 계산해 주고, 사유가 적절한지도 스스로 확인합니다.", "url": "https://educational-travel.vercel.app/"}, {"@type": "ListItem", "position": 24, "name": "미인정결석 학생 업무 처리 안내", "description": "담임·업무 담당자·관리자를 고르면 결석 당일부터 NEIS 등록, 매월 확인, 복귀 보고까지 내 차례의 일을 순서대로 보여 줍니다.", "url": "https://unexcused-absence-sage.vercel.app/"}, {"@type": "ListItem", "position": 25, "name": "감염병 등교중지·출석인정 확인", "description": "병명을 찾으면 등교 중지 기간과 출석 인정 절차를 학부모가 바로 확인할 수 있습니다.", "url": "https://infectious-diseases.vercel.app/"}, {"@type": "ListItem", "position": 26, "name": "야외활동 가능 여부 확인", "description": "지금 우리 지역 수치로 야외 활동이 가능한지, 자제인지, 금지인지 한 줄로 답합니다.", "url": "https://fine-dust-heat-wave.vercel.app/"}, {"@type": "ListItem", "name": "학급회의 한눈에", "description": "1~2·3~4·5~6학년 학년군마다 다른 학급회의 순서와 사회자·의장 대본을 안내하고, 교실 TV에 띄우는 진행 모드(타이머·그림 카드·스티커 투표)로 그대로 이끕니다. 전교학생회의 진행, 결정 방법 16가지, 달마다 안건, 회의 기록 양식까지 담았습니다.", "url": "https://class-meeting-ashy.vercel.app/", "position": 27}, {"@type": "ListItem", "position": 28, "name": "해냄 보물상자", "description": "학생이 2022 개정 교육과정 성취기준에서 스스로 목표를 고르고, 보호자 확인과 선생님 인증을 모아 한 해 동안 쌓아 갑니다.", "url": "https://growth-opal.vercel.app/"}, {"@type": "ListItem", "position": 29, "name": "생활기록부·통지표 문장 쓰기", "description": "생활통지표·생활기록부를 어떻게 쓰는지 기재 요령과 예시 문장으로 자세히 안내하고, 수업 중 관찰 기록을 문장으로 옮기도록 돕습니다.", "url": "https://student-record-seven.vercel.app/"}, {"@type": "ListItem", "name": "학생부 점검 한눈에", "description": "나이스에서 PDF로 저장한 학교생활기록부(생기부)나 생활통지표를 올리면, 그해 기재요령과 이번 학기 통지 항목으로 읽어 고칠 곳과 근거를 짚어 줍니다. 파일은 기기 밖으로 나가지 않습니다.", "url": "https://student-record-review.vercel.app/", "position": 30}, {"@type": "ListItem", "position": 31, "name": "반편성하기", "description": "성적·성별·관계 조건을 놓고 여러 안을 만들어 보며 협의 자리에서 함께 결정합니다.", "url": "https://class-assignment-ruddy.vercel.app/"}, {"@type": "ListItem", "position": 32, "name": "신입생 반편성하기", "description": "예비소집 면접 기록을 모아 신입생 반을 나누고 명렬표까지 정리합니다.", "url": "https://freshman-class-assignment-nmos.vercel.app/"}, {"@type": "ListItem", "position": 33, "name": "청렴 연수 방탈출 게임", "description": "청탁금지법과 갑질 예방을 방탈출 게임으로 풀어 가는 참여형 연수입니다.", "url": "https://integrity-henna.vercel.app/"}, {"@type": "ListItem", "position": 34, "name": "교육활동보호 법률 용어 익히기", "description": "교육활동 침해와 관련된 법률 용어를 읽고, 열 문항 퀴즈로 확인합니다.", "url": "https://protection-of-educational-activitie.vercel.app/"}, {"@type": "ListItem", "position": 35, "name": "교육활동 침해 사안 대응 익히기", "description": "실제 상황을 놓고 어디까지가 침해인지, 무엇부터 해야 하는지 따라가 봅니다.", "url": "https://protection-of-educational-activitie-three.vercel.app/"}, {"@type": "ListItem", "position": 36, "name": "내 수업 성장 지도", "description": "스물네 가지 수업 장면에서 지금 내 모습을 고르면, 여섯 영역의 성장 지도와 다음 한 걸음을 보여 줍니다.", "url": "https://teaching-competency.vercel.app/"}, {"@type": "ListItem", "position": 37, "name": "AI·디지털 교육 역량 진단", "description": "스물한 개 문항에 답하면 일곱 가지 역량의 성장 리포트와 이번 주 실천 미션을 보여 줍니다.", "url": "https://ai-digital-literacy.vercel.app/"}, {"@type": "ListItem", "position": 38, "name": "바이브 코딩 연수 길잡이", "description": "생성형 AI로 학교 업무용 웹사이트를 만들어 배포하는 연수를 2차시부터 15차시까지 단계별로 안내합니다.", "url": "https://vibecoding-zeta-seven.vercel.app/"}, {"@type": "ListItem", "position": 39, "name": "학급규칙 세우기 수업 준비", "description": "학급 규칙을 학생들과 함께 정하는 수업을 준비하고, 미리 연습해 볼 수 있습니다.", "url": "https://class-rules.vercel.app/"}, {"@type": "ListItem", "position": 40, "name": "교우관계 설문과 관계도 그리기", "description": "학년군별 설문으로 교우 관계를 모아 관계도와 리포트로 보여 줍니다.", "url": "https://sociogram-hazel.vercel.app/"}, {"@type": "ListItem", "position": 41, "name": "나 전달법 배우고 연습하기", "description": "나 전달법을 단계로 배우고 서른 가지 상황으로 연습한 뒤 골든벨로 확인합니다.", "url": "https://i-message-nine.vercel.app/"}, {"@type": "ListItem", "position": 42, "name": "도전행동 생활지도 가이드", "description": "도전 행동을 만났을 때 무엇을 먼저 하고 무엇을 하지 말아야 하는지 안내합니다.", "url": "https://school-guidance-plus.vercel.app/"}, {"@type": "ListItem", "position": 43, "name": "학부모 상담 준비와 연습", "description": "학부모 상담의 흐름을 익히고, 어려운 장면을 미리 연습해 볼 수 있습니다.", "url": "https://parent-consultation-training.vercel.app/"}, {"@type": "ListItem", "position": 44, "name": "상담과 민원 구분하기", "description": "상담과 민원의 경계를 사례로 구분하고, 민원으로 넘어갔을 때의 절차를 안내합니다.", "url": "https://consultation-complaints.vercel.app/"}, {"@type": "ListItem", "position": 45, "name": "학교폭력 사안 처리 절차", "description": "학부모 눈높이로 학교폭력 신고 접수부터 심의까지의 절차와 기한을 순서대로 따라갑니다. 교직원이 학부모에게 안내할 때도 씁니다.", "url": "https://school-violence-alpha.vercel.app/"}]}</script>
@@ -627,7 +647,7 @@ a.mcard{text-decoration:none;color:inherit;}
         </div>
         <div>
           <h3>‘서버 저장’ 표시가 있는 도구</h3>
-          <p>대부분의 도구는 입력한 내용이 브라우저 안에서만 처리되고 서버로 넘어가지 않습니다. 여럿이 함께 써야 하는 몇 가지만 저장이 필요하고, 그 도구에는 ‘서버 저장’ 표시를 붙였습니다. 사용이 끝나면 자료를 지워 주세요.</p>
+          <p>대부분의 도구는 입력한 내용이 브라우저 안에서만 처리되고 서버로 넘어가지 않습니다. 여럿이 함께 써야 하는 몇 가지만 저장이 필요하고, 그 도구에는 ‘서버 저장’ 표시를 붙였습니다. 사용이 끝나면 자료를 지워 주세요. 학교 연장통은 「많이 찾은 도구」를 보여 드리려고 도구별로 몇 번 열렸는지 횟수만 셉니다(같은 기기는 도구마다 하루 한 번). 누가 열었는지는 남기지 않습니다.</p>
         </div>
         <div>
           <h3>PC에서 쓰는 것이 편한 도구</h3>
@@ -1607,7 +1627,7 @@ function card(s, p){
   if (s.store) meta.push(`<span class="store">${esc(s.store)}</span>`);
   const mk = markOf(s);
   return `<article class="item" id="t-${keyOf(s)}" style="--k:${p.color};--kl:${p.light}" data-key="${keyOf(s)}" data-url="${esc(s.u)}">
-    <span class="tagrow"><span class="tagbadge" aria-hidden="true">${esc(s.tag)}</span>${mk ? `<span class="newtag${mk.kind !== "new" ? " up" : ""}">${NEWS_KIND[mk.kind]}</span>` : ""}</span>
+    <span class="tagrow"><span class="tagbadge" aria-hidden="true">${esc(s.tag)}</span>${mk ? `<span class="newtag${mk.kind !== "new" ? " up" : ""}">${NEWS_KIND[mk.kind]}</span>` : ""}${isRising(s) ? `<span class="newtag hot">요즘 찾음</span>` : ""}</span>
     <h3><a href="${esc(toolHref(s))}" target="_blank" rel="noopener">${esc(s.t)}</a></h3>
     <p class="desc">${esc(s.d)}</p>
     ${mk && mk.kind !== "new" && mk.text ? `<p class="upline"><b>${fmtMD(mk.d)} ${NEWS_KIND[mk.kind]}</b> ${esc(mk.text)}</p>` : ""}
@@ -1755,6 +1775,79 @@ function render(){
   showLabel(query && hits.length ? document.querySelector(`.cell[data-go="${keyOf(hits[0])}"]`) : null);
 }
 
+/* ══ 도구별 열람 횟수 ══════════════════════════════════════
+   도구가 새 창으로 열리는 순간만 셉니다. 같은 기기·같은 도구는 하루 한 번(한국 시간).
+     stats/clicks/YYYY-MM/키      — 달마다 새로 세는 순위
+     stats/clicksw/그 주 월요일/키 — 「요즘 찾음」(급상승) 판단용
+   누가 열었는지는 남기지 않고 도구 번호와 횟수만 남깁니다. COUNTER_DB를 비우면 모두 꺼집니다. */
+const POP_ON = !!COUNTER_DB;
+const POP_BASE = COUNTER_DB.replace(/\/+$/, "");
+const kstDay = () => new Date().toLocaleDateString("sv-SE", { timeZone:"Asia/Seoul" });
+const POP_DAY = kstDay(), POP_MONTH = POP_DAY.slice(0, 7);
+function mondayOf(day, back){
+  const d = new Date(day + "T00:00:00Z");
+  d.setUTCDate(d.getUTCDate() - (d.getUTCDay() + 6) % 7 - (back || 0) * 7);
+  return d.toISOString().slice(0, 10);
+}
+const POP_WEEK = mondayOf(POP_DAY), POP_PWEEK = mondayOf(POP_DAY, 1);
+const POP = { ready:false, m:{}, w:{}, pw:{} };
+const RISE_MIN = 3;   /* 이번 주 3회 이상이고 지난주의 두 배 이상이면 「요즘 찾음」 */
+const fmtN = n => Number(n || 0).toLocaleString("ko-KR");
+/* 주소로 어느 도구인지(?q= 같은 꼬리가 붙어도) */
+function siteOfUrl(u){
+  u = String(u || "");
+  return SITES.filter(s => u.startsWith(s.u)).sort((a, b) => b.u.length - a.u.length)[0] || null;
+}
+function trackOpen(u){
+  if (!POP_ON) return;
+  const s = siteOfUrl(u); if (!s) return;
+  const k = keyOf(s);
+  let st = {}; try { st = JSON.parse(lsGet("hub.opened", "{}")) || {}; } catch(err){}
+  if (st.d !== POP_DAY || !Array.isArray(st.k)) st = { d:POP_DAY, k:[] };
+  if (st.k.includes(k)) return;
+  st.k.push(k); lsSet("hub.opened", JSON.stringify(st));
+  POP.m[k] = (POP.m[k] || 0) + 1; POP.w[k] = (POP.w[k] || 0) + 1;
+  const inc = { ".sv": { "increment": 1 } };
+  try {
+    fetch(POP_BASE + "/stats.json", { method:"PATCH", keepalive:true,
+      body: JSON.stringify({ ["clicks/" + POP_MONTH + "/" + k]: inc, ["clicksw/" + POP_WEEK + "/" + k]: inc }) }).catch(() => {});
+  } catch(err){}
+}
+function loadPop(){
+  if (!POP_ON) return Promise.resolve(POP);
+  const get = p => fetch(POP_BASE + p, { cache:"no-cache" }).then(r => r.ok ? r.json() : null).catch(() => null);
+  return Promise.all([get("/stats/clicks/" + POP_MONTH + ".json"), get("/stats/clicksw/" + POP_WEEK + ".json"), get("/stats/clicksw/" + POP_PWEEK + ".json")])
+    .then(([m, w, pw]) => { Object.assign(POP, { ready:true, m:m || {}, w:w || {}, pw:pw || {} }); return POP; });
+}
+/* 이번 달 순위: 1회 이상 열린 도구. 횟수가 같으면 같은 순위 */
+function popRank(){
+  const n = s => POP.m[keyOf(s)] || 0;
+  return SITES.filter(s => n(s) > 0).sort((a, b) => n(b) - n(a) || a.seq - b.seq)
+    .map(s => ({ s, n:n(s), rank:1 + SITES.filter(x => n(x) > n(s)).length }));
+}
+function isRising(s){
+  const k = keyOf(s), w = POP.w[k] || 0, pw = POP.pw[k] || 0;
+  return POP.ready && w >= RISE_MIN && w >= pw * 2;
+}
+/* 상자 네 칸: 순위 1~3 → 모자라면 이달 추천 → 마지막 칸은 「새로」 도구(없으면 이달 추천) */
+function boxPicks(){
+  const M = MONTHLY[MONTH_NO];
+  const cur = M ? M.keys.map(k => SITES.find(s => keyOf(s) === k)).filter(Boolean) : [];
+  const out = popRank().slice(0, 3), used = out.map(x => x.s);
+  const take = (s, lab) => { out.push({ s, lab }); used.push(s); };
+  cur.forEach(s => { if (out.length < 3 && !used.includes(s)) take(s, "이달 추천"); });
+  const fresh = ALLNEWS.filter(n => n.kind === "new" && n.d >= NEW_FLOOR && !used.includes(n.s)).map(n => n.s)[0];
+  if (fresh) take(fresh, "새로");
+  else { const c = cur.find(s => !used.includes(s)); if (c) take(c, "이달 추천"); }
+  return { ranked: out.some(x => x.rank), list: out.slice(0, 4) };
+}
+function pcard(it){
+  const s = it.s, p = partOf(s.p), up = isRising(s);
+  const head = it.rank ? `<span class="mrk">${it.rank}위</span>` : `<span class="mlab${it.lab === "새로" ? " new" : ""}">${it.lab}</span>`;
+  return `<button type="button" class="mcard" data-go="${keyOf(s)}" style="--k:${p.color};--kl:${p.light}" aria-label="${it.rank ? it.rank + "위, " : esc(it.lab) + ", "}${esc(s.t)}${up ? ", 요즘 찾는 도구" : ""}">
+    <span class="mrow">${head}${up ? `<span class="mup">↑ 요즘 찾음</span>` : ""}</span><span class="mt">${esc(s.tag)}</span><span class="mm">${esc(s.m || s.t)}</span><span class="ma" aria-hidden="true">›</span></button>`;
+}
+
 /* 이번 달에 꺼내는 도구 ↔ 검색 중에는 같은 자리에 검색 결과 */
 const MONTH_NO = TODAY0.getMonth() + 1;
 function mcard(s, best, label){
@@ -1807,12 +1900,11 @@ function renderQuick(items){
     return;
   }
   box.classList.remove("searching");
-  const M = MONTHLY[MONTH_NO];
-  const list = M ? M.keys.map(k => SITES.find(s => keyOf(s) === k)).filter(Boolean).slice(0, 4) : [];
-  if (!list.length){ box.hidden = true; return; }
-  $("#mtitle").innerHTML = `<span class="mmon">${MONTH_NO}월</span>에 자주 꺼내는 도구`;
-  $("#mnote").textContent = M.note;
-  $("#mlist").innerHTML = list.map(s => mcard(s)).join("");
+  const B = boxPicks(), M = MONTHLY[MONTH_NO];
+  if (!B.list.length){ box.hidden = true; return; }
+  $("#mtitle").innerHTML = B.ranked ? `<span class="mmon">${MONTH_NO}월</span>에 많이 찾은 도구` : `<span class="mmon">${MONTH_NO}월</span>에 자주 꺼내는 도구`;
+  $("#mnote").textContent = B.ranked ? "이번 달 선생님들이 많이 연 순서예요. 순위는 매달 1일에 새로 셉니다." : (M ? M.note : "");
+  $("#mlist").innerHTML = B.list.map(pcard).join("");
   box.hidden = false;
 }
 
@@ -1831,7 +1923,7 @@ const TIPS = [
     act:() => chatOpen() },
   { id:"map", short:"색깔 칸 지도", text:"색깔 칸 하나가 도구 하나예요. 누르면 그 도구로 바로 가요",
     act:hintMap },
-  MONTHLY[MONTH_NO] ? { id:"monthly", short:"이달에 자주 쓰는 도구", text:`검색창 아래에 ${MONTH_NO}월에 자주 꺼내는 도구를 모아 두었어요`,
+  MONTHLY[MONTH_NO] ? { id:"monthly", short:"이달에 많이 찾은 도구", text:`검색창 아래에 ${MONTH_NO}월에 많이 찾은 도구와 이달 추천 도구를 모아 두었어요`,
     act:hintMonthly } : null,
   { id:"enter", short:"Enter로 바로 가기", text:"검색하고 Enter를 누르면 가장 잘 맞는 도구로 곧장 가요",
     act:() => tryQuery("학생이 일주일째 연락이 안 돼요", "이제 Enter(검색 키)를 눌러 보세요", true) },
@@ -2008,9 +2100,9 @@ qEl.addEventListener("input", () => {
 qEl.addEventListener("keydown", e => {
   if (e.key !== "Enter" || e.isComposing) return;
   e.preventDefault();
-  if (query && CUR_TOPIC){ markTipDone("enter"); window.open(topicUrl(CUR_TOPIC), "_blank", "noopener"); return; }
+  if (query && CUR_TOPIC){ markTipDone("enter"); trackOpen(topicUrl(CUR_TOPIC)); window.open(topicUrl(CUR_TOPIC), "_blank", "noopener"); return; }
   const first = query && SITES.filter(match).sort((a, b) => ranked().get(keyOf(a)) - ranked().get(keyOf(b)))[0];
-  if (query && CUR_DEEP.length && (!first || RANKWEAK)){ markTipDone("enter"); window.open(deepUrl(CUR_DEEP[0]), "_blank", "noopener"); return; }
+  if (query && CUR_DEEP.length && (!first || RANKWEAK)){ markTipDone("enter"); trackOpen(deepUrl(CUR_DEEP[0])); window.open(deepUrl(CUR_DEEP[0]), "_blank", "noopener"); return; }
   if (first){ markTipDone("enter"); qEl.blur(); goTo(keyOf(first)); }
 });
 clearEl.addEventListener("click", () => { qEl.value = ""; query = ""; clearEl.classList.remove("on"); render(); saveView(); qEl.focus(); });
@@ -2043,7 +2135,7 @@ document.addEventListener("click", e => {
   }
   const cardEl = e.target.closest(".item");
   if (cardEl && !e.target.closest("a,button")){
-    if (cardEl.dataset.turl) window.open(cardEl.dataset.turl, "_blank", "noopener");
+    if (cardEl.dataset.turl){ trackOpen(cardEl.dataset.turl); window.open(cardEl.dataset.turl, "_blank", "noopener"); }
     else openTool(SITES.find(s => keyOf(s) === cardEl.dataset.key));
   }
 });
@@ -2057,8 +2149,16 @@ document.addEventListener("click", e => {
 function openTool(s){
   if (!s) return;
   if (s.pc && isNarrow()){ openModal("pc", s); return; }
+  trackOpen(s.u);
   window.open(s.u, "_blank", "noopener");
 }
+/* 새 창으로 열리는 링크(카드 제목·길잡이·도구 안 내용·「그래도 열기」 등)를 누르면 셉니다.
+   휴대폰에서 PC 권장 도구처럼 열기를 막은 경우(defaultPrevented)는 세지 않습니다. */
+["click", "auxclick"].forEach(ev => document.addEventListener(ev, e => {
+  if (e.defaultPrevented || (ev === "auxclick" && e.button !== 1)) return;
+  const a = e.target.closest && e.target.closest('a[target="_blank"][href]');
+  if (a) trackOpen(a.href);
+}));
 
 /* ── 상단 바의 현재 위치 ── */
 const barEl = $("#progress");
@@ -2087,7 +2187,10 @@ function openModal(kind, s){
   lastFocus = document.activeElement;
   const box = $("#modalbox");
   box.className = "box";
-  if (kind === "news"){
+  if (kind === "stats"){
+    box.classList.add("news", "stats");
+    box.innerHTML = statsHTML();
+  } else if (kind === "news"){
     box.classList.add("news");
     box.innerHTML = newsHTML();
     markRead(unreadNews());
@@ -2139,6 +2242,54 @@ window.addEventListener("popstate", () => {
   if ($("#modal").classList.contains("on")) closeModal(true);
   stripHash();
 });
+/* ── 열람 순위 전체 보기: 주소 끝에 ?stats 를 붙였을 때만 열립니다(화면 어디에도 단추는 없음) ── */
+let STATS = { all:{}, months:[POP_MONTH], mon:POP_MONTH };
+const monLabel = m => m.slice(0, 4) + "년 " + (+m.slice(5, 7)) + "월";
+function statsRows(){
+  const d = STATS.all[STATS.mon] || {}, n = s => d[keyOf(s)] || 0;
+  return SITES.map(s => ({ s, n:n(s), rank:1 + SITES.filter(x => n(x) > n(s)).length }))
+    .sort((a, b) => b.n - a.n || a.s.seq - b.s.seq);
+}
+function statsHTML(){
+  const rows = statsRows(), cur = STATS.mon === POP_MONTH;
+  const sum = rows.reduce((a, x) => a + x.n, 0), used = rows.filter(x => x.n).length;
+  const tr = rows.map(x => { const k = keyOf(x.s), z = x.n ? "" : " z";
+    return `<tr><td class="n${z}">${x.n ? x.rank : "–"}</td><td class="${z}">${esc(x.s.t)}${cur && isRising(x.s) ? ' <span class="mup">↑ 요즘 찾음</span>' : ""}</td><td class="opt${z}">${esc(partOf(x.s.p).name)}</td><td class="n${z}">${fmtN(x.n)}</td>`
+      + (cur ? `<td class="n opt">${fmtN(POP.w[k])}</td><td class="n opt">${fmtN(POP.pw[k])}</td>` : "") + `</tr>`; }).join("");
+  return `<h3 id="mt">도구별 열람 순위</h3>
+    <p class="nw-sub">도구가 새 창으로 열린 횟수입니다. 같은 기기·같은 도구는 하루 한 번만 세고, 누가 열었는지는 남기지 않습니다. 순위는 달마다 새로 셉니다.</p>
+    <div class="sttools"><label for="stmon">달</label><select id="stmon">${STATS.months.map(m => `<option value="${m}"${m === STATS.mon ? " selected" : ""}>${monLabel(m)}</option>`).join("")}</select>
+      <span>모두 <b>${fmtN(sum)}</b>회 · 열린 도구 <b>${used}</b>/${SITES.length}개</span></div>
+    <table class="sttbl"><thead><tr><th class="n">순위</th><th>도구</th><th class="opt">분류</th><th class="n">${cur ? "이번 달" : "그달"}</th>${cur ? `<th class="n opt">이번 주</th><th class="n opt">지난주</th>` : ""}</tr></thead><tbody>${tr}</tbody></table>
+    <div class="row">
+      <button type="button" data-stcopy>표 복사(엑셀에 붙이기)</button>
+      <button type="button" class="primary" data-close>닫기</button>
+    </div>`;
+}
+function openStats(){
+  if (!POP_ON) return;
+  fetch(POP_BASE + "/stats/clicks.json", { cache:"no-cache" }).then(r => r.ok ? r.json() : null).catch(() => null)
+    .then(all => {
+      STATS.all = all || {};
+      STATS.months = [...new Set([POP_MONTH, ...Object.keys(STATS.all)])].sort().reverse();
+      return POP.ready ? null : loadPop();
+    })
+    .then(() => openModal("stats", {}));
+}
+$("#modalbox").addEventListener("change", e => {
+  if (e.target.id !== "stmon") return;
+  STATS.mon = e.target.value; $("#modalbox").innerHTML = statsHTML();
+  const sel = $("#stmon"); if (sel) sel.focus();
+});
+$("#modalbox").addEventListener("click", e => {
+  if (!e.target.closest("[data-stcopy]")) return;
+  const cur = STATS.mon === POP_MONTH;
+  const head = ["순위", "도구", "분류", monLabel(STATS.mon)].concat(cur ? ["이번 주", "지난주"] : []).join("\t");
+  const body = statsRows().map(x => [x.n ? x.rank : "", x.s.t, partOf(x.s.p).name, x.n]
+    .concat(cur ? [POP.w[keyOf(x.s)] || 0, POP.pw[keyOf(x.s)] || 0] : []).join("\t")).join("\n");
+  copy(head + "\n" + body, "표를 복사했습니다. 엑셀에 붙여 넣으세요");
+});
+
 /* 창·길잡이를 닫으며(뒤로가기 기록 되돌림) 다른 동작을 이어 할 때: 되돌림이 끝난 뒤에 실행 */
 let afterPop = null;
 function thenAfterPop(pushed, fn){
@@ -2228,7 +2379,7 @@ const CHAT_INFO = [
   [/누가\s*(만들|운영|관리)|만든\s*(사람|이|분)|운영자|제작자|개발자/, () => ({ html:"초등학교 교감 <b>최창훈</b> 선생님이 바이브 코딩으로 만들었어요." })],
   [/개인\s*정보|저장(돼|되|하)|서버|보안|안전한가/, () => storeInfo(), 1],
   [/새로\s*(들어온|나온|생긴|추가|올라온)|신규\s*도구|최근\s*(도구|추가|나온)|신상|업데이트|새\s*소식|바뀐\s*(것|게|거|점|내용)|달라진|변경\s*(사항|내용|된)|뭐가\s*(바뀌|달라)/, () => newInfo()],
-  [/많이\s*(쓰|찾|보|이용)|인기|요즘\s*(뜨|쓰)/, () => ({ html:"도구별 이용 횟수는 아직 따로 세지 않아요. 대신 이번 달에 자주 꺼내는 도구를 보여 드릴게요.", keys: monthKeys(), intro:null })],
+  [/많이\s*(쓰|찾|보|이용|누르|눌|클릭|열)|인기|순위|랭킹|급상승|요즘\s*(뜨|쓰|많이|찾)/, () => popInfo()],
   [/qr|큐알|공유|뿌리|퍼뜨|널리\s*알리|홍보|링크\s*(복사|보내|전달)|메신저|카톡으로\s*보내|단톡/i, () => ({ html:"도구 카드마다 <b>「링크 복사」</b>와 <b>「QR로 공유」</b> 버튼이 있어요. 모든 도구를 한꺼번에 보내려면 아래 버튼을 누르세요. 도구 이름과 주소가 글자로 복사되어 메신저에 그대로 붙일 수 있어요.", chips:[["전체 목록 복사하기","copyall"]] })],
   [/책|도서|출판|출간/, () => ({ html:"여기 있는 도구 가운데 서른 개를 만든 이야기를 책으로 묶고 있어요. 지금 원고를 쓰는 중이고, 출간되면 「책 소개」에 링크가 올라가요.", chips:[["책 소개 보기","scroll:book"]] })],
   [/방문자|몇\s*명(이|이나)?\s*(왔|다녀|방문|들어)/, () => ({ html:"사이트 맨 아래에 <b>오늘·누적 방문자 수</b>가 나와요. 같은 기기는 하루에 한 번만 세요." })],
@@ -2258,6 +2409,18 @@ function newInfo(){
   const lines = list.map(n => `• ${fmtMD(n.d)} <b>${NEWS_KIND[n.kind]}</b> ${esc(n.s.t)}${n.text ? " — " + esc(n.text) : ""}`).join("<br>");
   return { html:(un.length ? `아직 못 보신 소식이 <b>${un.length}개</b> 있어요.` : "새로 못 보신 소식은 없어요. 최근 소식을 보여 드릴게요.") + "<br>" + lines,
     chips:[["새 소식 모두 보기", "news"]] };
+}
+/* 「많이 찾은 도구」 물음: 길잡이에서는 순위와 횟수를 함께 보여 줍니다 */
+function popInfo(){
+  const r = popRank();
+  if (!r.length) return { html:(POP_ON && POP.ready ? `${MONTH_NO}월에는 아직 집계된 도구가 없어요.` : "이용 순위를 아직 불러오지 못했어요.") + " 대신 이번 달에 자주 꺼내는 도구를 보여 드릴게요.", keys: monthKeys() };
+  const top = r.slice(0, 5), rise = SITES.filter(isRising);
+  return {
+    html:`${MONTH_NO}월 1일부터 선생님들이 많이 연 도구예요. 같은 기기는 도구마다 하루 한 번만 셉니다.<br>`
+      + top.map(x => `${x.rank}위 <b>${esc(x.s.t)}</b> · ${fmtN(x.n)}회`).join("<br>")
+      + (rise.length ? `<br><br>요즘 부쩍 찾는 도구: ${listTags(rise.slice(0, 3))}` : ""),
+    keys: top.slice(0, 3).map(x => keyOf(x.s))
+  };
 }
 function monthKeys(m){ const M = MONTHLY[m || MONTH_NO]; return M ? M.keys.slice(0, 4) : []; }
 /* 도구 이름을 직접 말했는지: 이름의 두 낱말 이상 이어진 부분(4자 이상)이나 한 낱말 이름 */
@@ -2372,7 +2535,10 @@ function chatDecideTools(text, plan){
   if (!ment.length && RECO_CUE.test(text)){
     const m = text.match(/(1[0-2]|[1-9])\s*월/);
     if (m && MONTHLY[+m[1]]) return Object.assign(plan, { type:"tools", keys:monthKeys(+m[1]), intro:`${+m[1]}월에는 ${MONTHLY[+m[1]].note} 도구를 자주 꺼내요.`, list:true });
-    if (/이번\s*달|요즘|지금\s*시기|이맘때/.test(text)) return Object.assign(plan, { type:"tools", keys:monthKeys(), intro:`${MONTH_NO}월에는 ${MONTHLY[MONTH_NO].note} 도구를 자주 꺼내요.`, list:true });
+    if (/이번\s*달|요즘|지금\s*시기|이맘때/.test(text)){
+      const B = boxPicks();
+      return Object.assign(plan, { type:"tools", keys:B.list.map(x => keyOf(x.s)), intro: B.ranked ? `${MONTH_NO}월에 많이 찾은 도구와 이달 추천 도구예요.` : `${MONTH_NO}월에는 ${MONTHLY[MONTH_NO].note} 도구를 자주 꺼내요.`, list:true });
+    }
     for (const [re, who, keys] of CHAT_WHO){ if (re.test(text)) return Object.assign(plan, { type:"tools", keys, intro:`${who} 이런 도구를 권해요.`, list:true }); }
     for (const [re, when, keys] of CHAT_WHEN){ if (re.test(text)) return Object.assign(plan, { type:"tools", keys, intro:`${when} 이런 도구를 자주 꺼내요.`, list:true }); }
   }
@@ -2665,6 +2831,12 @@ renderMap();
 render();
 if (savedY) window.scrollTo(0, savedY);
 updateBar();
+/* 이번 달 열람 순위를 불러와 「많이 찾은 도구」와 「요즘 찾음」 표시를 채웁니다 */
+loadPop().then(() => {
+  if (SITES.some(isRising)) render();
+  else if (!query) renderQuick([]);
+});
+if (/[?&]stats(=|&|$)/.test(location.search)) openStats();
 
 /* ── 오픈소스 라이선스 창 ── */
 (function(){
