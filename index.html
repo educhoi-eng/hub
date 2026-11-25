@@ -228,7 +228,26 @@ a{color:inherit;}
 .notes{border-top:1px solid var(--line);padding:var(--s7) 0 var(--s5);}
 .notes h2{font-family:var(--serif);font-size:22px;font-weight:700;margin:0 0 var(--s5);}
 .notelist{display:grid;gap:var(--s5);}
-@media(min-width:760px){.notelist{grid-template-columns:1fr 1fr 1fr;gap:var(--s6);}}
+@media(min-width:760px){.notelist{grid-template-columns:1fr 1fr;gap:var(--s6) var(--s7);}}
+.notelist>div{border-radius:3px;}
+.notelist>div.flash{animation:noteFlash 1.1s ease-in-out 2;}
+@keyframes noteFlash{0%,100%{background:transparent;box-shadow:0 0 0 12px transparent;}45%{background:var(--c2t);box-shadow:0 0 0 12px var(--c2t);}}
+.notelist p+p{margin-top:var(--s2);}
+.notelist p b{color:var(--ink-soft);font-weight:600;}
+.nlinks{display:flex;flex-wrap:wrap;gap:6px;margin-top:var(--s3);}
+.nlinks button{font-family:var(--sans);font-size:12.5px;color:var(--ink-soft);background:#fff;border:1px solid var(--line-strong);border-radius:999px;padding:5px 11px;cursor:pointer;line-height:1.4;}
+.nlinks button:hover{border-color:var(--ink);color:var(--ink);}
+.nlinks .lb{font-size:12px;color:var(--muted);align-self:center;margin-right:2px;}
+#lastupd b{font-weight:600;color:var(--ink-soft);font-variant-numeric:tabular-nums;}
+#lastupd[hidden]{display:none;}
+/* 이용 안내에서 「해 보기」로 다른 자리에 간 뒤 돌아오기 */
+#backnotes{position:fixed;left:var(--s4);bottom:var(--s4);z-index:71;font-family:var(--sans);font-size:13.5px;font-weight:600;
+  color:#fff;background:var(--ink);border:0;border-radius:999px;padding:var(--s2) var(--s4);min-height:44px;cursor:pointer;
+  box-shadow:0 4px 14px rgba(22,32,46,.22);display:flex;align-items:center;gap:var(--s2);
+  opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .25s,transform .25s;}
+#backnotes.on{opacity:1;transform:translateY(0);pointer-events:auto;}
+#backnotes:hover{background:#26334a;}
+@media print{#backnotes{display:none !important;}}
 .notelist h3{font-size:14.5px;margin:0 0 var(--s2);font-weight:600;}
 .notelist p{margin:0;font-size:13.5px;color:var(--muted);line-height:1.8;}
 footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s8);color:var(--muted);font-size:13px;}
@@ -641,17 +660,28 @@ a.mcard{text-decoration:none;color:inherit;}
         <ul class="howlist" id="howlist"></ul>
       </div>
       <div class="notelist">
-        <div>
+        <div id="note-basis">
           <h3>무엇을 근거로 만들었나</h3>
-          <p>휴가·복무·겸직은 「국가공무원 복무규정」과 교육부 「교원 휴가에 관한 예규」를, 학교폭력과 교육활동보호는 해당 법률과 시행령을 그대로 따랐습니다. 개정이 있으면 반영하고, 마지막으로 손본 때를 아래에 적어 둡니다.</p>
+          <p>휴가·복무·겸직·휴직은 「국가공무원 복무규정」, 「교육공무원법」과 교육부 예규를, 학적·출결은 학적 업무 지침과 「학교생활기록부 기재요령」을, 학교폭력·교육활동보호·생활지도는 해당 법률과 시행령, 「교원의 학생생활지도에 관한 고시」를 따랐습니다.</p>
+          <p>인사 내규나 업무분장처럼 법령이 정하지 않는 것은 <b>참고안·표준안</b>입니다. 그대로 따르는 정답이 아니라 학교 협의로 고쳐 쓰는 출발점입니다.</p>
+          <p>교육부·교육청의 <b>공식 사이트가 아닙니다.</b> 실제 업무의 최종 판단은 규정과 교육청 지침으로 확인해 주세요. 개정이 있으면 반영하고, 바뀐 내용은 「새 소식」에, 마지막으로 손본 날은 맨 아래에 적어 둡니다.</p>
         </div>
-        <div>
+        <div id="note-chat">
+          <h3>연장통 길잡이는 이렇게 답해요</h3>
+          <p>오른쪽 아래 「무엇을 도와드릴까요?」를 누르고 상황을 문장으로 적으면, 알맞은 도구를 골라 주고 도구 안의 그 자리까지 바로 열어 줍니다.</p>
+          <p><b>AI가 아닙니다.</b> 정해진 규칙과 검색으로 답하기 때문에 규정을 대신 판단하지 않고, 확인할 수 있는 도구로 안내합니다. 적은 내용은 이 기기 밖으로 나가지 않지만, 학생 이름 같은 개인정보는 적지 말아 주세요.</p>
+          <div class="nlinks" id="chatex"></div>
+        </div>
+        <div id="note-store">
           <h3>‘서버 저장’ 표시가 있는 도구</h3>
-          <p>대부분의 도구는 입력한 내용이 브라우저 안에서만 처리되고 서버로 넘어가지 않습니다. 여럿이 함께 써야 하는 몇 가지만 저장이 필요하고, 그 도구에는 ‘서버 저장’ 표시를 붙였습니다. 사용이 끝나면 자료를 지워 주세요. 학교 연장통은 「많이 찾은 도구」를 보여 드리려고 도구별로 몇 번 열렸는지 횟수만 셉니다(같은 기기는 도구마다 하루 한 번). 누가 열었는지는 남기지 않습니다.</p>
+          <p>대부분의 도구는 입력한 내용이 브라우저 안에서만 처리되고 서버로 넘어가지 않습니다. 여럿이 함께 써야 하는 몇 가지만 저장이 필요하고, 그 도구에는 ‘서버 저장’ 표시를 붙였습니다. 사용이 끝나면 자료를 지워 주세요.</p>
+          <p>학교 연장통은 「많이 찾은 도구」를 보여 드리려고 도구별로 몇 번 열렸는지 횟수만 셉니다(같은 기기는 도구마다 하루 한 번). 누가 열었는지는 남기지 않습니다.</p>
+          <div class="nlinks" id="storelist"></div>
         </div>
-        <div>
+        <div id="note-pc">
           <h3>PC에서 쓰는 것이 편한 도구</h3>
-          <p>반편성이나 시간표처럼 표를 넓게 보아야 하는 도구에는 ‘PC 권장’을 표시해 두었습니다. 스마트폰에서 누르면 한 번 더 안내가 나옵니다.</p>
+          <p>반편성이나 시간표처럼 표를 넓게 보아야 하는 도구에는 ‘PC 권장’을 표시해 두었습니다. 스마트폰에서 누르면 한 번 더 안내가 나오고, 링크만 복사해 두었다가 컴퓨터에서 열 수 있습니다.</p>
+          <div class="nlinks" id="pclist"></div>
         </div>
       </div>
     </section>
@@ -660,6 +690,7 @@ a.mcard{text-decoration:none;color:inherit;}
   <footer>
     <div class="wrap fr">
       <div id="footcredit">만든이 최창훈 · 초등학교 교감 · 2026<span id="visits" hidden></span></div>
+      <button class="linkbtn" id="lastupd" type="button" hidden></button>
       <div>
         <button class="linkbtn" id="reportsite" hidden>잘못된 내용 알려 주기</button>
         <button class="linkbtn" id="copyall">전체 목록을 텍스트로 복사</button>
@@ -675,6 +706,7 @@ a.mcard{text-decoration:none;color:inherit;}
 
 <div id="toast" role="status" aria-live="polite"></div>
 
+<button type="button" id="backnotes" aria-hidden="true" tabindex="-1"><span class="arr" aria-hidden="true">↓</span><span>이용 안내로 돌아가기</span></button>
 <button type="button" id="backmap" aria-hidden="true" tabindex="-1"><span class="arr" aria-hidden="true">↑</span><span id="backmaptext">한눈에 보기로</span></button>
 
 <button type="button" id="chatbtn" aria-haspopup="dialog" aria-controls="chat"><span class="cb-i" aria-hidden="true">?</span><span class="cb-t">무엇을 도와드릴까요?</span></button>
@@ -857,6 +889,7 @@ const SITES = [
  k:"교육공무직 방학중 비근무 근무일수 유급 주휴 조리실무사 계산"},
 {p:"1",n:8,tag:"시간표",m:"반별로 짜기",h:"전담 시간과 학년 시수를 맞춰 반별 시간표를 짜고, 겹치는 시간을 바로 찾아 줘요.",t:"반별 시간표 짜기",c:"한 칸을 고치면 열두 곳이 어긋난다",u:"https://elementary-class-timetable.vercel.app/",
  d:"전담 시간과 학년 시수를 맞춰 가며 시간표를 짜고, 충돌을 바로 잡아 줍니다.",who:"업무 담당자",pc:true,
+ store:"시간표 자료 서버 저장",
  prep:"학년별 시수·전담 시간표",
  k:"시간표 전담 시수 편성 교육과정 반별"},
 {p:"1",n:4,tag:"연수비",m:"정산표 만들기",h:"자율연수 그룹과 명단을 만들고 지출을 입력하면 정산표를 엑셀로 내려받아요.",t:"자율연수비 정산하기",c:"연수는 즐거웠는데, 정산이 남았다",u:"https://training-fee-manager.vercel.app/",
@@ -905,6 +938,7 @@ const SITES = [
  k:"긴급 안전 사고 응급 이송 중대재해 위험성평가 비상연락망 매뉴얼 현장체험학습 체험학습 안전 수학여행 소풍 인솔 식중독 배탈 구토 설사 보존식 실종 미아 물놀이 익수 알레르기 아나필락시스 온열질환 열사병 교통사고 화재 대피"},
 {p:"1",n:21,tag:"판단 공유",m:"다른 학교 판단 보기",h:"업무 갈등이나 공문 핑퐁처럼 학교마다 판단이 갈리는 안건에 투표해, 다른 학교들의 판단과 이유를 살펴봐요.",added:"2026-11-16",t:"옆 학교는?",c:"“다른 학교는 어떻게 하고 있을까요?”",u:"https://survey-rho-drab.vercel.app/",
  d:"업무 갈등이나 공문 핑퐁처럼 학교마다 판단이 갈리는 안건을 올리면, 전국 초등학교가 학교별 1표로 판단과 이유를 남기고 해마다 기록이 쌓입니다. 로그인 없이 학교만 고르면 참여합니다.",who:"모든 교직원",pc:false,
+ store:"안건·투표 기록 서버 저장",
  k:"옆학교 옆 학교 다른학교 다른 학교 타학교 학교마다 판단 투표 설문 안건 의견 사례 관행 결정 비교 업무 갈등 공문 핑퐁 누구 일 담당 업무분장 학교별 1표 결과 소수의견 전국 초등학교"},
 /* ── 교실과 학급 ── */
 {p:"2",n:1,tag:"출결",m:"결석 처리 구분",h:"결석 사유를 검색하면 출석인정·질병·미인정 가운데 무엇인지, 낼 서류와 기한을 알려 줘요.",added:"2026-10-16",t:"출결 한눈에",c:"“학원 때문에 빠지면 뭐로 처리돼요?”",u:"https://stattendance.vercel.app/",
@@ -1928,9 +1962,12 @@ $("#tocmini").innerHTML = PARTS.map(p =>
 /* ══ 이용 팁 ══════════════════════════════════════════════
    하루에 하나씩, 이미 써 본 기능이나 닫은 팁은 다시 띄우지 않습니다.
    「해 보기」를 누르면 그 기능이 실제로 한 번 실행됩니다. */
+const HAS_KEYS = !!(window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches);
 const TIPS = [
   { id:"sentence", short:"문장으로 검색", text:"검색창에 문장 그대로 물어도 찾아요",
     act:() => tryQuery("보결은 누가 들어가요?", "문장 그대로 찾았습니다. 낱말 하나만 넣어도 됩니다") },
+  { id:"deep", short:"도구 안 내용까지 찾기", text:"도구 이름에 없는 말도 도구 안 내용까지 찾아, 그 자리를 바로 열어 줘요",
+    act:() => tryQuery("학급감축", "도구 안의 내용까지 찾았습니다. 카드를 누르면 그 조항이 바로 열립니다") },
   { id:"chat", short:"길잡이에게 묻기", text:"오른쪽 아래 길잡이에게 상황을 말하면 도구를 골라 줘요",
     act:() => chatOpen() },
   { id:"map", short:"색깔 칸 지도", text:"색깔 칸 하나가 도구 하나예요. 누르면 그 도구로 바로 가요",
@@ -1939,14 +1976,16 @@ const TIPS = [
     act:hintMonthly } : null,
   { id:"enter", short:"Enter로 바로 가기", text:"검색하고 Enter를 누르면 가장 잘 맞는 도구로 곧장 가요",
     act:() => tryQuery("학생이 일주일째 연락이 안 돼요", "이제 Enter(검색 키)를 눌러 보세요", true) },
-  { id:"news", short:"새 소식 모아 보기", btn:"보기", text:"새로 들어오거나 바뀐 도구는 맨 위 「새 소식」에 모여요",
+  HAS_KEYS ? { id:"slash", short:"/ 키로 검색", btn:"해 보기", text:"화면 어디서든 / 키를 누르면 검색창으로 바로 가요",
+    act:() => focusSearch("이제 어디서든 / 키를 누르면 이 검색창으로 옵니다") } : null,
+  { id:"news", short:"새 소식 모아 보기", btn:"새 소식 열기", text:"새로 들어오거나 바뀐 도구는 맨 위 「새 소식」에 모여요",
     act:() => openNews() },
   { id:"qr", short:"QR로 공유", text:"연수나 회의 때는 카드의 「QR로 공유」를 화면에 띄워 보세요",
     act:() => openModal("qr", siteBy((monthKeys()[0]) || "1-2") || SITES[0]) },
   { id:"copyall", short:"목록 통째로 복사", btn:"복사하기", text:"도구 목록 전체를 글자로 복사해 메신저로 보낼 수 있어요",
     act:() => copyAll() },
-  { id:"pc", short:"PC 권장 도구", btn:"자세히", text:"「PC 권장」 도구는 휴대폰에서 링크만 복사해 두었다가 컴퓨터에서 여세요",
-    act:() => scrollToId("notes") }
+  { id:"pc", short:"PC 권장 도구", btn:"도구 보기", text:"「PC 권장」 도구는 휴대폰에서 링크만 복사해 두었다가 컴퓨터에서 여세요",
+    act:() => flashNote("note-pc") }
 ].filter(Boolean);
 const tipBtn = t => t.btn || "해 보기";
 function markTipDone(id){
@@ -1969,6 +2008,7 @@ function runTip(id){
 }
 function tryQuery(ex, msg, focus){
   qEl.value = ex; query = ex; clearEl.classList.add("on"); render(); saveView();
+  if (!DEEP) loadDeep().then(() => { if (query === ex) render(); });
   const row = document.querySelector(".searchrow"), bar = document.querySelector(".topbar").offsetHeight;
   window.scrollTo({ top: Math.max(row.getBoundingClientRect().top + window.pageYOffset - bar - 16, 0), behavior: soften() ? "smooth" : "auto" });
   if (focus || !isNarrow()){ try { qEl.focus({ preventScroll:true }); } catch(err){ qEl.focus(); } }
@@ -2065,6 +2105,73 @@ $("#modalbox").addEventListener("click", e => {
 });
 
 /* 이용 안내의 「이렇게 쓰면 편해요」 */
+/* 이용 안내 네 칸: 길잡이 예시 질문 · 서버 저장 도구 · PC 권장 도구 */
+const CHAT_EX = ["학생이 일주일째 연락이 안 돼요", "학급 감축되면 누가 전출 가요?", "학부모가 밤마다 문자를 보내요"];
+$("#chatex").innerHTML = `<span class="lb">눌러서 물어보기</span>` + CHAT_EX.map(q => `<button type="button" data-chatq="${esc(q)}">${esc(q)}</button>`).join("");
+const toolChips = (arr, lab) => arr.length ? `<span class="lb">${lab}</span>` + arr.map(s => `<button type="button" data-go="${keyOf(s)}" title="${esc(s.store || s.t)}">${esc(s.t)}</button>`).join("") : "";
+$("#storelist").innerHTML = toolChips(SITES.filter(s => s.store), "서버 저장 " + SITES.filter(s => s.store).length + "개");
+$("#pclist").innerHTML = toolChips(SITES.filter(s => s.pc), "PC 권장 " + SITES.filter(s => s.pc).length + "개");
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-chatq]"); if (!b) return;
+  chatOpen(); chatQuery(b.getAttribute("data-chatq"));
+});
+function flashNote(id){
+  const el = document.getElementById(id); if (!el) return;
+  const bar = document.querySelector(".topbar").offsetHeight;
+  const r = el.getBoundingClientRect(), view = window.innerHeight - bar;
+  if (r.top < bar + 8 || r.bottom > window.innerHeight - 8) fastScroll(Math.max(r.top + window.pageYOffset - bar - Math.max((view - r.height) * 0.4, 12), 0));
+  el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash");
+  setTimeout(() => el.classList.remove("flash"), 2400);
+}
+/* 검색창으로: 맨 위로 올려 포커스 */
+function focusSearch(msg){
+  const row = document.querySelector(".searchrow"), bar = document.querySelector(".topbar").offsetHeight;
+  const y = Math.max(row.getBoundingClientRect().top + window.pageYOffset - bar - 16, 0);
+  if (Math.abs(window.pageYOffset - y) > 40) window.scrollTo({ top:y, behavior: soften() ? "smooth" : "auto" });
+  try { qEl.focus({ preventScroll:true }); } catch(err){ qEl.focus(); }
+  qEl.select();
+  if (msg) toast(msg);
+}
+document.addEventListener("keydown", e => {
+  if (e.key !== "/" || e.ctrlKey || e.metaKey || e.altKey || e.isComposing) return;
+  const a = document.activeElement, tag = a && a.tagName;
+  if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || (a && a.isContentEditable)) return;
+  if ($("#modal").classList.contains("on") || $("#lic").classList.contains("on")) return;
+  e.preventDefault(); markTipDone("slash"); focusSearch();
+});
+/* 이용 안내에서 「해 보기」를 눌러 다른 자리로 갔으면, 돌아오는 단추를 잠깐 띄웁니다 */
+const backNotes = $("#backnotes");
+let notesY = null;
+function hideBackNotes(){ backNotes.classList.remove("on"); backNotes.setAttribute("aria-hidden", "true"); backNotes.tabIndex = -1; }
+$("#howlist").addEventListener("click", e => {
+  if (!e.target.closest("[data-tip]")) return;
+  notesY = window.pageYOffset;
+  setTimeout(() => {
+    if (notesY == null || $("#modal").classList.contains("on") || !chat.el.hidden) return;
+    if (Math.abs(window.pageYOffset - notesY) < 300) return;
+    hideBackMap();
+    backNotes.classList.add("on"); backNotes.removeAttribute("aria-hidden"); backNotes.tabIndex = 0;
+  }, 700);
+});
+backNotes.addEventListener("click", () => {
+  hideBackNotes(); notesY = null;
+  /* 검색 결과로 쪽 길이가 달라졌을 수 있으니, 지금 「이렇게 쓰면 편해요」가 있는 자리로 */
+  const t = document.querySelector(".howto"), bar = document.querySelector(".topbar").offsetHeight;
+  fastScroll(Math.max(t.getBoundingClientRect().top + window.pageYOffset - bar - 16, 0));
+});
+window.addEventListener("scroll", () => {
+  if (!backNotes.classList.contains("on")) return;
+  const r = $("#notes").getBoundingClientRect();
+  if (r.top < window.innerHeight - 80 && r.bottom > 80) hideBackNotes();
+}, { passive:true });
+/* 바닥글: 마지막으로 손본 날(새 소식 가운데 가장 최근 날짜) */
+(function(){
+  const last = ALLNEWS[0]; if (!last) return;
+  const el = $("#lastupd");
+  el.innerHTML = `최근 고침 <b>${last.d.slice(0, 4)}. ${+last.d.slice(5, 7)}. ${+last.d.slice(8, 10)}.</b> · 새 소식 보기`;
+  el.hidden = false;
+  el.addEventListener("click", openNews);
+})();
 $("#howlist").innerHTML = TIPS.map(t => `<li><span>${esc(t.text)}</span><button type="button" data-tip="${t.id}">${tipBtn(t)}</button></li>`).join("");
 
 renderStrip();
