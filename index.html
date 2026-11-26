@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>학교 연장통 — 학교 업무를 바꾼 웹사이트</title>
-<meta name="description" content="학교 연장통 — 초등학교 교감이 바이브 코딩으로 만들어 학교에서 실제로 쓰는 웹 도구 45개 모음. 휴가·휴직·복무 확인부터 반편성, 시간표, 연수, 생활지도까지 링크 하나로 바로 씁니다.">
+<meta name="description" content="학교 연장통 — 초등학교 교감이 바이브 코딩으로 만들어 학교에서 실제로 쓰는 웹 도구 46개 모음. 휴가·휴직·복무 확인부터 반편성, 시간표, 연수, 생활지도까지 링크 하나로 바로 씁니다.">
 <meta name="keywords" content="학교 연장통, 바이브 코딩, 학교 업무, 교사 업무 도구, 초등학교, 교감, 반편성, 휴가, 휴직, 연수, 생활지도, 학급회의, 학생자치">
 <meta name="author" content="최창훈">
 <meta property="og:title" content="학교 연장통 — 학교 업무를 바꾼 웹사이트">
@@ -520,9 +520,60 @@ a.mcard{text-decoration:none;color:inherit;}
 .sttbl .n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;}
 .sttbl td.z{color:var(--muted);}
 @media(max-width:560px){.sttbl .opt{display:none;}}
+
+/* 이용 안내: 네 묶음 카드 + 꼭 알아 둘 것 */
+.nsec{display:flex;align-items:center;gap:var(--s2);font-size:16px !important;font-weight:700 !important;margin:0 0 var(--s4) !important;color:var(--ink);}
+.nsec .no{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--ink);color:#fff;font-size:12.5px;font-weight:700;}
+.howto{border-bottom:0 !important;padding-bottom:0 !important;}
+.howgrid{display:grid;gap:var(--s3);grid-template-columns:1fr;}
+@media(min-width:600px){.howgrid{grid-template-columns:1fr 1fr;}}
+.hcard{background:#fff;border:1px solid var(--line);border-top:3px solid var(--k);border-radius:3px;padding:var(--s4);display:flex;flex-direction:column;gap:var(--s3);min-width:0;}
+.hh{display:flex;gap:var(--s3);align-items:center;}
+.hh b{display:block;font-size:15.5px;color:var(--ink);font-weight:700;}
+.hh span{font-size:12.5px;color:var(--muted);}
+.hi,.mi{flex:none;display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:color-mix(in srgb,var(--k) 12%,#fff);color:var(--k);}
+.hi svg,.mi svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.hcard ul{list-style:none;margin:0;padding:0;display:grid;gap:4px;}
+@media(min-width:600px){.hcard ul{grid-template-columns:1fr 1fr;}}
+.hcard li button{width:100%;display:flex;justify-content:space-between;align-items:center;gap:var(--s2);text-align:left;font-family:var(--sans);font-size:13.5px;color:var(--ink);background:var(--paper);border:1px solid transparent;border-radius:3px;padding:8px 10px;cursor:pointer;line-height:1.45;}
+.hcard li button:hover{border-color:var(--k);background:#fff;}
+.hcard li em{flex:none;font-style:normal;font-size:12px;font-weight:600;color:var(--k);}
+kbd{display:inline-block;font-family:var(--sans);font-size:12px;font-weight:700;border:1px solid var(--line-strong);border-bottom-width:2px;border-radius:4px;padding:0 6px;background:#fff;margin-right:2px;}
+.hdemo{display:flex;align-items:center;gap:8px;width:100%;text-align:left;font-family:var(--sans);cursor:pointer;background:var(--paper);border:1px solid var(--line);border-radius:3px;padding:9px 11px;min-height:40px;color:var(--ink);font-size:13.5px;}
+.hdemo:hover{border-color:var(--k);}
+.hsearch svg{width:16px;height:16px;flex:none;fill:none;stroke:var(--muted);stroke-width:2;stroke-linecap:round;}
+.hdemo .cur{display:inline-block;width:1.5px;height:1.05em;background:var(--ink);margin-left:-6px;animation:hcur 1s steps(2) infinite;}
+@keyframes hcur{50%{opacity:0;}}
+.hchat{flex-direction:column;align-items:stretch;gap:6px;}
+.hchat .bub{max-width:92%;border-radius:12px;padding:6px 10px;font-size:13px;line-height:1.45;min-height:1.45em;}
+.hchat .bub.me{align-self:flex-end;background:var(--ink);color:#fff;border-bottom-right-radius:3px;}
+.hchat .bub.me .cur{background:#fff;margin-left:1px;}
+.hchat .bub.bot{align-self:flex-start;background:#fff;border:1px solid var(--line);color:var(--ink-soft);border-bottom-left-radius:3px;}
+.hcard .nlinks{margin-top:0;}
+.must{margin-top:var(--s7);}
+.mcard{background:#fff;border:1px solid var(--line);border-left:3px solid var(--k);border-radius:3px !important;padding:var(--s4);}
+.mh{display:flex;gap:var(--s3);align-items:flex-start;}
+.mh b{display:block;font-size:15.5px;color:var(--ink) !important;font-weight:700 !important;margin-bottom:2px;}
+.mh span{font-size:13.5px;color:var(--muted);line-height:1.6;}
+.srcchips{display:flex;flex-wrap:wrap;gap:5px;margin-top:var(--s3);}
+.srcchips .lb{font-size:12px;color:var(--muted);align-self:center;margin-right:2px;}
+.srcchips i{font-style:normal;font-size:12px;color:var(--ink-soft);background:var(--paper);border:1px solid var(--line);border-radius:3px;padding:2px 8px;}
+.mcard details{margin-top:var(--s3);}
+.mcard summary{cursor:pointer;font-size:12.5px;font-weight:600;color:var(--ink-soft);list-style:none;display:inline-flex;gap:4px;}
+.mcard summary::-webkit-details-marker{display:none;}
+.mcard summary::after{content:"▾";}
+.mcard details[open] summary::after{content:"▴";}
+.mcard details p{margin-top:var(--s2) !important;}
+
+.htiles{display:grid !important;grid-template-columns:repeat(6,1fr);gap:3px;padding:8px !important;}
+@media(max-width:600px){.htiles{grid-template-columns:repeat(4,1fr);}}
+.htiles i{font-style:normal;font-size:10.5px;font-weight:600;color:var(--ink-soft);text-align:center;padding:5px 0;border-radius:2px;white-space:nowrap;overflow:hidden;}
+.hshare svg{width:40px;height:40px;flex:none;fill:none;stroke:var(--ink);stroke-width:1.6;}
+.hshare span{font-size:12.5px;color:var(--muted);line-height:1.5;}
+.hshare b{color:var(--ink);font-weight:600;}
 </style>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "학교 연장통", "alternateName": ["학교 연장통 — 학교 업무를 바꾼 웹사이트", "바이브 코딩 학교 웹사이트 모음"], "url": "https://edu-hub-alpha-ten.vercel.app/", "description": "초등학교 교감이 바이브 코딩으로 만든 학교 업무용 웹 도구 45개 모음. 휴가·휴직·복무 확인, 반편성, 시간표, 연수, 생활지도까지 링크 하나로 바로 씁니다.", "inLanguage": "ko", "author": {"@type": "Person", "name": "최창훈", "jobTitle": "초등학교 교감"}, "keywords": "학교 연장통, 바이브 코딩, 학교 업무, 교사 웹 도구, 초등학교, 교감, 반편성, 휴가, 휴직, 연수, 생활지도, 학급회의, 학생자치"}</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "ItemList", "name": "학교 연장통 도구 목록", "numberOfItems": 45, "itemListElement": [{"@type": "ListItem", "position": 1, "name": "교육공무원 복무 한눈에", "description": "초과근무 인정 시간, 출장 구분과 이동시간, 41조 연수, 결재라인까지 헷갈리는 복무를 그림과 계산기로 바로 확인합니다.", "url": "https://attendance-six-liard.vercel.app/"}, {"@type": "ListItem", "position": 2, "name": "외부강의·겸직 가능 여부 확인", "description": "신고 대상인지 겸직 허가 대상인지, 몇 가지 질문에 답하면 스스로 가려낼 수 있습니다.", "url": "https://external-lecture.vercel.app/"}, {"@type": "ListItem", "position": 3, "name": "교원 휴가 종류와 일수 확인", "description": "연가·병가·공가·경조사 등 열세 가지 휴가를 조건과 일수까지 한 화면에서 확인합니다.", "url": "https://leave-of-absence-nu.vercel.app/"}, {"@type": "ListItem", "name": "휴직 한눈에", "description": "육아·질병·가족돌봄·유학 등 교육공무원 휴직 14종의 요건, 기간, 보수, 경력·승급을 한눈에 비교합니다. 상황을 고르거나 검색하면 맞는 휴직을 찾아 주고, 육아휴직수당·질병휴직 봉급·남은 휴직 기간을 계산하며, 서류 제출부터 복귀 신고까지 일정을 캘린더로 내보냅니다.", "url": "https://leave-blue-nu.vercel.app/", "position": 4}, {"@type": "ListItem", "position": 5, "name": "보결 배정하기", "description": "빈 시간과 담당 시수를 함께 보며 보결을 고르게 나눠 배정합니다.", "url": "https://substitute-assignment-yiix.vercel.app/"}, {"@type": "ListItem", "position": 6, "name": "방학 중 비근무 직종 근무일수 계산", "description": "달력에서 근무일을 고르면 연간 근무일수와 주휴 유급 여부가 자동으로 계산됩니다.", "url": "https://calculation-of-paid-vacation-days.vercel.app/"}, {"@type": "ListItem", "position": 7, "name": "반별 시간표 짜기", "description": "전담 시간과 학년 시수를 맞춰 가며 시간표를 짜고, 충돌을 바로 잡아 줍니다.", "url": "https://elementary-class-timetable.vercel.app/"}, {"@type": "ListItem", "position": 8, "name": "자율연수비 정산하기", "description": "연수 그룹과 명단을 만들고 지출을 입력하면 정산표가 엑셀로 나옵니다.", "url": "https://training-fee-manager.vercel.app/"}, {"@type": "ListItem", "position": 9, "name": "학부모 법정 의무교육 안내", "description": "해마다 인쇄해 보내던 열여섯 가지 법정 교육을 링크 하나로 대신합니다.", "url": "https://parent-education-zeta.vercel.app/"}, {"@type": "ListItem", "position": 10, "name": "월중·주간계획 자동으로 만들기", "description": "한 번 입력한 일정이 월중계획과 주간계획으로 함께 만들어지는 구글 시트 자동화입니다.", "url": "https://monthly-plan-theta.vercel.app/"}, {"@type": "ListItem", "position": 11, "name": "공문·회의록 작성 가이드", "description": "공문과 회의록 쓰는 법을 예시로 익히고, 스물아홉 문항으로 스스로 점검합니다.", "url": "https://official-document.vercel.app/"}, {"@type": "ListItem", "position": 12, "name": "업무 인수인계 노트 만들기", "description": "월별로 하는 일을 적어 두면 파일 하나로 후임자에게 그대로 넘길 수 있습니다.", "url": "https://handover-pi.vercel.app/"}, {"@type": "ListItem", "position": 13, "name": "단체 음료 주문 취합", "description": "각자 고른 음료가 자동으로 취합되고, 카페에 넘길 주문서가 정리되어 나옵니다.", "url": "https://cafe-order-xi.vercel.app/"}, {"@type": "ListItem", "position": 14, "name": "교내 인사 내규 점검하고 만들기", "description": "우리 학교 내규를 올리면 빠진 조항과 서로 어긋나는 조항을 찾아 고칠 문장까지 정리해 줍니다. 참고안을 바탕으로 새 내규를 만들고, 학급 감축·부장 미달 같은 상황을 검색하면 해당 조항을 바로 찾아 줍니다. 부장 임용 절차도 안내합니다.", "url": "https://personnel-regulations.vercel.app/"}, {"@type": "ListItem", "position": 15, "name": "업무분장 한눈에", "description": "표준안을 보고 협의해 우리 학교 안을 만들고, 작년 분장표(.hwpx)와 비교해 빠진 업무와 담당이 다른 업무를 찾습니다. 갈등 조정 절차와 근거도 담았습니다.", "url": "https://division-of-work.vercel.app/"}, {"@type": "ListItem", "position": 16, "name": "교감 자격연수 점수 계산과 진로 설계", "description": "경력·연수·가산점을 넣으면 지금 서류 점수와 기준점까지 남은 점수를 보여 주고, 앞으로 몇 년 뒤 닿을지 시뮬레이션합니다.", "url": "https://careerplanning.vercel.app/"}, {"@type": "ListItem", "position": 17, "name": "학적 한눈에", "description": "입학·전학·유예·정원 외 관리까지, 상황을 고르거나 문장으로 물으면 처리 순서와 서류, 나이스 메뉴를 바로 찾아 줍니다.", "url": "https://academic-records-rosy.vercel.app/"}, {"@type": "ListItem", "position": 18, "name": "외국 국적 학생 학적 처리 안내", "description": "입교 상담부터 아포스티유, 학적 처리까지 순서대로 짚어 줍니다.", "url": "https://academic-record-management-for-fore.vercel.app/"}, {"@type": "ListItem", "position": 19, "name": "교육활동 침해 판별과 대응 절차", "description": "있었던 일을 고르면 해당할 수 있는 침해 유형과 지금 할 일을 알려 주고, 담당자에게는 단계별 처리 절차와 기한을 안내합니다.", "url": "https://protection-of-educational-activitie-blond.vercel.app/"}, {"@type": "ListItem", "position": 20, "name": "학교 안전·긴급사항 대응 절차", "description": "응급환자 이송, 중대재해, 비상연락망까지 급할 때 열어 보는 절차를 모았습니다.", "url": "https://emergency-fh5s.vercel.app/"}, {"@type": "ListItem", "position": 21, "name": "옆 학교는?", "description": "업무 갈등이나 공문 핑퐁처럼 학교마다 판단이 갈리는 안건을 올리면, 전국 초등학교가 학교별 1표로 판단과 이유를 남기고 해마다 기록이 쌓입니다. 로그인 없이 학교만 고르면 참여합니다.", "url": "https://survey-rho-drab.vercel.app/"}, {"@type": "ListItem", "name": "출결 한눈에", "description": "결석 사유를 말하듯 검색하면 출석인정·질병·기타·미인정 중 무엇인지, 어떤 서류를 언제까지 내야 하는지, 생활기록부에 어떻게 남는지 한 화면에서 답합니다. 학부모와 담임이 같은 화면을 봅니다.", "url": "https://stattendance.vercel.app/", "position": 22}, {"@type": "ListItem", "position": 23, "name": "교외체험학습 신청기한 계산", "description": "휴일을 빼고 신청 기한을 계산해 주고, 사유가 적절한지도 스스로 확인합니다.", "url": "https://educational-travel.vercel.app/"}, {"@type": "ListItem", "position": 24, "name": "미인정결석 학생 업무 처리 안내", "description": "담임·업무 담당자·관리자를 고르면 결석 당일부터 NEIS 등록, 매월 확인, 복귀 보고까지 내 차례의 일을 순서대로 보여 줍니다.", "url": "https://unexcused-absence-sage.vercel.app/"}, {"@type": "ListItem", "position": 25, "name": "감염병 등교중지·출석인정 확인", "description": "병명을 찾으면 등교 중지 기간과 출석 인정 절차를 학부모가 바로 확인할 수 있습니다.", "url": "https://infectious-diseases.vercel.app/"}, {"@type": "ListItem", "position": 26, "name": "야외활동 가능 여부 확인", "description": "지금 우리 지역 수치로 야외 활동이 가능한지, 자제인지, 금지인지 한 줄로 답합니다.", "url": "https://fine-dust-heat-wave.vercel.app/"}, {"@type": "ListItem", "name": "학급회의 한눈에", "description": "1~2·3~4·5~6학년 학년군마다 다른 학급회의 순서와 사회자·의장 대본을 안내하고, 교실 TV에 띄우는 진행 모드(타이머·그림 카드·스티커 투표)로 그대로 이끕니다. 전교학생회의 진행, 결정 방법 16가지, 달마다 안건, 회의 기록 양식까지 담았습니다.", "url": "https://class-meeting-ashy.vercel.app/", "position": 27}, {"@type": "ListItem", "position": 28, "name": "해냄 보물상자", "description": "학생이 2022 개정 교육과정 성취기준에서 스스로 목표를 고르고, 보호자 확인과 선생님 인증을 모아 한 해 동안 쌓아 갑니다.", "url": "https://growth-opal.vercel.app/"}, {"@type": "ListItem", "position": 29, "name": "생활기록부·통지표 문장 쓰기", "description": "생활통지표·생활기록부를 어떻게 쓰는지 기재 요령과 예시 문장으로 자세히 안내하고, 수업 중 관찰 기록을 문장으로 옮기도록 돕습니다.", "url": "https://student-record-seven.vercel.app/"}, {"@type": "ListItem", "name": "학생부 점검 한눈에", "description": "나이스에서 PDF로 저장한 학교생활기록부(생기부)나 생활통지표를 올리면, 그해 기재요령과 이번 학기 통지 항목으로 읽어 고칠 곳과 근거를 짚어 줍니다. 파일은 기기 밖으로 나가지 않습니다.", "url": "https://student-record-review.vercel.app/", "position": 30}, {"@type": "ListItem", "position": 31, "name": "반편성하기", "description": "성적·성별·관계 조건을 놓고 여러 안을 만들어 보며 협의 자리에서 함께 결정합니다.", "url": "https://class-assignment-ruddy.vercel.app/"}, {"@type": "ListItem", "position": 32, "name": "신입생 반편성하기", "description": "예비소집 면접 기록을 모아 신입생 반을 나누고 명렬표까지 정리합니다.", "url": "https://freshman-class-assignment-nmos.vercel.app/"}, {"@type": "ListItem", "position": 33, "name": "청렴 연수 방탈출 게임", "description": "청탁금지법과 갑질 예방을 방탈출 게임으로 풀어 가는 참여형 연수입니다.", "url": "https://integrity-henna.vercel.app/"}, {"@type": "ListItem", "position": 34, "name": "교육활동보호 법률 용어 익히기", "description": "교육활동 침해와 관련된 법률 용어를 읽고, 열 문항 퀴즈로 확인합니다.", "url": "https://protection-of-educational-activitie.vercel.app/"}, {"@type": "ListItem", "position": 35, "name": "교육활동 침해 사안 대응 익히기", "description": "실제 상황을 놓고 어디까지가 침해인지, 무엇부터 해야 하는지 따라가 봅니다.", "url": "https://protection-of-educational-activitie-three.vercel.app/"}, {"@type": "ListItem", "position": 36, "name": "내 수업 성장 지도", "description": "스물네 가지 수업 장면에서 지금 내 모습을 고르면, 여섯 영역의 성장 지도와 다음 한 걸음을 보여 줍니다.", "url": "https://teaching-competency.vercel.app/"}, {"@type": "ListItem", "position": 37, "name": "AI·디지털 교육 역량 진단", "description": "스물한 개 문항에 답하면 일곱 가지 역량의 성장 리포트와 이번 주 실천 미션을 보여 줍니다.", "url": "https://ai-digital-literacy.vercel.app/"}, {"@type": "ListItem", "position": 38, "name": "바이브 코딩 연수 길잡이", "description": "생성형 AI로 학교 업무용 웹사이트를 만들어 배포하는 연수를 2차시부터 15차시까지 단계별로 안내합니다.", "url": "https://vibecoding-zeta-seven.vercel.app/"}, {"@type": "ListItem", "position": 39, "name": "학급규칙 세우기 수업 준비", "description": "학급 규칙을 학생들과 함께 정하는 수업을 준비하고, 미리 연습해 볼 수 있습니다.", "url": "https://class-rules.vercel.app/"}, {"@type": "ListItem", "position": 40, "name": "교우관계 설문과 관계도 그리기", "description": "학년군별 설문으로 교우 관계를 모아 관계도와 리포트로 보여 줍니다.", "url": "https://sociogram-hazel.vercel.app/"}, {"@type": "ListItem", "position": 41, "name": "나 전달법 배우고 연습하기", "description": "나 전달법을 단계로 배우고 서른 가지 상황으로 연습한 뒤 골든벨로 확인합니다.", "url": "https://i-message-nine.vercel.app/"}, {"@type": "ListItem", "position": 42, "name": "도전행동 생활지도 가이드", "description": "도전 행동을 만났을 때 무엇을 먼저 하고 무엇을 하지 말아야 하는지 안내합니다. 2026 생활지도 고시 해설(분리·제지·소지품 조사·훈계 과제·이의제기)을 담았고, 사이트 안에서 궁금한 말로 바로 찾을 수 있습니다.", "url": "https://school-guidance-plus.vercel.app/"}, {"@type": "ListItem", "position": 43, "name": "학부모 상담 준비와 연습", "description": "학부모 상담의 흐름을 익히고, 어려운 장면을 미리 연습해 볼 수 있습니다.", "url": "https://parent-consultation-training.vercel.app/"}, {"@type": "ListItem", "position": 44, "name": "상담과 민원 구분하기", "description": "상담과 민원의 경계를 사례로 구분하고, 민원으로 넘어갔을 때의 절차를 안내합니다.", "url": "https://consultation-complaints.vercel.app/"}, {"@type": "ListItem", "position": 45, "name": "학교폭력 사안 처리 절차", "description": "학부모 눈높이로 학교폭력 신고부터 심의·이의신청까지의 절차와 기한, 분리·보호조치, 가해학생 조치와 학생부 기재를 피해·가해·목격 학생 보호자 입장별로 안내합니다. 사이트 안에서 궁금한 말로 바로 찾을 수 있고, 교직원이 학부모에게 안내할 때도 씁니다.", "url": "https://school-violence-alpha.vercel.app/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "학교 연장통", "alternateName": ["학교 연장통 — 학교 업무를 바꾼 웹사이트", "바이브 코딩 학교 웹사이트 모음"], "url": "https://edu-hub-alpha-ten.vercel.app/", "description": "초등학교 교감이 바이브 코딩으로 만든 학교 업무용 웹 도구 46개 모음. 휴가·휴직·복무 확인, 반편성, 시간표, 연수, 생활지도까지 링크 하나로 바로 씁니다.", "inLanguage": "ko", "author": {"@type": "Person", "name": "최창훈", "jobTitle": "초등학교 교감"}, "keywords": "학교 연장통, 바이브 코딩, 학교 업무, 교사 웹 도구, 초등학교, 교감, 반편성, 휴가, 휴직, 연수, 생활지도, 학급회의, 학생자치"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "ItemList", "name": "학교 연장통 도구 목록", "numberOfItems": 46, "itemListElement": [{"@type": "ListItem", "position": 1, "name": "교육공무원 복무 한눈에", "description": "초과근무 인정 시간, 출장 구분과 이동시간, 41조 연수, 결재라인까지 헷갈리는 복무를 그림과 계산기로 바로 확인합니다.", "url": "https://attendance-six-liard.vercel.app/"}, {"@type": "ListItem", "position": 2, "name": "외부강의·겸직 가능 여부 확인", "description": "신고 대상인지 겸직 허가 대상인지, 몇 가지 질문에 답하면 스스로 가려낼 수 있습니다.", "url": "https://external-lecture.vercel.app/"}, {"@type": "ListItem", "position": 3, "name": "교원 휴가 종류와 일수 확인", "description": "연가·병가·공가·경조사 등 열세 가지 휴가를 조건과 일수까지 한 화면에서 확인합니다.", "url": "https://leave-of-absence-nu.vercel.app/"}, {"@type": "ListItem", "name": "휴직 한눈에", "description": "육아·질병·가족돌봄·유학 등 교육공무원 휴직 14종의 요건, 기간, 보수, 경력·승급을 한눈에 비교합니다. 상황을 고르거나 검색하면 맞는 휴직을 찾아 주고, 육아휴직수당·질병휴직 봉급·남은 휴직 기간을 계산하며, 서류 제출부터 복귀 신고까지 일정을 캘린더로 내보냅니다.", "url": "https://leave-blue-nu.vercel.app/", "position": 4}, {"@type": "ListItem", "position": 5, "name": "보결 배정하기", "description": "빈 시간과 담당 시수를 함께 보며 보결을 고르게 나눠 배정합니다.", "url": "https://substitute-assignment-yiix.vercel.app/"}, {"@type": "ListItem", "position": 6, "name": "방학 중 비근무 직종 근무일수 계산", "description": "달력에서 근무일을 고르면 연간 근무일수와 주휴 유급 여부가 자동으로 계산됩니다.", "url": "https://calculation-of-paid-vacation-days.vercel.app/"}, {"@type": "ListItem", "position": 7, "name": "반별 시간표 짜기", "description": "전담 시간과 학년 시수를 맞춰 가며 시간표를 짜고, 충돌을 바로 잡아 줍니다.", "url": "https://elementary-class-timetable.vercel.app/"}, {"@type": "ListItem", "position": 8, "name": "자율연수비 정산하기", "description": "연수 그룹과 명단을 만들고 지출을 입력하면 정산표가 엑셀로 나옵니다.", "url": "https://training-fee-manager.vercel.app/"}, {"@type": "ListItem", "position": 9, "name": "학부모 법정 의무교육 안내", "description": "해마다 인쇄해 보내던 열여섯 가지 법정 교육을 링크 하나로 대신합니다.", "url": "https://parent-education-zeta.vercel.app/"}, {"@type": "ListItem", "position": 10, "name": "월중·주간계획 자동으로 만들기", "description": "한 번 입력한 일정이 월중계획과 주간계획으로 함께 만들어지는 구글 시트 자동화입니다.", "url": "https://monthly-plan-theta.vercel.app/"}, {"@type": "ListItem", "position": 11, "name": "공문·회의록 작성 가이드", "description": "공문과 회의록 쓰는 법을 예시로 익히고, 스물아홉 문항으로 스스로 점검합니다.", "url": "https://official-document.vercel.app/"}, {"@type": "ListItem", "position": 12, "name": "업무 인수인계 노트 만들기", "description": "월별로 하는 일을 적어 두면 파일 하나로 후임자에게 그대로 넘길 수 있습니다.", "url": "https://handover-pi.vercel.app/"}, {"@type": "ListItem", "position": 13, "name": "단체 음료 주문 취합", "description": "각자 고른 음료가 자동으로 취합되고, 카페에 넘길 주문서가 정리되어 나옵니다.", "url": "https://cafe-order-xi.vercel.app/"}, {"@type": "ListItem", "position": 14, "name": "교내 인사 내규 점검하고 만들기", "description": "우리 학교 내규를 올리면 빠진 조항과 서로 어긋나는 조항을 찾아 고칠 문장까지 정리해 줍니다. 참고안을 바탕으로 새 내규를 만들고, 학급 감축·부장 미달 같은 상황을 검색하면 해당 조항을 바로 찾아 줍니다. 부장 임용 절차도 안내합니다.", "url": "https://personnel-regulations.vercel.app/"}, {"@type": "ListItem", "position": 15, "name": "업무분장 한눈에", "description": "표준안을 보고 협의해 우리 학교 안을 만들고, 작년 분장표(.hwpx)와 비교해 빠진 업무와 담당이 다른 업무를 찾습니다. 갈등 조정 절차와 근거도 담았습니다.", "url": "https://division-of-work.vercel.app/"}, {"@type": "ListItem", "position": 16, "name": "교감 자격연수 점수 계산과 진로 설계", "description": "경력·연수·가산점을 넣으면 지금 서류 점수와 기준점까지 남은 점수를 보여 주고, 앞으로 몇 년 뒤 닿을지 시뮬레이션합니다.", "url": "https://careerplanning.vercel.app/"}, {"@type": "ListItem", "position": 17, "name": "학적 한눈에", "description": "입학·전학·유예·정원 외 관리까지, 상황을 고르거나 문장으로 물으면 처리 순서와 서류, 나이스 메뉴를 바로 찾아 줍니다.", "url": "https://academic-records-rosy.vercel.app/"}, {"@type": "ListItem", "position": 18, "name": "외국 국적 학생 학적 처리 안내", "description": "입교 상담부터 아포스티유, 학적 처리까지 순서대로 짚어 줍니다.", "url": "https://academic-record-management-for-fore.vercel.app/"}, {"@type": "ListItem", "position": 19, "name": "교육활동 침해 판별과 대응 절차", "description": "있었던 일을 고르면 해당할 수 있는 침해 유형과 지금 할 일을 알려 주고, 담당자에게는 단계별 처리 절차와 기한을 안내합니다.", "url": "https://protection-of-educational-activitie-blond.vercel.app/"}, {"@type": "ListItem", "position": 20, "name": "학교 안전·긴급사항 대응 절차", "description": "응급환자 이송, 중대재해, 비상연락망까지 급할 때 열어 보는 절차를 모았습니다.", "url": "https://emergency-fh5s.vercel.app/"}, {"@type": "ListItem", "position": 21, "name": "옆 학교는?", "description": "업무 갈등이나 공문 핑퐁처럼 학교마다 판단이 갈리는 안건을 올리면, 전국 초등학교가 학교별 1표로 판단과 이유를 남기고 해마다 기록이 쌓입니다. 로그인 없이 학교만 고르면 참여합니다.", "url": "https://survey-rho-drab.vercel.app/"}, {"@type": "ListItem", "position": 22, "name": "전보 한눈에", "description": "광주 동·서부교육지원청 초등 교사를 위한 비공식 전보 안내입니다. 지도에서 집 근처·학급 수·혁신학교·인사특구·농촌학교 같은 조건으로 희망학교 10곳과 인사구역 순서를 고르면 희망 내신 엑셀을 바로 만들어 줍니다. 서열·동점자 순위, 전보 유예, 연령대 배치, 2027 달라진 점, 교감·특수·비교과 안내까지 담았고, 입력한 정보는 서버로 보내지 않습니다.", "url": "https://transfer-pied-three.vercel.app/"}, {"@type": "ListItem", "name": "출결 한눈에", "description": "결석 사유를 말하듯 검색하면 출석인정·질병·기타·미인정 중 무엇인지, 어떤 서류를 언제까지 내야 하는지, 생활기록부에 어떻게 남는지 한 화면에서 답합니다. 학부모와 담임이 같은 화면을 봅니다.", "url": "https://stattendance.vercel.app/", "position": 23}, {"@type": "ListItem", "position": 24, "name": "교외체험학습 신청기한 계산", "description": "휴일을 빼고 신청 기한을 계산해 주고, 사유가 적절한지도 스스로 확인합니다.", "url": "https://educational-travel.vercel.app/"}, {"@type": "ListItem", "position": 25, "name": "미인정결석 학생 업무 처리 안내", "description": "담임·업무 담당자·관리자를 고르면 결석 당일부터 NEIS 등록, 매월 확인, 복귀 보고까지 내 차례의 일을 순서대로 보여 줍니다.", "url": "https://unexcused-absence-sage.vercel.app/"}, {"@type": "ListItem", "position": 26, "name": "감염병 등교중지·출석인정 확인", "description": "병명을 찾으면 등교 중지 기간과 출석 인정 절차를 학부모가 바로 확인할 수 있습니다.", "url": "https://infectious-diseases.vercel.app/"}, {"@type": "ListItem", "position": 27, "name": "야외활동 가능 여부 확인", "description": "지금 우리 지역 수치로 야외 활동이 가능한지, 자제인지, 금지인지 한 줄로 답합니다.", "url": "https://fine-dust-heat-wave.vercel.app/"}, {"@type": "ListItem", "name": "학급회의 한눈에", "description": "1~2·3~4·5~6학년 학년군마다 다른 학급회의 순서와 사회자·의장 대본을 안내하고, 교실 TV에 띄우는 진행 모드(타이머·그림 카드·스티커 투표)로 그대로 이끕니다. 전교학생회의 진행, 결정 방법 16가지, 달마다 안건, 회의 기록 양식까지 담았습니다.", "url": "https://class-meeting-ashy.vercel.app/", "position": 28}, {"@type": "ListItem", "position": 29, "name": "해냄 보물상자", "description": "학생이 2022 개정 교육과정 성취기준에서 스스로 목표를 고르고, 보호자 확인과 선생님 인증을 모아 한 해 동안 쌓아 갑니다.", "url": "https://growth-opal.vercel.app/"}, {"@type": "ListItem", "position": 30, "name": "생활기록부·통지표 문장 쓰기", "description": "생활통지표·생활기록부를 어떻게 쓰는지 기재 요령과 예시 문장으로 자세히 안내하고, 수업 중 관찰 기록을 문장으로 옮기도록 돕습니다.", "url": "https://student-record-seven.vercel.app/"}, {"@type": "ListItem", "name": "학생부 점검 한눈에", "description": "나이스에서 PDF로 저장한 학교생활기록부(생기부)나 생활통지표를 올리면, 그해 기재요령과 이번 학기 통지 항목으로 읽어 고칠 곳과 근거를 짚어 줍니다. 파일은 기기 밖으로 나가지 않습니다.", "url": "https://student-record-review.vercel.app/", "position": 31}, {"@type": "ListItem", "position": 32, "name": "반편성하기", "description": "성적·성별·관계 조건을 놓고 여러 안을 만들어 보며 협의 자리에서 함께 결정합니다.", "url": "https://class-assignment-ruddy.vercel.app/"}, {"@type": "ListItem", "position": 33, "name": "신입생 반편성하기", "description": "예비소집 면접 기록을 모아 신입생 반을 나누고 명렬표까지 정리합니다.", "url": "https://freshman-class-assignment-nmos.vercel.app/"}, {"@type": "ListItem", "position": 34, "name": "청렴 연수 방탈출 게임", "description": "청탁금지법과 갑질 예방을 방탈출 게임으로 풀어 가는 참여형 연수입니다.", "url": "https://integrity-henna.vercel.app/"}, {"@type": "ListItem", "position": 35, "name": "교육활동보호 법률 용어 익히기", "description": "교육활동 침해와 관련된 법률 용어를 읽고, 열 문항 퀴즈로 확인합니다.", "url": "https://protection-of-educational-activitie.vercel.app/"}, {"@type": "ListItem", "position": 36, "name": "교육활동 침해 사안 대응 익히기", "description": "실제 상황을 놓고 어디까지가 침해인지, 무엇부터 해야 하는지 따라가 봅니다.", "url": "https://protection-of-educational-activitie-three.vercel.app/"}, {"@type": "ListItem", "position": 37, "name": "내 수업 성장 지도", "description": "스물네 가지 수업 장면에서 지금 내 모습을 고르면, 여섯 영역의 성장 지도와 다음 한 걸음을 보여 줍니다.", "url": "https://teaching-competency.vercel.app/"}, {"@type": "ListItem", "position": 38, "name": "AI·디지털 교육 역량 진단", "description": "스물한 개 문항에 답하면 일곱 가지 역량의 성장 리포트와 이번 주 실천 미션을 보여 줍니다.", "url": "https://ai-digital-literacy.vercel.app/"}, {"@type": "ListItem", "position": 39, "name": "바이브 코딩 연수 길잡이", "description": "생성형 AI로 학교 업무용 웹사이트를 만들어 배포하는 연수를 2차시부터 15차시까지 단계별로 안내합니다.", "url": "https://vibecoding-zeta-seven.vercel.app/"}, {"@type": "ListItem", "position": 40, "name": "학급규칙 세우기 수업 준비", "description": "학급 규칙을 학생들과 함께 정하는 수업을 준비하고, 미리 연습해 볼 수 있습니다.", "url": "https://class-rules.vercel.app/"}, {"@type": "ListItem", "position": 41, "name": "교우관계 설문과 관계도 그리기", "description": "학년군별 설문으로 교우 관계를 모아 관계도와 리포트로 보여 줍니다.", "url": "https://sociogram-hazel.vercel.app/"}, {"@type": "ListItem", "position": 42, "name": "나 전달법 배우고 연습하기", "description": "나 전달법을 단계로 배우고 서른 가지 상황으로 연습한 뒤 골든벨로 확인합니다.", "url": "https://i-message-nine.vercel.app/"}, {"@type": "ListItem", "position": 43, "name": "도전행동 생활지도 가이드", "description": "도전 행동을 만났을 때 무엇을 먼저 하고 무엇을 하지 말아야 하는지 안내합니다. 2026 생활지도 고시 해설(분리·제지·소지품 조사·훈계 과제·이의제기)을 담았고, 사이트 안에서 궁금한 말로 바로 찾을 수 있습니다.", "url": "https://school-guidance-plus.vercel.app/"}, {"@type": "ListItem", "position": 44, "name": "학부모 상담 준비와 연습", "description": "학부모 상담의 흐름을 익히고, 어려운 장면을 미리 연습해 볼 수 있습니다.", "url": "https://parent-consultation-training.vercel.app/"}, {"@type": "ListItem", "position": 45, "name": "상담과 민원 구분하기", "description": "상담과 민원의 경계를 사례로 구분하고, 민원으로 넘어갔을 때의 절차를 안내합니다.", "url": "https://consultation-complaints.vercel.app/"}, {"@type": "ListItem", "position": 46, "name": "학교폭력 사안 처리 절차", "description": "학부모 눈높이로 학교폭력 신고부터 심의·이의신청까지의 절차와 기한, 분리·보호조치, 가해학생 조치와 학생부 기재를 피해·가해·목격 학생 보호자 입장별로 안내합니다. 사이트 안에서 궁금한 말로 바로 찾을 수 있고, 교직원이 학부모에게 안내할 때도 씁니다.", "url": "https://school-violence-alpha.vercel.app/"}]}</script>
 </head>
 <body>
 
@@ -608,6 +659,7 @@ a.mcard{text-decoration:none;color:inherit;}
 <li><a href="https://protection-of-educational-activitie-blond.vercel.app/" rel="noopener"><strong>교육활동 침해 판별과 대응 절차</strong></a> — 있었던 일을 고르면 해당할 수 있는 침해 유형과 지금 할 일을 알려 주고, 담당자에게는 단계별 처리 절차와 기한을 안내합니다. <span class="who">(모든 교직원 · 교권침해)</span></li>
 <li><a href="https://emergency-fh5s.vercel.app/" rel="noopener"><strong>학교 안전·긴급사항 대응 절차</strong></a> — 응급환자 이송, 중대재해, 비상연락망까지 급할 때 열어 보는 절차를 모았습니다. <span class="who">(모든 교직원 · 안전)</span></li>
 <li><a href="https://survey-rho-drab.vercel.app/" rel="noopener"><strong>옆 학교는?</strong></a> — 업무 갈등이나 공문 핑퐁처럼 학교마다 판단이 갈리는 안건을 올리면, 전국 초등학교가 학교별 1표로 판단과 이유를 남기고 해마다 기록이 쌓입니다. 로그인 없이 학교만 고르면 참여합니다.</li>
+<li><a href="https://transfer-pied-three.vercel.app/" rel="noopener"><strong>전보 한눈에</strong></a> — 광주 동·서부교육지원청 초등 교사를 위한 비공식 전보 안내입니다. 지도에서 집 근처·학급 수·혁신학교·인사특구·농촌학교 같은 조건으로 희망학교 10곳과 인사구역 순서를 고르면 희망 내신 엑셀을 바로 만들어 줍니다. 서열·동점자 순위, 전보 유예, 연령대 배치, 2027 달라진 점, 교감·특수·비교과 안내까지 담았고, 입력한 정보는 서버로 보내지 않습니다. <span class="who">(교사 · 전보)</span></li>
 </ul></section>
 <section><h2>교실과 학급 — 교실과 학급 운영을 돕는 도구</h2><ul>
 <li><a href="https://stattendance.vercel.app/" rel="noopener"><strong>출결 한눈에</strong></a> — 결석 사유를 말하듯 검색하면 출석인정·질병·기타·미인정 중 무엇인지, 어떤 서류를 언제까지 내야 하는지, 생활기록부에 어떻게 남는지 한 화면에서 답합니다. 학부모와 담임이 같은 화면을 봅니다. <span class="who">(학부모 · 출결)</span></li>
@@ -656,32 +708,43 @@ a.mcard{text-decoration:none;color:inherit;}
     <section class="notes" id="notes">
       <h2>쓰기 전에 알아 두시면 좋은 것</h2>
       <div class="howto">
-        <h3>이렇게 쓰면 편해요</h3>
-        <ul class="howlist" id="howlist"></ul>
+        <h3 class="nsec"><span class="no">1</span>이렇게 쓰면 편해요</h3>
+        <div class="howgrid" id="howlist"></div>
       </div>
-      <div class="notelist">
-        <div id="note-basis">
-          <h3>무엇을 근거로 만들었나</h3>
-          <p>휴가·복무·겸직·휴직은 「국가공무원 복무규정」, 「교육공무원법」과 교육부 예규를, 학적·출결은 학적 업무 지침과 「학교생활기록부 기재요령」을, 학교폭력·교육활동보호·생활지도는 해당 법률과 시행령, 「교원의 학생생활지도에 관한 고시」를 따랐습니다.</p>
-          <p>인사 내규나 업무분장처럼 법령이 정하지 않는 것은 <b>참고안·표준안</b>입니다. 그대로 따르는 정답이 아니라 학교 협의로 고쳐 쓰는 출발점입니다.</p>
-          <p>교육부·교육청의 <b>공식 사이트가 아닙니다.</b> 실제 업무의 최종 판단은 규정과 교육청 지침으로 확인해 주세요. 개정이 있으면 반영하고, 바뀐 내용은 「새 소식」에, 마지막으로 손본 날은 맨 아래에 적어 둡니다.</p>
-        </div>
-        <div id="note-chat">
-          <h3>연장통 길잡이는 이렇게 답해요</h3>
-          <p>오른쪽 아래 「무엇을 도와드릴까요?」를 누르고 상황을 문장으로 적으면, 알맞은 도구를 골라 주고 도구 안의 그 자리까지 바로 열어 줍니다.</p>
-          <p><b>AI가 아닙니다.</b> 정해진 규칙과 검색으로 답하기 때문에 규정을 대신 판단하지 않고, 확인할 수 있는 도구로 안내합니다. 적은 내용은 이 기기 밖으로 나가지 않지만, 학생 이름 같은 개인정보는 적지 말아 주세요.</p>
-          <div class="nlinks" id="chatex"></div>
-        </div>
-        <div id="note-store">
-          <h3>‘서버 저장’ 표시가 있는 도구</h3>
-          <p>대부분의 도구는 입력한 내용이 브라우저 안에서만 처리되고 서버로 넘어가지 않습니다. 여럿이 함께 써야 하는 몇 가지만 저장이 필요하고, 그 도구에는 ‘서버 저장’ 표시를 붙였습니다. 사용이 끝나면 자료를 지워 주세요.</p>
-          <p>학교 연장통은 「많이 찾은 도구」를 보여 드리려고 도구별로 몇 번 열렸는지 횟수만 셉니다(같은 기기는 도구마다 하루 한 번). 누가 열었는지는 남기지 않습니다.</p>
-          <div class="nlinks" id="storelist"></div>
-        </div>
-        <div id="note-pc">
-          <h3>PC에서 쓰는 것이 편한 도구</h3>
-          <p>반편성이나 시간표처럼 표를 넓게 보아야 하는 도구에는 ‘PC 권장’을 표시해 두었습니다. 스마트폰에서 누르면 한 번 더 안내가 나오고, 링크만 복사해 두었다가 컴퓨터에서 열 수 있습니다.</p>
-          <div class="nlinks" id="pclist"></div>
+      <div class="must">
+        <h3 class="nsec"><span class="no">2</span>꼭 알아 둘 것</h3>
+        <div class="notelist">
+          <div id="note-basis" class="mcard" style="--k:var(--c1)">
+            <div class="mh"><span class="mi"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V10M19 21V10M9 21v-7M15 21v-7M2 10l10-6 10 6z"/></svg></span><div><b>공식 사이트가 아니에요</b><span>최종 판단은 규정과 교육청 지침으로 확인해 주세요</span></div></div>
+            <div class="srcchips"><span class="lb">근거</span><i>국가공무원 복무규정</i><i>교육공무원법</i><i>교육부 예규</i><i>학적 업무 지침</i><i>학교생활기록부 기재요령</i><i>학교폭력예방법</i><i>교원지위법</i><i>교원의 학생생활지도에 관한 고시</i></div>
+            <details><summary>자세히</summary>
+              <p>휴가·복무·겸직·휴직은 「국가공무원 복무규정」, 「교육공무원법」과 교육부 예규를, 학적·출결은 학적 업무 지침과 「학교생활기록부 기재요령」을, 학교폭력·교육활동보호·생활지도는 해당 법률과 시행령, 「교원의 학생생활지도에 관한 고시」를 따랐습니다.</p>
+              <p>인사 내규나 업무분장처럼 법령이 정하지 않는 것은 <b>참고안·표준안</b>입니다. 그대로 따르는 정답이 아니라 학교 협의로 고쳐 쓰는 출발점입니다.</p>
+              <p>개정이 있으면 반영하고, 바뀐 내용은 「새 소식」에, 마지막으로 손본 날은 맨 아래에 적어 둡니다.</p>
+            </details>
+          </div>
+          <div id="note-chat" class="mcard" style="--k:var(--c2)">
+            <div class="mh"><span class="mi"><svg viewBox="0 0 24 24"><rect x="5" y="7" width="14" height="11" rx="3"/><path d="M12 3v4M9 12h.01M15 12h.01M9.5 15.5h5"/></svg></span><div><b>길잡이는 AI가 아니에요</b><span>정해진 규칙과 검색으로 알맞은 도구를 골라 드려요</span></div></div>
+            <details><summary>자세히</summary>
+              <p>오른쪽 아래 「무엇을 도와드릴까요?」를 누르고 상황을 문장으로 적으면, 알맞은 도구를 골라 주고 도구 안의 그 자리까지 바로 열어 줍니다.</p>
+              <p>규정을 대신 판단하지 않고, 확인할 수 있는 도구로 안내합니다. 적은 내용은 이 기기 밖으로 나가지 않지만, <b>학생 이름 같은 개인정보는 적지 말아 주세요.</b></p>
+            </details>
+          </div>
+          <div id="note-store" class="mcard" style="--k:var(--c3)">
+            <div class="mh"><span class="mi"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span><div><b>대부분 서버에 저장하지 않아요</b><span id="storeline">여럿이 함께 쓰는 도구만 ‘서버 저장’ 표시가 있어요</span></div></div>
+            <details><summary>자세히</summary>
+              <p>대부분의 도구는 입력한 내용이 브라우저 안에서만 처리되고 서버로 넘어가지 않습니다. 여럿이 함께 써야 하는 몇 가지만 저장이 필요하고, 그 도구에는 ‘서버 저장’ 표시를 붙였습니다. 사용이 끝나면 자료를 지워 주세요.</p>
+              <p>학교 연장통은 「많이 찾은 도구」를 보여 드리려고 도구별로 몇 번 열렸는지 횟수만 셉니다(같은 기기는 도구마다 하루 한 번). 누가 열었는지는 남기지 않습니다.</p>
+              <div class="nlinks" id="storelist"></div>
+            </details>
+          </div>
+          <div id="note-pc" class="mcard" style="--k:var(--c4)">
+            <div class="mh"><span class="mi"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></span><div><b id="pcline">PC 권장 도구</b><span>표를 넓게 봐야 해서 컴퓨터에서 여는 게 편해요</span></div></div>
+            <details><summary>자세히</summary>
+              <p>반편성이나 시간표처럼 표를 넓게 보아야 하는 도구에는 ‘PC 권장’을 표시해 두었습니다. 스마트폰에서 누르면 한 번 더 안내가 나오고, 링크만 복사해 두었다가 컴퓨터에서 열 수 있습니다.</p>
+              <div class="nlinks" id="pclist"></div>
+            </details>
+          </div>
         </div>
       </div>
     </section>
@@ -850,7 +913,7 @@ const MONTHLY = {
   9:  { note:"2학기 시작, 다시 살피는 아이들",       keys:["4-5","2-3","2-6","1-3"] },
   10: { note:"가을 체험학습과 교우관계 점검",         keys:["2-2","4-2","1-6","4-6"] },
   11: { note:"학년말 준비와 연수비 정산",             keys:["2-8","1-4","1-15","2-4"] },
-  12: { note:"학기말 기록과 취학 업무",               keys:["2-7","2-10","1-20","1-17"] }
+  12: { note:"학기말 기록, 전보 내신과 취학 업무",     keys:["2-7","1-23","2-10","1-20"] }
 };
 const NEW_DAYS = 14;                   /* 추가한 날(added)로부터 며칠 동안 「새로」를 붙일지 */
 
@@ -940,6 +1003,9 @@ const SITES = [
  d:"업무 갈등이나 공문 핑퐁처럼 학교마다 판단이 갈리는 안건을 올리면, 전국 초등학교가 학교별 1표로 판단과 이유를 남기고 해마다 기록이 쌓입니다. 로그인 없이 학교만 고르면 참여합니다.",who:"모든 교직원",pc:false,
  store:"안건·투표 기록 서버 저장",
  k:"옆학교 옆 학교 다른학교 다른 학교 타학교 학교마다 판단 투표 설문 안건 의견 사례 관행 결정 비교 업무 갈등 공문 핑퐁 누구 일 담당 업무분장 학교별 1표 결과 소수의견 전국 초등학교"},
+{p:"1",n:23,tag:"전보",m:"희망학교 고르기",h:"광주 동·서부 초등 교사가 지도에서 희망학교를 고르고 희망 내신 엑셀까지 만들어요. 서열·동점자, 전보 유예, 달라진 점도 한곳에서 확인해요.",added:"2026-11-26",t:"전보 한눈에",c:"“올해 만기인데, 어느 학교를 써야 하죠?”",u:"https://transfer-pied-three.vercel.app/",
+ d:"광주 동·서부교육지원청 초등 교사를 위한 비공식 전보 안내입니다. 지도에서 집 근처·학급 수·혁신학교·인사특구·농촌학교 같은 조건으로 희망학교 10곳과 인사구역 순서를 고르면 희망 내신 엑셀을 바로 만들어 줍니다. 서열·동점자 순위, 전보 유예, 연령대 배치, 2027 달라진 점, 교감·특수·비교과 안내까지 담았고, 입력한 정보는 서버로 보내지 않습니다.",who:"교사",pc:false,
+ k:"전보 전보내신 전보 내신 정기전보 정기 전보 희망내신 희망 내신 내신서 희망학교 희망 학교 희망구역 희망 구역 인사구역 인사 구역 광주 동부 서부 광주동부 광주서부 동부교육지원청 서부교육지원청 교육지원청 만기 만기자 만기 전보 만료 만료자 근무 만료 4년 학교 이동 학교 옮기기 다른 학교로 학교 지도 카카오맵 집 근처 거리 2km 반경 학급수 학급 수 큰 학교 작은 학교 대규모 소규모 혁신학교 빛고을혁신학교 인사특구 인사 특구 농촌학교 농촌 학교 한국어학급 휴교 특수학교 서열 서열명부 전보순위 전보 순위 경력점 48점 동점자 동점자 순위 직무연수 다자녀 우대 전보 우대전보 국가유공자 유예 전보 유예 전보유예 연령대 연령대 배치 달라진 점 2027 인사관리기준 인사관리 기준 업무처리지침 서식1 서식3 서식4 엑셀 전보 서류 증빙 서류 체크리스트 명부 합치기 전보대상자 명부 수석교사 특수교사 보건교사 사서교사 영양교사 전문상담교사 순회교사 정원 감축 늘봄지원연구사 친인척 배우자 동시전보 교류 전입 전남광주 통합특별시 비공식 서버 없음"},
 /* ── 교실과 학급 ── */
 {p:"2",n:1,tag:"출결",m:"결석 처리 구분",h:"결석 사유를 검색하면 출석인정·질병·미인정 가운데 무엇인지, 낼 서류와 기한을 알려 줘요.",added:"2026-10-16",t:"출결 한눈에",c:"“학원 때문에 빠지면 뭐로 처리돼요?”",u:"https://stattendance.vercel.app/",
  d:"결석 사유를 말하듯 검색하면 출석인정·질병·기타·미인정 중 무엇인지, 어떤 서류를 언제까지 내야 하는지, 생활기록부에 어떻게 남는지 한 화면에서 답합니다. 학부모와 담임이 같은 화면을 봅니다.",who:"학부모",pc:false,
@@ -1044,6 +1110,7 @@ const TODAY0 = (() => { const d = new Date(); d.setHours(0,0,0,0); return d; })(
    새 도구는 SITES의 added만 적으면 「새로」 소식이 저절로 만들어집니다.
    오타 수정처럼 쓰는 사람이 느끼지 못하는 변화는 적지 않습니다. */
 const NEWSLOG = [
+  { d:"2026-11-26", key:"1-23", kind:"new", text:"전보 한눈에를 더했습니다 — 광주 동·서부 초등 교사가 지도에서 희망학교를 고르고 희망 내신 엑셀까지 만듭니다(비공식, 서버 없음)" },
   { d:"2026-11-25", key:"1-17", kind:"up", text:"교내 인사 내규 길잡이 첫 화면에 내규 조항 찾기를 더했고, 연장통 검색·길잡이에서 학급 감축·부장 미달·학년 경합 같은 상황으로도 그 조항(조문·상황별 길잡이·부장 임용 FAQ)을 찾아 바로 엽니다" },
   { d:"2026-11-25", key:"4-4", kind:"up", text:"생활지도 PLUS에 사이트 안 검색과 2026 생활지도 고시 해설 노트(분리·제지·소지품 조사·훈계 과제·이의제기 등 33항목)를 더했고, 연장통 검색·길잡이에서도 그 내용을 찾아 바로 엽니다" },
   { d:"2026-11-25", key:"4-7", kind:"up", text:"학교폭력 사안처리 안내에 사이트 안 검색과 피해·가해·목격 학생 보호자를 위한 설명(분리 조건, 학생부 기재 유보 조건, 확인서 쓰는 법 등)을 더했고, 연장통 검색·길잡이에서 그 내용을 바로 찾아 엽니다" },
@@ -1184,7 +1251,7 @@ function topicMatch(text){
    업로드가 가볍습니다(같은 도구가 두 파일에 있으면 뒤 파일이 이깁니다). */
 const DEEP_URLS = ["deep-index.json", "deep-index-add.json"];
 /* 주소에 ?q=검색어 를 붙이면 그 사이트 검색이 바로 열리는 도구 — 기능을 넣은 사이트를 여기에 더합니다 */
-const DEEP_QLINK = new Set(["1-20", "1-6", "2-1", "2-10", "1-1", "1-2", "1-3", "1-12", "1-14", "1-15", "1-17", "1-19", "2-4", "2-2", "2-7", "2-3", "2-6", "3-6", "3-1", "3-4", "3-5", "4-1", "4-3", "4-4", "4-5", "4-6", "4-7", "2-11", "1-22"]);
+const DEEP_QLINK = new Set(["1-20", "1-6", "2-1", "2-10", "1-1", "1-2", "1-3", "1-12", "1-14", "1-15", "1-17", "1-19", "2-4", "2-2", "2-7", "2-3", "2-6", "3-6", "3-1", "3-4", "3-5", "4-1", "4-3", "4-4", "4-5", "4-6", "4-7", "2-11", "1-22", "1-23"]);
 let DEEP = null, DEEP_LOADING = null;
 function loadDeep(){
   if (!DEEP_LOADING){
@@ -1302,9 +1369,11 @@ const SYNS = [
   [/업무\s*(분장|배정|조정|분담|량|나누)|담당자가?\s*(불분명|애매|모호|없)|누구\s*(일|업무)|일을?\s*누가/, "업무분장"],
   [/인수\s*인계|후임|전임자|담당자가?\s*(바뀌|변경|교체)|업무를?\s*넘기|일을?\s*넘겨|넘겨\s*주|새로\s*온\s*(담당|사람)/, "인수인계 후임"],
   [/음료|다과|커피|간식|회식/, "음료 간식"],
-  [/내규|인사\s*(규정|자문|관리\s*기준)|전보\s*유예|보직\s*교사|부장\s*(교사)?\s*(임용|배정|선정)|학년\s*배정|담임\s*배정/, "인사 내규 보직교사"],
+  [/내규|인사\s*(규정|자문|관리\s*기준)|보직\s*교사|부장\s*(교사)?\s*(임용|배정|선정)|학년\s*배정|담임\s*배정/, "인사 내규 보직교사"],
   /* 교내 인사 내규의 상황들(학급 감축 전출, 부장 미달·경합, 학년 희망 경합, 학기 중 담임 교체 등) → 인사 내규 길잡이의 조항 찾기 */
-  [/(학급|정원)\s*(이\s*)?(감축|감소|축소|증설|증감|변동|줄|늘)|(교사|교원|선생님).{0,10}전출|전출\s*(자|순위|대상|우선)|만기\s*전보|전보\s*내신|부장.{0,10}(희망|미달|모자|부족|경합|지원|강제|자원|그만|해임|결원|정원|임기|연임)|보직\s*(교사)?\s*(희망|미달|정원|경합)|학년\s*(희망|선택|경합)|[1-6]\s*학년.{0,8}(희망|원하|겹치|경합)|담임.{0,6}(교체|바꾸|바꿔|배정|희망|내려놓)|임시\s*담임|교담.{0,6}(배정|희망|맡)|교과\s*전담.{0,6}(배정|희망)|인사\s*점수|(담임|본교)\s*경력\s*점|통합\s*학급\s*부가\s*점|원로\s*교사|동점자|교무\s*업무\s*전담\s*팀|초빙\s*교(원|사)\s*(선정|선발)|업무\s*배정표|학년\s*배정표/, "인사 내규^3 보직교사"],
+  [/(학급|정원)\s*(이\s*)?(감축|감소|축소|증설|증감|변동|줄|늘)|(교사|교원|선생님).{0,10}전출|전출\s*(자|순위|대상|우선)|부장.{0,10}(희망|미달|모자|부족|경합|지원|강제|자원|그만|해임|결원|정원|임기|연임)|보직\s*(교사)?\s*(희망|미달|정원|경합)|학년\s*(희망|선택|경합)|[1-6]\s*학년.{0,8}(희망|원하|겹치|경합)|담임.{0,6}(교체|바꾸|바꿔|배정|희망|내려놓)|임시\s*담임|교담.{0,6}(배정|희망|맡)|교과\s*전담.{0,6}(배정|희망)|인사\s*점수|(담임|본교)\s*경력\s*점|통합\s*학급\s*부가\s*점|원로\s*교사|동점자|교무\s*업무\s*전담\s*팀|초빙\s*교(원|사)\s*(선정|선발)|업무\s*배정표|학년\s*배정표/, "인사 내규^3 보직교사"],
+  /* 교육지원청 정기 전보(학교를 옮기는 전보) → 전보 한눈에. 교내 학급 감축 전출 순위는 위 인사 내규 */
+  [/전보|희망\s*(학교|구역|내신)|내신\s*(서|서류|쓰|작성|제출)|인사\s*구역|만기|만료\s*자|근무\s*(연한\s*)?만료|학교를?\s*(옮기|옮겨|이동|바꾸|바꿔)|다른\s*학교로\s*(가|옮|이동)|(동부|서부)\s*(교육\s*지원청|지원청)|혁신\s*학교|인사\s*특구|농촌\s*학교|서열\s*명부|연령대\s*배치|(학급|반)\s*(수|많은|적은).{0,6}학교|큰\s*학교|작은\s*학교|집\s*(근처|가까운)\s*학교|동시\s*전보|명부\s*합치/, "전보^3 희망학교"],
   [/승진|교감\s*(이\s*)?(되|으로|승진)|교장\s*(이\s*)?되|가산점|근무\s*평정|근평|경력\s*평정|휴직.*(경력|영향)/, "승진 교감 가산점"],
   [/청탁|김영란|선물|상품권|촌지|금품|접대|갑질|청렴|부패|뇌물|쿠폰|기프티콘|답례|감사\s*(표시|선물)|성의/, "청렴^2 청탁금지법"],
   /* 학적·출결·체험학습·감염병 */
@@ -2107,16 +2176,18 @@ $("#modalbox").addEventListener("click", e => {
 /* 이용 안내의 「이렇게 쓰면 편해요」 */
 /* 이용 안내 네 칸: 길잡이 예시 질문 · 서버 저장 도구 · PC 권장 도구 */
 const CHAT_EX = ["학생이 일주일째 연락이 안 돼요", "학급 감축되면 누가 전출 가요?", "학부모가 밤마다 문자를 보내요"];
-$("#chatex").innerHTML = `<span class="lb">눌러서 물어보기</span>` + CHAT_EX.map(q => `<button type="button" data-chatq="${esc(q)}">${esc(q)}</button>`).join("");
 const toolChips = (arr, lab) => arr.length ? `<span class="lb">${lab}</span>` + arr.map(s => `<button type="button" data-go="${keyOf(s)}" title="${esc(s.store || s.t)}">${esc(s.t)}</button>`).join("") : "";
 $("#storelist").innerHTML = toolChips(SITES.filter(s => s.store), "서버 저장 " + SITES.filter(s => s.store).length + "개");
 $("#pclist").innerHTML = toolChips(SITES.filter(s => s.pc), "PC 권장 " + SITES.filter(s => s.pc).length + "개");
+$("#pcline").textContent = "PC 권장 도구 " + SITES.filter(s => s.pc).length + "개";
+$("#storeline").textContent = "‘서버 저장’ 표시가 있는 도구는 " + SITES.filter(s => s.store).length + "개뿐이에요";
 document.addEventListener("click", e => {
   const b = e.target.closest("[data-chatq]"); if (!b) return;
   chatOpen(); chatQuery(b.getAttribute("data-chatq"));
 });
 function flashNote(id){
   const el = document.getElementById(id); if (!el) return;
+  const dt = el.querySelector("details"); if (dt) dt.open = true;
   const bar = document.querySelector(".topbar").offsetHeight;
   const r = el.getBoundingClientRect(), view = window.innerHeight - bar;
   if (r.top < bar + 8 || r.bottom > window.innerHeight - 8) fastScroll(Math.max(r.top + window.pageYOffset - bar - Math.max((view - r.height) * 0.4, 12), 0));
@@ -2172,7 +2243,51 @@ window.addEventListener("scroll", () => {
   el.hidden = false;
   el.addEventListener("click", openNews);
 })();
-$("#howlist").innerHTML = TIPS.map(t => `<li><span>${esc(t.text)}</span><button type="button" data-tip="${t.id}">${tipBtn(t)}</button></li>`).join("");
+/* 「이렇게 쓰면 편해요」: 팁을 네 묶음 카드로. 찾기·물어보기 카드에는 움직이는 예시 */
+(function(){
+  const T = id => TIPS.find(t => t.id === id);
+  const ICON = {
+    find:'<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/>',
+    ask:'<path d="M4 5h16v11H9l-5 4z"/><path d="M8 10h8M8 13h5"/>',
+    pick:'<rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="4" width="7" height="7" rx="1"/><rect x="4" y="13" width="7" height="7" rx="1"/><rect x="13" y="13" width="7" height="7" rx="1"/>',
+    share:'<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.9l7.6-3.8M8.2 13.1l7.6 3.8"/>'
+  };
+  const G = [
+    { k:"find", t:"찾기", d:"낱말도 문장도 검색창에", c:"var(--c1)", ids:["sentence","deep","enter","slash"],
+      demo:`<button type="button" class="hdemo hsearch" data-tip="sentence" aria-label="문장으로 검색해 보기"><svg viewBox="0 0 24 24">${'<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/>'}</svg><span class="ty" data-ty="보결은 누가 들어가요?|학급 감축되면 누가 전출 가요?|올해 만기인데 어디로 가야 하죠"></span><span class="cur"></span></button>` },
+    { k:"ask", t:"물어보기", d:"상황을 말하면 도구를 골라 줘요", c:"var(--c2)", ids:["chat"],
+      demo:`<button type="button" class="hdemo hchat" data-tip="chat" aria-label="길잡이에게 물어보기"><span class="bub me"><span class="ty" data-ty="${CHAT_EX.join("|")}"></span><span class="cur"></span></span><span class="bub bot">알맞은 도구를 찾아 드릴게요</span></button><div class="nlinks" id="chatex"></div>` },
+    { k:"pick", t:"고르기", d:"무엇을 쓸지 모를 때", c:"var(--c3)", ids:["monthly","map","news"],
+      demo:`<button type="button" class="hdemo htiles" data-tip="map" aria-label="색깔 칸 지도 보기">${PARTS.map(pt => SITES.filter(x => x.p === pt.id).slice(0, 6).map(x => `<i style="background:${pt.light}">${esc(x.tag)}</i>`).join("")).join("")}</button>` },
+    { k:"share", t:"나누기", d:"연수·회의·메신저로", c:"var(--c4)", ids:["qr","copyall","pc"],
+      demo:`<button type="button" class="hdemo hshare" data-tip="qr" aria-label="QR로 공유해 보기"><svg viewBox="0 0 24 24"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM6 6h1v1H6zM17 6h1v1h-1zM6 17h1v1H6zM14 14h3v3h-3zM18 18h3v3h-3zM14 19h2v2h-2zM19 14h2v2h-2z"/></svg><span><b>QR을 화면에 띄우면</b><br>연수 자리에서 휴대폰으로 바로 열어요</span></button>` }
+  ];
+  const row = t => !t ? "" : `<li><button type="button" data-tip="${t.id}"><span>${t.id === "slash" ? '<kbd>/</kbd> 키로 검색창 열기' : esc(t.short)}</span><em>${esc(tipBtn(t))} ›</em></button></li>`;
+  $("#howlist").innerHTML = G.map(g => `<div class="hcard" style="--k:${g.c}">
+      <div class="hh"><span class="hi"><svg viewBox="0 0 24 24">${ICON[g.k]}</svg></span><div><b>${g.t}</b><span>${g.d}</span></div></div>
+      ${g.demo || ""}
+      <ul>${g.ids.map(id => row(T(id))).join("")}</ul>
+    </div>`).join("");
+  /* 타자 치듯 예시가 바뀌는 움직임(움직임 줄이기 설정이면 첫 문장만 보여 줌) */
+  document.querySelectorAll("#howlist .ty").forEach(el => {
+    const list = el.dataset.ty.split("|");
+    if (!soften()){ el.textContent = list[0]; return; }
+    let li = 0, ci = 0, dir = 1, vis = false;
+    if ("IntersectionObserver" in window) new IntersectionObserver(es => { vis = es[0].isIntersecting; }).observe(el); else vis = true;
+    const step = () => {
+      let wait = 80;
+      if (vis){
+        const w = list[li];
+        if (dir > 0){ ci++; if (ci >= w.length){ dir = -1; wait = 1700; } }
+        else { ci -= 2; if (ci <= 0){ ci = 0; dir = 1; li = (li + 1) % list.length; wait = 400; } else wait = 25; }
+        el.textContent = w.slice(0, ci);
+      } else wait = 600;
+      setTimeout(step, wait);
+    };
+    setTimeout(step, 500);
+  });
+})();
+$("#chatex").innerHTML = `<span class="lb">눌러서 물어보기</span>` + CHAT_EX.map(q => `<button type="button" data-chatq="${esc(q)}">${esc(q)}</button>`).join("");
 
 renderStrip();
 updateNewsBadge();
@@ -2430,7 +2545,7 @@ const CHAT_MENU = [
   { label:"학적·전학", ask:"어떤 학적 업무인가요?", opts:[["전입·전출·유예·정원 외","1-20"],["외국 국적 학생","1-3"],["신입생 반편성","2-9"],["학년말 반편성","2-8"]] },
   { label:"학급·생활지도", ask:"어떤 상황인가요?", opts:[["문제행동 지도","4-4"],["친구 관계·소외","4-2"],["학급규칙 만들기","4-1"],["나 전달법 대화","4-3"],["통지표·생활기록부 문장","2-7"],["생활기록부 기재 점검","2-10"],["학생 목표 인증","2-6"],["학급회의·전교학생회의 진행","2-11"]] },
   { label:"학부모·교권·학폭", ask:"어떤 일이 있었나요?", opts:[["학부모 상담 준비","4-5"],["상담인지 민원인지","4-6"],["교육활동 침해(교권)","1-14"],["학교폭력 사안","4-7"],["선물·청탁금지법","3-1"]] },
-  { label:"업무·행정", ask:"어떤 업무인가요?", opts:[["업무분장","1-19"],["다른 학교는 어떻게 하나","1-21"],["보결 배정","1-10"],["시간표","1-8"],["공문·회의록","1-12"],["인수인계","1-13"],["월중·주간계획","1-11"],["인사 내규","1-17"],["연수비 정산","1-4"],["음료 주문 취합","1-7"]] },
+  { label:"업무·행정", ask:"어떤 업무인가요?", opts:[["업무분장","1-19"],["다른 학교는 어떻게 하나","1-21"],["학교 옮기는 전보·희망 내신(광주 초등)","1-23"],["보결 배정","1-10"],["시간표","1-8"],["공문·회의록","1-12"],["인수인계","1-13"],["월중·주간계획","1-11"],["인사 내규","1-17"],["연수비 정산","1-4"],["음료 주문 취합","1-7"]] },
   { label:"연수", ask:"어떤 연수인가요?", opts:[["바이브 코딩 연수","3-6"],["수업 역량 진단","3-4"],["AI·디지털 역량 진단","3-5"],["청렴 연수 게임","3-1"],["교육활동보호 용어","3-2"],["교권 사안 대응 연습","3-3"],["학부모 법정교육 안내","1-5"]] },
   { label:"안전·날씨", ask:"어떤 상황인가요?", opts:[["사고·응급·긴급 대응","1-6"],["체험학습 중 사고 9가지","tplist:"],["미세먼지·폭염, 밖에 나가도 될까","2-5"],["감염병 등교중지","2-4"]] }
 ];
@@ -2444,6 +2559,8 @@ const CHAT_ASK = [
   [/교권|침해/, /용어|퀴즈|연습|사례|욕|전화|문자/, { ask:"무엇이 필요하세요?", opts:[["지금 일어난 일 판별·대응","1-14"],["연수용 사례 대응 연습","3-3"],["법률 용어 익히기","3-2"]] }],
   [/생활\s*기록부|생기부|학생부|통지표/, /학교\s*폭력|학폭|가해|피해|[1-9]\s*호|조치|유보|점검|검토|오류|기재\s*요령|금지|문장|쓰기|쓰는|작성|세특|행동/, { ask:"무엇이 필요하세요?", opts:[["관찰 기록을 문장으로 쓰기","2-7"],["다 쓴 기록을 기재요령으로 점검","2-10"]] }],
   [/회의(?!록)/, /학급|전교|학생|자치|대의원|다모임|사회자|의장|안건|공문|기안|교직원|협의회|위원회|인사|자문|회의록/, { ask:"어떤 회의인가요?", opts:[["학급회의·전교학생회의 진행","2-11"],["회의록·공문 쓰기","1-12"],["다른 학교는 어떻게 정했나","1-21"]] }],
+  [/유예/, /취학|입학|학적|학생|아이|자녀|전보|내신|만기|교사|혁신|육아|휴직|복직|교감/, { ask:"어떤 유예인가요?", opts:[["교사 전보 유예","1-23"],["학생 취학·입학 유예(학적)","1-20"]] }],
+  [/동점자/, /전보|내신|서열|희망|학년|부장|담임|내규|교내|보직/, { ask:"어떤 동점자 순위인가요?", opts:[["교육지원청 전보 서열의 동점자","1-23"],["교내 인사(학년·부장 배정)의 동점자","1-17"]] }],
   [/연수/, /비|정산|영수증|코딩|바이브|ai|디지털|수업|청렴|교권|41|방학|법정|학부모|휴직|유학|대학원|자율/i, 6],
   [/육아|가족\s*돌봄|돌봄|출산|임신/, /휴가|휴직|시간|수당|학생|학급|교실|늘봄|돌봄\s*교실|출결|결석|체험/, { ask:"며칠 쉬는 휴가인가요, 몇 달 이상 쉬는 휴직인가요?", opts:[["며칠 쉬는 휴가(육아시간·가족돌봄휴가·출산휴가)","1-2"],["몇 달~몇 년 쉬는 휴직(육아휴직 등)","1-22"]] }]
 ];
@@ -2453,7 +2570,7 @@ const CHAT_WHO = [
   [/6\s*학년\s*담임/, "6학년 담임 선생님께", ["1-20","2-7","2-10","2-8"]],
   [/신규|새로\s*온\s*(교사|선생)|처음\s*(온|발령)|초임/, "새로 오신 선생님께", ["2-1","1-2","4-5","2-11","1-12"]],
   [/학생\s*자치\s*(담당|업무|부장)|학생회\s*(담당|지도)|자치\s*담당/, "학생자치 담당 선생님께", ["2-11","4-1","4-3"]],
-  [/교감|관리자|교장/, "교감·관리자께", ["1-10","1-19","1-17","1-14","1-22"]],
+  [/교감|관리자|교장/, "교감·관리자께", ["1-10","1-19","1-17","1-14","1-22","1-23"]],
   [/교무\s*부장|교무/, "교무 업무 담당께", ["1-11","1-8","1-19"]],
   [/학적\s*담당|학적/, "학적 담당자께", ["1-20","1-3","2-3"]],
   [/생활\s*(지도)?\s*부장|생활\s*부/, "생활지도 담당께", ["4-4","4-7","1-14"]],
@@ -2461,6 +2578,7 @@ const CHAT_WHO = [
   [/보건/, "보건 선생님께", ["2-4","1-6","2-5"]],
   [/공무직|조리|실무사/, "교육공무직 선생님께", ["1-9","1-2"]],
   [/휴직\s*(예정|중|앞둔|고민|하려|하는)|복직\s*(예정|앞둔|하는)|임신\s*중|출산\s*(예정|앞둔)/, "휴직·복직을 앞둔 선생님께", ["1-22","1-2","1-18"]],
+  [/전보\s*(대상|예정|앞둔|가는|가야)|만기\s*(자|교사|라서|예요|이에요)|만료\s*자|학교를?\s*(옮기|옮겨)/, "전보를 앞둔 선생님께", ["1-23","1-13","1-17"]],
   [/학부모(에게|께|한테)|가정에\s*(보내|안내)/, "학부모에게 보내기 좋은 도구", ["2-2","2-4","2-1"]],
   [/담임/, "담임 선생님께", ["2-1","4-1","2-11","4-2","2-7","2-10"]]
 ];
@@ -2470,6 +2588,7 @@ const CHAT_WHEN = [
   [/새\s*학년|학년\s*초|새\s*학기|신학기/, "새 학년도 준비에는", ["1-19","1-17","2-8","4-1"]],
   [/상담\s*주간/, "상담주간 즈음에는", ["4-5","4-2","4-6"]],
   [/체험\s*학습\s*철|소풍\s*철|봄\s*소풍|가을\s*소풍/, "체험학습 철에는", ["2-2","1-6","2-5"]],
+  [/전보\s*(철|시기|기간)|내신\s*(철|시기|기간)|인사\s*(철|시기|발표)/, "전보 내신 시기에는", ["1-23","1-13","1-17"]],
   [/여름/, "여름에는", ["2-5","1-2","1-18"]],
   [/겨울/, "겨울에는", ["2-4","2-7","1-2"]]
 ];
